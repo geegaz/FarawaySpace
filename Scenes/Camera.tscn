@@ -10,3 +10,5 @@ target = NodePath("../Ship")
 
 [node name="CameraShake" type="Node" parent="."]
 script = ExtResource( 2 )
+shake_speed = 60.0
+shake_multiplier = 0.1

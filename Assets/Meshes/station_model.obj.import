@@ -16,4 +16,5 @@ dest_files=[ "res://.import/station_model.obj-d55f0eaf4416e29d6e0153bde6b100a7.m
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
 offset_mesh=Vector3( 0, 0, 0 )
-optimize_mesh=true
+octahedral_compression=true
+optimize_mesh_flags=4286
