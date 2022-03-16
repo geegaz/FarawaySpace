@@ -3,10 +3,9 @@
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/CameraShake.gd" type="Script" id=2]
 
-[node name="Camera" type="Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 2, 5 )
+[node name="Camera" type="ClippedCamera"]
+margin = 0.1
 script = ExtResource( 1 )
-target = NodePath("../Ship")
 
 [node name="CameraShake" type="Node" parent="."]
 script = ExtResource( 2 )

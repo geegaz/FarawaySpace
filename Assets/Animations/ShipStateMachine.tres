@@ -1,0 +1,38 @@
+[gd_resource type="AnimationNodeStateMachine" load_steps=9 format=2]
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "move"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "move_end"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "move_start"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+switch_mode = 2
+auto_advance = true
+
+[resource]
+states/idle/node = SubResource( 6 )
+states/idle/position = Vector2( 767, 18 )
+states/move/node = SubResource( 7 )
+states/move/position = Vector2( 767, 124 )
+states/move_end/node = SubResource( 8 )
+states/move_end/position = Vector2( 922, 124 )
+states/move_start/node = SubResource( 9 )
+states/move_start/position = Vector2( 609, 124 )
+transitions = [ "idle", "move_start", SubResource( 10 ), "move_start", "move", SubResource( 11 ), "move", "move_end", SubResource( 12 ), "move_end", "idle", SubResource( 13 ) ]
+start_node = "idle"
+graph_offset = Vector2( 293, -121 )
