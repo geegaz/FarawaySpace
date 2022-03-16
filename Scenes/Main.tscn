@@ -66,6 +66,9 @@ text = "Paused"
 [node name="Ship" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 256, 2, 256 )
 
+[node name="Camera" parent="." instance=ExtResource( 2 )]
+smoothing_speed = 3.0
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
 
