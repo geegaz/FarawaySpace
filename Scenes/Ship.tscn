@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Assets/Meshes/ship_wing.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Meshes/ship_prism.obj" type="ArrayMesh" id=2]
@@ -9,9 +9,21 @@
 [ext_resource path="res://addons/Trail/trail_3d.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Materials/trail_material.tres" type="Material" id=8]
 [ext_resource path="res://Scenes/Camera.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Shaders/distortion_shader.tres" type="Shader" id=10]
 
 [sub_resource type="Curve" id=21]
 _data = [ Vector2( 0, 0.5 ), 0.0, -0.0743801, 0, 0, Vector2( 1, 0 ), -0.954545, 0.0, 0, 0 ]
+
+[sub_resource type="ShaderMaterial" id=30]
+shader = ExtResource( 10 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/noise_scale = 12.0
+shader_param/noise_amount = 0.0
+shader_param/noise_speed = 2.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+
+[sub_resource type="QuadMesh" id=31]
 
 [sub_resource type="Animation" id=18]
 length = 0.001
@@ -98,6 +110,30 @@ tracks/6/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Core/DistortionEffect:material_override:shader_param/noise_scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 12.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Core/DistortionEffect:material_override:shader_param/noise_amount")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
 }
 
 [sub_resource type="Animation" id=28]
@@ -187,6 +223,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [ Vector3( 0, 0, 1 ) ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("Core/DistortionEffect:material_override:shader_param/noise_amount")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.05 ]
+}
 
 [sub_resource type="Animation" id=22]
 length = 4.0
@@ -275,6 +323,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("Core/DistortionEffect:material_override:shader_param/noise_amount")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="Animation" id=23]
 loop = true
@@ -361,6 +421,18 @@ tracks/6/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, -1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Core/DistortionEffect:material_override:shader_param/noise_amount")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.05, 0.05 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -558,7 +630,7 @@ blend_point_2/pos = -1.0
 snap = 0.05
 
 [sub_resource type="AnimationNodeBlendTree" id=27]
-graph_offset = Vector2( 202, -82.3671 )
+graph_offset = Vector2( 0, 37.5 )
 nodes/output/position = Vector2( 920, 140 )
 nodes/speed/node = SubResource( 26 )
 nodes/speed/position = Vector2( 680, 120 )
@@ -585,10 +657,18 @@ light_energy = 0.0
 [node name="Trail3D" type="ImmediateGeometry" parent="ShipVisuals/Core"]
 transform = Transform( 1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, -8.74228e-08, 0 )
 material_override = ExtResource( 8 )
+cast_shadow = 0
 script = ExtResource( 7 )
 segments = 100
 width_profile = SubResource( 21 )
 smoothing_iterations = 1
+
+[node name="DistortionEffect" type="MeshInstance" parent="ShipVisuals/Core"]
+transform = Transform( 3, 0, 0, 0, -3, -1.50996e-07, 0, 4.52987e-07, -1, 0, 0, -1.5 )
+material_override = SubResource( 30 )
+mesh = SubResource( 31 )
+skeleton = NodePath("../../..")
+material/0 = null
 
 [node name="RightWing" type="MeshInstance" parent="ShipVisuals"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
@@ -596,26 +676,34 @@ material_override = ExtResource( 4 )
 mesh = ExtResource( 1 )
 material/0 = null
 
-[node name="LeftWing" type="MeshInstance" parent="ShipVisuals"]
-transform = Transform( -1, -8.74227e-08, 0, 8.74227e-08, -1, 0, 0, 0, 1, 0, 0, 0 )
-material_override = ExtResource( 4 )
-mesh = ExtResource( 1 )
-material/0 = null
+[node name="TrailAnchor" type="Spatial" parent="ShipVisuals/RightWing"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0, -1 )
 
-[node name="Trail3DRight" type="ImmediateGeometry" parent="ShipVisuals"]
-transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -2.5, 0, -1 )
+[node name="Trail3DRight" type="ImmediateGeometry" parent="ShipVisuals/RightWing/TrailAnchor"]
+transform = Transform( 1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0 )
 material_override = ExtResource( 8 )
+cast_shadow = 0
 script = ExtResource( 7 )
-segments = 50
+segments = 100
 base_width = 0.2
 width_profile = SubResource( 21 )
 smoothing_iterations = 1
 
-[node name="Trail3DLeft" type="ImmediateGeometry" parent="ShipVisuals"]
-transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 2.5, -2.18557e-07, -1 )
+[node name="LeftWing" type="MeshInstance" parent="ShipVisuals"]
+transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0 )
+material_override = ExtResource( 4 )
+mesh = ExtResource( 1 )
+material/0 = null
+
+[node name="TrailAnchor2" type="Spatial" parent="ShipVisuals/LeftWing"]
+transform = Transform( 1, -2.94531e-08, 0, -1.16415e-09, 1, 0, -5.96046e-08, 1.86265e-09, 1, -2.4, 0, -1 )
+
+[node name="Trail3DRight" type="ImmediateGeometry" parent="ShipVisuals/LeftWing/TrailAnchor2"]
+transform = Transform( 1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0 )
 material_override = ExtResource( 8 )
+cast_shadow = 0
 script = ExtResource( 7 )
-segments = 50
+segments = 100
 base_width = 0.2
 width_profile = SubResource( 21 )
 smoothing_iterations = 1
@@ -641,3 +729,4 @@ shape = SubResource( 16 )
 
 [node name="Camera" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 2, 6 )
+max_fov = 80.0

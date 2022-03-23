@@ -23,6 +23,7 @@ func _ready():
 func _process(delta):
 	if _Target:
 		transform = transform.interpolate_with(_Target.global_transform.translated(offset), 1- exp(-smoothing * delta))
+		rotation = Quat(rotation).slerp(Quat(_Target.rotation),1- exp(-smoothing * delta)).get_euler()
 		
 		if _Target.is_in_group("ship"):
 			fov = lerp(min_fov, max_fov, _Target.speed/_Target.max_speed)

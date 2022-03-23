@@ -6,6 +6,8 @@ export(float) var min_speed = -5 # m/s
 export(float) var acceleration = 5 # m/s/s
 export(float) var braking = 10 # m/s/s
 export(float) var deceleration = 7 # m/s/s
+export(float) var upper_limit = 100 # m
+export(float) var lower_limit = 2 # m
 
 # Rotation variables
 export(float) var rotation_deadzone = 0.05
@@ -25,7 +27,7 @@ func _process(delta):
 	# Visual rotation
 	_Visuals.rotation.z = dir.x * (PI/2)
 	
-	_AnimTree.set("parameters/speed/blend_position", speed / max_speed)
+	_AnimTree.set("parameters/speed/blend_position", speed / max_speed * 2)
 #	if abs(speed) > 0.1:
 #		_StateMachine.travel("move")
 #	else:
