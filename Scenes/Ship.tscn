@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Assets/Meshes/ship_wing.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Meshes/ship_prism.obj" type="ArrayMesh" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Scripts/ShipVisuals.gd" type="Script" id=6]
 [ext_resource path="res://addons/Trail/trail_3d.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Materials/trail_material.tres" type="Material" id=8]
-[ext_resource path="res://Scenes/Camera.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Shaders/distortion_shader.tres" type="Shader" id=10]
 
 [sub_resource type="Curve" id=21]
@@ -19,7 +18,7 @@ shader = ExtResource( 10 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/noise_scale = 12.0
 shader_param/noise_amount = 0.0
-shader_param/noise_speed = 2.0
+shader_param/noise_speed = 5.0
 shader_param/uv1_scale = Vector3( 1, 1, 1 )
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
 
@@ -432,7 +431,7 @@ tracks/7/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.05, 0.05 ]
+"values": [ 0.025, 0.025 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -671,7 +670,6 @@ skeleton = NodePath("../../..")
 material/0 = null
 
 [node name="RightWing" type="MeshInstance" parent="ShipVisuals"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 material_override = ExtResource( 4 )
 mesh = ExtResource( 1 )
 material/0 = null
@@ -721,12 +719,8 @@ anims/move_start = SubResource( 5 )
 tree_root = SubResource( 27 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/speed/blend_position = 0.0
+parameters/speed/blend_position = 10.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 16 )
-
-[node name="Camera" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 2, 6 )
-max_fov = 80.0

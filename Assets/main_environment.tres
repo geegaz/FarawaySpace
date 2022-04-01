@@ -8,8 +8,13 @@ ground_bottom_color = Color( 0.372549, 0.0509804, 0, 1 )
 ground_horizon_color = Color( 0.643137, 0.168627, 0, 1 )
 
 [resource]
-background_mode = 2
+background_mode = 1
 background_sky = SubResource( 1 )
+background_color = Color( 0.768627, 0.768627, 0.768627, 1 )
 fog_enabled = true
-fog_color = Color( 0.372549, 0.0509804, 0, 1 )
+fog_color = Color( 0.768627, 0.768627, 0.768627, 1 )
+fog_sun_color = Color( 1, 1, 1, 1 )
+fog_depth_end = 500.0
+fog_height_min = 100.0
+ssao_enabled = true
 glow_enabled = true

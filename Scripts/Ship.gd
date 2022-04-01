@@ -23,7 +23,7 @@ onready var _Visuals: Spatial = $ShipVisuals
 
 func _process(delta):
 	rotate_y(-dir.x * rotation_speed.x * delta)
-	rotation.x = -dir.y * (PI/2)
+	rotation.x = -dir.y * (PI)
 	# Visual rotation
 	_Visuals.rotation.z = dir.x * (PI/2)
 	
