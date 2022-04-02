@@ -1,12 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/main_environment.tres" type="Environment" id=2]
 [ext_resource path="res://Scenes/Megastructures/Stairs.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Camera.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Megastructures/Entry.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Megastructures/UI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/MainData/data.hterrain" type="Resource" id=8]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=9]
 
@@ -17,19 +16,26 @@ textures = [ [  ], [  ] ]
 
 [node name="Main" type="Spatial"]
 
-[node name="UI" parent="." instance=ExtResource( 7 )]
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="UILayer" instance=ExtResource( 7 )]
 visible = false
 
 [node name="Ship" parent="." instance=ExtResource( 1 )]
 transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 676.021, 2, 714.205 )
 
-[node name="Camera" parent="Ship" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2.13404, 7.03464 )
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 2 )
-far = 1000.0
-max_fov = 75.0
 
-[node name="World" type="Node" parent="."]
+[node name="Lighting" type="Spatial" parent="."]
+
+[node name="DirectionalLight" type="DirectionalLight" parent="Lighting"]
+transform = Transform( -0.939693, 0.196175, -0.280167, 0, 0.819152, 0.573577, 0.34202, 0.538986, -0.769751, 0, 0, 0 )
+shadow_enabled = true
+directional_shadow_normal_bias = 5.0
+directional_shadow_max_distance = 1000.0
+
+[node name="World" type="Spatial" parent="."]
 
 [node name="HTerrain" type="Spatial" parent="World"]
 script = ExtResource( 4 )
@@ -73,11 +79,3 @@ transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1238, 2
 
 [node name="Entry8" parent="World" instance=ExtResource( 6 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1024, 22, 810 )
-
-[node name="Lighting" type="Node" parent="."]
-
-[node name="DirectionalLight" type="DirectionalLight" parent="Lighting"]
-transform = Transform( 0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 40, 0 )
-shadow_enabled = true
-
-[node name="UILayer" type="CanvasLayer" parent="."]

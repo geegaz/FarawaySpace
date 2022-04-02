@@ -4,7 +4,7 @@ extends Spatial
 export(Vector3) var core_origin = Vector3.ZERO setget set_core_origin
 
 export(float, 0, 10) var core_light_opening = 0.0 setget set_core_opening
-export(float, 0, 10) var core_light_multiplier = 2.0
+export(float, 0, 10) var core_light_multiplier = 1.0
 
 func _ready():
 	set_core_opening(core_light_opening)

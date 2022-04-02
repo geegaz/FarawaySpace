@@ -8,6 +8,7 @@ data = PoolVector3Array( -1, -22, -80, -9, -22, -79, -1, -22, -79, -7, -31, -9, 
 [node name="Entry" type="Spatial"]
 
 [node name="PitWorld" type="MeshInstance" parent="."]
+use_in_baked_light = true
 mesh = ExtResource( 1 )
 material/0 = null
 __meta__ = {
@@ -21,6 +22,7 @@ shape = SubResource( 1 )
 
 [node name="PitWorld2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0 )
+use_in_baked_light = true
 mesh = ExtResource( 1 )
 material/0 = null
 __meta__ = {
@@ -34,6 +36,7 @@ shape = SubResource( 1 )
 
 [node name="PitWorld3" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 0 )
+use_in_baked_light = true
 mesh = ExtResource( 1 )
 material/0 = null
 __meta__ = {
@@ -47,6 +50,7 @@ shape = SubResource( 1 )
 
 [node name="PitWorld4" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 0 )
+use_in_baked_light = true
 mesh = ExtResource( 1 )
 material/0 = null
 __meta__ = {
@@ -60,6 +64,7 @@ shape = SubResource( 1 )
 
 [node name="PitWorld5" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 0 )
+use_in_baked_light = true
 mesh = ExtResource( 1 )
 material/0 = null
 __meta__ = {
@@ -73,6 +78,7 @@ shape = SubResource( 1 )
 
 [node name="PitWorld6" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0 )
+use_in_baked_light = true
 mesh = ExtResource( 1 )
 material/0 = null
 __meta__ = {
@@ -86,6 +92,7 @@ shape = SubResource( 1 )
 
 [node name="PitWorld7" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 0 )
+use_in_baked_light = true
 mesh = ExtResource( 1 )
 material/0 = null
 __meta__ = {
@@ -99,6 +106,7 @@ shape = SubResource( 1 )
 
 [node name="PitWorld8" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 0 )
+use_in_baked_light = true
 mesh = ExtResource( 1 )
 material/0 = null
 __meta__ = {
@@ -109,23 +117,3 @@ __meta__ = {
 
 [node name="CollisionShape" type="CollisionShape" parent="PitWorld8/StaticBody"]
 shape = SubResource( 1 )
-
-[node name="OmniLight" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, 50 )
-shadow_enabled = true
-omni_range = 50.0
-
-[node name="OmniLight2" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -50 )
-shadow_enabled = true
-omni_range = 50.0
-
-[node name="OmniLight3" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 110, 0, 50 )
-shadow_enabled = true
-omni_range = 50.0
-
-[node name="OmniLight4" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 110, 0, -50 )
-shadow_enabled = true
-omni_range = 50.0
