@@ -1,7 +1,7 @@
 extends KinematicBody
 
 # Movement variables
-export(float) var max_speed = 20 # m/s
+export(float) var max_speed = 25 # m/s
 export(float) var acceleration = 10 # m/s/s
 export(float) var deceleration = 5 # m/s/s
 export(float) var forward_multiplier = 1.0
@@ -14,15 +14,22 @@ export(Vector2) var sensitivity: Vector2 = Vector2(0.1, 0.1)
 var last_rotation: Vector3 = Vector3.ZERO
 
 var speed: float = 0
+var power: float = 0
 var dir: float = 0
 var velocity: Vector3 = Vector3.ZERO
 
 onready var _AnimTree: AnimationTree = $ShipVisuals/AnimationTree
 onready var _Visuals: Spatial = $ShipVisuals
 onready var _Camera: Camera = $Camera
-onready var _Audio: AudioStreamPlayer = $ShipAudio
+onready var _Audio: AudioStreamPlayer3D = $ShipAudio
+
+func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _process(delta):
+	# If the ship is being powered
+	power = lerp(power, dir, 1 - exp(-4 * delta))
+	
 	# Visual rotation
 	var rotation_speed := rotation - last_rotation
 	var tilt = deg2rad(clamp(rad2deg(-rotation_speed.y) * 20, -90, 90))
@@ -35,11 +42,16 @@ func _process(delta):
 	_Camera.fov = lerp(70, 100, speed / max_speed)
 	
 	# Audio
-	_Audio.pitch_scale = (speed / max_speed) + 0.1
-	_Audio.playing = speed > 0.1
+	_Audio.pitch_scale = clamp(
+		abs(power) + 0.1 + 
+		abs(rotation_speed.y) * 1.2 + 
+		rotation.x * 0.2, 
+		0.01, 4)
+	_Audio.unit_db = linear2db(abs(power) * 2)
 	
 	# Animation
 	_AnimTree.set("parameters/speed/blend_position", speed / max_speed)
+	_AnimTree.set("parameters/power/blend_position", power)
 
 
 func _physics_process(delta):
@@ -66,4 +78,4 @@ func accel_movement(delta):
 	var target_accel: float = acceleration if dir != 0 else deceleration
 	speed += target_accel * delta * sign(target_speed - speed)
 	
-	$Label.text = "dir: %s, speed: %s"%[dir, speed]
+	#$Label.text = "dir: %s, speed: %s"%[dir, speed]
