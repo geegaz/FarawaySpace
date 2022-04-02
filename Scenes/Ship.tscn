@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Assets/Meshes/ship_wing.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Meshes/ship_prism.obj" type="ArrayMesh" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Scripts/ShipVisuals.gd" type="Script" id=6]
 [ext_resource path="res://addons/Trail/trail_3d.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Materials/trail_material.tres" type="Material" id=8]
-[ext_resource path="res://Scripts/CameraShake.gd" type="Script" id=9]
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=11]
 [ext_resource path="res://Assets/Sounds/flying_sound.ogg" type="AudioStream" id=12]
 
@@ -689,11 +688,6 @@ transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0
 current = true
 far = 1000.0
 script = ExtResource( 11 )
-
-[node name="CameraShake" type="Node" parent="Camera"]
-script = ExtResource( 9 )
-shake_speed = 60.0
-shake_multiplier = 0.1
 
 [node name="Label" type="Label" parent="."]
 margin_right = 40.0
