@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Ship.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/main_environment.tres" type="Environment" id=2]
+[ext_resource path="res://Assets/Sounds/background_wind.ogg" type="AudioStream" id=2]
 [ext_resource path="res://Scenes/Megastructures/Stairs.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Sounds/scifi_ruined_environment-16800.mp3" type="AudioStream" id=5]
@@ -9,11 +9,16 @@
 [ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/MainData/data.hterrain" type="Resource" id=8]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=9]
+[ext_resource path="res://default_env.tres" type="Environment" id=10]
 
 [sub_resource type="Resource" id=3]
 script = ExtResource( 9 )
 mode = 0
 textures = [ [  ], [  ] ]
+
+[sub_resource type="CapsuleShape" id=4]
+radius = 150.0
+height = 400.0
 
 [node name="Main" type="Spatial"]
 
@@ -21,10 +26,11 @@ textures = [ [  ], [  ] ]
 visible = false
 
 [node name="Ship" parent="." instance=ExtResource( 1 )]
-transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 676.021, 2, 714.205 )
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 832, 10, 538 )
+invert_y = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource( 2 )
+environment = ExtResource( 10 )
 
 [node name="Lighting" type="Spatial" parent="."]
 
@@ -53,33 +59,63 @@ shader_params/u_triplanar = false
 shader_params/u_tile_reduction = Plane( 0, 0, 0, 0 )
 
 [node name="Stairs" parent="World" instance=ExtResource( 3 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 1024, 524, 1024 )
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 1024, 400, 1024 )
+
+[node name="Stairs2" parent="World" instance=ExtResource( 3 )]
+transform = Transform( 2, 0, 0, 0, -8.74228e-08, -2, 0, 2, -8.74228e-08, 1024, 150, 1024 )
 
 [node name="Entry" parent="World" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 755, 524, 1024 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 755, 400, 1024 )
 
 [node name="Entry2" parent="World" instance=ExtResource( 6 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1025, 524, 1258 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1025, 400, 1258 )
 
 [node name="Entry3" parent="World" instance=ExtResource( 6 )]
-transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1294, 524, 1024 )
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1294, 400, 1024 )
 
 [node name="Entry4" parent="World" instance=ExtResource( 6 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1024, 524, 790 )
-
-[node name="Entry5" parent="World" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 810, 22, 1024 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1024, 400, 790 )
 
 [node name="Entry6" parent="World" instance=ExtResource( 6 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1025, 22, 1238 )
-
-[node name="Entry7" parent="World" instance=ExtResource( 6 )]
-transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1238, 22, 1024 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1025, 25, 1238 )
 
 [node name="Entry8" parent="World" instance=ExtResource( 6 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1024, 22, 810 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1024, 25, 810 )
 
-[node name="AmbianceAudio" type="AudioStreamPlayer" parent="World"]
-stream = ExtResource( 5 )
+[node name="Audio" type="Spatial" parent="."]
+
+[node name="BackgroundWind" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 2 )
 volume_db = -10.0
 autoplay = true
+bus = "SFX"
+
+[node name="InteriorAudio" type="AudioStreamPlayer3D" parent="Audio"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1024, 200, 1024 )
+stream = ExtResource( 5 )
+attenuation_model = 3
+unit_db = -10.0
+autoplay = true
+max_distance = 200.0
+bus = "SFX"
+area_mask = 0
+
+[node name="InteriorAudio2" type="AudioStreamPlayer3D" parent="Audio"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1024, 50, 1024 )
+stream = ExtResource( 5 )
+attenuation_model = 3
+unit_db = -10.0
+autoplay = true
+max_distance = 200.0
+bus = "SFX"
+area_mask = 0
+
+[node name="InteriorArea" type="Area" parent="Audio"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1024, 200, 1024 )
+reverb_bus_enable = true
+reverb_bus_name = "Interior"
+reverb_bus_amount = 0.5
+
+[node name="CollisionShape" type="CollisionShape" parent="Audio/InteriorArea"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 4 )

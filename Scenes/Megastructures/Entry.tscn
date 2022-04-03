@@ -15,11 +15,6 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="StaticBody" type="StaticBody" parent="PitWorld"]
-
-[node name="CollisionShape" type="CollisionShape" parent="PitWorld/StaticBody"]
-shape = SubResource( 1 )
-
 [node name="PitWorld2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0 )
 use_in_baked_light = true
@@ -28,11 +23,6 @@ material/0 = null
 __meta__ = {
 "_edit_group_": true
 }
-
-[node name="StaticBody" type="StaticBody" parent="PitWorld2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="PitWorld2/StaticBody"]
-shape = SubResource( 1 )
 
 [node name="PitWorld3" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 0 )
@@ -43,11 +33,6 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="StaticBody" type="StaticBody" parent="PitWorld3"]
-
-[node name="CollisionShape" type="CollisionShape" parent="PitWorld3/StaticBody"]
-shape = SubResource( 1 )
-
 [node name="PitWorld4" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 0 )
 use_in_baked_light = true
@@ -56,11 +41,6 @@ material/0 = null
 __meta__ = {
 "_edit_group_": true
 }
-
-[node name="StaticBody" type="StaticBody" parent="PitWorld4"]
-
-[node name="CollisionShape" type="CollisionShape" parent="PitWorld4/StaticBody"]
-shape = SubResource( 1 )
 
 [node name="PitWorld5" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 0 )
@@ -71,11 +51,6 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="StaticBody" type="StaticBody" parent="PitWorld5"]
-
-[node name="CollisionShape" type="CollisionShape" parent="PitWorld5/StaticBody"]
-shape = SubResource( 1 )
-
 [node name="PitWorld6" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0 )
 use_in_baked_light = true
@@ -84,11 +59,6 @@ material/0 = null
 __meta__ = {
 "_edit_group_": true
 }
-
-[node name="StaticBody" type="StaticBody" parent="PitWorld6"]
-
-[node name="CollisionShape" type="CollisionShape" parent="PitWorld6/StaticBody"]
-shape = SubResource( 1 )
 
 [node name="PitWorld7" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 0 )
@@ -99,11 +69,6 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="StaticBody" type="StaticBody" parent="PitWorld7"]
-
-[node name="CollisionShape" type="CollisionShape" parent="PitWorld7/StaticBody"]
-shape = SubResource( 1 )
-
 [node name="PitWorld8" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 0 )
 use_in_baked_light = true
@@ -113,7 +78,35 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="StaticBody" type="StaticBody" parent="PitWorld8"]
+[node name="PartCollision" type="StaticBody" parent="."]
 
-[node name="CollisionShape" type="CollisionShape" parent="PitWorld8/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="PartCollision"]
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="PartCollision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="PartCollision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="PartCollision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="PartCollision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape6" type="CollisionShape" parent="PartCollision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape7" type="CollisionShape" parent="PartCollision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape8" type="CollisionShape" parent="PartCollision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 0 )
 shape = SubResource( 1 )

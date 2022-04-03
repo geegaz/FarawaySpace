@@ -1,14 +1,12 @@
 extends Control
 
-var previous_mouse_mode: int
-
 func _ready() -> void:
 	pause(false)
+	OS.window_fullscreen = true
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_pause"):
 		pause(not get_tree().paused)
-	
 	if event.is_action_pressed("ui_fullscreen"):
 		OS.window_fullscreen = not OS.window_fullscreen
 
