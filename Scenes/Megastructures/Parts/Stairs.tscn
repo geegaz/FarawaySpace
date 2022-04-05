@@ -174,65 +174,65 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PartCollision" type="StaticBody" parent="."]
+[node name="PartCollisions" type="StaticBody" parent="."]
 
-[node name="CollisionShape" type="CollisionShape" parent="PartCollision"]
+[node name="CollisionShape" type="CollisionShape" parent="PartCollisions"]
 shape = SubResource( 1 )
 
-[node name="CollisionShape2" type="CollisionShape" parent="PartCollision"]
+[node name="CollisionShape2" type="CollisionShape" parent="PartCollisions"]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape3" type="CollisionShape" parent="PartCollision"]
+[node name="CollisionShape3" type="CollisionShape" parent="PartCollisions"]
 transform = Transform( 1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape4" type="CollisionShape" parent="PartCollision"]
+[node name="CollisionShape4" type="CollisionShape" parent="PartCollisions"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape5" type="CollisionShape" parent="PartCollision"]
+[node name="CollisionShape5" type="CollisionShape" parent="PartCollisions"]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape6" type="CollisionShape" parent="PartCollision"]
+[node name="CollisionShape6" type="CollisionShape" parent="PartCollisions"]
 shape = SubResource( 1 )
 
-[node name="CollisionShape7" type="CollisionShape" parent="PartCollision"]
+[node name="CollisionShape7" type="CollisionShape" parent="PartCollisions"]
 transform = Transform( -1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape8" type="CollisionShape" parent="PartCollision"]
+[node name="CollisionShape8" type="CollisionShape" parent="PartCollisions"]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape9" type="CollisionShape" parent="PartCollision"]
+[node name="CollisionShape9" type="CollisionShape" parent="PartCollisions"]
 transform = Transform( 1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape10" type="CollisionShape" parent="PartCollision"]
+[node name="CollisionShape10" type="CollisionShape" parent="PartCollisions"]
 transform = Transform( -1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape11" type="CollisionShape" parent="PartCollision"]
+[node name="CollisionShape11" type="CollisionShape" parent="PartCollisions"]
 shape = SubResource( 1 )
 
-[node name="CollisionShape12" type="CollisionShape" parent="PartCollision"]
+[node name="CollisionShape12" type="CollisionShape" parent="PartCollisions"]
 transform = Transform( 1, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape13" type="CollisionShape" parent="PartCollision"]
+[node name="CollisionShape13" type="CollisionShape" parent="PartCollisions"]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape14" type="CollisionShape" parent="PartCollision"]
+[node name="CollisionShape14" type="CollisionShape" parent="PartCollisions"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape15" type="CollisionShape" parent="PartCollision"]
+[node name="CollisionShape15" type="CollisionShape" parent="PartCollisions"]
 transform = Transform( -1, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape16" type="CollisionShape" parent="PartCollision"]
+[node name="CollisionShape16" type="CollisionShape" parent="PartCollisions"]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 1 )
