@@ -52,7 +52,7 @@ func _process(delta):
 		abs(rotation_speed.y) * 1.2 + 
 		rotation.x * 0.2, 
 		0.01, 4)
-	_Audio.unit_db = linear2db(abs(power) * 2)
+	_Audio.unit_db = linear2db(abs(power) * 3)
 	
 	# Animation
 	_AnimTree.set("parameters/speed/blend_position", speed / max_speed)
