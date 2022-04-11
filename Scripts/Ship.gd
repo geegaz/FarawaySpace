@@ -10,19 +10,22 @@ export(float) var backward_multiplier = 0.5
 # Rotation variables
 #export(float) var rotation_deadzone = 0.05
 #export(Vector2) var rotation_speed = Vector2(4, 2) # rad/s
-export(Vector2) var sensitivity: Vector2 = Vector2(0.1, 0.1)
+export(Vector2) var mouse_sensitivity: Vector2 = Vector2(0.1, 0.1)
 export(Vector2) var controller_sensitivity: Vector2 = Vector2(2.0, 2.0)
 export(bool) var invert_y: bool = true
 var last_rotation: Vector3 = Vector3.ZERO
 
-var speed: float = 0
-var power: float = 0
 var dir: float = 0
-var velocity: Vector3 = Vector3.ZERO
+var power: float = 0
+var speed: float = 0
 
+# Gameplay
+onready var _Camera: Camera = $Camera
+onready var _TCorrect: RayCast = $TrajectoryCorrection
+# Visuals
 onready var _AnimTree: AnimationTree = $ShipVisuals/AnimationTree
 onready var _Visuals: Spatial = $ShipVisuals
-onready var _Camera: Camera = $Camera
+# SFX
 onready var _Audio: AudioStreamPlayer3D = $ShipAudio
 
 func _ready() -> void:
@@ -39,12 +42,13 @@ func _process(delta):
 	
 	###### Cosmetic effects ######
 	
+	var speed_amount = speed / max_speed
 	# If the ship is being powered
 	power = lerp(power, dir, 1 - exp(-4 * delta))
 	
 	# Camera
-	_Camera.fov = lerp(70, 100, speed / max_speed)
-	_Camera.shake_duration = abs(power) * (speed / max_speed)
+	_Camera.fov = lerp(70, 100, speed_amount)
+	_Camera.shake_duration = abs(power) * speed_amount
 	
 	# Audio
 	_Audio.pitch_scale = clamp(
@@ -55,21 +59,27 @@ func _process(delta):
 	_Audio.unit_db = linear2db(abs(power) * 3)
 	
 	# Animation
-	_AnimTree.set("parameters/speed/blend_position", speed / max_speed)
+	_AnimTree.set("parameters/speed/blend_position", speed_amount)
 	_AnimTree.set("parameters/power/blend_position", power)
 
 
 func _physics_process(delta):
-	vector_rotate(Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * controller_sensitivity)
+	# Input management
+	var input_dir: Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * controller_sensitivity
+	vector_rotate(input_dir)
+	
+	# Trajectory correction
+	correct_trajectory(delta)
+	
+	# Movement calculations
 	accel_movement(delta)
-#	lerp_movement(delta)
 	move_and_slide(-transform.basis.z * speed)
 
 func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		vector_rotate(event.relative * sensitivity)
+		vector_rotate(event.relative * mouse_sensitivity)
 
-func accel_movement(delta):
+func accel_movement(delta: float):
 	# dir goes from -0.5 to 2
 	dir = (
 		Input.get_action_strength("move_front") * forward_multiplier -
@@ -88,3 +98,7 @@ func vector_rotate(rot: Vector2):
 	rotation.x -= deg2rad(rot.y)
 
 	rotation_degrees.x = clamp(rotation_degrees.x, -90, 90)
+
+func correct_trajectory(delta: float):
+	# TODO
+	pass

@@ -575,6 +575,10 @@ node_connections = [ "output", 0, "Add2", "Add2", 0, "speed", "Add2", 1, "power"
 collision_layer = 2
 script = ExtResource( 5 )
 
+[node name="Debug" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 16 )
@@ -677,6 +681,6 @@ current = true
 far = 1000.0
 script = ExtResource( 11 )
 
-[node name="Label" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 14.0
+[node name="TrajectoryCorrection" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, -2, 0 )
