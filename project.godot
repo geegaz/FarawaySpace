@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "HTerrainDataSaver",
 "language": "GDScript",
 "path": "res://addons/zylann.hterrain/hterrain_resource_saver.gd"
+}, {
+"base": "Node",
+"class": "MultiLayerPlayer",
+"language": "GDScript",
+"path": "res://Scripts/MultiLayerPlayer.gd"
 } ]
 _global_script_class_icons={
 "HTerrainDataLoader": "",
-"HTerrainDataSaver": ""
+"HTerrainDataSaver": "",
+"MultiLayerPlayer": ""
 }
 
 [application]

@@ -11,5 +11,3 @@ expand_margin_left = 4.0
 expand_margin_right = 4.0
 expand_margin_top = 4.0
 expand_margin_bottom = 4.0
-shadow_color = Color( 0, 0, 0, 0.498039 )
-shadow_size = 10

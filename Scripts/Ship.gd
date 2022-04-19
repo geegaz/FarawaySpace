@@ -1,5 +1,9 @@
 extends KinematicBody
 
+signal started_moving
+signal moved(speed, relative)
+signal stopped_moving
+
 # Movement variables
 export(float) var max_speed = 25 # m/s
 export(float) var acceleration = 10 # m/s/s
@@ -64,6 +68,9 @@ func _process(delta):
 
 
 func _physics_process(delta):
+	var prev_translation = translation
+	var prev_speed = speed
+	
 	# Input management
 	var input_dir: Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * controller_sensitivity
 	vector_rotate(input_dir)
@@ -74,6 +81,16 @@ func _physics_process(delta):
 	# Movement calculations
 	accel_movement(delta)
 	move_and_slide(-transform.basis.z * speed)
+	
+	if not is_zero_approx(speed):
+		if is_zero_approx(prev_speed):
+			emit_signal("started_moving")
+		else:
+			emit_signal("moved",speed, translation-prev_translation)
+	else:
+		if is_zero_approx(prev_speed):
+			emit_signal("stopped_moving")
+	
 
 func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
