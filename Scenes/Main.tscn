@@ -1,18 +1,89 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Sounds/background_wind.ogg" type="AudioStream" id=2]
 [ext_resource path="res://Scenes/Megastructures/Tower.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/UI/Pause.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scripts/MultiLayerPlayer.gd" type="Script" id=6]
-[ext_resource path="res://Assets/Sounds/Music/music-003.ogg" type="AudioStream" id=7]
 [ext_resource path="res://Scenes/MainData/data.hterrain" type="Resource" id=8]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=9]
 [ext_resource path="res://default_env.tres" type="Environment" id=10]
-[ext_resource path="res://Assets/Sounds/Music/music-004.ogg" type="AudioStream" id=11]
-[ext_resource path="res://Assets/Sounds/Music/music-001.ogg" type="AudioStream" id=12]
-[ext_resource path="res://Assets/Sounds/Music/music-002.ogg" type="AudioStream" id=13]
+[ext_resource path="res://Assets/Fonts/hydrogen.tres" type="DynamicFont" id=14]
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends Spatial
+
+export(bool) var has_started = false
+
+onready var _Title: Control = $UI/Title
+onready var _Ship: Spatial = $Ship
+onready var _WorldAnimationPlayer: AnimationPlayer = $WorldAnimationPlayer
+
+func _ready() -> void:
+	_Title.hide()
+
+func _on_Ship_started_moving() -> void:
+	if has_started:
+		return
+	
+	has_started = true
+	_WorldAnimationPlayer.play(\"title\")
+"
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/Title:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("UI/Title:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "title"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/Title:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("UI/Title:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 3, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Resource" id=3]
 script = ExtResource( 9 )
@@ -20,10 +91,30 @@ mode = 0
 textures = [ [  ], [  ] ]
 
 [node name="Main" type="Spatial"]
+script = SubResource( 4 )
+
+[node name="WorldAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 6 )
+anims/title = SubResource( 5 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="Title" type="Control" parent="UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="UI/Title"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 14 )
+text = "Faraway
+Space"
+align = 1
+valign = 1
+
 [node name="Pause" parent="UI" instance=ExtResource( 5 )]
+visible = false
 
 [node name="Ship" parent="." instance=ExtResource( 1 )]
 transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 832, 10, 538 )
@@ -65,11 +156,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1024, 0, 1024 )
 
 [node name="Audio" type="Spatial" parent="."]
 
-[node name="MultiLayerPlayer" type="AudioStreamPlayer" parent="Audio"]
-script = ExtResource( 6 )
-streams = [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 7 ), ExtResource( 11 ) ]
-
 [node name="BackgroundWind" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 2 )
 autoplay = true
 bus = "SFX"
+
+[connection signal="started_moving" from="Ship" to="." method="_on_Ship_started_moving"]
