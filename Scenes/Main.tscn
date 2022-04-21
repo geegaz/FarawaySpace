@@ -1,13 +1,18 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Sounds/background_wind.ogg" type="AudioStream" id=2]
 [ext_resource path="res://Scenes/Megastructures/Tower.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/UI/Pause.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/MultiLayerPlayer.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Sounds/Music/music-003.ogg" type="AudioStream" id=7]
 [ext_resource path="res://Scenes/MainData/data.hterrain" type="Resource" id=8]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=9]
 [ext_resource path="res://default_env.tres" type="Environment" id=10]
+[ext_resource path="res://Assets/Sounds/Music/music-004.ogg" type="AudioStream" id=11]
+[ext_resource path="res://Assets/Sounds/Music/music-001.ogg" type="AudioStream" id=12]
+[ext_resource path="res://Assets/Sounds/Music/music-002.ogg" type="AudioStream" id=13]
 
 [sub_resource type="Resource" id=3]
 script = ExtResource( 9 )
@@ -60,8 +65,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1024, 0, 1024 )
 
 [node name="Audio" type="Spatial" parent="."]
 
+[node name="MultiLayerPlayer" type="AudioStreamPlayer" parent="Audio"]
+script = ExtResource( 6 )
+streams = [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 7 ), ExtResource( 11 ) ]
+
 [node name="BackgroundWind" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 2 )
-volume_db = -10.0
 autoplay = true
 bus = "SFX"
