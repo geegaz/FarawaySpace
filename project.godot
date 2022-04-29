@@ -18,16 +18,10 @@ _global_script_classes=[ {
 "class": "HTerrainDataSaver",
 "language": "GDScript",
 "path": "res://addons/zylann.hterrain/hterrain_resource_saver.gd"
-}, {
-"base": "Node",
-"class": "MultiLayerPlayer",
-"language": "GDScript",
-"path": "res://Scripts/MultiLayerPlayer.gd"
 } ]
 _global_script_class_icons={
 "HTerrainDataLoader": "",
-"HTerrainDataSaver": "",
-"MultiLayerPlayer": ""
+"HTerrainDataSaver": ""
 }
 
 [application]
@@ -35,6 +29,10 @@ _global_script_class_icons={
 config/name="Faraway-Space"
 run/main_scene="res://Scenes/Main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+AudioManager="*res://Scenes/AudioManager.tscn"
 
 [editor_plugins]
 

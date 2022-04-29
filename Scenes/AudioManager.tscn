@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/AudioManager.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sounds/background_wind.ogg" type="AudioStream" id=2]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource( 1 )
+default_player = NodePath("BackgroundWind")
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="BackgroundWind" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+autoplay = true
+bus = "SFX"

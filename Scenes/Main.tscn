@@ -1,12 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Ship.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Sounds/background_wind.ogg" type="AudioStream" id=2]
 [ext_resource path="res://Scenes/Megastructures/Tower.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/UI/Pause.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scripts/LayerPlayer.gd" type="Script" id=6]
-[ext_resource path="res://Assets/Sounds/Music/music-002.ogg" type="AudioStream" id=7]
 [ext_resource path="res://Scenes/MainData/data.hterrain" type="Resource" id=8]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=9]
 [ext_resource path="res://default_env.tres" type="Environment" id=10]
@@ -55,18 +52,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("Audio/Music:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
 
 [sub_resource type="Animation" id=5]
 resource_name = "title"
@@ -94,34 +79,6 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath("Audio/Music")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ true ],
-"method": "set_active"
-} ]
-}
-tracks/3/type = "method"
-tracks/3/path = NodePath("Audio/Music")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ 0.0 ],
-"method": "play"
-} ]
 }
 
 [sub_resource type="Resource" id=3]
@@ -192,16 +149,5 @@ shader_params/u_tile_reduction = Plane( 0, 0, 0, 0 )
 
 [node name="Tower" parent="World" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1024, 0, 1024 )
-
-[node name="Audio" type="Spatial" parent="."]
-
-[node name="BackgroundWind" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource( 2 )
-autoplay = true
-bus = "SFX"
-
-[node name="Music" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource( 7 )
-script = ExtResource( 6 )
 
 [connection signal="started_moving" from="Ship" to="." method="_on_Ship_started_moving"]

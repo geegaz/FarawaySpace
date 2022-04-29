@@ -571,7 +571,7 @@ nodes/speed/node = SubResource( 26 )
 nodes/speed/position = Vector2( 580, 40 )
 node_connections = [ "output", 0, "Add2", "Add2", 0, "speed", "Add2", 1, "power" ]
 
-[node name="Ship" type="KinematicBody" groups=["ship"]]
+[node name="Ship" type="KinematicBody" groups=["Player"]]
 collision_layer = 2
 script = ExtResource( 5 )
 
@@ -599,7 +599,7 @@ mesh = ExtResource( 2 )
 material/0 = null
 
 [node name="OmniLight" type="OmniLight" parent="ShipVisuals/Core"]
-light_energy = 0.0
+light_energy = 0.05
 
 [node name="TrailAnchor" type="Spatial" parent="ShipVisuals/Core"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.01992e-07, -2 )
