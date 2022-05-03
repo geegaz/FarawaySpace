@@ -39,7 +39,6 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 25, 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 200, 0 )
 reverb_bus_enable = true
 reverb_bus_name = "Reverb"
-reverb_bus_amount = 0.5
 script = ExtResource( 4 )
 associated_player = NodePath("Ambiance")
 
