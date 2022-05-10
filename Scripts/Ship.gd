@@ -25,7 +25,6 @@ var speed: float = 0
 
 # Gameplay
 onready var _Camera: Camera = $Camera
-onready var _TCorrect: RayCast = $TrajectoryCorrection
 # Visuals
 onready var _AnimTree: AnimationTree = $ShipVisuals/AnimationTree
 onready var _Visuals: Spatial = $ShipVisuals
@@ -38,7 +37,7 @@ func _ready() -> void:
 func _process(delta):
 	# Visual rotation
 	var rotation_speed := rotation - last_rotation
-	var tilt = deg2rad(clamp(rad2deg(-rotation_speed.y) * 20, -90, 90))
+	var tilt: float = clamp(-rotation_speed.y * 20, -PI/2, PI/2)
 	# Framerate-independant lerping
 	# https://www.rorydriscoll.com/2016/03/07/frame-rate-independent-damping-using-lerp/
 	_Visuals.rotation.z = lerp(_Visuals.rotation.z, tilt, 1 - exp(-4 * delta))
@@ -75,9 +74,6 @@ func _physics_process(delta):
 	var input_dir: Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * controller_sensitivity
 	vector_rotate(input_dir)
 	
-	# Trajectory correction
-	correct_trajectory(delta)
-	
 	# Movement calculations
 	accel_movement(delta)
 	move_and_slide(-transform.basis.z * speed)
@@ -90,6 +86,8 @@ func _physics_process(delta):
 	else:
 		if is_zero_approx(prev_speed):
 			emit_signal("stopped_moving")
+	
+	transform = transform.orthonormalized()
 	
 
 func _input(event):
@@ -115,7 +113,3 @@ func vector_rotate(rot: Vector2):
 	rotation.x -= deg2rad(rot.y)
 
 	rotation_degrees.x = clamp(rotation_degrees.x, -90, 90)
-
-func correct_trajectory(delta: float):
-	# TODO
-	pass
