@@ -33,6 +33,7 @@ config/icon="res://icon.png"
 [autoload]
 
 AudioManager="*res://Scenes/AudioManager.tscn"
+DebugDraw="*res://addons/zylann.debug_draw/debug_draw.gd"
 
 [editor_plugins]
 
