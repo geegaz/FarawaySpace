@@ -39,11 +39,11 @@ config/icon="res://icon.png"
 [autoload]
 
 AudioManager="*res://Scenes/AudioManager.tscn"
-EnvironmentBlender="*res://addons/godot-environment-volume/environment_blender.gd"
+DebugDraw="*res://addons/zylann.debug_draw/debug_draw.gd"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/Trail/plugin.cfg", "res://addons/godot-environment-volume/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/Trail/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
 
 [input]
 

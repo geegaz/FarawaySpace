@@ -684,4 +684,3 @@ script = ExtResource( 11 )
 
 [node name="TrajectoryCorrection" type="Spatial" parent="."]
 script = ExtResource( 9 )
-distance = Vector2( 5, 6 )
