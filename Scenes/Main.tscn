@@ -10,7 +10,7 @@
 [ext_resource path="res://Assets/Fonts/hydrogen.tres" type="DynamicFont" id=14]
 
 [sub_resource type="GDScript" id=4]
-script/source = "extends Spatial
+script/source = "extends Node
 
 export(bool) var has_started = false
 
@@ -86,7 +86,7 @@ script = ExtResource( 9 )
 mode = 0
 textures = [ [  ], [  ] ]
 
-[node name="Main" type="Spatial"]
+[node name="Main" type="Node"]
 script = SubResource( 4 )
 
 [node name="WorldAnimationPlayer" type="AnimationPlayer" parent="."]

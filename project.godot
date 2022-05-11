@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Spatial",
-"class": "EnvironmentVolume",
-"language": "GDScript",
-"path": "res://addons/godot-environment-volume/environment_volume.gd"
-}, {
 "base": "ResourceFormatLoader",
 "class": "HTerrainDataLoader",
 "language": "GDScript",
@@ -25,7 +20,6 @@ _global_script_classes=[ {
 "path": "res://addons/zylann.hterrain/hterrain_resource_saver.gd"
 } ]
 _global_script_class_icons={
-"EnvironmentVolume": "res://addons/godot-environment-volume/environment_volume.svg",
 "HTerrainDataLoader": "",
 "HTerrainDataSaver": ""
 }
@@ -39,11 +33,10 @@ config/icon="res://icon.png"
 [autoload]
 
 AudioManager="*res://Scenes/AudioManager.tscn"
-EnvironmentBlender="*res://addons/godot-environment-volume/environment_blender.gd"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/Trail/plugin.cfg", "res://addons/godot-environment-volume/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/Trail/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
 
 [input]
 

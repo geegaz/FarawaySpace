@@ -599,7 +599,7 @@ mesh = ExtResource( 2 )
 material/0 = null
 
 [node name="OmniLight" type="OmniLight" parent="ShipVisuals/Core"]
-light_energy = 0.05
+light_energy = 0.0
 
 [node name="TrailAnchor" type="Spatial" parent="ShipVisuals/Core"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.01992e-07, -2 )
@@ -680,7 +680,3 @@ transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0
 current = true
 far = 1000.0
 script = ExtResource( 11 )
-
-[node name="TrajectoryCorrection" type="RayCast" parent="."]
-enabled = true
-cast_to = Vector3( 0, -2, 0 )
