@@ -18,6 +18,11 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="PartCollisions" type="StaticBody" parent="Part/BlockTop"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Part/BlockTop/PartCollisions"]
+shape = SubResource( 1 )
+
 [node name="BlockTopX" type="MeshInstance" parent="Part"]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 use_in_baked_light = true
@@ -27,6 +32,11 @@ material/0 = null
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="PartCollisions2" type="StaticBody" parent="Part/BlockTopX"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Part/BlockTopX/PartCollisions2"]
+shape = SubResource( 1 )
 
 [node name="BlockTopY" type="MeshInstance" parent="Part"]
 transform = Transform( 1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0 )
@@ -38,6 +48,11 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="PartCollisions3" type="StaticBody" parent="Part/BlockTopY"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Part/BlockTopY/PartCollisions3"]
+shape = SubResource( 1 )
+
 [node name="BlockTopZ" type="MeshInstance" parent="Part"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0 )
 use_in_baked_light = true
@@ -48,10 +63,15 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PartX" type="Spatial" parent="."]
-transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+[node name="PartCollisions4" type="StaticBody" parent="Part/BlockTopZ"]
 
-[node name="BlockTop" type="MeshInstance" parent="PartX"]
+[node name="CollisionShape" type="CollisionShape" parent="Part/BlockTopZ/PartCollisions4"]
+shape = SubResource( 1 )
+
+[node name="Part2" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0 )
+
+[node name="BlockTop" type="MeshInstance" parent="Part2"]
 use_in_baked_light = true
 mesh = ExtResource( 1 )
 skeleton = NodePath("../..")
@@ -60,7 +80,12 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="BlockTopX" type="MeshInstance" parent="PartX"]
+[node name="PartCollisions" type="StaticBody" parent="Part2/BlockTop"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Part2/BlockTop/PartCollisions"]
+shape = SubResource( 1 )
+
+[node name="BlockTopX" type="MeshInstance" parent="Part2"]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 use_in_baked_light = true
 mesh = ExtResource( 1 )
@@ -70,7 +95,12 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="BlockTopY" type="MeshInstance" parent="PartX"]
+[node name="PartCollisions2" type="StaticBody" parent="Part2/BlockTopX"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Part2/BlockTopX/PartCollisions2"]
+shape = SubResource( 1 )
+
+[node name="BlockTopY" type="MeshInstance" parent="Part2"]
 transform = Transform( 1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0 )
 use_in_baked_light = true
 mesh = ExtResource( 1 )
@@ -80,7 +110,12 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="BlockTopZ" type="MeshInstance" parent="PartX"]
+[node name="PartCollisions3" type="StaticBody" parent="Part2/BlockTopY"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Part2/BlockTopY/PartCollisions3"]
+shape = SubResource( 1 )
+
+[node name="BlockTopZ" type="MeshInstance" parent="Part2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0 )
 use_in_baked_light = true
 mesh = ExtResource( 1 )
@@ -90,10 +125,15 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PartY" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0 )
+[node name="PartCollisions4" type="StaticBody" parent="Part2/BlockTopZ"]
 
-[node name="BlockTop" type="MeshInstance" parent="PartY"]
+[node name="CollisionShape" type="CollisionShape" parent="Part2/BlockTopZ/PartCollisions4"]
+shape = SubResource( 1 )
+
+[node name="Part3" type="Spatial" parent="."]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0 )
+
+[node name="BlockTop" type="MeshInstance" parent="Part3"]
 use_in_baked_light = true
 mesh = ExtResource( 1 )
 skeleton = NodePath("../..")
@@ -102,7 +142,12 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="BlockTopX" type="MeshInstance" parent="PartY"]
+[node name="PartCollisions" type="StaticBody" parent="Part3/BlockTop"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Part3/BlockTop/PartCollisions"]
+shape = SubResource( 1 )
+
+[node name="BlockTopX" type="MeshInstance" parent="Part3"]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 use_in_baked_light = true
 mesh = ExtResource( 1 )
@@ -112,7 +157,12 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="BlockTopY" type="MeshInstance" parent="PartY"]
+[node name="PartCollisions2" type="StaticBody" parent="Part3/BlockTopX"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Part3/BlockTopX/PartCollisions2"]
+shape = SubResource( 1 )
+
+[node name="BlockTopY" type="MeshInstance" parent="Part3"]
 transform = Transform( 1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0 )
 use_in_baked_light = true
 mesh = ExtResource( 1 )
@@ -122,7 +172,12 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="BlockTopZ" type="MeshInstance" parent="PartY"]
+[node name="PartCollisions3" type="StaticBody" parent="Part3/BlockTopY"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Part3/BlockTopY/PartCollisions3"]
+shape = SubResource( 1 )
+
+[node name="BlockTopZ" type="MeshInstance" parent="Part3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0 )
 use_in_baked_light = true
 mesh = ExtResource( 1 )
@@ -132,10 +187,15 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PartZ" type="Spatial" parent="."]
-transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0 )
+[node name="PartCollisions4" type="StaticBody" parent="Part3/BlockTopZ"]
 
-[node name="BlockTop" type="MeshInstance" parent="PartZ"]
+[node name="CollisionShape" type="CollisionShape" parent="Part3/BlockTopZ/PartCollisions4"]
+shape = SubResource( 1 )
+
+[node name="Part4" type="Spatial" parent="."]
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="BlockTop" type="MeshInstance" parent="Part4"]
 use_in_baked_light = true
 mesh = ExtResource( 1 )
 skeleton = NodePath("../..")
@@ -144,7 +204,12 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="BlockTopX" type="MeshInstance" parent="PartZ"]
+[node name="PartCollisions" type="StaticBody" parent="Part4/BlockTop"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Part4/BlockTop/PartCollisions"]
+shape = SubResource( 1 )
+
+[node name="BlockTopX" type="MeshInstance" parent="Part4"]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 use_in_baked_light = true
 mesh = ExtResource( 1 )
@@ -154,7 +219,12 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="BlockTopY" type="MeshInstance" parent="PartZ"]
+[node name="PartCollisions2" type="StaticBody" parent="Part4/BlockTopX"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Part4/BlockTopX/PartCollisions2"]
+shape = SubResource( 1 )
+
+[node name="BlockTopY" type="MeshInstance" parent="Part4"]
 transform = Transform( 1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0 )
 use_in_baked_light = true
 mesh = ExtResource( 1 )
@@ -164,7 +234,12 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="BlockTopZ" type="MeshInstance" parent="PartZ"]
+[node name="PartCollisions3" type="StaticBody" parent="Part4/BlockTopY"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Part4/BlockTopY/PartCollisions3"]
+shape = SubResource( 1 )
+
+[node name="BlockTopZ" type="MeshInstance" parent="Part4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0 )
 use_in_baked_light = true
 mesh = ExtResource( 1 )
@@ -174,65 +249,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PartCollisions" type="StaticBody" parent="."]
+[node name="PartCollisions4" type="StaticBody" parent="Part4/BlockTopZ"]
 
-[node name="CollisionShape" type="CollisionShape" parent="PartCollisions"]
-shape = SubResource( 1 )
-
-[node name="CollisionShape2" type="CollisionShape" parent="PartCollisions"]
-transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape3" type="CollisionShape" parent="PartCollisions"]
-transform = Transform( 1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape4" type="CollisionShape" parent="PartCollisions"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape5" type="CollisionShape" parent="PartCollisions"]
-transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape6" type="CollisionShape" parent="PartCollisions"]
-shape = SubResource( 1 )
-
-[node name="CollisionShape7" type="CollisionShape" parent="PartCollisions"]
-transform = Transform( -1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape8" type="CollisionShape" parent="PartCollisions"]
-transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape9" type="CollisionShape" parent="PartCollisions"]
-transform = Transform( 1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape10" type="CollisionShape" parent="PartCollisions"]
-transform = Transform( -1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape11" type="CollisionShape" parent="PartCollisions"]
-shape = SubResource( 1 )
-
-[node name="CollisionShape12" type="CollisionShape" parent="PartCollisions"]
-transform = Transform( 1, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, 0 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape13" type="CollisionShape" parent="PartCollisions"]
-transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape14" type="CollisionShape" parent="PartCollisions"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape15" type="CollisionShape" parent="PartCollisions"]
-transform = Transform( -1, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, 0 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape16" type="CollisionShape" parent="PartCollisions"]
-transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+[node name="CollisionShape" type="CollisionShape" parent="Part4/BlockTopZ/PartCollisions4"]
 shape = SubResource( 1 )
