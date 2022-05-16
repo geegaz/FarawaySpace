@@ -31,8 +31,10 @@ onready var _Visuals: Spatial = $ShipVisuals
 # SFX
 onready var _Audio: AudioStreamPlayer3D = $ShipAudio
 
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 
 func _process(delta):
 	# Visual rotation
@@ -87,8 +89,8 @@ func _physics_process(delta):
 		if is_zero_approx(prev_speed):
 			emit_signal("stopped_moving")
 	
-	transform = transform.orthonormalized()
-	
+
+
 
 func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
