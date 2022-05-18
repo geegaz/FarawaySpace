@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Assets/Meshes/ship_wing.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Meshes/ship_prism.obj" type="ArrayMesh" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scripts/ShipVisuals.gd" type="Script" id=6]
 [ext_resource path="res://addons/Trail/trail_3d.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Materials/trail_material.tres" type="Material" id=8]
+[ext_resource path="res://Scripts/TrajectoryCorrection.gd" type="Script" id=9]
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=11]
 [ext_resource path="res://Assets/Sounds/flying_sound.ogg" type="AudioStream" id=12]
 
@@ -571,6 +572,12 @@ nodes/speed/node = SubResource( 26 )
 nodes/speed/position = Vector2( 580, 40 )
 node_connections = [ "output", 0, "Add2", "Add2", 0, "speed", "Add2", 1, "power" ]
 
+[sub_resource type="Curve" id=38]
+_data = [ Vector2( 0, 0 ), 0.0, 7.06612, 0, 0, Vector2( 0.746667, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=39]
+_data = [ Vector2( 0, 1 ), 0.0, -2.39812, 0, 0, Vector2( 1, 0 ), -1.29712, 0.0, 0, 0 ]
+
 [node name="Ship" type="KinematicBody" groups=["Player"]]
 collision_layer = 2
 script = ExtResource( 5 )
@@ -599,7 +606,7 @@ mesh = ExtResource( 2 )
 material/0 = null
 
 [node name="OmniLight" type="OmniLight" parent="ShipVisuals/Core"]
-light_energy = 0.0
+light_energy = 0.05
 
 [node name="TrailAnchor" type="Spatial" parent="ShipVisuals/Core"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.01992e-07, -2 )
@@ -680,3 +687,8 @@ transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0
 current = true
 far = 1000.0
 script = ExtResource( 11 )
+
+[node name="TrajectoryCorrection" type="Spatial" parent="."]
+script = ExtResource( 9 )
+angle_curve = SubResource( 38 )
+distance_curve = SubResource( 39 )

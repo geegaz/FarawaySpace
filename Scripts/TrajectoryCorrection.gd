@@ -1,14 +1,20 @@
 extends Spatial
 
-export(int, 1, 32) var directions: int = 8
-export(Vector2) var distance: Vector2 = Vector2(5, 6)
-export(float, 0, 1) var margin: float = 0.1
-export(float, 0, 1) var amount: float = 0.5
-export(float) var smoothing_speed: float = 4
-export(bool) var exclude_parent: bool = true
-export(int, LAYERS_3D_PHYSICS) var collision_layer: int = 1
-# DEBUG
-export(Gradient) var debug_gradient: Gradient = Gradient.new()
+export(int, 1, 32) 				var directions: int = 8
+export(Vector2) 				var distance: Vector2 = Vector2(5, 6)
+export(float, 0, 1) 			var margin: float = 0.1
+export(float, 0, 1) 			var amount: float = 1.0
+export(Curve) 					var angle_curve: Curve
+export(Curve) 					var distance_curve: Curve
+export(Curve) 					var speed_curve: Curve
+export(float) 					var correction_speed: float = 1.0
+
+export(bool) 					var exclude_parent: bool = true
+export(int, LAYERS_3D_PHYSICS) 	var collision_mask: int = 1
+
+var pos: Vector3
+var last_pos: Vector3
+var speed: float
 
 var exclude: Array = []
 
@@ -35,7 +41,7 @@ func _physics_process(delta: float) -> void:
 		var end: Vector3 = global_transform.origin + ray_rotated
 		var ray_length: float = (end - start).length()
 		
-		var collision: Dictionary = space.intersect_ray(start, end, exclude, collision_layer)
+		var collision: Dictionary = space.intersect_ray(start, end, exclude, collision_mask)
 		
 		if not collision.empty():
 			var projected_forward: Vector3 = forward - forward.project(collision.normal)
@@ -44,7 +50,12 @@ func _physics_process(delta: float) -> void:
 			var dot_amount: float = clamp(-forward.dot(collision.normal), 0, 1)
 			
 			target_dir += projected_forward * distance_amount * dot_amount
+			if angle_curve:
+				target_dir *= angle_curve.interpolate(dot_amount)
+			if distance_curve:
+				target_dir *= distance_curve.interpolate(distance_amount)
 	
-	if target_dir != Vector3.ZERO and parent:
-		target_dir = forward.linear_interpolate(target_dir.normalized(), 1 - exp(-smoothing_speed * amount * delta))
+	target_dir = forward.linear_interpolate(target_dir.normalized(), amount)
+	if parent and target_dir != Vector3.ZERO:
+		target_dir = forward.move_toward(target_dir, correction_speed * delta)
 		parent.look_at(parent.global_transform.origin + target_dir, Vector3.UP)
