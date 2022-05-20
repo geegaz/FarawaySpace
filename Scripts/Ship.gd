@@ -1,7 +1,6 @@
 extends KinematicBody
 
 signal started_moving
-signal moved(speed, relative)
 signal stopped_moving
 
 # Movement variables
@@ -19,12 +18,14 @@ export(Vector2) var controller_sensitivity: Vector2 = Vector2(2.0, 2.0)
 export(bool) var invert_y: bool = true
 var last_rotation: Vector3 = Vector3.ZERO
 
-var dir: float = 0
-var power: float = 0
-var speed: float = 0
+var dir: float = 0.0
+var power: float = 0.0
+var speed: float = 0.0
+var speed_amount: float
 
 # Gameplay
 onready var _Camera: Camera = $Camera
+onready var _Correction: Spatial = $TrajectoryCorrection
 # Visuals
 onready var _AnimTree: AnimationTree = $ShipVisuals/AnimationTree
 onready var _Visuals: Spatial = $ShipVisuals
@@ -37,6 +38,13 @@ func _ready() -> void:
 
 
 func _process(delta):
+	# If the ship is being powered
+	power = lerp(power, dir, 1 - exp(-4 * delta))
+	speed_amount = speed / max_speed
+	
+	
+	###### Cosmetic effects ######
+	
 	# Visual rotation
 	var rotation_speed := rotation - last_rotation
 	var tilt: float = clamp(-rotation_speed.y * 20, -PI/2, PI/2)
@@ -45,11 +53,8 @@ func _process(delta):
 	_Visuals.rotation.z = lerp(_Visuals.rotation.z, tilt, 1 - exp(-4 * delta))
 	last_rotation = rotation
 	
-	###### Cosmetic effects ######
-	
-	var speed_amount = speed / max_speed
-	# If the ship is being powered
-	power = lerp(power, dir, 1 - exp(-4 * delta))
+	# Trajectory Correction
+	_Correction.speed_amount = speed_amount
 	
 	# Camera
 	_Camera.fov = lerp(70, 100, speed_amount)
@@ -79,22 +84,12 @@ func _physics_process(delta):
 	# Movement calculations
 	accel_movement(delta)
 	move_and_slide(-transform.basis.z * speed)
-	
-	if not is_zero_approx(speed):
-		if is_zero_approx(prev_speed):
-			emit_signal("started_moving")
-		else:
-			emit_signal("moved",speed, translation-prev_translation)
-	else:
-		if is_zero_approx(prev_speed):
-			emit_signal("stopped_moving")
-	
-
 
 
 func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		vector_rotate(event.relative * mouse_sensitivity)
+
 
 func accel_movement(delta: float):
 	# dir goes from -0.5 to 2

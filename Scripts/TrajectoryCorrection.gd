@@ -1,21 +1,24 @@
 extends Spatial
 
-export(int, 1, 32) 				var directions: int = 8
+export(int, 1, 32) 				var directions: int = 8 setget set_directions
+func set_directions(value: int)->void:
+	directions = value
+	step = (PI*2) / directions
+
 export(Vector2) 				var distance: Vector2 = Vector2(5, 6)
 export(float, 0, 1) 			var margin: float = 0.1
 export(float, 0, 1) 			var amount: float = 1.0
+export(float) 					var correction_speed: float = 1.0
 export(Curve) 					var angle_curve: Curve
 export(Curve) 					var distance_curve: Curve
 export(Curve) 					var speed_curve: Curve
-export(float) 					var correction_speed: float = 1.0
+export(float) 					var max_speed: float = 25.0
 
 export(bool) 					var exclude_parent: bool = true
 export(int, LAYERS_3D_PHYSICS) 	var collision_mask: int = 1
 
-var pos: Vector3
-var last_pos: Vector3
-var speed: float
-
+var step: float
+var speed_amount: float = 1.0
 var exclude: Array = []
 
 onready var space: PhysicsDirectSpaceState = get_world().direct_space_state
@@ -31,9 +34,9 @@ func _physics_process(delta: float) -> void:
 	var right: Vector3 = global_transform.basis.x
 	var down: Vector3 = -global_transform.basis.y
 	
-	var step: float = (PI*2) / directions
 	var ray: Vector3 = down * distance.y + forward * distance.x
 	
+	var target_amount: float = amount
 	var target_dir: Vector3 = Vector3.ZERO
 	for i in directions:
 		var ray_rotated: Vector3 = ray.rotated(forward, step * i)
@@ -55,7 +58,10 @@ func _physics_process(delta: float) -> void:
 			if distance_curve:
 				target_dir *= distance_curve.interpolate(distance_amount)
 	
-	target_dir = forward.linear_interpolate(target_dir.normalized(), amount)
+	if speed_curve:
+		target_amount *= speed_curve.interpolate(speed_amount)
+	
+	target_dir = forward.linear_interpolate(target_dir.normalized(), target_amount)
 	if parent and target_dir != Vector3.ZERO:
 		target_dir = forward.move_toward(target_dir, correction_speed * delta)
 		parent.look_at(parent.global_transform.origin + target_dir, Vector3.UP)

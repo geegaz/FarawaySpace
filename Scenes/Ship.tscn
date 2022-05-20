@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Assets/Meshes/ship_wing.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Meshes/ship_prism.obj" type="ArrayMesh" id=2]
@@ -573,10 +573,13 @@ nodes/speed/position = Vector2( 580, 40 )
 node_connections = [ "output", 0, "Add2", "Add2", 0, "speed", "Add2", 1, "power" ]
 
 [sub_resource type="Curve" id=38]
-_data = [ Vector2( 0, 0 ), 0.0, 7.06612, 0, 0, Vector2( 0.746667, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 9.07394, 0, 0, Vector2( 0.753807, 0 ), -0.179091, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=39]
-_data = [ Vector2( 0, 1 ), 0.0, -2.39812, 0, 0, Vector2( 1, 0 ), -1.29712, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 0, Vector2( 1, 0 ), -1.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=40]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Ship" type="KinematicBody" groups=["Player"]]
 collision_layer = 2
@@ -606,7 +609,7 @@ mesh = ExtResource( 2 )
 material/0 = null
 
 [node name="OmniLight" type="OmniLight" parent="ShipVisuals/Core"]
-light_energy = 0.05
+light_energy = 0.0
 
 [node name="TrailAnchor" type="Spatial" parent="ShipVisuals/Core"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.01992e-07, -2 )
@@ -692,3 +695,4 @@ script = ExtResource( 11 )
 script = ExtResource( 9 )
 angle_curve = SubResource( 38 )
 distance_curve = SubResource( 39 )
+speed_curve = SubResource( 40 )
