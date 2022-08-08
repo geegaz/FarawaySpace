@@ -599,6 +599,7 @@ script = ExtResource( 6 )
 
 [node name="SpotLight" type="SpotLight" parent="ShipVisuals"]
 transform = Transform( 1, 0, 0, 0, -1, -1.50996e-07, 0, 1.50996e-07, -1, 0, 1.50996e-07, 1 )
+light_bake_mode = 0
 spot_range = 50.0
 spot_attenuation = 2.0
 spot_angle_attenuation = 0.75
@@ -610,6 +611,7 @@ material/0 = null
 
 [node name="OmniLight" type="OmniLight" parent="ShipVisuals/Core"]
 light_energy = 0.0
+light_bake_mode = 0
 
 [node name="TrailAnchor" type="Spatial" parent="ShipVisuals/Core"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.01992e-07, -2 )
@@ -692,6 +694,7 @@ far = 1000.0
 script = ExtResource( 11 )
 
 [node name="TrajectoryCorrection" type="Spatial" parent="."]
+visible = false
 script = ExtResource( 9 )
 angle_curve = SubResource( 38 )
 distance_curve = SubResource( 39 )

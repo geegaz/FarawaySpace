@@ -18,4 +18,3 @@ dof_blur_near_distance = 20.0
 glow_enabled = true
 glow_levels/1 = true
 glow_levels/5 = false
-glow_blend_mode = 0
