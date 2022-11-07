@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Ship.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Environments/tower_env.tres" type="Environment" id=2]
+[ext_resource path="res://Assets/Environments/env_low.tres" type="Environment" id=2]
 [ext_resource path="res://Scenes/Megastructures/Tower.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/UI/Pause.tscn" type="PackedScene" id=5]
@@ -81,7 +81,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Resource" id=3]
+[sub_resource type="Resource" id=7]
 script = ExtResource( 9 )
 mode = 0
 textures = [ [  ], [  ] ]
@@ -119,17 +119,15 @@ invert_y = false
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 2 )
 
-[node name="Lighting" type="Spatial" parent="."]
+[node name="World" type="Spatial" parent="."]
 
-[node name="DirectionalLight" type="DirectionalLight" parent="Lighting"]
-transform = Transform( -0.939693, 0.196175, -0.280167, 0, 0.819152, 0.573577, 0.34202, 0.538986, -0.769751, 0, 0, 0 )
+[node name="DirectionalLight" type="DirectionalLight" parent="World"]
+transform = Transform( -0.939693, 0.196175, -0.280166, 0, 0.819152, 0.573577, 0.34202, 0.538986, -0.769751, 0, 0, 0 )
 shadow_enabled = true
 directional_shadow_split_1 = 0.05
 directional_shadow_normal_bias = 1.0
 directional_shadow_bias_split_scale = 0.5
 directional_shadow_max_distance = 500.0
-
-[node name="World" type="Spatial" parent="."]
 
 [node name="HTerrain" type="Spatial" parent="World"]
 script = ExtResource( 4 )
@@ -141,7 +139,7 @@ collision_mask = 1
 shader_type = "Classic4Lite"
 custom_shader = null
 custom_globalmap_shader = null
-texture_set = SubResource( 3 )
+texture_set = SubResource( 7 )
 shader_params/u_ground_uv_scale = 20
 shader_params/u_depth_blending = true
 shader_params/u_triplanar = false

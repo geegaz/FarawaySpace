@@ -8,113 +8,121 @@ data = PoolVector3Array( -1, -22, -80, -9, -22, -79, -1, -22, -79, -7, -31, -9, 
 
 [node name="Entry" type="Spatial"]
 
-[node name="PitWorld" type="MeshInstance" parent="."]
+[node name="PartCollision" type="StaticBody" parent="."]
+
+[node name="PitWorld" type="MeshInstance" parent="PartCollision"]
 use_in_baked_light = true
 mesh = ExtResource( 1 )
+skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PartCollision" type="StaticBody" parent="PitWorld"]
-
-[node name="CollisionShape" type="CollisionShape" parent="PitWorld/PartCollision"]
+[node name="CollisionShape" type="CollisionShape" parent="PartCollision"]
 shape = SubResource( 1 )
 
-[node name="PitWorld2" type="MeshInstance" parent="."]
+[node name="PartCollision2" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0 )
+
+[node name="PitWorld2" type="MeshInstance" parent="PartCollision2"]
 use_in_baked_light = true
 mesh = ExtResource( 1 )
+skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PartCollision2" type="StaticBody" parent="PitWorld2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="PitWorld2/PartCollision2"]
+[node name="CollisionShape" type="CollisionShape" parent="PartCollision2"]
 shape = SubResource( 1 )
 
-[node name="PitWorld3" type="MeshInstance" parent="."]
+[node name="PartCollision3" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 0 )
+
+[node name="PitWorld3" type="MeshInstance" parent="PartCollision3"]
 use_in_baked_light = true
 mesh = ExtResource( 1 )
+skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PartCollision3" type="StaticBody" parent="PitWorld3"]
-
-[node name="CollisionShape" type="CollisionShape" parent="PitWorld3/PartCollision3"]
+[node name="CollisionShape" type="CollisionShape" parent="PartCollision3"]
 shape = SubResource( 1 )
 
-[node name="PitWorld4" type="MeshInstance" parent="."]
+[node name="PartCollision4" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 0 )
+
+[node name="PitWorld4" type="MeshInstance" parent="PartCollision4"]
 use_in_baked_light = true
 mesh = ExtResource( 1 )
+skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PartCollision4" type="StaticBody" parent="PitWorld4"]
-
-[node name="CollisionShape" type="CollisionShape" parent="PitWorld4/PartCollision4"]
+[node name="CollisionShape" type="CollisionShape" parent="PartCollision4"]
 shape = SubResource( 1 )
 
-[node name="PitWorld5" type="MeshInstance" parent="."]
+[node name="PartCollision5" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 0 )
+
+[node name="PitWorld5" type="MeshInstance" parent="PartCollision5"]
 use_in_baked_light = true
 mesh = ExtResource( 1 )
+skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PartCollision5" type="StaticBody" parent="PitWorld5"]
-
-[node name="CollisionShape" type="CollisionShape" parent="PitWorld5/PartCollision5"]
+[node name="CollisionShape" type="CollisionShape" parent="PartCollision5"]
 shape = SubResource( 1 )
 
-[node name="PitWorld6" type="MeshInstance" parent="."]
+[node name="PartCollision6" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0 )
+
+[node name="PitWorld6" type="MeshInstance" parent="PartCollision6"]
 use_in_baked_light = true
 mesh = ExtResource( 1 )
+skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PartCollision6" type="StaticBody" parent="PitWorld6"]
-
-[node name="CollisionShape" type="CollisionShape" parent="PitWorld6/PartCollision6"]
+[node name="CollisionShape" type="CollisionShape" parent="PartCollision6"]
 shape = SubResource( 1 )
 
-[node name="PitWorld7" type="MeshInstance" parent="."]
+[node name="PartCollision7" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 0 )
+
+[node name="PitWorld7" type="MeshInstance" parent="PartCollision7"]
 use_in_baked_light = true
 mesh = ExtResource( 1 )
+skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PartCollision7" type="StaticBody" parent="PitWorld7"]
-
-[node name="CollisionShape" type="CollisionShape" parent="PitWorld7/PartCollision7"]
+[node name="CollisionShape" type="CollisionShape" parent="PartCollision7"]
 shape = SubResource( 1 )
 
-[node name="PitWorld8" type="MeshInstance" parent="."]
+[node name="PartCollision8" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 0 )
+
+[node name="PitWorld8" type="MeshInstance" parent="PartCollision8"]
 use_in_baked_light = true
 mesh = ExtResource( 1 )
+skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PartCollision8" type="StaticBody" parent="PitWorld8"]
-
-[node name="CollisionShape" type="CollisionShape" parent="PitWorld8/PartCollision8"]
+[node name="CollisionShape" type="CollisionShape" parent="PartCollision8"]
 shape = SubResource( 1 )

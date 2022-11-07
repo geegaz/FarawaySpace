@@ -25,7 +25,7 @@ var speed_amount: float
 
 # Gameplay
 onready var _Camera: Camera = $Camera
-onready var _Correction: Spatial = $TrajectoryCorrection
+#onready var _Correction: Spatial = $TrajectoryCorrection
 # Visuals
 onready var _AnimTree: AnimationTree = $ShipVisuals/AnimationTree
 onready var _Visuals: Spatial = $ShipVisuals
@@ -54,7 +54,7 @@ func _process(delta):
 	last_rotation = rotation
 	
 	# Trajectory Correction
-	_Correction.speed_amount = speed_amount
+	#_Correction.speed_amount = speed_amount
 	
 	# Camera
 	_Camera.fov = lerp(70, 100, speed_amount)
