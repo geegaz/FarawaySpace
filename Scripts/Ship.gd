@@ -29,6 +29,10 @@ onready var _Camera: Camera = $Camera
 # Visuals
 onready var _AnimTree: AnimationTree = $ShipVisuals/AnimationTree
 onready var _Visuals: Spatial = $ShipVisuals
+onready var _WingTrails: Array = [
+	$ShipVisuals/RightWing/TrailAnchor/Trail3DLeft,
+	$ShipVisuals/LeftWing/TrailAnchor/Trail3DRight
+]
 # SFX
 onready var _Audio: AudioStreamPlayer3D = $ShipAudio
 
@@ -42,7 +46,6 @@ func _process(delta):
 	power = lerp(power, dir, 1 - exp(-4 * delta))
 	speed_amount = speed / max_speed
 	
-	
 	###### Cosmetic effects ######
 	
 	# Visual rotation
@@ -52,6 +55,11 @@ func _process(delta):
 	# https://www.rorydriscoll.com/2016/03/07/frame-rate-independent-damping-using-lerp/
 	_Visuals.rotation.z = lerp(_Visuals.rotation.z, tilt, 1 - exp(-4 * delta))
 	last_rotation = rotation
+	
+	# Trails
+	var target_trail_width = 0.2 if speed_amount > 0.8 else 0.0
+	for trail in _WingTrails:
+		trail.base_width = move_toward(trail.base_width, target_trail_width, delta * 1.0)
 	
 	# Trajectory Correction
 	#_Correction.speed_amount = speed_amount
@@ -84,6 +92,12 @@ func _physics_process(delta):
 	# Movement calculations
 	accel_movement(delta)
 	move_and_slide(-transform.basis.z * speed)
+	
+	# Movement signals
+	if is_zero_approx(prev_speed) and not is_zero_approx(speed):
+		emit_signal("started_moving")
+	elif is_zero_approx(speed) and not is_zero_approx(prev_speed):
+		emit_signal("stopped_moving")
 
 
 func _input(event):
@@ -100,8 +114,6 @@ func accel_movement(delta: float):
 	var target_speed: float = dir * max_speed
 	var target_accel: float = acceleration if dir != 0 else deceleration
 	speed += target_accel * delta * sign(target_speed - speed)
-	
-	#$Label.text = "dir: %s, speed: %s"%[dir, speed]
 
 func vector_rotate(rot: Vector2):
 	if invert_y:
