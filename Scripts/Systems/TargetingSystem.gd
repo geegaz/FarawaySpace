@@ -2,6 +2,7 @@ extends Spatial
 
 export var target_rect: PackedScene = preload("res://Scenes/UI/TargetRect.tscn")
 export(int, LAYERS_3D_PHYSICS) var mask: int = 1
+export(int, LAYERS_3D_PHYSICS) var raycast_mask: int = 1
 export(float, 1, 180) var max_targeting_angle: float = 45
 export(float, 1, 200) var max_targeting_distance: float = 100
 export var target_rect_size: float = 80.0
@@ -36,7 +37,7 @@ func _process(delta):
 		targets[target].visible = false
 		# Test if the enemy is visible
 		if forward.angle_to(diff) <= deg2rad(max_targeting_angle):
-			collision = space.intersect_ray(global_transform.origin, target.global_transform.origin, [], mask)
+			collision = space.intersect_ray(global_transform.origin, target.global_transform.origin, [], raycast_mask)
 			if collision["collider"] == target:
 				targets[target].visible = not _Camera.is_position_behind(target.global_transform.origin)
 				targets[target].target_pos = _Camera.unproject_position(target.global_transform.origin)

@@ -19,6 +19,31 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/zylann.hterrain/hterrain_resource_saver.gd"
 }, {
+"base": "LabelRange",
+"class": "HealthBar",
+"language": "GDScript",
+"path": "res://addons/SimpleNodes/HealthBar.gd"
+}, {
+"base": "Range",
+"class": "LabelRange",
+"language": "GDScript",
+"path": "res://addons/SimpleNodes/LabelRange.gd"
+}, {
+"base": "Node",
+"class": "MusicManager",
+"language": "GDScript",
+"path": "res://addons/SimpleNodes/MusicManager.gd"
+}, {
+"base": "AudioStreamPlayer",
+"class": "RandomStreamPlayer",
+"language": "GDScript",
+"path": "res://addons/SimpleNodes/RandomStreamPlayer.gd"
+}, {
+"base": "Node",
+"class": "Shaker",
+"language": "GDScript",
+"path": "res://addons/SimpleNodes/Shaker.gd"
+}, {
 "base": "Reference",
 "class": "Splerger",
 "language": "GDScript",
@@ -27,23 +52,29 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "HTerrainDataLoader": "",
 "HTerrainDataSaver": "",
+"HealthBar": "res://addons/SimpleNodes/HealthBar.svg",
+"LabelRange": "res://addons/SimpleNodes/LabelRange.svg",
+"MusicManager": "",
+"RandomStreamPlayer": "res://addons/SimpleNodes/RandomStreamPlayer.svg",
+"Shaker": "res://addons/SimpleNodes/Shaker.svg",
 "Splerger": ""
 }
 
 [application]
 
 config/name="Faraway-Space"
+config/description="No Description"
 run/main_scene="res://Scenes/Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 AudioManager="*res://Scenes/AudioManager.tscn"
-AdvancedBackgroundLoader="*res://addons/Advanced Background Loader/background_load.gd"
+Screenshake="*res://Scenes/Screenshake.tscn"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/Advanced Background Loader/plugin.cfg", "res://addons/Trail/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/Trail/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
 
 [input]
 
@@ -116,7 +147,6 @@ ui_options={
 
 [physics]
 
-3d/smooth_trimesh_collision=true
 common/enable_pause_aware_picking=true
 
 [rendering]

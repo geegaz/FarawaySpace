@@ -5,6 +5,7 @@
 [node name="TargetingSystem" type="Spatial"]
 script = ExtResource( 1 )
 mask = 4
+raycast_mask = 5
 
 [node name="Display" type="Control" parent="."]
 anchor_right = 1.0

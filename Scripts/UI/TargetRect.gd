@@ -14,11 +14,13 @@ func _process(delta):
 	size_time -= delta
 	if size_time < 0:
 		rect_size = target_size + random_vector() * target_size * size_randomness
+		rect_pivot_offset = rect_size / 2.0
 		size_time = size_update_step
 	
 	pos_time -= delta
 	if pos_time < 0:
-		rect_position = target_pos - rect_size / 2.0 + random_vector() * target_size * pos_randomness
+		rect_position = target_pos + random_vector() * target_size * pos_randomness
+		rect_position -= rect_pivot_offset
 		pos_time = pos_update_step
 
 func random_vector()->Vector2:
