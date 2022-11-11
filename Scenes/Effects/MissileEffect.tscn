@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Effect.gd" type="Script" id=1]
+[ext_resource path="res://addons/Trail/trail_3d.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Materials/trail_material.tres" type="Material" id=3]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 13.7798, 0, 0, Vector2( 0.1, 0.5 ), -5.60159e-07, -5.60159e-07, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[node name="MissileEffect" type="Spatial"]
+script = ExtResource( 1 )
+destroy_on_finish = false
+active = false
+
+[node name="Trail3D" type="ImmediateGeometry" parent="."]
+material_override = ExtResource( 3 )
+cast_shadow = 0
+script = ExtResource( 2 )
+distance = 0.2
+lifetime = 0.75
+width_profile = SubResource( 2 )

@@ -1,15 +1,16 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Environments/env_low.tres" type="Environment" id=2]
 [ext_resource path="res://Scenes/Megastructures/Tower.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/UI/Pause.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Target.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Systems/TargetingSystem.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/MainData/data.hterrain" type="Resource" id=8]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/Systems/MissilesSystem.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/UI/TargetRectStyleVisor.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Effects/MissileEffect.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Fonts/hydrogen.tres" type="DynamicFont" id=14]
 
 [sub_resource type="GDScript" id=4]
@@ -120,10 +121,15 @@ transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107,
 invert_y = false
 
 [node name="TargetingSystem" parent="Ship" instance=ExtResource( 7 )]
+target_rect = ExtResource( 11 )
 max_targeting_distance = 200.0
+target_rect_grow = 0.2
 
 [node name="MissilesSystem" parent="Ship" instance=ExtResource( 10 )]
 targeting_system = NodePath("../TargetingSystem")
+missile_effect = ExtResource( 12 )
+missile_effect_pooling = false
+missile_mask = 5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 2 )
@@ -157,14 +163,5 @@ shader_params/u_tile_reduction = Plane( 0, 0, 0, 0 )
 
 [node name="Tower" parent="World" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1024, 0, 1024 )
-
-[node name="Target" parent="World" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1024, 20, 1024 )
-
-[node name="Target3" parent="World" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1044, 20, 1024 )
-
-[node name="Target2" parent="World" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1004, 20, 1024 )
 
 [connection signal="started_moving" from="Ship" to="." method="_on_Ship_started_moving"]

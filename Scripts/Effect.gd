@@ -1,35 +1,55 @@
 extends Spatial
 
-export(int, "Destroy", "Hide") var end_behavior: int
-export var active: bool = true setget set_active
+signal finished(node)
+
+export var destroy_on_finish: bool = true
+export var active: bool = true
 
 var emitters: = []
+var trails: = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	visible = active
 	var children: = get_children()
 	for child in children:
-		if child is Particles:
-			emitters.append(child)
-			child.emitting = active
+		match child.get_class():
+			"Particles":
+				emitters.append(child)
+				child.emitting = active
+			"Trail3D":
+				trails.append(child)
+				child.emit = active
 
 func _process(delta):
-	active = false
-	for emitter in emitters:
-		if emitter.emitting:
-			active = true
+	active = (emitters_active() or trails_active())
+	visible = active
 	
 	if not active:
-		if end_behavior == 0:
+		emit_signal("finished", self)
+		if destroy_on_finish:
 			queue_free()
-		elif end_behavior == 1:
-			hide()
 
-func set_active(value: bool):
+func stop():
+	for emitter in emitters:
+		emitter.emitting = false
+	for trail in trails:
+		trail.emit = false
+
+func restart():
 	for emitter in emitters:
 		emitter.restart()
-		emitter.emitting = value
-	visible = value
-	set_process(value)
-	
-	active = value
+	for trail in trails:
+		trail.emit = true
+
+func emitters_active()->bool:
+	for emitter in emitters:
+		if emitter.emitting:
+			return true
+	return false
+
+func trails_active()->bool:
+	for trail in trails:
+		if trail.emit or trail.points.size() > 0:
+			return true
+	return false

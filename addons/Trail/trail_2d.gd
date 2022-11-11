@@ -75,3 +75,9 @@ func _process(delta):
 	if emit:
 		_emit()
 		
+
+func get_class()->String:
+	return "Trail2D"
+
+func is_class(_class: String)->bool:
+	return _class == get_class()

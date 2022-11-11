@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/UI/TargetRectStyles/Visor.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Textures/visor_1.png" type="Texture" id=3]
+
+[node name="TargetRectStyleVisor" type="TextureRect"]
+margin_right = 64.0
+margin_bottom = 64.0
+mouse_filter = 2
+texture = ExtResource( 3 )
+expand = true
+script = ExtResource( 1 )
+rot_randomness = 1.0

@@ -1,8 +1,8 @@
 extends Spatial
 
-export var target_rect: PackedScene = preload("res://Scenes/UI/TargetRect.tscn")
-export(int, LAYERS_3D_PHYSICS) var mask: int = 1
-export(int, LAYERS_3D_PHYSICS) var raycast_mask: int = 1
+export var target_rect: PackedScene
+export(int, LAYERS_3D_PHYSICS) var target_mask: int = 0
+export(int, LAYERS_3D_PHYSICS) var raycast_mask: int = 0
 export(float, 1, 180) var max_targeting_angle: float = 45
 export(float, 1, 200) var max_targeting_distance: float = 100
 export var target_rect_size: float = 80.0
@@ -18,7 +18,7 @@ onready var _Shape: CollisionShape = $Area/CollisionShape
 
 func _ready():
 	_Area.collision_layer = 0
-	_Area.collision_mask = mask
+	_Area.collision_mask = target_mask
 	_Area.connect("body_entered",self, "_on_Area_body_entered")
 	_Area.connect("body_exited",self, "_on_Area_body_exited")
 	
@@ -38,13 +38,13 @@ func _process(delta):
 		# Test if the enemy is visible
 		if forward.angle_to(diff) <= deg2rad(max_targeting_angle):
 			collision = space.intersect_ray(global_transform.origin, target.global_transform.origin, [], raycast_mask)
-			if collision["collider"] == target:
+			if collision.empty():
 				targets[target].visible = not _Camera.is_position_behind(target.global_transform.origin)
 				targets[target].target_pos = _Camera.unproject_position(target.global_transform.origin)
 				targets[target].target_size = Vector2.ONE * target_rect_size * ease(1.0 - diff.length() / max_targeting_distance, target_rect_grow)
 		
 
-func _on_Area_body_entered(body: Node):
+func _on_Area_body_entered(body: Spatial):
 	if not targets.has(body):
 		var new_target_rect = target_rect.instance()
 		new_target_rect.visible = false
@@ -52,7 +52,7 @@ func _on_Area_body_entered(body: Node):
 		
 		targets[body] = new_target_rect
 
-func _on_Area_body_exited(body: Node):
+func _on_Area_body_exited(body: Spatial):
 	if targets.has(body):
 		targets[body].queue_free()
 		targets.erase(body)

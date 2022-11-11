@@ -7,7 +7,7 @@
 [ext_resource path="res://Scripts/Ship.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/ShipVisuals.gd" type="Script" id=6]
 [ext_resource path="res://addons/Trail/trail_3d.gd" type="Script" id=7]
-[ext_resource path="res://Assets/Materials/Particles/trail_material.tres" type="Material" id=8]
+[ext_resource path="res://Assets/Materials/trail_material.tres" type="Material" id=8]
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=11]
 [ext_resource path="res://Assets/Sounds/flying_sound.ogg" type="AudioStream" id=12]
 
@@ -497,7 +497,7 @@ nodes/power/node = SubResource( 36 )
 nodes/power/position = Vector2( 580, 180 )
 nodes/speed/node = SubResource( 26 )
 nodes/speed/position = Vector2( 580, 40 )
-node_connections = [ "Add2", 0, "speed", "Add2", 1, "power", "output", 0, "Add2" ]
+node_connections = [ "output", 0, "Add2", "Add2", 0, "speed", "Add2", 1, "power" ]
 
 [node name="Ship" type="KinematicBody" groups=["Player"]]
 collision_layer = 2
@@ -529,7 +529,7 @@ mesh = ExtResource( 2 )
 material/0 = ExtResource( 4 )
 
 [node name="OmniLight" type="OmniLight" parent="ShipVisuals/Core"]
-light_energy = 0.05
+light_energy = 0.0
 light_bake_mode = 0
 
 [node name="TrailAnchor" type="Spatial" parent="ShipVisuals/Core"]

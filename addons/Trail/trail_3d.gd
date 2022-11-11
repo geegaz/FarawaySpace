@@ -347,3 +347,9 @@ func _process(delta) -> void:
 		# This is needed for alignment == view, so it can be updated every frame.
 		_render_geometry(points)
 
+
+func get_class()->String:
+	return "Trail3D"
+
+func is_class(_class: String)->bool:
+	return _class == get_class()
