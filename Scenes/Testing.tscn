@@ -1,0 +1,26 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scenes/Ship.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Target.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Systems/TargetingSystem.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Systems/MissilesSystem.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Effects/HitEffect.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Missile.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/UI/TargetRectStyleVisor.tscn" type="PackedScene" id=7]
+
+[node name="Testing" type="Node"]
+
+[node name="Ship" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16 )
+
+[node name="MissilesSystem" parent="Ship" instance=ExtResource( 4 )]
+targeting_system = NodePath("../TargetingSystem")
+missile = ExtResource( 6 )
+hit_effect = ExtResource( 5 )
+shoot_cooldown = 0.0
+
+[node name="TargetingSystem" parent="Ship" instance=ExtResource( 3 )]
+target_visual = ExtResource( 7 )
+
+[node name="Target" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )

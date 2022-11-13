@@ -4,6 +4,7 @@
 flags_transparent = true
 flags_vertex_lighting = true
 flags_do_not_receive_shadows = true
+params_depth_draw_mode = 3
 emission_enabled = true
 emission = Color( 1, 1, 1, 1 )
 emission_energy = 1.0

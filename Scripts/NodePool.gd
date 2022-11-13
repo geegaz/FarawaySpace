@@ -4,12 +4,14 @@ export var override_parent: NodePath
 export var original: PackedScene
 export var amount: int = 100
 
-var parent: Node
 var available: = []
 var active: = []
 
+var parent: Node = self
+
 func _ready():
-	create_pool()
+	if original:
+		create_pool(original, get_node_or_null(override_parent))
 
 func pull()->Node:
 	var new_node: Node = available.pop_back()
@@ -44,11 +46,13 @@ func clear_pool():
 		node.queue_free()
 		node = active.pop_back()
 
-func create_pool(new_parent: Node = null):
+func create_pool(scene: PackedScene, new_parent: Node = null):
 	clear_pool()
 	var node: Node
 	# Create all the nodes in the pool
-	parent = self if not new_parent else new_parent
+	original = scene
+	if new_parent:
+		parent = new_parent
 	for i in amount:
 		node = original.instance()
 		available.append(node)

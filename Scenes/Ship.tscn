@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Assets/Meshes/ship_wing.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Meshes/ship_prism.obj" type="ArrayMesh" id=2]
@@ -12,6 +12,9 @@
 [ext_resource path="res://Assets/Sounds/flying_sound.ogg" type="AudioStream" id=12]
 
 [sub_resource type="SphereShape" id=16]
+
+[sub_resource type="Curve" id=38]
+_data = [ Vector2( 0, 0 ), 0.0, 9.79091, 0, 0, Vector2( 0.2, 0.7 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=21]
 _data = [ Vector2( 0, 0 ), 0.0, 5.03245, 0, 0, Vector2( 0.251269, 0.501136 ), -0.071954, -0.071954, 0, 0, Vector2( 1, 0 ), -0.459207, 0.0, 0, 0 ]
@@ -101,30 +104,6 @@ tracks/6/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("Core/TrailAnchor/Trail3D:base_width")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/8/type = "value"
-tracks/8/path = NodePath("Core/TrailAnchor/Trail3D:lifetime")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.5 ]
 }
 
 [sub_resource type="Animation" id=28]
@@ -363,24 +342,12 @@ tracks/2/keys = {
 "values": [ Vector3( 0, 0, 0 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Core/TrailAnchor/Trail3D:base_width")
+tracks/3/path = NodePath("Core/TrailAnchor/Trail3DCore:base_width")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Core/TrailAnchor/Trail3D:lifetime")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -426,30 +393,6 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector3( 0, 0, -1 ) ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("Core/TrailAnchor/Trail3D:base_width")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.8, 1.2, 0.8 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Core/TrailAnchor/Trail3D:lifetime")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.6 ]
-}
 
 [sub_resource type="AnimationNodeAdd2" id=33]
 
@@ -489,7 +432,7 @@ blend_point_2/pos = -1.0
 snap = 0.05
 
 [sub_resource type="AnimationNodeBlendTree" id=27]
-graph_offset = Vector2( 376, -21 )
+graph_offset = Vector2( 778.701, -54.2027 )
 nodes/Add2/node = SubResource( 33 )
 nodes/Add2/position = Vector2( 800, 60 )
 nodes/output/position = Vector2( 1100, 140 )
@@ -497,7 +440,7 @@ nodes/power/node = SubResource( 36 )
 nodes/power/position = Vector2( 580, 180 )
 nodes/speed/node = SubResource( 26 )
 nodes/speed/position = Vector2( 580, 40 )
-node_connections = [ "output", 0, "Add2", "Add2", 0, "speed", "Add2", 1, "power" ]
+node_connections = [ "Add2", 0, "speed", "Add2", 1, "power", "output", 0, "Add2" ]
 
 [node name="Ship" type="KinematicBody" groups=["Player"]]
 collision_layer = 2
@@ -533,17 +476,14 @@ light_energy = 0.0
 light_bake_mode = 0
 
 [node name="TrailAnchor" type="Spatial" parent="ShipVisuals/Core"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.01992e-07, -2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.26494e-07, -1.5 )
 
-[node name="Trail3D" type="ImmediateGeometry" parent="ShipVisuals/Core/TrailAnchor"]
-transform = Transform( 0.999999, 0, 0, 0, -0.999999, -8.74227e-08, 0, 8.74226e-08, -1, 0, -8.7423e-08, 0 )
+[node name="Trail3DCore" type="ImmediateGeometry" parent="ShipVisuals/Core/TrailAnchor"]
 material_override = ExtResource( 8 )
-cast_shadow = 0
 script = ExtResource( 7 )
-segments = 100
+segments = 50
 base_width = 0.0
-width_profile = SubResource( 21 )
-smoothing_iterations = 1
+width_profile = SubResource( 38 )
 
 [node name="RightWing" type="MeshInstance" parent="ShipVisuals"]
 mesh = ExtResource( 1 )

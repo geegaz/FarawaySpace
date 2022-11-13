@@ -1,6 +1,6 @@
 extends Spatial
 
-export var target_rect: PackedScene
+export var target_visual: PackedScene
 export(int, LAYERS_3D_PHYSICS) var target_mask: int = 0
 export(int, LAYERS_3D_PHYSICS) var raycast_mask: int = 0
 export(float, 1, 180) var max_targeting_angle: float = 45
@@ -16,6 +16,7 @@ onready var _Display: Control = $Display
 onready var _Area: Area = $Area
 onready var _Shape: CollisionShape = $Area/CollisionShape
 
+
 func _ready():
 	_Area.collision_layer = 0
 	_Area.collision_mask = target_mask
@@ -26,41 +27,54 @@ func _ready():
 	_Shape.shape.radius = max_targeting_distance
 
 func _process(delta):
-	var forward: Vector3
-	var diff: Vector3
-	var collision: Dictionary
-	
 	for target in targets:
-		forward = -global_transform.basis.z
-		diff = target.global_transform.origin - global_transform.origin
-		
-		targets[target].visible = false
-		# Test if the enemy is visible
-		if forward.angle_to(diff) <= deg2rad(max_targeting_angle):
-			collision = space.intersect_ray(global_transform.origin, target.global_transform.origin, [], raycast_mask)
-			if collision.empty():
-				targets[target].visible = not _Camera.is_position_behind(target.global_transform.origin)
-				targets[target].target_pos = _Camera.unproject_position(target.global_transform.origin)
-				targets[target].target_size = Vector2.ONE * target_rect_size * ease(1.0 - diff.length() / max_targeting_distance, target_rect_grow)
-		
+		# Only update the visual if the target has one
+		var visual: Node = targets[target]
+		if visual:
+			var distance: float = global_transform.origin.distance_to(target.global_transform.origin)
+			
+			visual.visible = is_target_visible(target) and not _Camera.is_position_behind(target.global_transform.origin)
+			visual.target_pos = _Camera.unproject_position(target.global_transform.origin)
+			visual.target_size = Vector2.ONE * target_rect_size * ease(1.0 - distance / max_targeting_distance, target_rect_grow)
+
 
 func _on_Area_body_entered(body: Spatial):
 	if not targets.has(body):
-		var new_target_rect = target_rect.instance()
-		new_target_rect.visible = false
-		_Display.add_child(new_target_rect)
+		var new_visual: Control = null
+		# Don't create a new visual if there is not target_visual set
+		if target_visual:
+			new_visual = target_visual.instance()
+			new_visual.visible = false
+			_Display.add_child(new_visual)
 		
-		targets[body] = new_target_rect
+		targets[body] = new_visual
 
 func _on_Area_body_exited(body: Spatial):
 	if targets.has(body):
-		targets[body].queue_free()
+		# Only delete the visual if the target had one
+		if targets[body] != null:
+			targets[body].queue_free()
 		targets.erase(body)
+
+
+func is_target_visible(target: Spatial)->bool:
+	var forward: Vector3 = -global_transform.basis.z
+	var diff: Vector3 = target.global_transform.origin - global_transform.origin
+	var collision: Dictionary
+	
+	if forward.angle_to(diff) > deg2rad(max_targeting_angle):
+		return false
+	
+	collision = space.intersect_ray(global_transform.origin, target.global_transform.origin, [], raycast_mask)
+	if not collision.empty():
+		return false
+	
+	return true
 
 func get_visible_targets()->Array:
 	var visible_targets: = []
 	for target in targets:
-		if targets[target].visible:
+		if is_target_visible(target):
 			visible_targets.append(target)
 	
 	return visible_targets

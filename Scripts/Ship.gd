@@ -4,24 +4,25 @@ signal started_moving
 signal stopped_moving
 
 # Movement variables
-export(float) var max_speed = 25 # m/s
-export(float) var acceleration = 10 # m/s/s
-export(float) var deceleration = 5 # m/s/s
-export(float) var forward_multiplier = 1.0
-export(float) var backward_multiplier = 0.5
+export var max_speed: float = 25 # m/s
+export var acceleration: float = 10 # m/s/s
+export var deceleration: float = 5 # m/s/s
+export var forward_multiplier: float = 1.0
+export var backward_multiplier: float = 0.5
 
 # Rotation variables
 #export(float) var rotation_deadzone = 0.05
 #export(Vector2) var rotation_speed = Vector2(4, 2) # rad/s
 export(Vector2) var mouse_sensitivity: Vector2 = Vector2(0.1, 0.1)
 export(Vector2) var controller_sensitivity: Vector2 = Vector2(2.0, 2.0)
-export(bool) var invert_y: bool = true
+export(bool) var mouse_invert_y: bool = true
 var last_rotation: Vector3 = Vector3.ZERO
 
 var dir: float = 0.0
 var power: float = 0.0
 var speed: float = 0.0
 var speed_amount: float
+var velocity: Vector3
 
 # Gameplay
 onready var _Camera: Camera = $Camera
@@ -29,6 +30,7 @@ onready var _Camera: Camera = $Camera
 # Visuals
 onready var _AnimTree: AnimationTree = $ShipVisuals/AnimationTree
 onready var _Visuals: Spatial = $ShipVisuals
+onready var _CoreTrail: Spatial = $ShipVisuals/Core/TrailAnchor/Trail3DCore
 onready var _WingTrails: Array = [
 	$ShipVisuals/RightWing/TrailAnchor/Trail3DLeft,
 	$ShipVisuals/LeftWing/TrailAnchor/Trail3DRight
@@ -36,10 +38,8 @@ onready var _WingTrails: Array = [
 # SFX
 onready var _Audio: AudioStreamPlayer3D = $ShipAudio
 
-
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
 
 func _process(delta):
 	# If the ship is being powered
@@ -57,9 +57,13 @@ func _process(delta):
 	last_rotation = rotation
 	
 	# Trails
-	var target_trail_width = 0.2 if speed_amount > 0.8 else 0.0
+	var core_trail_width = max(power, 0.0)
+	var core_trail_lifetime = max(power * 0.5, 0.0)
+	_CoreTrail.base_width = core_trail_width
+	_CoreTrail.lifetime = core_trail_lifetime
+	var wing_trail_width = 0.2 if speed_amount > 0.8 else 0.0
 	for trail in _WingTrails:
-		trail.base_width = move_toward(trail.base_width, target_trail_width, delta * 1.0)
+		trail.base_width = move_toward(trail.base_width, wing_trail_width, delta * 1.0)
 	
 	# Trajectory Correction
 	#_Correction.speed_amount = speed_amount
@@ -82,7 +86,6 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	var prev_translation = translation
 	var prev_speed = speed
 	
 	# Input management
@@ -91,7 +94,7 @@ func _physics_process(delta):
 	
 	# Movement calculations
 	accel_movement(delta)
-	move_and_slide(-transform.basis.z * speed)
+	velocity = move_and_slide(velocity)
 	
 	# Movement signals
 	if is_zero_approx(prev_speed) and not is_zero_approx(speed):
@@ -102,7 +105,10 @@ func _physics_process(delta):
 
 func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		vector_rotate(event.relative * mouse_sensitivity)
+		var rot: Vector2 = event.relative * mouse_sensitivity
+		if mouse_invert_y:
+			rot.y *= -1
+		vector_rotate(rot)
 
 
 func accel_movement(delta: float):
@@ -114,11 +120,11 @@ func accel_movement(delta: float):
 	var target_speed: float = dir * max_speed
 	var target_accel: float = acceleration if dir != 0 else deceleration
 	speed += target_accel * delta * sign(target_speed - speed)
+	
+	velocity = -global_transform.basis.z * speed
 
 func vector_rotate(rot: Vector2):
-	if invert_y:
-		rot.y = -rot.y
 	rotation.y -= deg2rad(rot.x)
-	rotation.x -= deg2rad(rot.y)
+	rotation.x += deg2rad(rot.y)
 
 	rotation_degrees.x = clamp(rotation_degrees.x, -90, 90)

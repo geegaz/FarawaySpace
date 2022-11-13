@@ -19,35 +19,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/zylann.hterrain/hterrain_resource_saver.gd"
 }, {
-"base": "LabelRange",
-"class": "HealthBar",
-"language": "GDScript",
-"path": "res://addons/SimpleNodes/HealthBar.gd"
-}, {
-"base": "Range",
-"class": "LabelRange",
-"language": "GDScript",
-"path": "res://addons/SimpleNodes/LabelRange.gd"
-}, {
-"base": "Node",
-"class": "MusicManager",
-"language": "GDScript",
-"path": "res://addons/SimpleNodes/MusicManager.gd"
-}, {
 "base": "Node",
 "class": "NodePool",
 "language": "GDScript",
 "path": "res://Scripts/NodePool.gd"
-}, {
-"base": "AudioStreamPlayer",
-"class": "RandomStreamPlayer",
-"language": "GDScript",
-"path": "res://addons/SimpleNodes/RandomStreamPlayer.gd"
-}, {
-"base": "Node",
-"class": "Shaker",
-"language": "GDScript",
-"path": "res://addons/SimpleNodes/Shaker.gd"
 }, {
 "base": "Reference",
 "class": "Splerger",
@@ -57,12 +32,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "HTerrainDataLoader": "",
 "HTerrainDataSaver": "",
-"HealthBar": "res://addons/SimpleNodes/HealthBar.svg",
-"LabelRange": "res://addons/SimpleNodes/LabelRange.svg",
-"MusicManager": "",
 "NodePool": "",
-"RandomStreamPlayer": "res://addons/SimpleNodes/RandomStreamPlayer.svg",
-"Shaker": "res://addons/SimpleNodes/Shaker.svg",
 "Splerger": ""
 }
 
@@ -80,7 +50,31 @@ Screenshake="*res://Scenes/Screenshake.tscn"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/Trail/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/Trail/plugin.cfg", "res://addons/randomAudioStreamPlayer/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 2,
+"compress/normal_map": 2,
+"detect_3d": true,
+"flags/anisotropic": false,
+"flags/filter": true,
+"flags/mipmaps": true,
+"flags/repeat": 1,
+"flags/srgb": 0,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/normal_map_invert_y": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
 
 [input]
 
@@ -89,6 +83,7 @@ ui_left={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":-1.0,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":65,"unicode":0,"echo":false,"script":null)
  ]
 }
 ui_right={
@@ -96,6 +91,7 @@ ui_right={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":15,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":1.0,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":68,"unicode":0,"echo":false,"script":null)
  ]
 }
 ui_up={
@@ -103,6 +99,7 @@ ui_up={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":12,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":-1.0,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":87,"unicode":0,"echo":false,"script":null)
  ]
 }
 ui_down={
@@ -110,6 +107,7 @@ ui_down={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":13,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":83,"unicode":0,"echo":false,"script":null)
  ]
 }
 ui_fullscreen={

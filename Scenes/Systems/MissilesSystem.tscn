@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Scripts/Systems/MissilesSystem.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Effects/HitEffect.tscn" type="PackedScene" id=3]
 
 [node name="MissilesSystem" type="Spatial"]
 script = ExtResource( 1 )
-hit_effect = ExtResource( 3 )
+
+[node name="Missiles" type="Node" parent="."]
+
+[node name="Effects" type="Node" parent="."]
