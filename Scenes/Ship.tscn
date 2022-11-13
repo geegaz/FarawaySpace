@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Assets/Meshes/ship_wing.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Meshes/ship_prism.obj" type="ArrayMesh" id=2]
@@ -18,6 +18,10 @@ _data = [ Vector2( 0, 0 ), 0.0, 9.79091, 0, 0, Vector2( 0.2, 0.7 ), 0.0, 0.0, 0,
 
 [sub_resource type="Curve" id=21]
 _data = [ Vector2( 0, 0 ), 0.0, 5.03245, 0, 0, Vector2( 0.251269, 0.501136 ), -0.071954, -0.071954, 0, 0, Vector2( 1, 0 ), -0.459207, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=39]
+offsets = PoolRealArray( 0, 0.107143, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [sub_resource type="Animation" id=18]
 length = 0.001
@@ -472,7 +476,7 @@ mesh = ExtResource( 2 )
 material/0 = ExtResource( 4 )
 
 [node name="OmniLight" type="OmniLight" parent="ShipVisuals/Core"]
-light_energy = 0.0
+light_energy = 0.05
 light_bake_mode = 0
 
 [node name="TrailAnchor" type="Spatial" parent="ShipVisuals/Core"]
@@ -484,6 +488,7 @@ script = ExtResource( 7 )
 segments = 50
 base_width = 0.0
 width_profile = SubResource( 38 )
+smoothing_iterations = 1
 
 [node name="RightWing" type="MeshInstance" parent="ShipVisuals"]
 mesh = ExtResource( 1 )
@@ -500,6 +505,7 @@ script = ExtResource( 7 )
 segments = 100
 base_width = 0.0
 width_profile = SubResource( 21 )
+color_gradient = SubResource( 39 )
 smoothing_iterations = 1
 
 [node name="LeftWing" type="MeshInstance" parent="ShipVisuals"]
@@ -518,6 +524,7 @@ script = ExtResource( 7 )
 segments = 100
 base_width = 0.0
 width_profile = SubResource( 21 )
+color_gradient = SubResource( 39 )
 smoothing_iterations = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ShipVisuals"]

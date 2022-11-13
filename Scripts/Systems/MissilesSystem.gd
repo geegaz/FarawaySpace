@@ -7,6 +7,10 @@ export var hit_effect: PackedScene
 export var use_parent_velocity: = true
 # Shooting parameters
 export var shoot_cooldown: = 0.25
+# Effect parameters
+export(float, 0.0, 1.0) var screenshake_directional: float = 0.8
+export(float, 1.0, 100.0) var screenshake_distance_multiplier: float = 50.0
+
 
 var cooldown: = 0.0
 var target_index: int = 0
@@ -66,4 +70,9 @@ func missile_hit(missile: Spatial, collision: KinematicCollision):
 		_Effects.add_child(new_effect)
 		new_effect.restart()
 		new_effect.transform = missile.transform
+		# Shake screen
+		var distance = global_transform.origin.distance_to(collision.position) / screenshake_distance_multiplier
+		var screen_pos: Vector2 = Screenshake._Camera.unproject_position(global_transform.origin)
+		var screen_pos_collision: Vector2 = Screenshake._Camera.unproject_position(collision.position)
+		Screenshake.add_shake(1.0 / distance, 0.8, (screen_pos_collision - screen_pos).angle_to(Vector2.RIGHT))
 

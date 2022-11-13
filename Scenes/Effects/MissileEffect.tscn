@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Effect.gd" type="Script" id=1]
 [ext_resource path="res://addons/Trail/trail_3d.gd" type="Script" id=2]
@@ -9,10 +9,7 @@
 [ext_resource path="res://Assets/Materials/Particles/missile_smoke_process_material.tres" type="Material" id=7]
 
 [sub_resource type="Curve" id=1]
-_data = [ Vector2( 0, 0 ), 0.0, 13.7798, 0, 0, Vector2( 0.1, 0.5 ), -5.60159e-07, -5.60159e-07, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="Gradient" id=2]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+_data = [ Vector2( 0, 0 ), 0.0, 30.1886, 0, 0, Vector2( 0.1, 1 ), -5.60159e-07, -5.60159e-07, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="QuadMesh" id=4]
 
@@ -34,8 +31,8 @@ cast_shadow = 0
 script = ExtResource( 2 )
 distance = 0.2
 segments = 100
+base_width = 0.2
 width_profile = SubResource( 1 )
-color_gradient = SubResource( 2 )
 
 [node name="Particles" type="Particles" parent="."]
 material_override = ExtResource( 6 )

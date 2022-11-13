@@ -1,50 +1,43 @@
 extends Node
 
-var layers: = []
-
 onready var _Camera: = get_viewport().get_camera()
 onready var noise: = OpenSimplexNoise.new()
 
-class Layer:
-	enum {
-		MODE_MIX,
-		MODE_ADD,
-		MODE_REPLACE
-	}
-	
-	var mode: int
-	
-	var intensity: float
-	var time: float
-	
-	var offset: Vector2
-	var offset_multiplier: Vector2
-	
-	func _init(mode: int = MODE_MIX)->void:
-		pass
-	
-	func _process(delta: float)->void:
-		pass
-	
-	
-	func shake(time: float, intensity: float, speed: float, decay: float = 0.8, directional: = 0.0, angle: = 0.0)->void:
-		pass
-	
-	func shake_impulse(intensity: float, speed: float, decay: float = 0.8, directional: = 0.0, angle: = 0.0)->void:
-		pass
+var shake_power: int = 2
+var shake_decay: float = 0.8
+var shake_speed: float = 120.0
+var shake_intensity: float = 2.0
 
+var duration: float = 0.0
+var noise_pos: float = 0.0
 
-func _process(delta: float) -> void:
-	pass
-#	_Camera.h_offset = offset.x
-#	_Camera.v_offset = offset.y
+var offset: Vector2
+var offset_multiplier: Vector2 = Vector2.ONE
+var offset_transform: Transform2D
 
-func get_layer(id: int)->Layer:
-	if id >= layers.size():
-		return null
-	return layers[id]
+func _ready() -> void:
+	noise.seed = randi()
+	noise.period = 4
+	noise.octaves = 2
 
-func set_layer(id: int, layer: Layer):
-	if id >= layers.size():
-		layers.resize(id + 1)
-	layers[id] = layer
+func _process(delta: float)->void:
+	if duration > 0.0:
+		duration -= max(shake_decay * delta, 0.0)
+		
+		var amount: float = pow(duration, shake_power)
+		offset.x = offset_multiplier.x * shake_intensity * amount * noise.get_noise_2d(noise.seed, noise_pos)
+		offset.y = offset_multiplier.y * shake_intensity * amount * noise.get_noise_2d(noise.seed * 2, noise_pos)
+		offset = offset_transform.xform(offset)
+		noise_pos += delta * shake_speed
+	
+		_Camera.h_offset = offset.x
+		_Camera.v_offset = offset.y
+
+func set_shake(strength: float, directional: = 0.0, angle: = 0.0)->void:
+	if duration < strength:
+		duration = min(strength, 1.0)
+		offset_transform = Transform2D(angle, Vector2.ZERO)
+		offset_multiplier = Vector2(1.0 + directional, 1.0 - directional)
+
+func add_shake(strength: float, directional: = 0.0, angle: = 0.0)->void:
+	set_shake(duration + strength, directional, angle)

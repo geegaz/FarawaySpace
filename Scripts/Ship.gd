@@ -70,7 +70,7 @@ func _process(delta):
 	
 	# Camera
 	_Camera.fov = lerp(70, 100, speed_amount)
-#	_Camera.shake_duration = abs(power) * speed_amount
+	Screenshake.set_shake(abs(power) * speed_amount * 0.2)
 	
 	# Audio
 	_Audio.pitch_scale = clamp(
