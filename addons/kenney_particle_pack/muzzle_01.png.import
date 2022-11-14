@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/muzzle_01.png-6b5b53ab7ff581d37d9574d2b01cae58.stex"
+path.s3tc="res://.import/muzzle_01.png-6b5b53ab7ff581d37d9574d2b01cae58.s3tc.stex"
+path.etc2="res://.import/muzzle_01.png-6b5b53ab7ff581d37d9574d2b01cae58.etc2.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/kenney_particle_pack/muzzle_01.png"
-dest_files=[ "res://.import/muzzle_01.png-6b5b53ab7ff581d37d9574d2b01cae58.stex" ]
+dest_files=[ "res://.import/muzzle_01.png-6b5b53ab7ff581d37d9574d2b01cae58.s3tc.stex", "res://.import/muzzle_01.png-6b5b53ab7ff581d37d9574d2b01cae58.etc2.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
@@ -31,5 +33,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

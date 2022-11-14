@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/trace_01.png-534a36da64722acb1573600948127b58.stex"
+path.s3tc="res://.import/trace_01.png-534a36da64722acb1573600948127b58.s3tc.stex"
+path.etc2="res://.import/trace_01.png-534a36da64722acb1573600948127b58.etc2.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/kenney_particle_pack/trace_01.png"
-dest_files=[ "res://.import/trace_01.png-534a36da64722acb1573600948127b58.stex" ]
+dest_files=[ "res://.import/trace_01.png-534a36da64722acb1573600948127b58.s3tc.stex", "res://.import/trace_01.png-534a36da64722acb1573600948127b58.etc2.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
@@ -31,5 +33,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

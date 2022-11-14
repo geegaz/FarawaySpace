@@ -2,7 +2,6 @@ extends KinematicBody
 
 signal hit(missile, collision)
 
-
 export var damping: float = 5 # m/s/s
 export var thrust_force: float = 200 # m/s
 export var lifetime: float = 10.0
@@ -20,9 +19,10 @@ func _ready():
 	if target and target.has_method(hit_method):
 		# warning-ignore:return_value_discarded
 		connect("hit", target, hit_method)
+		
 
 func _physics_process(delta):
-	if target:
+	if is_instance_valid(target):
 		look_at(target.global_transform.origin, Vector3.UP)
 		dir = -global_transform.basis.z
 	velocity = velocity.linear_interpolate(Vector3.ZERO, delta * damping)

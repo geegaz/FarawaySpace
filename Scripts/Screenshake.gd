@@ -5,7 +5,7 @@ onready var noise: = OpenSimplexNoise.new()
 
 var shake_power: int = 2
 var shake_decay: float = 0.8
-var shake_speed: float = 120.0
+var shake_speed: float = 80.0
 var shake_intensity: float = 2.0
 
 var duration: float = 0.0

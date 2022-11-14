@@ -25,7 +25,6 @@ func _ready():
 func _process(delta):
 	cooldown = max(cooldown - delta, 0.0)
 
-
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_WHEEL_DOWN:
 		if event.pressed and cooldown == 0.0:
@@ -72,7 +71,7 @@ func missile_hit(missile: Spatial, collision: KinematicCollision):
 		new_effect.transform = missile.transform
 		# Shake screen
 		var distance = global_transform.origin.distance_to(collision.position) / screenshake_distance_multiplier
-		var screen_pos: Vector2 = Screenshake._Camera.unproject_position(global_transform.origin)
-		var screen_pos_collision: Vector2 = Screenshake._Camera.unproject_position(collision.position)
+		var screen_pos: Vector2 = Screenshake._Camera.unproject_position(collision.position)
+		var screen_pos_collision: Vector2 = Screenshake._Camera.unproject_position(collision.position + collision.normal)
 		Screenshake.add_shake(1.0 / distance, 0.8, (screen_pos_collision - screen_pos).angle_to(Vector2.RIGHT))
 

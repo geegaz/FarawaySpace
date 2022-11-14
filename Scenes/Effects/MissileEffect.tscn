@@ -5,8 +5,9 @@
 [ext_resource path="res://Assets/Materials/trail_material.tres" type="Material" id=3]
 [ext_resource path="res://addons/randomAudioStreamPlayer/random_audio_stream_player_3D.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Sounds/missile_sound.wav" type="AudioStream" id=5]
-[ext_resource path="res://Assets/Materials/Particles/missile_smoke_material.tres" type="Material" id=6]
-[ext_resource path="res://Assets/Materials/Particles/missile_smoke_process_material.tres" type="Material" id=7]
+[ext_resource path="res://Assets/Materials/Particles/smoke_material.tres" type="Material" id=6]
+[ext_resource path="res://Assets/Materials/Particles/smoke_process_material.tres" type="Material" id=7]
+
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 30.1886, 0, 0, Vector2( 0.1, 1 ), -5.60159e-07, -5.60159e-07, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]

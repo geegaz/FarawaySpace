@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/star_02.png-019ee31c4232c6f06a5ad75c333b69a1.stex"
+path.s3tc="res://.import/star_02.png-019ee31c4232c6f06a5ad75c333b69a1.s3tc.stex"
+path.etc2="res://.import/star_02.png-019ee31c4232c6f06a5ad75c333b69a1.etc2.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/kenney_particle_pack/star_02.png"
-dest_files=[ "res://.import/star_02.png-019ee31c4232c6f06a5ad75c333b69a1.stex" ]
+dest_files=[ "res://.import/star_02.png-019ee31c4232c6f06a5ad75c333b69a1.s3tc.stex", "res://.import/star_02.png-019ee31c4232c6f06a5ad75c333b69a1.etc2.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
@@ -31,5 +33,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
