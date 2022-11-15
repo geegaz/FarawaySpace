@@ -41,6 +41,9 @@ func _physics_process(delta):
 
 
 func hit(collision: KinematicCollision):
+	var col: Node = collision.collider
+	if col.has_method(hit_method):
+		connect("hit", col, hit_method)
 	emit_signal("hit", self, collision)
 	
 	_Effect.stop()

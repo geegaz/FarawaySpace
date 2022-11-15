@@ -15,8 +15,8 @@
 [ext_resource path="res://Scenes/UI/TargetRectStyleVisor.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Assets/Fonts/hydrogen.tres" type="DynamicFont" id=14]
 [ext_resource path="res://Scenes/Creature/CreaturePart.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/Creature/CreatureTarget.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scripts/CreatureManager.gd" type="Script" id=17]
+[ext_resource path="res://Scenes/Creature/CreatureRing.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scripts/Creature/CreatureManager.gd" type="Script" id=17]
 
 [sub_resource type="GDScript" id=4]
 script/source = "extends Node
@@ -132,7 +132,6 @@ transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107,
 
 [node name="TargetingSystem" parent="Ship" instance=ExtResource( 7 )]
 target_visual = ExtResource( 13 )
-raycast_mask = 0
 max_targeting_distance = 200.0
 target_rect_grow = 0.2
 
@@ -176,98 +175,8 @@ shader_params/u_tile_reduction = Plane( 0, 0, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1024, 0, 1024 )
 curve = SubResource( 8 )
 script = ExtResource( 17 )
-managed_parts = [ NodePath("CreaturePart"), NodePath("CreaturePart2"), NodePath("CreaturePart3"), NodePath("CreaturePart4"), NodePath("CreaturePart5"), NodePath("CreaturePart6"), NodePath("CreaturePart7"), NodePath("CreaturePart8"), NodePath("CreaturePart9"), NodePath("CreaturePart10"), NodePath("CreaturePart11"), NodePath("CreaturePart12"), NodePath("CreaturePart13"), NodePath("CreaturePart14"), NodePath("CreaturePart15"), NodePath("CreaturePart16") ]
-
-[node name="CreaturePart" parent="World/Path" instance=ExtResource( 15 )]
-transform = Transform( 0.999254, -2.12485e-05, 0.0386279, 1.81899e-12, 1, 0.000550081, -0.0386279, -0.000549671, 0.999252, -342.084, 203.305, 34.9019 )
-rotation_mode = 4
-
-[node name="CreaturePart2" parent="World/Path" instance=ExtResource( 15 )]
-transform = Transform( 0.997503, 0.00136284, 0.0706099, 0.000378839, 0.999696, -0.0246468, -0.0706221, 0.0246121, 0.997198, -341.462, 203.168, 46.2498 )
-offset = 10.0
-rotation_mode = 4
-
-[node name="CreatureTarget" parent="World/Path/CreaturePart2" instance=ExtResource( 16 )]
-creature_manager = NodePath("../..")
-
-[node name="CreaturePart3" parent="World/Path" instance=ExtResource( 15 )]
-transform = Transform( 0.994803, 0.00343519, 0.101758, 0.00151448, 0.998821, -0.0485245, -0.101804, 0.0484265, 0.993625, -340.465, 202.745, 57.7562 )
-offset = 20.0
-rotation_mode = 4
-
-[node name="CreaturePart4" parent="World/Path" instance=ExtResource( 15 )]
-transform = Transform( 0.991273, 0.00598927, 0.131686, 0.00330017, 0.997527, -0.0702111, -0.131781, 0.070033, 0.988802, -339.093, 202.048, 69.4247 )
-offset = 30.0
-rotation_mode = 4
-
-[node name="CreaturePart5" parent="World/Path" instance=ExtResource( 15 )]
-transform = Transform( 0.987071, 0.00895849, 0.160034, 0.00560359, 0.995898, -0.090311, -0.160187, 0.0900404, 0.982969, -337.346, 201.088, 81.2339 )
-offset = 40.0
-rotation_mode = 4
-
-[node name="CreaturePart6" parent="World/Path" instance=ExtResource( 15 )]
-transform = Transform( 0.982081, 0.0122613, 0.18806, 0.00845184, 0.994011, -0.108945, -0.188269, 0.108583, 0.976095, -335.227, 199.876, 93.1626 )
-offset = 50.0
-rotation_mode = 4
-
-[node name="CreatureTarget" parent="World/Path/CreaturePart6" instance=ExtResource( 16 )]
-creature_manager = NodePath("../..")
-
-[node name="CreaturePart7" parent="World/Path" instance=ExtResource( 15 )]
-transform = Transform( 0.976389, 0.0158406, 0.21544, 0.0117678, 0.991927, -0.126265, -0.215701, 0.125819, 0.968319, -332.737, 198.423, 105.189 )
-offset = 60.0
-rotation_mode = 4
-
-[node name="CreaturePart8" parent="World/Path" instance=ExtResource( 15 )]
-transform = Transform( 0.970171, 0.0196683, 0.241623, 0.01542, 0.989679, -0.142475, -0.241931, 0.141951, 0.959853, -329.878, 196.74, 117.293 )
-offset = 70.0
-rotation_mode = 4
-
-[node name="CreaturePart9" parent="World/Path" instance=ExtResource( 15 )]
-transform = Transform( 0.963392, 0.0235585, 0.267058, 0.0194078, 0.98739, -0.157114, -0.267392, 0.156546, 0.950785, -326.65, 194.837, 129.453 )
-offset = 80.0
-rotation_mode = 4
-
-[node name="CreaturePart10" parent="World/Path" instance=ExtResource( 15 )]
-transform = Transform( 0.957784, 0.0266338, 0.28625, 0.0226988, 0.985585, -0.167652, -0.286589, 0.167072, 0.943372, -323.903, 193.222, 138.88 )
-offset = 90.0
-rotation_mode = 4
-
-[node name="CreatureTarget" parent="World/Path/CreaturePart10" instance=ExtResource( 16 )]
-creature_manager = NodePath("../..")
-
-[node name="CreaturePart11" parent="World/Path" instance=ExtResource( 15 )]
-transform = Transform( 0.952564, 0.0292927, 0.302924, 0.0257494, 0.984031, -0.176126, -0.303246, 0.175572, 0.936598, -321.359, 191.734, 147.016 )
-offset = 100.0
-rotation_mode = 4
-
-[node name="CreaturePart12" parent="World/Path" instance=ExtResource( 15 )]
-transform = Transform( 0.94724, 0.0321054, 0.318913, 0.0288426, 0.982397, -0.184568, -0.319224, 0.184028, 0.929639, -318.653, 190.161, 155.153 )
-offset = 110.0
-rotation_mode = 4
-
-[node name="CreaturePart13" parent="World/Path" instance=ExtResource( 15 )]
-transform = Transform( 0.941565, 0.034939, 0.335013, 0.0321169, 0.980761, -0.192549, -0.335297, 0.192058, 0.922325, -315.785, 188.505, 163.286 )
-offset = 120.0
-rotation_mode = 4
-
-[node name="CreaturePart14" parent="World/Path" instance=ExtResource( 15 )]
-transform = Transform( 0.935583, 0.0376802, 0.35109, 0.0355404, 0.979192, -0.199797, -0.351314, 0.199405, 0.914774, -312.757, 186.771, 171.407 )
-offset = 130.0
-rotation_mode = 4
-
-[node name="CreatureTarget" parent="World/Path/CreaturePart14" instance=ExtResource( 16 )]
-creature_manager = NodePath("../..")
-
-[node name="CreaturePart15" parent="World/Path" instance=ExtResource( 15 )]
-transform = Transform( 0.92944, 0.0405796, 0.366735, 0.0390255, 0.977547, -0.207071, -0.366904, 0.206772, 0.906987, -309.568, 184.96, 179.51 )
-offset = 140.0
-rotation_mode = 4
-
-[node name="CreaturePart16" parent="World/Path" instance=ExtResource( 15 )]
-transform = Transform( 0.92289, 0.0432977, 0.382623, 0.0427055, 0.97602, -0.213452, -0.38269, 0.213333, 0.898908, -306.218, 183.078, 187.59 )
-offset = 150.0
-rotation_mode = 4
+part = ExtResource( 15 )
+ring = ExtResource( 16 )
 
 [node name="Tower" parent="World" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1024, 0, 1024 )

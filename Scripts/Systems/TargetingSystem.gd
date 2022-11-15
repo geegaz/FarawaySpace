@@ -5,7 +5,7 @@ export(int, LAYERS_3D_PHYSICS) var target_mask: int = 0
 export(int, LAYERS_3D_PHYSICS) var raycast_mask: int = 0
 export(float, 1, 180) var max_targeting_angle: float = 45
 export(float, 1, 200) var max_targeting_distance: float = 100
-export var target_rect_size: float = 80.0
+export var target_rect_size: float = 60.0
 export(float, EASE) var target_rect_grow: float = 2.0
 
 var targets: Dictionary = {}
@@ -32,10 +32,12 @@ func _process(delta):
 		var visual: Node = targets[target]
 		if visual:
 			var distance: float = global_transform.origin.distance_to(target.global_transform.origin)
+			var target_max_axis = target.scale.max_axis()
+			var target_scale: float = target.scale[target_max_axis]
 			
 			visual.visible = is_target_visible(target) and not _Camera.is_position_behind(target.global_transform.origin)
 			visual.target_pos = _Camera.unproject_position(target.global_transform.origin)
-			visual.target_size = Vector2.ONE * target_rect_size * ease(1.0 - distance / max_targeting_distance, target_rect_grow)
+			visual.target_size = Vector2.ONE * target_rect_size * target_scale * ease(1.0 - distance / max_targeting_distance, target_rect_grow)
 
 
 func _on_Area_body_entered(body: Spatial):
