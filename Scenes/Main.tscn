@@ -177,6 +177,7 @@ curve = SubResource( 8 )
 script = ExtResource( 17 )
 part = ExtResource( 15 )
 ring = ExtResource( 16 )
+parts_amount = 21
 
 [node name="Tower" parent="World" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1024, 0, 1024 )

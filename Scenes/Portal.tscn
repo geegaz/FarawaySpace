@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[sub_resource type="CubeMesh" id=1]
-size = Vector3( 2, 2, 0.1 )
-
-[node name="Portal" type="MeshInstance"]
-mesh = SubResource( 1 )
-material/0 = null
