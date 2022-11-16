@@ -18,10 +18,13 @@ func _ready() -> void:
 			new_part = part.instance()
 		
 		if new_part:
-			new_part.offset = pieces_spacing * index
 			parts.append(new_part)
+			new_part.offset = pieces_spacing * index
 			add_child(new_part)
 
 func _physics_process(delta: float) -> void:
 	for part in parts:
 		part.offset += movement_speed * delta
+
+func remove_ring(ring: Node):
+	pass

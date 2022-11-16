@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Assets/Meshes/ship_wing.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Meshes/ship_prism.obj" type="ArrayMesh" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Scripts/ShipVisuals.gd" type="Script" id=6]
 [ext_resource path="res://addons/Trail/trail_3d.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Materials/trail_material.tres" type="Material" id=8]
-[ext_resource path="res://addons/godot-polyliner/Trail3D/Trail3D.gd" type="Script" id=9]
 [ext_resource path="res://Scripts/CameraFollow.gd" type="Script" id=11]
 [ext_resource path="res://Assets/Sounds/flying_sound.ogg" type="AudioStream" id=12]
 
@@ -16,139 +15,6 @@
 
 [sub_resource type="Curve" id=38]
 _data = [ Vector2( 0, 0 ), 0.0, 9.79091, 0, 0, Vector2( 0.2, 0.7 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="Shader" id=40]
-code = "shader_type spatial;
-render_mode skip_vertex_transform, cull_disabled;
-render_mode depth_draw_alpha_prepass;
-
-uniform float line_width = 0.1;
-uniform bool tangent_facing = false;
-uniform bool rounded = false;
-float line_process(float width, inout vec3 vertex, vec3 dir_to_cam, vec2 uv,
-					inout vec3 normal, inout vec3 tangent){
-	vec3 dir_to_next_point = normal;
-	vec3 perp = tangent;
-	if (!tangent_facing) {
-		perp = normalize(cross(dir_to_cam,dir_to_next_point));
-	}
-	
-	float is_end = 0.5-uv.x;
-	is_end = float(abs(is_end) > 0.5) * -sign(is_end);
-	vec3 rounder = vec3(0.0); 
-	if (rounded) { 
-		rounder = is_end * normalize(cross(perp,dir_to_cam));
-	}
-
-	float side = sign(float(uv.y > 0.5)-0.5);
-	vertex += ((perp*side)-rounder) * width;
-	
-	tangent = perp;
-	normal = cross(perp,dir_to_next_point);
-	
-	return is_end;
-}
-
-uniform bool uv_matches_width = true;
-
-varying float is_end;
-void vertex(){
-	VERTEX = (MODELVIEW_MATRIX * vec4(VERTEX,1.0)).xyz;
-	NORMAL = mat3(MODELVIEW_MATRIX) * NORMAL;
-	TANGENT = mat3(MODELVIEW_MATRIX) * TANGENT;
-	
-	is_end = line_process(line_width,VERTEX,normalize(VERTEX),UV,NORMAL,TANGENT);
-	
-	BINORMAL = cross(TANGENT,NORMAL);
-	
-	if (uv_matches_width) {
-		UV.x /= line_width;
-	}
-	
-	UV.x = 1.0-UV.x;
-	
-	float line_length = UV2.x;
-//	float uv_correct = UV2.y;
-	UV2 = UV;
-	UV2.x *= line_length;
-	
-	if (rounded) {
-		float uv_correct = is_end*line_width;
-		UV.x += uv_correct;
-		UV2.x += uv_correct;
-	}
-}
-
-float getDistToLineCenter(vec2 uv) {
-	vec2 c = vec2(is_end*0.5,uv.y-0.5);
-	return length(c)*0.5;
-}
-
-float getDistSquaredToLineCenter(vec2 uv) {
-	vec2 c = vec2(is_end*0.5,uv.y-0.5);
-	return dot(c,c);
-}
-
-vec2 getLineTubeNormal(vec2 uv) {
-	vec2 n = vec2(0.5);
-		n.x = uv.y;
-		if (rounded) {
-			n.y = (is_end*0.5+0.5);
-		}
-	return n;
-}
-
-uniform sampler2D albedo_tex : hint_albedo;
-uniform bool tex_stretch = true;
-uniform vec2 tex_scale = vec2(1.0,1.0);
-
-uniform vec4 color : hint_color = vec4(vec3(1.0),1.0);
-uniform float metallic  : hint_range(0.0,1.0,0.005) = 0.0;
-uniform float specular  : hint_range(0.0,1.0,0.005) = 0.5;
-uniform float roughness : hint_range(0.0,1.0,0.005) = 0.5;
-
-uniform bool tube_normal = true;
-void fragment() {
-	if (!FRONT_FACING) { NORMAL = -NORMAL; }
-	
-	if (tube_normal && !tangent_facing) { NORMALMAP.xy = getLineTubeNormal(UV); }
-	
-	
-	if (rounded) {
-		if (abs(is_end) > 0.0) {
-			ALPHA *= smoothstep(1.0,0.99,getDistToLineCenter(UV)*4.0);
-		}
-	}
-	
-	vec2 uv_alb = UV2;
-	if (tex_stretch) {
-		uv_alb = UV;
-	}
-	uv_alb *= tex_scale;
-	
-	vec4 alb_sample = texture(albedo_tex,uv_alb.yx);
-	
-	ALBEDO = alb_sample.rgb * alb_sample.a * color.rgb;
-	SPECULAR = specular;
-	ROUGHNESS = roughness;
-	METALLIC = metallic;
-	
-	ALPHA_SCISSOR = 0.001; // uncomment for alpha blending
-}"
-
-[sub_resource type="ShaderMaterial" id=41]
-shader = SubResource( 40 )
-shader_param/line_width = 0.1
-shader_param/tangent_facing = false
-shader_param/rounded = false
-shader_param/uv_matches_width = true
-shader_param/tex_stretch = true
-shader_param/tex_scale = Vector2( 1, 1 )
-shader_param/color = Color( 1, 1, 1, 1 )
-shader_param/metallic = 0.0
-shader_param/specular = 0.5
-shader_param/roughness = 0.5
-shader_param/tube_normal = true
 
 [sub_resource type="Curve" id=21]
 _data = [ Vector2( 0, 0 ), 0.0, 5.03245, 0, 0, Vector2( 0.251269, 0.501136 ), -0.071954, -0.071954, 0, 0, Vector2( 1, 0 ), -0.459207, 0.0, 0, 0 ]
@@ -578,7 +444,7 @@ nodes/power/node = SubResource( 36 )
 nodes/power/position = Vector2( 580, 180 )
 nodes/speed/node = SubResource( 26 )
 nodes/speed/position = Vector2( 580, 40 )
-node_connections = [ "Add2", 0, "speed", "Add2", 1, "power", "output", 0, "Add2" ]
+node_connections = [ "output", 0, "Add2", "Add2", 0, "speed", "Add2", 1, "power" ]
 
 [node name="Ship" type="KinematicBody" groups=["Player"]]
 collision_layer = 2
@@ -614,7 +480,6 @@ light_bake_mode = 0
 
 [node name="TrailAnchor" type="Spatial" parent="ShipVisuals/Core"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.26494e-07, -1.5 )
-visible = false
 
 [node name="Trail3DCore" type="ImmediateGeometry" parent="ShipVisuals/Core/TrailAnchor"]
 material_override = ExtResource( 8 )
@@ -623,10 +488,6 @@ segments = 50
 base_width = 0.0
 width_profile = SubResource( 38 )
 smoothing_iterations = 1
-
-[node name="Trail3D" type="Spatial" parent="ShipVisuals/Core"]
-script = ExtResource( 9 )
-material = SubResource( 41 )
 
 [node name="RightWing" type="MeshInstance" parent="ShipVisuals"]
 mesh = ExtResource( 1 )

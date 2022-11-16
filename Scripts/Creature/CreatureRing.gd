@@ -16,6 +16,8 @@ var broken: bool = false
 
 onready var rotator: Spatial = get_node(rotator_node)
 onready var intact: Spatial = get_node(intact_node)
+onready var target_effect: Spatial = $CreatureTargetEffect
+onready var parent: Spatial = get_parent_spatial()
 onready var pieces: = get_pieces()
 
 func _ready()->void:
@@ -46,26 +48,31 @@ func break_piece(piece: RigidBody):
 	if not broken:
 		set_pieces_visible(true)
 		broken = true
-	
 	# Explosion impulse
 	var direction = global_transform.origin.direction_to(piece.global_transform.origin) 
 	var force = explosion_force * (1.0 - randf() * explosion_force_random)
 	piece.explode(force, direction, explosion_use_mass)
-	
 	# Visual effects
-	Screenshake.add_shake(0.2)
+	Screenshake.add_shake(0.5)
 	if pieces_effect:
 		var new_effect = pieces_effect.instance()
 		piece.add_child(new_effect)
-	
 	# Cleanup
 	pieces.erase(piece)
 
-
 func explode():
+	# Break every piece
+	while pieces.size() > 0:
+		break_piece(pieces.back())
+	# Visual effects
+	target_effect.stop()
 	if explosion_effect:
 		var new_effect = explosion_effect.instance()
 		new_effect.set_as_toplevel(true)
 		add_child(new_effect)
-	while pieces.size() > 0:
-		break_piece(pieces.back())
+		yield(new_effect,"finished")
+	# Cleanup
+	if parent.has_method("remove_ring"):
+		parent.remove_ring(self)
+	else:
+		queue_free()

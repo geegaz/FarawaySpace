@@ -2,7 +2,7 @@
 
 [resource]
 code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert;
+render_mode blend_mix, depth_draw_opaque, cull_back, unshaded;
 
 uniform vec4 color : hint_color = vec4(1.0);
 
