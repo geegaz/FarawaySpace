@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Shaders/normal_displacement.tres" type="Shader" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=2]
+
+[sub_resource type="NoiseTexture" id=3]
+seamless = true
+noise = SubResource( 2 )
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/grow = 0.0
+shader_param/grow_origin = Vector3( 0, 0, 0 )
+shader_param/grow_origin_distance = 2.0
+shader_param/grow_origin_multiplier = 2.0
+shader_param/grow_noise_speed = 0.2
+shader_param/grow_noise = SubResource( 3 )

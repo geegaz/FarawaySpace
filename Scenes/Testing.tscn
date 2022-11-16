@@ -24,4 +24,3 @@ shape = SubResource( 2 )
 
 [node name="ShipPhysical" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 16 )
-damping = 1.0

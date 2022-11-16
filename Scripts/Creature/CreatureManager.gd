@@ -4,8 +4,8 @@ export var part: PackedScene
 export var ring: PackedScene
 
 export var parts_amount: int = 9
-export var movement_speed: float = 15.0
-export var pieces_spacing: float = 20.0
+export var movement_speed: float = 15
+export var pieces_spacing: float = 18.0
 
 var parts: = []
 

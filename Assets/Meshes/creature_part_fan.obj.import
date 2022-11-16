@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/creature_part_fan.obj-88f0cc0933d4afa99b90728601c9c76e.mesh"
+
+[deps]
+
+files=[ "res://.import/creature_part_fan.obj-88f0cc0933d4afa99b90728601c9c76e.mesh" ]
+
+source_file="res://Assets/Meshes/creature_part_fan.obj"
+dest_files=[ "res://.import/creature_part_fan.obj-88f0cc0933d4afa99b90728601c9c76e.mesh", "res://.import/creature_part_fan.obj-88f0cc0933d4afa99b90728601c9c76e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

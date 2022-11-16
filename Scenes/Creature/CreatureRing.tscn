@@ -452,6 +452,7 @@ skeleton = NodePath("")
 [node name="RigidBody" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.9475, 7.61711, -6.87264 )
 mass = 17.0499
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody"]
@@ -463,6 +464,7 @@ mesh = SubResource( 1 )
 [node name="RigidBody2" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0035, -8.06005, -14.2785 )
 mass = 20.446
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody2"]
@@ -474,6 +476,7 @@ mesh = SubResource( 2 )
 [node name="RigidBody3" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.40266, 12.643, 17.4755 )
 mass = 22.6181
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody3"]
@@ -485,6 +488,7 @@ mesh = SubResource( 3 )
 [node name="RigidBody4" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.252, 4.14773, 0.389319 )
 mass = 20.2222
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody4"]
@@ -496,6 +500,7 @@ mesh = SubResource( 4 )
 [node name="RigidBody5" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.78291, -6.25218, -16.9231 )
 mass = 26.7696
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody5"]
@@ -507,6 +512,7 @@ mesh = SubResource( 5 )
 [node name="RigidBody6" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.6677, -11.8898, 4.05959 )
 mass = 25.2183
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody6"]
@@ -518,6 +524,7 @@ mesh = SubResource( 6 )
 [node name="RigidBody7" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1369, -11.689, 4.39591 )
 mass = 21.691
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody7"]
@@ -529,6 +536,7 @@ mesh = SubResource( 7 )
 [node name="RigidBody8" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0928, 5.79419, -12.6208 )
 mass = 18.3677
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody8"]
@@ -540,6 +548,7 @@ mesh = SubResource( 8 )
 [node name="RigidBody9" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09402, 7.64581, 14.7301 )
 mass = 30.4769
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody9"]
@@ -551,6 +560,7 @@ mesh = SubResource( 9 )
 [node name="RigidBody11" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6168, -11.3184, -2.62177 )
 mass = 18.1187
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody11"]
@@ -562,6 +572,7 @@ mesh = SubResource( 11 )
 [node name="RigidBody12" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.7012, -7.19356, -6.1551 )
 mass = 21.0199
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody12"]
@@ -573,6 +584,7 @@ mesh = SubResource( 12 )
 [node name="RigidBody13" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.2376, 5.47405, -5.89733 )
 mass = 20.863
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody13"]
@@ -584,6 +596,7 @@ mesh = SubResource( 13 )
 [node name="RigidBody14" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8014, 7.87917, -13.7366 )
 mass = 16.3322
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody14"]
@@ -595,6 +608,7 @@ mesh = SubResource( 14 )
 [node name="RigidBody15" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5926, 5.14627, -2.30518 )
 mass = 18.3369
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody15"]
@@ -606,6 +620,7 @@ mesh = SubResource( 15 )
 [node name="RigidBody16" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0751, -7.70886, 14.2524 )
 mass = 25.8944
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody16"]
@@ -617,6 +632,7 @@ mesh = SubResource( 16 )
 [node name="RigidBody17" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.18768, 8.10387, -16.8604 )
 mass = 21.9547
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody17"]
@@ -628,6 +644,7 @@ mesh = SubResource( 17 )
 [node name="RigidBody18" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6169, 11.5754, -7.12256 )
 mass = 10.4832
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody18"]
@@ -639,6 +656,7 @@ mesh = SubResource( 18 )
 [node name="RigidBody10" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.78053, -5.93808, 15.9709 )
 mass = 31.8464
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody10"]
@@ -650,6 +668,7 @@ mesh = SubResource( 10 )
 [node name="RigidBody19" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6009, -12.3396, -9.10063 )
 mass = 21.3182
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody19"]
@@ -661,6 +680,7 @@ mesh = SubResource( 19 )
 [node name="RigidBody20" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.25719, 15.4226, -17.922 )
 mass = 11.1525
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody20"]
@@ -672,6 +692,7 @@ mesh = SubResource( 20 )
 [node name="RigidBody21" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.10453, 12.0773, -17.2853 )
 mass = 19.858
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody21"]
@@ -683,6 +704,7 @@ mesh = SubResource( 21 )
 [node name="RigidBody22" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.7702, 8.4283, -11.2759 )
 mass = 22.6966
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody22"]
@@ -694,6 +716,7 @@ mesh = SubResource( 22 )
 [node name="RigidBody23" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5668, -6.18594, -8.24893 )
 mass = 24.2575
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody23"]
@@ -705,6 +728,7 @@ mesh = SubResource( 23 )
 [node name="RigidBody24" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4387, 4.77578, 6.65579 )
 mass = 22.4052
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody24"]
@@ -716,6 +740,7 @@ mesh = SubResource( 24 )
 [node name="RigidBody25" type="RigidBody" parent="creature_parts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6122, 8.16328, 10.1026 )
 mass = 27.0646
+gravity_scale = 2.0
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="creature_parts/RigidBody25"]

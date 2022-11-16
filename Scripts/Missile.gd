@@ -2,8 +2,8 @@ extends KinematicBody
 
 signal hit(missile, collision)
 
-export var damping: float = 5 # m/s/s
-export var thrust_force: float = 200 # m/s
+export var damping: float = 2.0 # m/s/s
+export var thrust_force: float = 200.0 # m/s
 export var lifetime: float = 10.0
 export var hit_method: String = "missile_hit"
 

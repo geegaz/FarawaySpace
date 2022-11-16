@@ -4,6 +4,7 @@ export var targeting_system: NodePath
 export var missile: PackedScene
 export var hit_effect: PackedScene
 # Missile parameters
+export var random_start_velocity: float = 0.05
 export var use_parent_velocity: = true
 # Shooting parameters
 export var shoot_cooldown: = 0.25
@@ -47,8 +48,8 @@ func fire_missile():
 	
 	# Set random velocity
 	var random_angle: float = randf() * TAU
-	new_missile.velocity = global_transform.basis.xform(Vector3(cos(random_angle), sin(random_angle), 2.0))
-	new_missile.velocity *= new_missile.thrust_force * 0.1
+	new_missile.velocity = global_transform.basis.xform(Vector3(cos(random_angle), sin(random_angle), 0.0))
+	new_missile.velocity *= new_missile.thrust_force * random_start_velocity
 	# Add velocity from parent
 	var parent_velocity: Vector3 = get_parent().get("velocity")
 	if use_parent_velocity and parent_velocity:

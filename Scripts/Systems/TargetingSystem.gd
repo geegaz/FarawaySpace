@@ -3,9 +3,9 @@ extends Spatial
 export var target_visual: PackedScene
 export(int, LAYERS_3D_PHYSICS) var target_mask: int = 0
 export(int, LAYERS_3D_PHYSICS) var raycast_mask: int = 0
-export(float, 1, 180) var max_targeting_angle: float = 45
+export(float, 1, 180) var max_targeting_angle: float = 90
 export(float, 1, 200) var max_targeting_distance: float = 100
-export var target_rect_size: float = 60.0
+export var target_rect_size: float = 50.0
 export(float, EASE) var target_rect_grow: float = 2.0
 
 var targets: Dictionary = {}

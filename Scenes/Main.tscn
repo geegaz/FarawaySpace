@@ -136,9 +136,11 @@ max_targeting_distance = 200.0
 target_rect_grow = 0.2
 
 [node name="MissilesSystem" parent="Ship" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
 targeting_system = NodePath("../TargetingSystem")
 missile = ExtResource( 11 )
 hit_effect = ExtResource( 10 )
+random_start_velocity = 0.01
 shoot_cooldown = 0.2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

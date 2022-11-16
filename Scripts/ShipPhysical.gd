@@ -3,7 +3,7 @@ extends KinematicBody
 export var forward_thrust: float = 25.0
 export var backward_thrust: float = 20.0
 export(float, 0.0, 1.0) var turn_help: float = 0.1
-export var damping: float = 0.5
+export var damping: float = 5.0
 
 var roll: float = 0.0
 var thrust: float = 0.0
@@ -37,6 +37,6 @@ func _physics_process(delta: float) -> void:
 	speed *= 1.0 - damping * delta
 	if speed > 0.0:
 		velocity = vel_direction.slerp(look_direction, speed_amount * turn_help) * speed
-	velocity += look_direction * thrust * delta
+	velocity += look_direction * thrust
 	
 	velocity = move_and_slide(velocity)
