@@ -19,16 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/zylann.hterrain/hterrain_resource_saver.gd"
 }, {
-"base": "Reference",
-"class": "ImmediateSurface",
-"language": "GDScript",
-"path": "res://addons/godot-polyliner/LineGen3D/ImmediateSurface.gd"
-}, {
-"base": "Resource",
-"class": "LineGen3D",
-"language": "GDScript",
-"path": "res://addons/godot-polyliner/LineGen3D/LineGen3D.gd"
-}, {
 "base": "Node",
 "class": "NodePool",
 "language": "GDScript",
@@ -42,8 +32,6 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "HTerrainDataLoader": "",
 "HTerrainDataSaver": "",
-"ImmediateSurface": "",
-"LineGen3D": "",
 "NodePool": "",
 "Splerger": ""
 }

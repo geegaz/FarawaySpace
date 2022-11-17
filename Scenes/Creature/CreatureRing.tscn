@@ -1,11 +1,13 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://Scripts/Creature/CreatureRing.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Creature/CreatureTarget.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Meshes/creature_intact.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://Scenes/Effects/CreatureExplosionEffect.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Effects/CreaturePieceEffect.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Effects/CreatureTargetEffect.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/Creature/CreaturePiece.gd" type="Script" id=7]
+[ext_resource path="res://Assets/Materials/simple_diffuse.tres" type="Material" id=8]
 
 [sub_resource type="ConvexPolygonShape" id=26]
 points = PoolVector3Array( -0.462043, -7.62793, -3.24554, 0.676008, 3.24022, 3.34562, 0.425042, 3.24098, 3.34641, -0.0739089, 4.92835, -3.89261, -2.57718, 2.71164, 2.69296, 2.15995, -7.62756, 0.187791, 1.69467, -6.97941, -5.85974, -1.62693, -8.01673, -0.916083, 0.555918, 4.91558, 2.23909, -2.0459, 4.7348, 0.660532, 0.17123, 5.21423, -3.05331, -0.980196, 4.92967, -2.33964, -1.58773, 5.26227, 1.33855, -1.58428, -7.81506, -0.5511, 1.03264, 1.9286, 3.14555, 1.51478, -6.68451, -5.84553, -0.0739089, -7.49745, -3.89261, -1.8386, 3.11769, 2.97271, 0.0480191, 5.26204, 1.84275, 2.0334, -7.00047, 0.434859, 0.174872, 4.77126, -3.95331, -0.850658, -7.75709, -2.59847, 2.15015, -7.60126, -0.190776, -2.31154, 4.17072, 1.54693, -1.83135, 5.22895, 1.20079, -2.2656, -1.40558, 1.36354, 1.28536, -3.88903, -5.52208, 0.047698, 3.11481, 3.34697, -0.850658, 4.92967, -2.59847, -2.17125, 3.92436, 1.01088, -2.08709, 3.36063, 2.71416, 1.6926, -7.22547, -4.0846, -0.0769685, -7.88225, -0.289693, 0.795599, 3.5863, 3.06728, -0.980196, -7.75709, -2.33964, -1.07252, 5.17118, -1.05613, -2.20378, 4.71714, 1.19635, -2.56049, 2.8073, 2.54085, -1.94392, 5.05621, 0.933057, 0.902761, 2.27871, 3.24371, -0.203447, 5.17171, -2.79365, -1.90962, -5.06318, 0.279718, -2.22162, -1.52145, 1.18796, 1.50703, -7.51605, 0.16156, 1.51478, -6.19463, -5.84553, 0.903617, 2.89772, 3.24723, -2.32501, 2.95661, 2.81366, 1.66166, -6.75503, -5.90483, 0.288223, 3.879, -4.13224, -1.32325, 5.1871, -0.433483 )
@@ -442,10 +444,14 @@ pieces_effect = ExtResource( 5 )
 
 [node name="CreatureTarget" parent="." instance=ExtResource( 2 )]
 
+[node name="CreatureTargetEffect" parent="." instance=ExtResource( 6 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0 )
+
 [node name="creature_parts" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 
 [node name="creature_intact" type="MeshInstance" parent="creature_parts"]
+material_override = ExtResource( 8 )
 mesh = ExtResource( 3 )
 skeleton = NodePath("")
 
@@ -459,6 +465,7 @@ script = ExtResource( 7 )
 shape = SubResource( 26 )
 
 [node name="CylinderApplied_cell" type="MeshInstance" parent="creature_parts/RigidBody"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 1 )
 
 [node name="RigidBody2" type="RigidBody" parent="creature_parts"]
@@ -471,6 +478,7 @@ script = ExtResource( 7 )
 shape = SubResource( 27 )
 
 [node name="CylinderApplied_cell001" type="MeshInstance" parent="creature_parts/RigidBody2"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 2 )
 
 [node name="RigidBody3" type="RigidBody" parent="creature_parts"]
@@ -483,6 +491,7 @@ script = ExtResource( 7 )
 shape = SubResource( 28 )
 
 [node name="CylinderApplied_cell002" type="MeshInstance" parent="creature_parts/RigidBody3"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 3 )
 
 [node name="RigidBody4" type="RigidBody" parent="creature_parts"]
@@ -495,6 +504,7 @@ script = ExtResource( 7 )
 shape = SubResource( 29 )
 
 [node name="CylinderApplied_cell003" type="MeshInstance" parent="creature_parts/RigidBody4"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 4 )
 
 [node name="RigidBody5" type="RigidBody" parent="creature_parts"]
@@ -507,6 +517,7 @@ script = ExtResource( 7 )
 shape = SubResource( 30 )
 
 [node name="CylinderApplied_cell004" type="MeshInstance" parent="creature_parts/RigidBody5"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 5 )
 
 [node name="RigidBody6" type="RigidBody" parent="creature_parts"]
@@ -519,6 +530,7 @@ script = ExtResource( 7 )
 shape = SubResource( 31 )
 
 [node name="CylinderApplied_cell005" type="MeshInstance" parent="creature_parts/RigidBody6"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 6 )
 
 [node name="RigidBody7" type="RigidBody" parent="creature_parts"]
@@ -531,6 +543,7 @@ script = ExtResource( 7 )
 shape = SubResource( 32 )
 
 [node name="CylinderApplied_cell006" type="MeshInstance" parent="creature_parts/RigidBody7"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 7 )
 
 [node name="RigidBody8" type="RigidBody" parent="creature_parts"]
@@ -543,6 +556,7 @@ script = ExtResource( 7 )
 shape = SubResource( 33 )
 
 [node name="CylinderApplied_cell007" type="MeshInstance" parent="creature_parts/RigidBody8"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 8 )
 
 [node name="RigidBody9" type="RigidBody" parent="creature_parts"]
@@ -555,6 +569,7 @@ script = ExtResource( 7 )
 shape = SubResource( 34 )
 
 [node name="CylinderApplied_cell008" type="MeshInstance" parent="creature_parts/RigidBody9"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 9 )
 
 [node name="RigidBody11" type="RigidBody" parent="creature_parts"]
@@ -567,6 +582,7 @@ script = ExtResource( 7 )
 shape = SubResource( 36 )
 
 [node name="CylinderApplied_cell010" type="MeshInstance" parent="creature_parts/RigidBody11"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 11 )
 
 [node name="RigidBody12" type="RigidBody" parent="creature_parts"]
@@ -579,6 +595,7 @@ script = ExtResource( 7 )
 shape = SubResource( 37 )
 
 [node name="CylinderApplied_cell011" type="MeshInstance" parent="creature_parts/RigidBody12"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 12 )
 
 [node name="RigidBody13" type="RigidBody" parent="creature_parts"]
@@ -591,6 +608,7 @@ script = ExtResource( 7 )
 shape = SubResource( 38 )
 
 [node name="CylinderApplied_cell012" type="MeshInstance" parent="creature_parts/RigidBody13"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 13 )
 
 [node name="RigidBody14" type="RigidBody" parent="creature_parts"]
@@ -603,6 +621,7 @@ script = ExtResource( 7 )
 shape = SubResource( 39 )
 
 [node name="CylinderApplied_cell013" type="MeshInstance" parent="creature_parts/RigidBody14"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 14 )
 
 [node name="RigidBody15" type="RigidBody" parent="creature_parts"]
@@ -615,6 +634,7 @@ script = ExtResource( 7 )
 shape = SubResource( 40 )
 
 [node name="CylinderApplied_cell014" type="MeshInstance" parent="creature_parts/RigidBody15"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 15 )
 
 [node name="RigidBody16" type="RigidBody" parent="creature_parts"]
@@ -627,6 +647,7 @@ script = ExtResource( 7 )
 shape = SubResource( 41 )
 
 [node name="CylinderApplied_cell015" type="MeshInstance" parent="creature_parts/RigidBody16"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 16 )
 
 [node name="RigidBody17" type="RigidBody" parent="creature_parts"]
@@ -639,6 +660,7 @@ script = ExtResource( 7 )
 shape = SubResource( 42 )
 
 [node name="CylinderApplied_cell016" type="MeshInstance" parent="creature_parts/RigidBody17"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 17 )
 
 [node name="RigidBody18" type="RigidBody" parent="creature_parts"]
@@ -651,6 +673,7 @@ script = ExtResource( 7 )
 shape = SubResource( 43 )
 
 [node name="CylinderApplied_cell017" type="MeshInstance" parent="creature_parts/RigidBody18"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 18 )
 
 [node name="RigidBody10" type="RigidBody" parent="creature_parts"]
@@ -663,6 +686,7 @@ script = ExtResource( 7 )
 shape = SubResource( 35 )
 
 [node name="CylinderApplied_cell009" type="MeshInstance" parent="creature_parts/RigidBody10"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 10 )
 
 [node name="RigidBody19" type="RigidBody" parent="creature_parts"]
@@ -675,6 +699,7 @@ script = ExtResource( 7 )
 shape = SubResource( 44 )
 
 [node name="CylinderApplied_cell018" type="MeshInstance" parent="creature_parts/RigidBody19"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 19 )
 
 [node name="RigidBody20" type="RigidBody" parent="creature_parts"]
@@ -687,6 +712,7 @@ script = ExtResource( 7 )
 shape = SubResource( 45 )
 
 [node name="CylinderApplied_cell019" type="MeshInstance" parent="creature_parts/RigidBody20"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 20 )
 
 [node name="RigidBody21" type="RigidBody" parent="creature_parts"]
@@ -699,6 +725,7 @@ script = ExtResource( 7 )
 shape = SubResource( 46 )
 
 [node name="CylinderApplied_cell020" type="MeshInstance" parent="creature_parts/RigidBody21"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 21 )
 
 [node name="RigidBody22" type="RigidBody" parent="creature_parts"]
@@ -711,6 +738,7 @@ script = ExtResource( 7 )
 shape = SubResource( 47 )
 
 [node name="CylinderApplied_cell021" type="MeshInstance" parent="creature_parts/RigidBody22"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 22 )
 
 [node name="RigidBody23" type="RigidBody" parent="creature_parts"]
@@ -723,6 +751,7 @@ script = ExtResource( 7 )
 shape = SubResource( 48 )
 
 [node name="CylinderApplied_cell022" type="MeshInstance" parent="creature_parts/RigidBody23"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 23 )
 
 [node name="RigidBody24" type="RigidBody" parent="creature_parts"]
@@ -735,6 +764,7 @@ script = ExtResource( 7 )
 shape = SubResource( 49 )
 
 [node name="CylinderApplied_cell023" type="MeshInstance" parent="creature_parts/RigidBody24"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 24 )
 
 [node name="RigidBody25" type="RigidBody" parent="creature_parts"]
@@ -747,4 +777,5 @@ script = ExtResource( 7 )
 shape = SubResource( 50 )
 
 [node name="CylinderApplied_cell024" type="MeshInstance" parent="creature_parts/RigidBody25"]
+material_override = ExtResource( 8 )
 mesh = SubResource( 25 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Effect.gd" type="Script" id=1]
 [ext_resource path="res://addons/Trail/trail_3d.gd" type="Script" id=2]
@@ -6,13 +6,34 @@
 [ext_resource path="res://addons/randomAudioStreamPlayer/random_audio_stream_player_3D.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Sounds/missile_sound.wav" type="AudioStream" id=5]
 [ext_resource path="res://Assets/Materials/Particles/smoke_material.tres" type="Material" id=6]
-[ext_resource path="res://Assets/Materials/Particles/smoke_process_material.tres" type="Material" id=7]
-
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 30.1886, 0, 0, Vector2( 0.1, 1 ), -5.60159e-07, -5.60159e-07, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="QuadMesh" id=4]
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 0 ), 0.0, 1.95859, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+emission_shape = 1
+emission_sphere_radius = 0.2
+spread = 2.0
+gravity = Vector3( 0, -0.2, 0 )
+angle = 360.0
+angle_random = 1.0
+scale = 2.0
+scale_curve = SubResource( 2 )
+color_ramp = SubResource( 4 )
+
+[sub_resource type="QuadMesh" id=7]
 
 [node name="MissileEffect" type="Spatial"]
 script = ExtResource( 1 )
@@ -43,5 +64,5 @@ one_shot = true
 explosiveness = 0.8
 local_coords = false
 draw_order = 2
-process_material = ExtResource( 7 )
-draw_pass_1 = SubResource( 4 )
+process_material = SubResource( 6 )
+draw_pass_1 = SubResource( 7 )

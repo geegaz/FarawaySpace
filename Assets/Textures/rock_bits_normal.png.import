@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/spark_06_rotated.png-a13828006144443ae6058582986a928a.s3tc.stex"
-path.etc2="res://.import/spark_06_rotated.png-a13828006144443ae6058582986a928a.etc2.stex"
+path.s3tc="res://.import/rock_bits_normal.png-96a4eef29a88b44b591164e7a478d41c.s3tc.stex"
+path.etc2="res://.import/rock_bits_normal.png-96a4eef29a88b44b591164e7a478d41c.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/kenney_particle_pack/rotated/spark_06_rotated.png"
-dest_files=[ "res://.import/spark_06_rotated.png-a13828006144443ae6058582986a928a.s3tc.stex", "res://.import/spark_06_rotated.png-a13828006144443ae6058582986a928a.etc2.stex" ]
+source_file="res://Assets/Textures/rock_bits_normal.png"
+dest_files=[ "res://.import/rock_bits_normal.png-96a4eef29a88b44b591164e7a478d41c.s3tc.stex", "res://.import/rock_bits_normal.png-96a4eef29a88b44b591164e7a478d41c.etc2.stex" ]
 
 [params]
 
@@ -20,12 +20,12 @@ compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
-compress/normal_map=0
+compress/normal_map=1
 flags/repeat=true
 flags/filter=true
 flags/mipmaps=true
 flags/anisotropic=false
-flags/srgb=1
+flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
