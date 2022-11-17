@@ -11,7 +11,7 @@ noise = SubResource( 2 )
 [resource]
 shader = ExtResource( 1 )
 shader_param/color = Color( 1, 1, 1, 1 )
-shader_param/grow = 0.05
+shader_param/grow = 0.0
 shader_param/grow_origin = Vector3( 0, 0, 0 )
 shader_param/grow_origin_distance = 2.0
 shader_param/grow_origin_multiplier = 2.0
