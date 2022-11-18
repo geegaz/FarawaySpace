@@ -1,11 +1,9 @@
-extends PathFollow
+extends "CreaturePart.gd"
 
-# Rotation parameters
-export var rotator_node: NodePath
-export var rotation_speed: float = 45.0 # deg/s
-export var rotation_offset: float = 0.35
+export var target: NodePath
+export var intact_part: NodePath
+export var broken_part: NodePath
 # Pieces parameters
-export var intact_node: NodePath
 export var explosion_force: float = 500
 export(float, 0.0, 1.0) var explosion_force_random: float = 0.8
 export var explosion_use_mass: bool = false
@@ -14,33 +12,30 @@ export var pieces_effect: PackedScene
 
 var broken: bool = false
 
-onready var rotator: Spatial = get_node(rotator_node)
-onready var intact: Spatial = get_node(intact_node)
-onready var target_effect: Spatial = $CreatureTargetEffect
-onready var parent: Spatial = get_parent_spatial()
+onready var _Target: Node = get_node(target)
+onready var _IntactPart: Spatial = get_node(intact_part)
+onready var _BrokenPart: Spatial = get_node(broken_part)
 onready var pieces: = get_pieces()
 
 func _ready()->void:
-	rotator.rotate_object_local(Vector3.UP, deg2rad(offset * rotation_offset))
-	intact.visible = true
+#	rotate_object_local(Vector3.UP, deg2rad(offset * rotation_offset))
+	_Target.connect("target_hit", self, "explode")
+	_IntactPart.visible = true
 	for piece in pieces:
 		piece.visible = false
 		piece.source = self
-
-func _physics_process(delta: float) -> void:
-	rotator.rotate_object_local(Vector3.UP, deg2rad(rotation_speed) * delta)
 
 
 
 func get_pieces()->Array:
 	var _pieces: = []
-	for child in rotator.get_children():
+	for child in _BrokenPart.get_children():
 		if child is RigidBody:
 			_pieces.append(child)
 	return _pieces
 
 func set_pieces_visible(value: bool):
-	intact.visible = not value
+	_IntactPart.visible = not value
 	for piece in pieces:
 		piece.visible = value
 
@@ -65,14 +60,8 @@ func explode():
 	while pieces.size() > 0:
 		break_piece(pieces.back())
 	# Visual effects
-	target_effect.stop()
 	if explosion_effect:
 		var new_effect = explosion_effect.instance()
 		new_effect.set_as_toplevel(true)
 		add_child(new_effect)
-		yield(new_effect,"finished")
-	# Cleanup
-	if parent.has_method("remove_ring"):
-		parent.remove_ring(self)
-	else:
-		queue_free()
+#		yield(new_effect, "finished")
