@@ -454,7 +454,7 @@ material_override = ExtResource( 3 )
 mesh = ExtResource( 2 )
 
 [node name="OmniLight" type="OmniLight" parent="ShipVisuals/Core"]
-light_energy = 0.0
+light_energy = 0.05
 light_bake_mode = 0
 
 [node name="Trail3D" type="Spatial" parent="ShipVisuals/Core"]

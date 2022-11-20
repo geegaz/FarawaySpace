@@ -11,12 +11,13 @@ export var forward_multiplier: float = 1.0
 export var backward_multiplier: float = 0.5
 
 # Rotation variables
-#export(float) var rotation_deadzone = 0.05
-#export(Vector2) var rotation_speed = Vector2(4, 2) # rad/s
 export(Vector2) var mouse_sensitivity: Vector2 = Vector2(0.1, 0.1)
 export(Vector2) var controller_sensitivity: Vector2 = Vector2(2.0, 2.0)
 export(bool) var mouse_invert_y: bool = true
 var last_rotation: Vector3 = Vector3.ZERO
+
+export var targeting_system: NodePath
+export var missiles_system: NodePath
 
 var dir: float = 0.0
 var power: float = 0.0
@@ -24,9 +25,12 @@ var speed: float = 0.0
 var speed_amount: float
 var velocity: Vector3
 
+var target_index: int = 0
+
 # Gameplay
-onready var _Camera: Camera = $Camera
-#onready var _Correction: Spatial = $TrajectoryCorrection
+onready var _Camera: Camera = get_viewport().get_camera()
+onready var _TargetingSystem: Node = get_node(targeting_system)
+onready var _MissilesSystem: Node = get_node(missiles_system)
 # Visuals
 onready var _AnimTree: AnimationTree = $ShipVisuals/AnimationTree
 onready var _Visuals: Spatial = $ShipVisuals
@@ -101,12 +105,23 @@ func _physics_process(delta):
 		emit_signal("stopped_moving")
 
 
-func _input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		var rot: Vector2 = event.relative * mouse_sensitivity
 		if mouse_invert_y:
 			rot.y *= -1
 		vector_rotate(rot)
+	
+	if event.is_action_pressed("action_shoot"):
+		var target: Spatial = null
+		if _TargetingSystem: 
+			var targets: Array = _TargetingSystem.get_visible_targets()
+			var size: = targets.size()
+			if size > 0:
+				target_index = (target_index + 1) % size
+				target = targets[target_index]
+		if _MissilesSystem:
+			_MissilesSystem.fire_missile(target)
 
 
 func accel_movement(delta: float):
