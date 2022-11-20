@@ -10,7 +10,7 @@
 [ext_resource path="res://Scenes/MainData/data.hterrain" type="Resource" id=8]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/Effects/HitEffect.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Missile.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Effects/MissileEffect.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Systems/MissilesSystem.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/UI/TargetRectStyleVisor.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Assets/Fonts/hydrogen.tres" type="DynamicFont" id=14]
@@ -129,6 +129,8 @@ visible = false
 
 [node name="Ship" parent="." instance=ExtResource( 1 )]
 transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 832, 10, 538 )
+targeting_system = NodePath("TargetingSystem")
+missiles_system = NodePath("MissilesSystem")
 
 [node name="TargetingSystem" parent="Ship" instance=ExtResource( 7 )]
 target_visual = ExtResource( 13 )
@@ -137,11 +139,11 @@ target_rect_grow = 0.2
 
 [node name="MissilesSystem" parent="Ship" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
-targeting_system = NodePath("../TargetingSystem")
-missile = ExtResource( 11 )
-hit_effect = ExtResource( 10 )
 random_start_velocity = 0.01
+missile_mask = 5
 shoot_cooldown = 0.2
+missile_effect = ExtResource( 11 )
+hit_effect = ExtResource( 10 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 2 )
@@ -183,7 +185,7 @@ pattern = [ 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0 ]
 movement_speed = -15.0
 
 [node name="CreaturePart" parent="World/Path" instance=ExtResource( 15 )]
-transform = Transform( 0.999254, -2.12485e-05, 0.0386279, 1.81899e-12, 1, 0.000550081, -0.0386279, -0.000549671, 0.999254, -342.084, 203.305, 34.9019 )
+transform = Transform( 0.999254, -2.12485e-05, 0.038628, 1.81899e-12, 1, 0.000550082, -0.038628, -0.000549671, 0.999254, -342.084, 203.305, 34.9019 )
 
 [node name="CreatureRing" parent="World/Path" instance=ExtResource( 16 )]
 transform = Transform( 0.996275, 0.00229715, 0.0861988, 0.00085375, 0.999333, -0.0364992, -0.0862252, 0.0364368, 0.995609, -341.011, 202.991, 51.9814 )
@@ -198,7 +200,7 @@ transform = Transform( 0.987029, 0.00893948, 0.160292, 0.00562647, 0.995909, -0.
 offset = 40.0
 
 [node name="CreatureRing2" parent="World/Path" instance=ExtResource( 16 )]
-transform = Transform( 0.979351, 0.0139899, 0.201682, 0.0100366, 0.993008, -0.117617, -0.201918, 0.117213, 0.972362, -334.029, 199.179, 99.1651 )
+transform = Transform( 0.979351, 0.0139899, 0.201682, 0.0100366, 0.993008, -0.117617, -0.201918, 0.117213, 0.972361, -334.029, 199.179, 99.1651 )
 offset = 55.0
 
 [node name="CreaturePart4" parent="World/Path" instance=ExtResource( 15 )]
@@ -206,11 +208,11 @@ transform = Transform( 0.970199, 0.0196398, 0.241513, 0.0154039, 0.989695, -0.14
 offset = 70.0
 
 [node name="CreaturePart5" parent="World/Path" instance=ExtResource( 15 )]
-transform = Transform( 0.963379, 0.0235503, 0.267106, 0.0194155, 0.987394, -0.157083, -0.267439, 0.156516, 0.950776, -326.651, 194.837, 129.453 )
+transform = Transform( 0.963379, 0.0235502, 0.267106, 0.0194155, 0.987393, -0.157083, -0.267439, 0.156516, 0.950776, -326.651, 194.837, 129.453 )
 offset = 80.0
 
 [node name="CreatureRing3" parent="World/Path" instance=ExtResource( 16 )]
-transform = Transform( 0.952756, 0.0292921, 0.302319, 0.0256382, 0.984031, -0.176142, -0.302652, 0.175572, 0.936789, -321.359, 191.734, 147.016 )
+transform = Transform( 0.952756, 0.0292922, 0.302319, 0.0256382, 0.984031, -0.176142, -0.302652, 0.175572, 0.936789, -321.359, 191.734, 147.016 )
 offset = 100.0
 
 [node name="CreaturePart6" parent="World/Path" instance=ExtResource( 15 )]

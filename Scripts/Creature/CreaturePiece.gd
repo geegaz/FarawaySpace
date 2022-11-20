@@ -5,9 +5,10 @@ var source: Spatial
 func _ready() -> void:
 	mode = MODE_KINEMATIC
 
-func missile_hit(missile: Spatial, collision: KinematicCollision):
+func missile_hit(missile: Spatial, collision):
 	if collision.collider == self and source:
-		source.break_piece(self)
+		if source.pieces.has(self):
+			source.break_piece(self)
 
 func explode(force: float, direction: Vector3, use_mass: bool = true):
 	mode = MODE_RIGID
