@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/demo_panel.obj-b26b9d4827108d918eec019ce35aff09.mesh"
+
+[deps]
+
+files=[ "res://.import/demo_panel.obj-b26b9d4827108d918eec019ce35aff09.mesh" ]
+
+source_file="res://addons/godot-polyliner/demos/demo/assets/meshes/demo_panel.obj"
+dest_files=[ "res://.import/demo_panel.obj-b26b9d4827108d918eec019ce35aff09.mesh", "res://.import/demo_panel.obj-b26b9d4827108d918eec019ce35aff09.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

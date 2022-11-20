@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://addons/godot-polyliner/Line3D/shaders/line_neon.shader" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/line_width = 0.1
+shader_param/edge_pos = 0.95
+shader_param/edge_softness = 0.05
+shader_param/edge_diminish = 0.001

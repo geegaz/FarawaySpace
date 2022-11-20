@@ -1,0 +1,400 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://addons/godot-polyliner/demos/demo/assets/meshes/demo_background.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://addons/godot-polyliner/demos/demo/data/Demo.lmbake" type="BakedLightmapData" id=2]
+[ext_resource path="res://addons/godot-polyliner/demos/demo/demo_environment.tres" type="Environment" id=3]
+[ext_resource path="res://addons/godot-polyliner/Line3D/LinePath3D.gd" type="Script" id=4]
+[ext_resource path="res://addons/godot-polyliner/demos/demo/assets/materials/neon_letters_material.tres" type="Material" id=5]
+[ext_resource path="res://addons/godot-polyliner/demos/demo/assets/materials/demo_background_material.tres" type="Material" id=6]
+[ext_resource path="res://addons/godot-polyliner/demos/demo/assets/meshes/demo_platform.obj" type="ArrayMesh" id=7]
+[ext_resource path="res://addons/godot-polyliner/Trail3D/Trail3D.gd" type="Script" id=8]
+[ext_resource path="res://addons/godot-polyliner/demos/demo/scripts/Rotator.gd" type="Script" id=9]
+[ext_resource path="res://addons/godot-polyliner/shaders/line_fade.gdshader" type="Shader" id=10]
+[ext_resource path="res://addons/godot-polyliner/demos/demo/assets/meshes/demo_panel.obj" type="ArrayMesh" id=11]
+[ext_resource path="res://addons/godot-polyliner/shaders/line_glow.gdshader" type="Shader" id=14]
+[ext_resource path="res://addons/godot-polyliner/demos/demo/assets/materials/demo_flat_material.tres" type="Material" id=15]
+
+[sub_resource type="Curve3D" id=26]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -0.302274, 0.302649, -0.0180876, 0.311127, -0.623768, 0.788271, -0.311127, 0.623768, -0.788271, 0.458711, 0.945564, -0.338579, -0.182997, -0.618354, -0.519271, 0.182997, 0.618354, 0.519271, -0.955383, 1.47943, 0.180779, -0.32071, 0.161185, 0.487626, 0.32071, -0.161185, -0.487626, 0.678935, 2.15963, -0.0848641 ),
+"tilts": PoolRealArray( 0, 0, 0, 0 )
+}
+
+[sub_resource type="Curve" id=28]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=29]
+curve = SubResource( 28 )
+
+[sub_resource type="ShaderMaterial" id=27]
+shader = ExtResource( 14 )
+shader_param/line_width = 0.1
+shader_param/glow_width = 0.2
+shader_param/tangent_facing = false
+shader_param/rounded = true
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/curve = 0.2
+shader_param/width_curve = SubResource( 29 )
+
+[sub_resource type="Curve" id=21]
+_data = [ Vector2( 0, 0 ), 0.0, 0.402273, 0, 0, Vector2( 0.8, 1 ), -0.0216944, -0.0216944, 0, 0, Vector2( 1, 0 ), -14.6523, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=22]
+curve = SubResource( 21 )
+
+[sub_resource type="ShaderMaterial" id=20]
+shader = ExtResource( 10 )
+shader_param/line_width = 0.1
+shader_param/tangent_facing = false
+shader_param/tangent_offset = 0.0
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/alpha_curve = 0.5
+shader_param/width_curve = SubResource( 22 )
+
+[sub_resource type="Curve3D" id=23]
+bake_interval = 0.1
+_data = {
+"points": PoolVector3Array( -0.104774, -0.000724316, -0.222784, 0.104774, 0.000724316, 0.222784, 0.0363646, 0.0742414, -0.633153, 0.123001, 0.0439329, -0.0984995, -0.123001, -0.0439329, 0.0984995, -0.238227, 0.104617, 0.176497, 0.195916, 0.00436568, -0.0785966, -0.195916, -0.00436568, 0.0785966, -0.511882, 0.280929, 0.283445, 0.162147, -0.0191286, -0.121203, -0.162147, 0.0191286, 0.121203, -0.808488, 0.097888, 0.577521, 0.285775, 0.0170063, -0.0656557, -0.285775, -0.0170063, 0.0656557, -0.999829, -0.88604, 0.807626, 0.151392, -0.0188098, 0.326834, -0.151392, 0.0188098, -0.326834, -1.94857, -0.89979, 0.515011, -0.502751, -0.0849854, -0.0717199, 0.502751, 0.0849854, 0.0717199, -1.64011, -0.899805, -0.259439, -0.132787, -0.00884748, 0.0452683, 0.132787, 0.00884748, -0.0452683, -1, 0.1, 0, -0.0210032, 0.00020647, -0.288705, 0.0210032, -0.00020647, 0.288705, -0.4, 0.1, 0.5, -0.0704999, -0.0402063, 0.368168, 0.0704999, 0.0402063, -0.368168, 0.6, 0.1, 0.2, -0.12607, 0.0643189, 0.0807776, 0.12607, -0.0643189, -0.0807776, 1.02257, 0.0997751, -0.209294, -0.183896, -0.00126499, 0.114847, 0.183896, 0.00126499, -0.114847, 1, -0.9, -0.8, -0.241246, 0.0292617, -0.695814, 0.241246, -0.0292617, 0.695814, 3.5158, -0.900127, -0.912379, 0.132721, 0.00144458, 0.125328, -0.132721, -0.00144458, -0.125328, 2.40424, -0.905977, -0.686812, 0.112565, -0.0109671, 0.180591, -0.112565, 0.0109671, -0.180591, 2.12101, -0.710568, -1.12396, 0.315639, -0.0224671, 0.0532665, -0.315639, 0.0224671, -0.0532665, 1.60527, -0.892574, -1.43124, 0.553792, 0.000126362, -0.217868, -0.553792, -0.000126362, 0.217868, -0.050674, -0.900545, -1.28468 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="Shader" id=24]
+code = "shader_type spatial;
+render_mode skip_vertex_transform, cull_disabled;
+render_mode depth_draw_alpha_prepass;
+
+uniform float line_width = 0.1;
+uniform sampler2D width_curve : hint_albedo;
+uniform bool tangent_facing = false;
+uniform bool rounded = false;
+float line_process(float width, inout vec3 vertex, vec3 dir_to_cam, vec2 uv,
+					inout vec3 normal, inout vec3 tangent){
+	vec3 dir_to_next_point = normal;
+	vec3 perp = tangent;
+	if (!tangent_facing) {
+		perp = normalize(cross(dir_to_cam,dir_to_next_point));
+	}
+	
+	float is_end = 0.5-uv.x;
+	is_end = float(abs(is_end) > 0.5) * -sign(is_end);
+	vec3 rounder = vec3(0.0); 
+	if (rounded) { 
+		rounder = is_end * normalize(cross(perp,dir_to_cam));
+	}
+	
+	float curve_multiplier = texture(width_curve, uv).a;
+	float side = sign(float(uv.y > 0.5)-0.5);
+	vertex += ((perp*side)-rounder) * width * curve_multiplier;
+	
+	tangent = perp;
+	normal = cross(perp,dir_to_next_point);
+	
+	return is_end;
+}
+
+uniform bool uv_matches_width = true;
+
+varying float is_end;
+void vertex(){
+	VERTEX = (MODELVIEW_MATRIX * vec4(VERTEX,1.0)).xyz;
+	NORMAL = mat3(MODELVIEW_MATRIX) * NORMAL;
+	TANGENT = mat3(MODELVIEW_MATRIX) * TANGENT;
+	
+	is_end = line_process(line_width,VERTEX,normalize(VERTEX),UV,NORMAL,TANGENT);
+	
+	BINORMAL = cross(TANGENT,NORMAL);
+	
+	if (uv_matches_width) {
+		UV.x /= line_width;
+	}
+	
+	UV.x = 1.0-UV.x;
+	
+	float line_length = UV2.x;
+//	float uv_correct = UV2.y;
+	UV2 = UV;
+	UV2.x *= line_length;
+	
+	if (rounded) {
+		float uv_correct = is_end*line_width;
+		UV.x += uv_correct;
+		UV2.x += uv_correct;
+	}
+}
+
+float getDistToLineCenter(vec2 uv) {
+	vec2 c = vec2(is_end*0.5,uv.y-0.5);
+	return length(c)*0.5;
+}
+
+float getDistSquaredToLineCenter(vec2 uv) {
+	vec2 c = vec2(is_end*0.5,uv.y-0.5);
+	return dot(c,c);
+}
+
+vec2 getLineTubeNormal(vec2 uv) {
+	vec2 n = vec2(0.5);
+		n.x = uv.y;
+		if (rounded) {
+			n.y = (is_end*0.5+0.5);
+		}
+	return n;
+}
+
+uniform sampler2D albedo_tex : hint_albedo;
+uniform bool tex_stretch = true;
+uniform vec2 tex_scale = vec2(1.0,1.0);
+
+uniform vec4 color : hint_color = vec4(vec3(1.0),1.0);
+uniform float metallic  : hint_range(0.0,1.0,0.005) = 0.0;
+uniform float specular  : hint_range(0.0,1.0,0.005) = 0.5;
+uniform float roughness : hint_range(0.0,1.0,0.005) = 0.5;
+
+uniform bool tube_normal = true;
+void fragment() {
+	if (!FRONT_FACING) { NORMAL = -NORMAL; }
+	
+	if (tube_normal && !tangent_facing) { NORMALMAP.xy = getLineTubeNormal(UV); }
+	
+	
+	if (rounded) {
+		if (abs(is_end) > 0.0) {
+			ALPHA *= smoothstep(1.0,0.99,getDistToLineCenter(UV)*4.0);
+		}
+	}
+	
+	vec2 uv_alb = UV2;
+	if (tex_stretch) {
+		uv_alb = UV;
+	}
+	uv_alb *= tex_scale;
+	
+	vec4 alb_sample = texture(albedo_tex,uv_alb.yx);
+	
+	ALBEDO = alb_sample.rgb * alb_sample.a * color.rgb;
+	SPECULAR = specular;
+	ROUGHNESS = roughness;
+	METALLIC = metallic;
+	
+	ALPHA_SCISSOR = 0.001; // uncomment for alpha blending
+}"
+
+[sub_resource type="ShaderMaterial" id=25]
+shader = SubResource( 24 )
+shader_param/line_width = 0.1
+shader_param/tangent_facing = false
+shader_param/rounded = true
+shader_param/uv_matches_width = true
+shader_param/tex_stretch = true
+shader_param/tex_scale = Vector2( 1, 1 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/metallic = 0.0
+shader_param/specular = 0.5
+shader_param/roughness = 0.3
+shader_param/tube_normal = true
+
+[sub_resource type="Curve3D" id=9]
+bake_interval = 0.1
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0.1, 0, 0, -0.1, 0, 6, -0.8, 0, 0.1, 0, 0, -0.1, 0, 0, 5.8, -1, 0, 0.1, 0, 0, -0.1, 0, 0, 4.2, -1, 0, 0, -0.1, 0, 0, 0.1, 0, 4, -0.8, 0, 0, 0, 0, 0, 0, 0, 4, -0.2 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=2]
+bake_interval = 0.1
+_data = {
+"points": PoolVector3Array( 0, -0.1, 0, 0, 0, 0, 0, 3.8, 0, 0, -0.1, 0, 0, 0.1, 0, 0, 4.3, 0, 0, 0, 0.1, 0, 0, -0.1, 0, 4.5, -0.2, 0, 0, 0.1, 0, 0, -0.1, 0, 4.5, -0.8, 0, 0.1, 0, 0, -0.1, 0, 0, 4.3, -1, 0, 0.1, 0, 0, -0.1, 0, 0, 3.2, -1, 0, 0, -0.1, 0, 0, 0.1, 0, 3, -0.8, 0, 0, -0.1, 0, 0, 0.1, 0, 3, -0.2, 0, -0.1, 0, 0, 0.1, 0, 0, 3.2, 0, 0, 0, 0, 0, 0, 0, 0, 3.6, 0 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=3]
+bake_interval = 0.1
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0.1, 0, 0, -0.1, 0, 0, 3.2, 0, 0, 0, 0.1, 0, 0, -0.1, 0, 3, -0.2, 0, 0, 0, 0, 0, 0, 0, 3, -0.5 ),
+"tilts": PoolRealArray( 0, 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=4]
+bake_interval = 0.1
+_data = {
+"points": PoolVector3Array( 0, 0.1, 0, 0, -0.1, 0, 0, 2.3, 0, 0, 0, 0.1, 0, 0, -0.1, 0, 2.1, -0.2, 0, 0, 0.1, 0, 0, -0.1, 0, 2.1, -0.8, 0, -0.1, 0, 0, 0.1, 0, 0, 2.3, -1, 0, 0.1, 0, 0, -0.1, 0, 0, 4.5, -1, 0, 0.1, 0, 0, -0.1, 0, 0, 4.5, -0.8, 0, 0.1, 0, 0, -0.1, 0, 0, 3.7, -0.8, 0, 0, -0.1, 0, 0, 0.1, 0, 3.5, -0.6, 0, 0, -0.1, 0, 0, 0.1, 0, 3.5, -0.2, 0, -0.1, 0, 0, 0.1, 0, 0, 3.7, 0, 0, 0, 0, 0, 0, 0, 0, 4.5, 0 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=6]
+bake_interval = 0.1
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0.1, 4.5, 0, 0, 0, 0.1, 0, 0, -0.1, 0, 4.5, -0.5, 0, 0, -0.1, 0, 0, 0.1, 0, 4.3, -0.5, 0, 0, 0, 0, 0, 0, 0, 4.3, -0.3, 0, 0, 0, 0, 0, 0, 0, 3.2, -0.3, 0, 0, 0.1, 0, 0, -0.1, 0, 3.2, -0.5, 0, 0, 0.1, 0, 0, -0.1, 0, 3, -0.5, 0, 0, 0, 0, 0, 0, 0, 3, 0 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=5]
+bake_interval = 0.1
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0, 4.5, 0, 0, 0.1, 0, 0, -0.1, 0, 0, 3, 0, 0, 0.1, 0, 0, -0.1, 0, 0, 3, -0.2, 0, -0.1, 0, 0, 0.1, 0, 0, 4.3, -0.2, 0, 0, 0.1, 0, 0, -0.1, 0, 4.5, -0.4, 0, 0, 0.1, 0, 0, -0.1, 0, 4.5, -0.8, 0, 0.1, 0, 0, -0.1, 0, 0, 4.3, -1, 0, 0.1, 0, 0, -0.1, 0, 0, 2.9, -1 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=7]
+bake_interval = 0.1
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0, 3.5, -0.2, 0, 0, 0.1, 0, 0, -0.1, 0, 3.5, -0.8, 0, -0.1, 0, 0, 0.1, 0, 0, 3.7, -1, 0, -0.1, 0, 0, 0.1, 0, 0, 4.3, -1, 0, 0, -0.1, 0, 0, 0.1, 0, 4.5, -0.8, 0, 0, -0.1, 0, 0, 0.1, 0, 4.5, -0.2, 0, 0.1, 0, 0, -0.1, 0, 0, 4.3, 0, 0, 0.1, 0, 0, -0.1, 0, 0, 3.2, 0, 0, 0, 0.1, 0, 0, -0.1, 0, 3, -0.2, 0, 0, 0.1, 0, 0, -0.1, 0, 3, -0.796516, 0, -0.1, 0, 0, 0.1, 0, 0, 3.2, -1 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=8]
+bake_interval = 0.1
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0, 4.5, 0, 0, 0.1, 0, 0, -0.1, 0, 0, 3, 0, 0, 0.1, 0, 0, -0.1, 0, 0, 3, -0.2, 0, -0.1, 0, 0, 0.1, 0, 0, 4.3, -0.2, 0, 0, 0.1, 0, 0, -0.1, 0, 4.5, -0.4, 0, 0, 0.1, 0, 0, -0.1, 0, 4.5, -0.8, 0, 0.1, 0, 0, -0.1, 0, 0, 4.3, -1 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[node name="PolylinerDemo" type="Spatial"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 3 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.866025, -0.0868241, 0.492404, 0, 0.984808, 0.173648, -0.5, -0.150384, 0.852869, 0, 10, 10 )
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 10 )
+
+[node name="BakedLightmap" type="BakedLightmap" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 5 )
+extents = Vector3( 11, 7, 7 )
+quality = 0
+environment_mode = 1
+light_data = ExtResource( 2 )
+
+[node name="Scene" type="Spatial" parent="."]
+
+[node name="demo_background" type="MeshInstance" parent="Scene"]
+material_override = ExtResource( 6 )
+use_in_baked_light = true
+mesh = ExtResource( 1 )
+skeleton = NodePath("../..")
+
+[node name="demo_platform" type="MeshInstance" parent="Scene"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3 )
+material_override = ExtResource( 6 )
+use_in_baked_light = true
+mesh = ExtResource( 7 )
+skeleton = NodePath("../..")
+
+[node name="LinePath3D" type="Path" parent="Scene/demo_platform"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+curve = SubResource( 26 )
+script = ExtResource( 4 )
+material = SubResource( 27 )
+
+[node name="demo_platform2" type="MeshInstance" parent="Scene"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3 )
+material_override = ExtResource( 6 )
+use_in_baked_light = true
+mesh = ExtResource( 7 )
+skeleton = NodePath("../..")
+
+[node name="Rotator2" type="Spatial" parent="Scene/demo_platform2"]
+transform = Transform( 0.5, -0.5, 0.707107, 0.707107, 0.707107, 0, -0.5, 0.5, 0.707107, 0, 2, 0 )
+script = ExtResource( 9 )
+
+[node name="Trail3D" type="Spatial" parent="Scene/demo_platform2/Rotator2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+script = ExtResource( 8 )
+max_points = 20
+material = SubResource( 20 )
+
+[node name="demo_platform3" type="MeshInstance" parent="Scene"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3 )
+material_override = ExtResource( 6 )
+use_in_baked_light = true
+mesh = ExtResource( 7 )
+skeleton = NodePath("../..")
+
+[node name="LinePath3D" type="Path" parent="Scene/demo_platform3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+curve = SubResource( 23 )
+script = ExtResource( 4 )
+material = SubResource( 25 )
+
+[node name="demo_panel" type="MeshInstance" parent="Scene"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.96046e-08, 5.5, 0 )
+material_override = ExtResource( 15 )
+use_in_baked_light = true
+mesh = ExtResource( 11 )
+skeleton = NodePath("../..")
+
+[node name="OmniLight" type="OmniLight" parent="Scene/demo_panel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4, 0, 2 )
+light_color = Color( 0.984314, 0.823529, 1, 1 )
+light_energy = 2.0
+omni_shadow_mode = 0
+
+[node name="OmniLight2" type="OmniLight" parent="Scene/demo_panel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.96046e-08, 0, 2 )
+light_color = Color( 0.984314, 0.823529, 1, 1 )
+light_energy = 2.0
+omni_shadow_mode = 0
+
+[node name="OmniLight3" type="OmniLight" parent="Scene/demo_panel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 0, 2 )
+light_color = Color( 0.984314, 0.823529, 1, 1 )
+light_energy = 2.0
+omni_shadow_mode = 0
+
+[node name="NeonP" type="Path" parent="Scene/demo_panel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.1, -4, 0.4 )
+curve = SubResource( 9 )
+script = ExtResource( 4 )
+material = ExtResource( 5 )
+
+[node name="NeonO" type="Path" parent="Scene/demo_panel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.7, -4, 0.4 )
+curve = SubResource( 2 )
+script = ExtResource( 4 )
+material = ExtResource( 5 )
+
+[node name="NeonL" type="Path" parent="Scene/demo_panel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.3, -4, 0.4 )
+curve = SubResource( 3 )
+script = ExtResource( 4 )
+material = ExtResource( 5 )
+
+[node name="NeonY" type="Path" parent="Scene/demo_panel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.4, -4, 0.4 )
+curve = SubResource( 4 )
+script = ExtResource( 4 )
+material = ExtResource( 5 )
+
+[node name="NeonL2" type="Path" parent="Scene/demo_panel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.1921e-07, -4, 0.4 )
+curve = SubResource( 3 )
+script = ExtResource( 4 )
+material = ExtResource( 5 )
+
+[node name="NeonI" type="Path" parent="Scene/demo_panel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.7, -4, 0.4 )
+curve = SubResource( 6 )
+script = ExtResource( 4 )
+material = ExtResource( 5 )
+
+[node name="NeonN" type="Path" parent="Scene/demo_panel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.7, -4, 0.4 )
+curve = SubResource( 5 )
+script = ExtResource( 4 )
+material = ExtResource( 5 )
+
+[node name="NeonE" type="Path" parent="Scene/demo_panel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.1, -4, 0.4 )
+curve = SubResource( 7 )
+script = ExtResource( 4 )
+material = ExtResource( 5 )
+
+[node name="NeonR" type="Path" parent="Scene/demo_panel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.5, -4, 0.4 )
+curve = SubResource( 8 )
+script = ExtResource( 4 )
+material = ExtResource( 5 )
