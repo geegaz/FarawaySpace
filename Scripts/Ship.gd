@@ -30,10 +30,10 @@ onready var _Camera: Camera = $Camera
 # Visuals
 onready var _AnimTree: AnimationTree = $ShipVisuals/AnimationTree
 onready var _Visuals: Spatial = $ShipVisuals
-onready var _CoreTrail: Spatial = $ShipVisuals/Core/TrailAnchor/Trail3DCore
+onready var _CoreTrail: Spatial = $ShipVisuals/Core/Trail3D
 onready var _WingTrails: Array = [
-	$ShipVisuals/RightWing/TrailAnchor/Trail3DLeft,
-	$ShipVisuals/LeftWing/TrailAnchor/Trail3DRight
+	$ShipVisuals/RightWing/Trail3D,
+	$ShipVisuals/LeftWing/Trail3D
 ]
 # SFX
 onready var _Audio: AudioStreamPlayer3D = $ShipAudio
@@ -57,16 +57,14 @@ func _process(delta):
 	last_rotation = rotation
 	
 	# Trails
-	var core_trail_width = max(power, 0.0)
-	var core_trail_lifetime = max(power * 0.5, 0.0)
-	_CoreTrail.base_width = core_trail_width
-	_CoreTrail.lifetime = core_trail_lifetime
-	var wing_trail_width = 0.2 if speed_amount > 0.8 else 0.0
+	var core_trail_width = max(power, 0.0) * 0.3
+	_CoreTrail.material.set_shader_param("line_width", core_trail_width)
+	var trail_emitting: bool = speed_amount > 0.9;
 	for trail in _WingTrails:
-		trail.base_width = move_toward(trail.base_width, wing_trail_width, delta * 1.0)
-	
-	# Trajectory Correction
-	#_Correction.speed_amount = speed_amount
+		if trail_emitting:
+			trail.sampling_mode = trail.SamplingMode.Idle
+		else:
+			trail.sampling_mode = trail.SamplingMode.None
 	
 	# Camera
 	_Camera.fov = lerp(70, 100, speed_amount)

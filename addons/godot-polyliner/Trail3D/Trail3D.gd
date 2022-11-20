@@ -137,3 +137,9 @@ func _debug_spheres():
 				var sphere_inst = sphere.duplicate()
 				sphere_inst.transform = i
 				s.add_child(sphere_inst)
+
+func get_class()->String:
+	return "Trail3D"
+
+func is_class(_class: String)->bool:
+	return _class == get_class()

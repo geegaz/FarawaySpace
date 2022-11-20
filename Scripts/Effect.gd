@@ -25,6 +25,7 @@ func _ready():
 					child.play()
 			"Trail3D":
 				trails.append(child)
+				child.sampling_mode = child.SamplingMode.Idle
 	
 	active_time = get_max_time()
 
@@ -42,7 +43,8 @@ func stop():
 		emitter.emitting = false
 	for player in players:
 		player.playing = false
-	# Nothing for trails
+	for trail in trails:
+		trail.sampling_mode = trail.SamplingMode.None
 
 func restart():
 	active_time = get_max_time()
@@ -51,7 +53,8 @@ func restart():
 	for player in players:
 		player.play()
 	for trail in trails:
-		trail.clear_points()
+		trail.points = []
+		trail.sampling_mode = trail.SamplingMode.Idle
 
 func is_active()->bool:
 	for emitter in emitters:
@@ -61,7 +64,7 @@ func is_active()->bool:
 		if player.playing:
 			return true
 	for trail in trails:
-		if trail._points.size() > 0:
+		if trail.points.size() > 0:
 			return true
 	return false
 
@@ -72,5 +75,5 @@ func get_max_time()->float:
 	for player in players:
 		time = max(time, player.stream.get_length())
 	for trail in trails:
-		time = max(time, trail.lifetime)
+		time = max(time, trail.max_points * get_process_delta_time())
 	return time

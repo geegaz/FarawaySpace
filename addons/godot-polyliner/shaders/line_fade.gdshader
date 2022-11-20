@@ -19,7 +19,7 @@ float line_process(float width, inout vec3 vertex, vec3 dir_to_cam, vec2 uv,
 		perp = normalize(cross(dir_to_cam,dir_to_next_point));
 	}
 	
-	float curve_multiplier = texture(width_curve, uv).a;
+	float curve_multiplier = textureLod(width_curve, vec2(uv.x, 0.0), 0.0).r;
 	float side = sign(float(uv.y > 0.5)-0.5);
 	vertex += (perp*side) * width * curve_multiplier;
 	

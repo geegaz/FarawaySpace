@@ -3,16 +3,16 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/demo_tiles_occlusion.png-a08092fc01cc61f418c56024db2c7065.s3tc.stex"
-path.etc="res://.import/demo_tiles_occlusion.png-a08092fc01cc61f418c56024db2c7065.etc.stex"
+path.etc2="res://.import/demo_tiles_occlusion.png-a08092fc01cc61f418c56024db2c7065.etc2.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/godot-polyliner/demos/demo/assets/textures/demo_tiles_occlusion.png"
-dest_files=[ "res://.import/demo_tiles_occlusion.png-a08092fc01cc61f418c56024db2c7065.s3tc.stex", "res://.import/demo_tiles_occlusion.png-a08092fc01cc61f418c56024db2c7065.etc.stex" ]
+dest_files=[ "res://.import/demo_tiles_occlusion.png-a08092fc01cc61f418c56024db2c7065.s3tc.stex", "res://.import/demo_tiles_occlusion.png-a08092fc01cc61f418c56024db2c7065.etc2.stex" ]
 
 [params]
 

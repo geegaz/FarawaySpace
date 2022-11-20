@@ -38,6 +38,8 @@ void vertex() {
 }
 
 void fragment() {
+	if (!FRONT_FACING) { NORMAL = -NORMAL; }
+	
 	vec2 base_uv = UV;
 	float alpha_tex = texture(texture_albedo,base_uv).a;
 	ALBEDO = albedo.rgb * COLOR.rgb;

@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Shaders/simple_emit_trail.gdshader" type="Shader" id=1]
+
+[sub_resource type="Gradient" id=45]
+offsets = PoolRealArray( 0, 0.2, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.498039, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=46]
+gradient = SubResource( 45 )
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/line_width = 0.1
+shader_param/tangent_facing = false
+shader_param/tex_stretch = true
+shader_param/tex_scale = Vector2( 1, 1 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/albedo_tex = SubResource( 46 )

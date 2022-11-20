@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Assets/Meshes/ship_wing.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Meshes/ship_prism.obj" type="ArrayMesh" id=2]
@@ -6,22 +6,13 @@
 [ext_resource path="res://Assets/Materials/simple_diffuse.tres" type="Material" id=4]
 [ext_resource path="res://Scripts/Ship.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/ShipVisuals.gd" type="Script" id=6]
-[ext_resource path="res://addons/Trail/trail_3d.gd" type="Script" id=7]
-[ext_resource path="res://Assets/Materials/trail_material.tres" type="Material" id=8]
+[ext_resource path="res://Assets/Materials/Trails/ship_core_material.tres" type="Material" id=7]
+[ext_resource path="res://Assets/Materials/Trails/ship_wings_material.tres" type="Material" id=8]
+[ext_resource path="res://addons/godot-polyliner/Trail3D/Trail3D.gd" type="Script" id=10]
 [ext_resource path="res://Scripts/CameraFollow.gd" type="Script" id=11]
 [ext_resource path="res://Assets/Sounds/flying_sound.ogg" type="AudioStream" id=12]
 
 [sub_resource type="SphereShape" id=16]
-
-[sub_resource type="Curve" id=38]
-_data = [ Vector2( 0, 0 ), 0.0, 9.79091, 0, 0, Vector2( 0.2, 0.7 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="Curve" id=21]
-_data = [ Vector2( 0, 0 ), 0.0, 5.03245, 0, 0, Vector2( 0.251269, 0.501136 ), -0.071954, -0.071954, 0, 0, Vector2( 1, 0 ), -0.459207, 0.0, 0, 0 ]
-
-[sub_resource type="Gradient" id=39]
-offsets = PoolRealArray( 0, 0.107143, 1 )
-colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [sub_resource type="Animation" id=18]
 length = 0.001
@@ -345,18 +336,6 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("Core/TrailAnchor/Trail3DCore:base_width")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
 
 [sub_resource type="Animation" id=31]
 resource_name = "power_move"
@@ -444,7 +423,7 @@ nodes/power/node = SubResource( 36 )
 nodes/power/position = Vector2( 580, 180 )
 nodes/speed/node = SubResource( 26 )
 nodes/speed/position = Vector2( 580, 40 )
-node_connections = [ "output", 0, "Add2", "Add2", 0, "speed", "Add2", 1, "power" ]
+node_connections = [ "Add2", 0, "speed", "Add2", 1, "power", "output", 0, "Add2" ]
 
 [node name="Ship" type="KinematicBody" groups=["Player"]]
 collision_layer = 2
@@ -478,53 +457,32 @@ mesh = ExtResource( 2 )
 light_energy = 0.0
 light_bake_mode = 0
 
-[node name="TrailAnchor" type="Spatial" parent="ShipVisuals/Core"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.26494e-07, -1.5 )
-
-[node name="Trail3DCore" type="ImmediateGeometry" parent="ShipVisuals/Core/TrailAnchor"]
-material_override = ExtResource( 8 )
-script = ExtResource( 7 )
-segments = 50
-base_width = 0.0
-width_profile = SubResource( 38 )
-smoothing_iterations = 1
+[node name="Trail3D" type="Spatial" parent="ShipVisuals/Core"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.50996e-07, -1 )
+script = ExtResource( 10 )
+max_points = 25
+material = ExtResource( 7 )
 
 [node name="RightWing" type="MeshInstance" parent="ShipVisuals"]
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 4 )
 
-[node name="TrailAnchor" type="Spatial" parent="ShipVisuals/RightWing"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, -7.5498e-08, -1.5 )
-
-[node name="Trail3DLeft" type="ImmediateGeometry" parent="ShipVisuals/RightWing/TrailAnchor"]
-transform = Transform( 1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0 )
-material_override = ExtResource( 8 )
-cast_shadow = 0
-script = ExtResource( 7 )
-segments = 100
-base_width = 0.0
-width_profile = SubResource( 21 )
-color_gradient = SubResource( 39 )
-smoothing_iterations = 1
+[node name="Trail3D" type="Spatial" parent="ShipVisuals/RightWing"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -1 )
+script = ExtResource( 10 )
+max_points = 20
+material = ExtResource( 8 )
 
 [node name="LeftWing" type="MeshInstance" parent="ShipVisuals"]
 transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 4 )
 
-[node name="TrailAnchor" type="Spatial" parent="ShipVisuals/LeftWing"]
-transform = Transform( 1, -2.94531e-08, 0, -1.16415e-09, 1, 0, -5.96046e-08, 1.86265e-09, 1, -2.4, 7.5498e-08, -1.5 )
-
-[node name="Trail3DRight" type="ImmediateGeometry" parent="ShipVisuals/LeftWing/TrailAnchor"]
-transform = Transform( 1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0 )
-material_override = ExtResource( 8 )
-cast_shadow = 0
-script = ExtResource( 7 )
-segments = 100
-base_width = 0.0
-width_profile = SubResource( 21 )
-color_gradient = SubResource( 39 )
-smoothing_iterations = 1
+[node name="Trail3D" type="Spatial" parent="ShipVisuals/LeftWing"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -1 )
+script = ExtResource( 10 )
+max_points = 20
+material = ExtResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ShipVisuals"]
 autoplay = "idle"

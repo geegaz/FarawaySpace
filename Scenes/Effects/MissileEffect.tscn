@@ -1,14 +1,11 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Effect.gd" type="Script" id=1]
-[ext_resource path="res://addons/Trail/trail_3d.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Materials/trail_material.tres" type="Material" id=3]
+[ext_resource path="res://addons/godot-polyliner/Trail3D/Trail3D.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Materials/Trails/missile_material.tres" type="Material" id=3]
 [ext_resource path="res://addons/randomAudioStreamPlayer/random_audio_stream_player_3D.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Sounds/missile_sound.wav" type="AudioStream" id=5]
 [ext_resource path="res://Assets/Materials/Particles/smoke_material.tres" type="Material" id=6]
-
-[sub_resource type="Curve" id=1]
-_data = [ Vector2( 0, 0 ), 0.0, 30.1886, 0, 0, Vector2( 0.1, 1 ), -5.60159e-07, -5.60159e-07, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=3]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
@@ -47,15 +44,6 @@ samples = [ ExtResource( 5 ) ]
 random_volume_range = 0.2
 random_pitch_range = 0.5
 
-[node name="Trail3D" type="ImmediateGeometry" parent="."]
-material_override = ExtResource( 3 )
-cast_shadow = 0
-script = ExtResource( 2 )
-distance = 0.2
-segments = 100
-base_width = 0.2
-width_profile = SubResource( 1 )
-
 [node name="Particles" type="Particles" parent="."]
 material_override = ExtResource( 6 )
 emitting = false
@@ -66,3 +54,8 @@ local_coords = false
 draw_order = 2
 process_material = SubResource( 6 )
 draw_pass_1 = SubResource( 7 )
+
+[node name="Trail3D" type="Spatial" parent="."]
+script = ExtResource( 2 )
+max_points = 100
+material = ExtResource( 3 )

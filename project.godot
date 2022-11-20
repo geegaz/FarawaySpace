@@ -19,10 +19,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/zylann.hterrain/hterrain_resource_saver.gd"
 }, {
+"base": "Reference",
+"class": "ImmediateSurface",
+"language": "GDScript",
+"path": "res://addons/godot-polyliner/LineGen3D/ImmediateSurface.gd"
+}, {
+"base": "Resource",
+"class": "LineGen3D",
+"language": "GDScript",
+"path": "res://addons/godot-polyliner/LineGen3D/LineGen3D.gd"
+}, {
 "base": "Node",
 "class": "NodePool",
 "language": "GDScript",
 "path": "res://Scripts/NodePool.gd"
+}, {
+"base": "RigidBody",
+"class": "Rope3D",
+"language": "GDScript",
+"path": "res://addons/godot-polyliner/demos/ropetesting/Rope3D.gd"
 }, {
 "base": "Reference",
 "class": "Splerger",
@@ -32,7 +47,10 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "HTerrainDataLoader": "",
 "HTerrainDataSaver": "",
+"ImmediateSurface": "",
+"LineGen3D": "",
 "NodePool": "",
+"Rope3D": "",
 "Splerger": ""
 }
 
@@ -50,7 +68,7 @@ Screenshake="*res://Scenes/Screenshake.tscn"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/Trail/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/Trail/plugin.cfg", "res://addons/godot-polyliner/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
 
 [importer_defaults]
 

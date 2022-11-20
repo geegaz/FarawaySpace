@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Shaders/simple_emit_trail.gdshader" type="Shader" id=1]
+
+[sub_resource type="Curve" id=40]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.716418, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -10.6274, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=41]
+curve = SubResource( 40 )
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/line_width = 0.0
+shader_param/tangent_facing = false
+shader_param/tex_stretch = true
+shader_param/tex_scale = Vector2( 1, 1 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/width_curve = SubResource( 41 )

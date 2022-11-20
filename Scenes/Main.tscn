@@ -137,11 +137,10 @@ target_rect_grow = 0.2
 
 [node name="MissilesSystem" parent="Ship" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
-targeting_system = NodePath("../TargetingSystem")
-missile = ExtResource( 11 )
-hit_effect = ExtResource( 10 )
 random_start_velocity = 0.01
 shoot_cooldown = 0.2
+missile = ExtResource( 11 )
+hit_effect = ExtResource( 10 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 2 )
@@ -183,10 +182,10 @@ pattern = [ 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0 ]
 movement_speed = -15.0
 
 [node name="CreaturePart" parent="World/Path" instance=ExtResource( 15 )]
-transform = Transform( 0.999254, -2.12485e-05, 0.0386279, 1.81899e-12, 1, 0.000550081, -0.0386279, -0.000549671, 0.999254, -342.084, 203.305, 34.9019 )
+transform = Transform( 0.999254, -2.12485e-05, 0.038628, 1.81899e-12, 1, 0.000550082, -0.038628, -0.000549671, 0.999254, -342.084, 203.305, 34.9019 )
 
 [node name="CreatureRing" parent="World/Path" instance=ExtResource( 16 )]
-transform = Transform( 0.996275, 0.00229715, 0.0861988, 0.00085375, 0.999333, -0.0364992, -0.0862252, 0.0364368, 0.995609, -341.011, 202.991, 51.9814 )
+transform = Transform( 0.996275, 0.00229715, 0.0861988, 0.00085375, 0.999333, -0.0364992, -0.0862251, 0.0364368, 0.995609, -341.011, 202.991, 51.9814 )
 offset = 15.0
 
 [node name="CreaturePart2" parent="World/Path" instance=ExtResource( 15 )]
@@ -210,7 +209,7 @@ transform = Transform( 0.963379, 0.0235503, 0.267106, 0.0194155, 0.987394, -0.15
 offset = 80.0
 
 [node name="CreatureRing3" parent="World/Path" instance=ExtResource( 16 )]
-transform = Transform( 0.952756, 0.0292921, 0.302319, 0.0256382, 0.984031, -0.176142, -0.302652, 0.175572, 0.936789, -321.359, 191.734, 147.016 )
+transform = Transform( 0.952756, 0.0292922, 0.302319, 0.0256382, 0.984031, -0.176142, -0.302651, 0.175572, 0.936789, -321.359, 191.734, 147.016 )
 offset = 100.0
 
 [node name="CreaturePart6" parent="World/Path" instance=ExtResource( 15 )]
