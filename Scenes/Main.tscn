@@ -212,7 +212,7 @@ transform = Transform( 0.963379, 0.0235502, 0.267106, 0.0194155, 0.987393, -0.15
 offset = 80.0
 
 [node name="CreatureRing3" parent="World/Path" instance=ExtResource( 16 )]
-transform = Transform( 0.952756, 0.0292922, 0.302319, 0.0256382, 0.984031, -0.176142, -0.302652, 0.175572, 0.936789, -321.359, 191.734, 147.016 )
+transform = Transform( 0.952756, 0.0292922, 0.302319, 0.0256382, 0.984031, -0.176142, -0.302651, 0.175572, 0.936789, -321.359, 191.734, 147.016 )
 offset = 100.0
 
 [node name="CreaturePart6" parent="World/Path" instance=ExtResource( 15 )]
