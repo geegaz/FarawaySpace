@@ -41,3 +41,8 @@ func set_shake(strength: float, directional: = 0.0, angle: = 0.0)->void:
 
 func add_shake(strength: float, directional: = 0.0, angle: = 0.0)->void:
 	set_shake(duration + strength, directional, angle)
+	
+static func get_screenshake_angle(pos: Vector3, normal: Vector3)->float:
+	var screen_pos: Vector2 = Screenshake._Camera.unproject_position(pos)
+	var screen_pos_collision: Vector2 = Screenshake._Camera.unproject_position(pos + normal)
+	return (screen_pos_collision - screen_pos).angle_to(Vector2.RIGHT)

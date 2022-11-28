@@ -135,16 +135,9 @@ func missile_hit(missile: Missile, collision):
 	_Effects.add_child(new_effect)
 	new_effect.restart()
 	new_effect.transform = missile.transform
-	# Shake screen
-	var distance = global_transform.origin.distance_to(collision.position) / screenshake_distance_multiplier
-	var screen_pos: Vector2 = Screenshake._Camera.unproject_position(collision.position)
-	var screen_pos_collision: Vector2 = Screenshake._Camera.unproject_position(collision.position + collision.normal)
-	var amount: float = 1.0 / distance
-	
-	if missile.target == collision.collider:
-		Screenshake.add_shake(amount, 0.8, (screen_pos_collision - screen_pos).angle_to(Vector2.RIGHT))
-		Input.start_joy_vibration(0, 0.0, clamp(amount, 0.0, 1.0), 0.5)
-	else:
-		Screenshake.add_shake(amount, 0.5, (screen_pos_collision - screen_pos).angle_to(Vector2.RIGHT))
-		Input.start_joy_vibration(0, 0.0, clamp(amount, 0.0, 1.0) * 0.5, 0.25)
+#	# Shake screen
+#	var distance = global_transform.origin.distance_to(collision.position) / screenshake_distance_multiplier
+#	var screen_pos: Vector2 = Screenshake._Camera.unproject_position(collision.position)
+#	var screen_pos_collision: Vector2 = Screenshake._Camera.unproject_position(collision.position + collision.normal)
+#	var amount: float = 1.0 / distance
 

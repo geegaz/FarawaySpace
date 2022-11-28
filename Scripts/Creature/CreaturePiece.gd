@@ -9,6 +9,9 @@ func missile_hit(missile: Spatial, collision):
 	if collision.collider == self and source:
 		if source.pieces.has(self):
 			source.break_piece(self)
+			
+			Screenshake.add_shake(0.25, 0.8, Screenshake.get_screenshake_angle(collision.position, collision.normal))
+			Input.start_joy_vibration(0, 0.2, 0.2, 0.25)
 
 func explode(force: float, direction: Vector3, use_mass: bool = true):
 	mode = MODE_RIGID
