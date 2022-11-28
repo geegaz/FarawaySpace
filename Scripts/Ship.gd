@@ -72,7 +72,9 @@ func _process(delta):
 	
 	# Camera
 	_Camera.fov = lerp(70, 100, speed_amount)
-	Screenshake.set_shake(abs(power) * speed_amount * 0.2)
+	var shake_amount: float = abs(power) * speed_amount * 0.2
+	Screenshake.set_shake(shake_amount)
+	#Input.start_joy_vibration(0, shake_amount, 0.0, 0.1)
 	
 	# Audio
 	_Audio.pitch_scale = clamp(

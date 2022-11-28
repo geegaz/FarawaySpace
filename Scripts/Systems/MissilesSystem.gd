@@ -11,8 +11,8 @@ export var missile_hit_method: String = "missile_hit"
 # Shooting parameters
 export var shoot_cooldown: = 0.25
 # Effect parameters
-export(float, 0.0, 1.0) var screenshake_directional: float = 0.8
-export(float, 1.0, 100.0) var screenshake_distance_multiplier: float = 50.0
+export(float, 0.0, 1.0) var screenshake_directional: float = 1.0
+export(float, 1.0, 100.0) var screenshake_distance_multiplier: float = 20.0
 export var missile_effect: PackedScene
 export var hit_effect: PackedScene
 
@@ -124,21 +124,27 @@ func fire_missile(target: Spatial = null):
 		new_missile.velocity += parent_velocity
 
 func missile_hit(missile: Missile, collision):
-	print("Missile %s hit %s"%[missile, collision.collider.name])
+	# print("Missile %s hit %s"%[missile, collision.collider.name])
 	# Don't create a hit effect if there is no effect set
 	if not hit_effect:
 		return
 	
 	var new_effect: Spatial
+	# Hit effect
+	new_effect = hit_effect.instance()
+	_Effects.add_child(new_effect)
+	new_effect.restart()
+	new_effect.transform = missile.transform
+	# Shake screen
+	var distance = global_transform.origin.distance_to(collision.position) / screenshake_distance_multiplier
+	var screen_pos: Vector2 = Screenshake._Camera.unproject_position(collision.position)
+	var screen_pos_collision: Vector2 = Screenshake._Camera.unproject_position(collision.position + collision.normal)
+	var amount: float = 1.0 / distance
+	
 	if missile.target == collision.collider:
-		# Hit effect
-		new_effect = hit_effect.instance()
-		_Effects.add_child(new_effect)
-		new_effect.restart()
-		new_effect.transform = missile.transform
-		# Shake screen
-		var distance = global_transform.origin.distance_to(collision.position) / screenshake_distance_multiplier
-		var screen_pos: Vector2 = Screenshake._Camera.unproject_position(collision.position)
-		var screen_pos_collision: Vector2 = Screenshake._Camera.unproject_position(collision.position + collision.normal)
-		Screenshake.add_shake(1.0 / distance, 0.8, (screen_pos_collision - screen_pos).angle_to(Vector2.RIGHT))
+		Screenshake.add_shake(amount, 0.8, (screen_pos_collision - screen_pos).angle_to(Vector2.RIGHT))
+		Input.start_joy_vibration(0, 0.0, clamp(amount, 0.0, 1.0), 0.5)
+	else:
+		Screenshake.add_shake(amount, 0.5, (screen_pos_collision - screen_pos).angle_to(Vector2.RIGHT))
+		Input.start_joy_vibration(0, 0.0, clamp(amount, 0.0, 1.0) * 0.5, 0.25)
 
