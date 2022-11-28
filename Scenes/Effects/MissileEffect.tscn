@@ -57,5 +57,5 @@ draw_pass_1 = SubResource( 7 )
 
 [node name="Trail3D" type="Spatial" parent="."]
 script = ExtResource( 2 )
-max_points = 50
+max_points = 25
 material = ExtResource( 3 )
