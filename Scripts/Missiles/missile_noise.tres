@@ -1,0 +1,4 @@
+[gd_resource type="OpenSimplexNoise" format=2]
+
+[resource]
+octaves = 1
