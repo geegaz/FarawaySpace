@@ -423,7 +423,7 @@ nodes/power/node = SubResource( 36 )
 nodes/power/position = Vector2( 580, 180 )
 nodes/speed/node = SubResource( 26 )
 nodes/speed/position = Vector2( 580, 40 )
-node_connections = [ "Add2", 0, "speed", "Add2", 1, "power", "output", 0, "Add2" ]
+node_connections = [ "output", 0, "Add2", "Add2", 0, "speed", "Add2", 1, "power" ]
 
 [node name="Ship" type="KinematicBody" groups=["Player"]]
 collision_layer = 2

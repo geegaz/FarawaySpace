@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scenes/Ship.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Environments/env_low.tres" type="Environment" id=2]
+[ext_resource path="res://Assets/Environments/env_high.tres" type="Environment" id=2]
 [ext_resource path="res://Scenes/Megastructures/Tower.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/UI/Pause.tscn" type="PackedScene" id=5]
