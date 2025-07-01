@@ -1,12 +1,19 @@
 extends Node
 
+export(bool) var has_started = false
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+onready var _Title: Control = $UI/Title
+onready var _Ship: Spatial = $Ship
+onready var _WorldAnimationPlayer: AnimationPlayer = $WorldAnimationPlayer
+onready var _WorldMusicPlayer: AudioStreamPlayer = $WorldMusicPlayer
 
+func _ready()->void:
+	_Ship.connect("started_moving",self,"_on_Ship_started_moving")
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
+func _on_Ship_started_moving() -> void:
+	if has_started:
+		return
+	
+	has_started = true
+	_WorldAnimationPlayer.play("title")
+	_WorldMusicPlayer.play()

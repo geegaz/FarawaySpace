@@ -9,29 +9,8 @@
 [ext_resource path="res://Assets/Materials/radial_blur.tres" type="Material" id=7]
 [ext_resource path="res://Scenes/MainData/data.hterrain" type="Resource" id=8]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/Main.gd" type="Script" id=10]
 [ext_resource path="res://Assets/Fonts/hydrogen.tres" type="DynamicFont" id=14]
-
-[sub_resource type="GDScript" id=4]
-script/source = "extends Node
-
-export(bool) var has_started = false
-
-onready var _Title: Control = $UI/Title
-onready var _Ship: Spatial = $Ship
-onready var _WorldAnimationPlayer: AnimationPlayer = $WorldAnimationPlayer
-onready var _WorldMusicPlayer: AudioStreamPlayer = $WorldMusicPlayer
-
-func _ready()->void:
-	_Ship.connect(\"started_moving\",self,\"_on_Ship_started_moving\")
-
-func _on_Ship_started_moving() -> void:
-	if has_started:
-		return
-	
-	has_started = true
-	_WorldAnimationPlayer.play(\"title\")
-	_WorldMusicPlayer.play()
-"
 
 [sub_resource type="Animation" id=6]
 length = 0.001
@@ -94,7 +73,7 @@ mode = 0
 textures = [ [  ], [  ] ]
 
 [node name="Main" type="Node"]
-script = SubResource( 4 )
+script = ExtResource( 10 )
 
 [node name="WorldAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 6 )
@@ -106,6 +85,7 @@ stream = ExtResource( 6 )
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="RadialBlur" type="ColorRect" parent="UI"]
+visible = false
 material = ExtResource( 7 )
 anchor_right = 1.0
 anchor_bottom = 1.0

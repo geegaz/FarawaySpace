@@ -1,14 +1,15 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Assets/Meshes/Ship/ship_wing.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Meshes/Ship/ship_prism.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Assets/Materials/glowing_core.tres" type="Material" id=3]
-[ext_resource path="res://Scripts/Ship.gd" type="Script" id=5]
-[ext_resource path="res://Scripts/ShipVisuals.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Ship/InputHandling.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Ship/Ship.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/Ship/ShipVisuals.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Materials/Trails/ship_core_material.tres" type="Material" id=7]
 [ext_resource path="res://Assets/Materials/Trails/ship_wings_material.tres" type="Material" id=8]
+[ext_resource path="res://Scripts/CameraFollow.gd" type="Script" id=9]
 [ext_resource path="res://addons/godot-polyliner/Trail3D/Trail3D.gd" type="Script" id=10]
-[ext_resource path="res://Scripts/CameraFollow.gd" type="Script" id=11]
 [ext_resource path="res://Assets/Sounds/flying_sound.ogg" type="AudioStream" id=12]
 
 [sub_resource type="SphereShape" id=16]
@@ -427,11 +428,12 @@ node_connections = [ "output", 0, "Add2", "Add2", 0, "speed", "Add2", 1, "power"
 [node name="Ship" type="KinematicBody" groups=["Player"]]
 collision_layer = 2
 collision_mask = 15
+moving_platform_apply_velocity_on_leave = 2
 script = ExtResource( 5 )
 
-[node name="Debug" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 14.0
+[node name="InputHandling" type="Node" parent="."]
+script = ExtResource( 4 )
+ship = NodePath("..")
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
@@ -505,9 +507,9 @@ unit_db = -80.0
 autoplay = true
 bus = "SFX"
 
-[node name="Camera" type="ClippedCamera" parent="."]
+[node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2, 6 )
 current = true
 far = 1000.0
-margin = 0.4
-script = ExtResource( 11 )
+script = ExtResource( 9 )
+target = NodePath("..")
