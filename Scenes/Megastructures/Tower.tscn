@@ -1,16 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Megastructures/Parts/Stairs.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Megastructures/Parts/Entry.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Sounds/scifi_ruined_environment-16800.mp3" type="AudioStream" id=3]
-[ext_resource path="res://Scripts/MeshMerger.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleShape" id=4]
 radius = 150.0
 height = 400.0
 
 [node name="Tower" type="Spatial"]
-script = ExtResource( 4 )
 
 [node name="Stairs" parent="." instance=ExtResource( 1 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 400, 0 )

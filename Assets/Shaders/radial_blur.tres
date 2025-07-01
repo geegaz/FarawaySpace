@@ -1,0 +1,39 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "/*
+	放射状ブラーエフェクト by あるる（きのもと　結衣） @arlez80
+	Radial Blur Effect by Yui Kinomoto
+
+	MIT License
+*/
+shader_type canvas_item;
+
+// 発射中央部
+uniform vec2 blur_center = vec2( 0.5, 0.5 );
+// ブラー強度
+uniform float blur_power : hint_range( 0.0, 1.0 ) = 0.01;
+// サンプリング回数
+uniform int sampling_count : hint_range( 1, 64 ) = 6;
+
+uniform float blur_start: hint_range(0.0,1.0) = 0.1;
+
+float inverse_lerp(float a, float b, float delta) {
+	return (delta - a) / (b - a);
+}
+
+void fragment( )
+{
+	vec2 direction = SCREEN_UV - blur_center;
+	vec3 color = vec3( 0.0, 0.0, 0.0 );
+	float factor = 1.0 / float( sampling_count );
+	
+	float remapped = inverse_lerp(blur_start, 1.0, length(direction));
+	direction *= clamp(remapped, 0.0, 1.0);
+	
+	for( int i=0; i < sampling_count; i++ ) {
+		color += texture( SCREEN_TEXTURE, SCREEN_UV - blur_power * direction * float(i) ).rgb * factor;
+	}
+	COLOR.rgb = color;
+}
+"

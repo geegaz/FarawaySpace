@@ -1,9 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Assets/Meshes/creature_part.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://Assets/Meshes/Creature/creature_part.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Materials/simple_diffuse.tres" type="Material" id=2]
 [ext_resource path="res://Assets/Materials/simple_emit.tres" type="Material" id=3]
 [ext_resource path="res://Scripts/Creature/CreaturePart.gd" type="Script" id=5]
+
 
 [sub_resource type="CylinderShape" id=2]
 height = 12.0

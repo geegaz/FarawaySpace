@@ -29,8 +29,8 @@ var target_index: int = 0
 
 # Gameplay
 onready var _Camera: Camera = get_viewport().get_camera()
-onready var _TargetingSystem: Node = get_node(targeting_system)
-onready var _MissilesSystem: Node = get_node(missiles_system)
+onready var _TargetingSystem: Node = get_node_or_null(targeting_system)
+onready var _MissilesSystem: Node = get_node_or_null(missiles_system)
 # Visuals
 onready var _AnimTree: AnimationTree = $ShipVisuals/AnimationTree
 onready var _Visuals: Spatial = $ShipVisuals
@@ -72,9 +72,7 @@ func _process(delta):
 	
 	# Camera
 	_Camera.fov = lerp(70, 100, speed_amount)
-	var shake_amount: float = abs(power) * speed_amount * 0.2
-	Screenshake.set_shake(shake_amount)
-	#Input.start_joy_vibration(0, shake_amount, 0.0, 0.1)
+	#Screenshake.set_shake(abs(power) * speed_amount * 0.2)
 	
 	# Audio
 	_Audio.pitch_scale = clamp(

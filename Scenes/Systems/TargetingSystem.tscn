@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/Systems/TargetingSystem.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/UI/TargetRectStyleVisor.tscn" type="PackedScene" id=2]
 
 [node name="TargetingSystem" type="Spatial"]
 script = ExtResource( 1 )
+target_visual = ExtResource( 2 )
 target_mask = 4
 raycast_mask = 1
 

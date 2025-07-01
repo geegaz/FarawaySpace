@@ -1,7 +1,7 @@
 extends Spatial
 
 # Missile parameters
-export var random_start_velocity: float = 0.05
+export var random_start_velocity: float = 0.01
 export var use_parent_velocity: = true
 export var missile_damping: float = 2.5 # m/s/s
 export var missile_thrust_force: float = 200.0 # m/s
@@ -9,7 +9,7 @@ export var missile_lifetime: float = 10.0
 export(int, LAYERS_3D_PHYSICS) var missile_mask: int = 0
 export var missile_hit_method: String = "missile_hit"
 # Shooting parameters
-export var shoot_cooldown: = 0.25
+export var shoot_cooldown: = 0.2
 # Effect parameters
 export var missile_effect: PackedScene
 export var hit_effect: PackedScene
