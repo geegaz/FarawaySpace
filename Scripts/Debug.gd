@@ -1,5 +1,7 @@
 extends Node
 
+const ENABLED = false
+
 enum {
 	LOG,
 	WARNING,
@@ -40,7 +42,13 @@ func write(text: String, type: int = LOG)->void:
 		ERROR:
 			push_error(message)
 
+func _ready() -> void:
+	_DebugDraw.clear()
+	_DebugWrite.hide()
+
 func _process(delta: float) -> void:
+	if not ENABLED:
+		return
 	_debug_draw()
 	_debug_write()
 
@@ -55,6 +63,7 @@ func _debug_draw()->void:
 	draw_queue.clear()
 
 func _debug_write()->void:
+	_DebugWrite.visible = true
 	var text: String = ""
 	for key in write_queue:
 		text += "%s\n"%key

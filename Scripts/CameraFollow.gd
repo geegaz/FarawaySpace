@@ -12,8 +12,7 @@ func _ready():
 	# Setup target
 	if translation_as_offset and _Target:
 		offset = translation
-	if get_parent() == _Target:
-		set_as_toplevel(true)
+	set_as_toplevel(true)
 	
 	transform = get_target_transform()
 	rotation = get_target_rotation().get_euler()

@@ -24,11 +24,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-polyliner/LineGen3D/ImmediateSurface.gd"
 }, {
-"base": "Node",
-"class": "InputHandling",
-"language": "GDScript",
-"path": "res://Scripts/Ship/InputHandling.gd"
-}, {
 "base": "Resource",
 "class": "LineGen3D",
 "language": "GDScript",
@@ -43,15 +38,26 @@ _global_script_classes=[ {
 "class": "Ship",
 "language": "GDScript",
 "path": "res://Scripts/Ship/Ship.gd"
+}, {
+"base": "Node",
+"class": "ShipEffects",
+"language": "GDScript",
+"path": "res://Scripts/Ship/ShipEffects.gd"
+}, {
+"base": "Node",
+"class": "ShipInput",
+"language": "GDScript",
+"path": "res://Scripts/Ship/ShipInput.gd"
 } ]
 _global_script_class_icons={
 "HTerrainDataLoader": "",
 "HTerrainDataSaver": "",
 "ImmediateSurface": "",
-"InputHandling": "",
 "LineGen3D": "",
 "Rope3D": "",
-"Ship": ""
+"Ship": "",
+"ShipEffects": "",
+"ShipInput": ""
 }
 
 [application]

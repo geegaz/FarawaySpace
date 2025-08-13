@@ -1,11 +1,8 @@
-class_name InputHandling
+class_name ShipInput
 extends Node
 
 const MOUSE_MULTIPLIER: float = 0.1
 const CONTROLLER_MULTIPLIER: float = 4.0
-
-export var ship: NodePath
-onready var _Ship: Ship = get_node_or_null(ship)
 
 export var mouse_sensitivity: float = 0.5
 export var mouse_invert_vertical: bool = false
@@ -14,8 +11,13 @@ export var controller_invert_vertical: bool = false
 
 var mouse_motion: Vector2
 
+var forward_input: float
+var backward_input: float
+var turn_input: Vector2
+
 func _ready() -> void:
 	Input.use_accumulated_input = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 func _process(delta: float) -> void:
 	# Turning (with a controller)
@@ -25,10 +27,10 @@ func _process(delta: float) -> void:
 	if controller_invert_vertical:
 		controller_motion.y = -controller_motion.y
 	
-	if _Ship:
-		_Ship.forward_input = Input.get_action_strength("move_front")
-		_Ship.backward_input = Input.get_action_strength("move_back")
-		_Ship.turn_input = mouse_motion + controller_motion
+	forward_input = Input.get_action_strength("move_front")
+	backward_input = Input.get_action_strength("move_back")
+	turn_input = mouse_motion + controller_motion
+	
 	mouse_motion = Vector2.ZERO
 
 func _unhandled_input(event: InputEvent) -> void:

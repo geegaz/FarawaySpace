@@ -14,5 +14,6 @@ shader_param/line_width = 0.0
 shader_param/tangent_facing = false
 shader_param/tex_stretch = true
 shader_param/tex_scale = Vector2( 1, 1 )
+shader_param/amount = 1.2
 shader_param/color = Color( 1, 1, 1, 1 )
 shader_param/width_curve = SubResource( 41 )

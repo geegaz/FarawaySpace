@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+[gd_resource type="ShaderMaterial" load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Shaders/simple_emit_trail.gdshader" type="Shader" id=1]
 
@@ -9,11 +9,19 @@ colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.498039, 1, 1, 1, 0 )
 [sub_resource type="GradientTexture" id=46]
 gradient = SubResource( 45 )
 
+[sub_resource type="Curve" id=47]
+_data = [ Vector2( 0, 0 ), 0.0, 5.0, 0, 0, Vector2( 0.4, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -3.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=48]
+curve = SubResource( 47 )
+
 [resource]
 shader = ExtResource( 1 )
 shader_param/line_width = 0.1
 shader_param/tangent_facing = false
 shader_param/tex_stretch = true
 shader_param/tex_scale = Vector2( 1, 1 )
+shader_param/amount = 1.0
 shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/width_curve = SubResource( 48 )
 shader_param/albedo_tex = SubResource( 46 )
