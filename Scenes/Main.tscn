@@ -101,7 +101,7 @@ valign = 1
 [node name="Pause" parent="UI" instance=ExtResource( 5 )]
 
 [node name="Ship" parent="." instance=ExtResource( 1 )]
-transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 832, 10, 538 )
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 832, 11, 538 )
 
 [node name="Lighting" type="Spatial" parent="."]
 

@@ -4,17 +4,26 @@ extends KinematicBody
 signal started_moving
 signal stopped_moving
 
-# Movement variables
+# Movement exports
 export var max_speed: float = 25 # m/s
 export var acceleration: float = 10 # m/s/s
 export var deceleration: float = 5 # m/s/s
 export var forward_multiplier: float = 1.0
 export var backward_multiplier: float = 0.5
 export(float, 0, 1) var collision_correction_amount: float = 0.05
+export var gravity_enabled: bool = true
+export var gravity: float = 9.8
+export var gravity_max_speed: float = 100.0
+export var gravity_ray_length: float = 4.0
+export(int, LAYERS_3D_PHYSICS) var gravity_ray_mask = 1
+export(float, 0.0, 100.0) var spring_strength: float = 20.0
+export(float, 0.0, 10.0) var spring_damping: float = 4.0
+export(float, 0, 1) var gravity_correction_amount: float = 0.02
 
 # Movement variables
 var speed: float
 var prev_speed: float
+var gravity_speed: float
 var velocity: Vector3
 
 # Collision variables
@@ -26,7 +35,7 @@ var power: float = 0.0
 var tilt: float = 0.0
 
 # Gameplay nodes
-onready var _Camera: Camera = get_viewport().get_camera()
+onready var _Camera: Camera = $Camera
 onready var _ShipInput: ShipInput = $Input
 # Visuals nodes
 onready var _ShipEffects: ShipEffects = $Effects
@@ -96,7 +105,7 @@ func _process(delta):
 		abs(_ShipInput.turn_input.x) * 0.1 + 
 		rotation.x * 0.2, 
 		0.01, 4)
-	_ShipAudio.unit_db = linear2db(abs(power) * 3)
+	_ShipAudio.unit_db = linear2db(abs(power) * 3.0)
 	
 	# Animation
 	_AnimationTree.set("parameters/speed/blend_position", speed_amount)
@@ -108,12 +117,27 @@ func _process(delta):
 
 func _physics_process(delta):
 	# Only do necessary physics calculations
-	velocity = -global_transform.basis.z * speed
-	velocity = move_and_slide(velocity, Vector3.UP, false, 4, PI)
-	
-	Debug.draw_line(global_translation, global_translation - global_transform.basis.z * 10.0, Color.blue)
-	
 	collision_correction = Vector2.ZERO
+	velocity = -global_transform.basis.z * speed
+	
+	if gravity_enabled:
+		gravity_speed = max(gravity_speed - gravity * delta, -gravity_max_speed)
+		
+		var cast_vector = Vector3.DOWN * gravity_ray_length
+		var result: Dictionary = space_state.intersect_ray(
+			global_translation, global_translation + cast_vector, [], gravity_ray_mask)
+		if not result.empty():
+			var ground_distance: float = (result.position - global_translation).length()
+			var ground_offset: float = gravity_ray_length - ground_distance
+			gravity_speed += ((ground_offset * spring_strength) - (gravity_speed * spring_damping)) * delta
+			collision_correction += calculate_correction(result.normal) * gravity_correction_amount
+	else:
+		gravity_speed = move_toward(gravity_speed, 0.0, gravity * delta)
+	
+	var final_velocity: Vector3 = velocity + Vector3.UP * gravity_speed
+	velocity = move_and_slide(final_velocity, Vector3.UP, false, 4, PI)
+	
+	
 	var slide_count: = get_slide_count()
 	if slide_count > 0:
 		# Get the collision normal
@@ -122,7 +146,9 @@ func _physics_process(delta):
 			var col: KinematicCollision = get_slide_collision(0)
 			col_normal += col.normal
 		col_normal = col_normal.normalized()
-		collision_correction = calculate_correction(col_normal)
+		collision_correction += calculate_correction(col_normal) * collision_correction_amount
+	
+	Debug.draw_line(global_translation, global_translation - global_transform.basis.z * 10.0, Color.blue)
 
 
 func calculate_correction(collison_normal: Vector3)->Vector2:
@@ -141,11 +167,14 @@ func calculate_correction(collison_normal: Vector3)->Vector2:
 	var angle: = local_normal.signed_angle_to(local_normal_flattened, plane_normal)
 	var correction = Vector2(
 		rad2deg(angle) * local_normal_flattened.x, 
-		-rad2deg(angle) * local_normal_flattened.y
-	) * collision_correction_amount
+		-rad2deg(angle) * local_normal_flattened.y)
 	
 	Debug.draw_line(global_translation, global_translation + local_normal * 10.0, Color.green)
 	Debug.draw_line(global_translation, global_translation + plane_normal * 10.0, Color.red)
 	Debug.draw_line(global_translation, global_translation + local_normal_flattened * 10.0, Color.purple)
 	
 	return correction
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("debug_switch_gravity"):
+		gravity_enabled = !gravity_enabled

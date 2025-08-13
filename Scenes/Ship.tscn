@@ -421,7 +421,7 @@ nodes/power/node = SubResource( 36 )
 nodes/power/position = Vector2( 580, 180 )
 nodes/speed/node = SubResource( 26 )
 nodes/speed/position = Vector2( 580, 40 )
-node_connections = [ "Add2", 0, "speed", "Add2", 1, "power", "output", 0, "Add2" ]
+node_connections = [ "output", 0, "Add2", "Add2", 0, "speed", "Add2", 1, "power" ]
 
 [sub_resource type="SphereShape" id=16]
 
@@ -460,13 +460,13 @@ spot_attenuation = 2.0
 spot_angle_attenuation = 0.75
 
 [node name="Core" type="MeshInstance" parent="Model"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.74228e-08, 3.72529e-08 )
 material_override = ExtResource( 3 )
 mesh = ExtResource( 2 )
 
 [node name="OmniLight" type="OmniLight" parent="Model/Core"]
 light_energy = 0.1
 light_bake_mode = 0
+omni_attenuation = 2.0
 
 [node name="Trail3D" type="Spatial" parent="Model/Core"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.50996e-07, -1 )
@@ -475,7 +475,7 @@ max_points = 25
 material = ExtResource( 7 )
 
 [node name="RightWing" type="MeshInstance" parent="Model"]
-transform = Transform( 0.986531, 0.0240389, -0.161796, -0.0243599, 0.999703, 0, 0.161748, 0.00394134, 0.986824, 0, -0.0402869, 3.52199e-09 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = ExtResource( 1 )
 
 [node name="Trail3D" type="Spatial" parent="Model/RightWing"]
@@ -485,7 +485,7 @@ max_points = 20
 material = ExtResource( 8 )
 
 [node name="LeftWing" type="MeshInstance" parent="Model"]
-transform = Transform( -0.993455, 0.0345394, 0.108879, -0.034746, -0.999396, 0, 0.108813, -0.00378311, 0.994055, 0, -0.0682597, 5.96745e-09 )
+transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = ExtResource( 1 )
 
 [node name="Trail3D" type="Spatial" parent="Model/LeftWing"]
