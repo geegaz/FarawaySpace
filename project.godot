@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-polyliner/LineGen3D/LineGen3D.gd"
 }, {
+"base": "Spatial",
+"class": "PhysInterp",
+"language": "GDScript",
+"path": "res://addons/godot-recipes/phys_interp.gd"
+}, {
 "base": "RigidBody",
 "class": "Rope3D",
 "language": "GDScript",
@@ -54,6 +59,7 @@ _global_script_class_icons={
 "HTerrainDataSaver": "",
 "ImmediateSurface": "",
 "LineGen3D": "",
+"PhysInterp": "",
 "Rope3D": "",
 "Ship": "",
 "ShipEffects": "",
@@ -215,7 +221,7 @@ debug_switch_gravity={
 
 [physics]
 
-common/enable_pause_aware_picking=true
+common/physics_fps=30
 
 [rendering]
 

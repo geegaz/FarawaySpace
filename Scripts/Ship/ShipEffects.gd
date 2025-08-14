@@ -28,10 +28,6 @@ export var dust_effect: NodePath
 onready var _DustEffect: Particles = get_node_or_null(dust_effect)
 
 
-func _ready():
-	if _DustEffect:
-		_DustEffect.set_as_toplevel(true)
-
 func set_core_opening(new_value: float):
 	core_light_opening = new_value
 	
@@ -65,7 +61,3 @@ func set_dust_effect_emitting(new_value: bool):
 	
 	if _DustEffect:
 		_DustEffect.emitting = new_value
-
-func move_dust_effect(position: Vector3):
-	if _DustEffect:
-		_DustEffect.translation = position
