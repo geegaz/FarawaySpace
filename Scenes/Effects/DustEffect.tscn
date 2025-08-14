@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Materials/Particles/smoke_material.tres" type="Material" id=1]
+[ext_resource path="res://Assets/Meshes/Effects/rounded_quad.obj" type="ArrayMesh" id=2]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.1, 0.6, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 0.5 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 1.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+direction = Vector3( 0, 0, -1 )
+spread = 180.0
+gravity = Vector3( 0, 1, 0 )
+initial_velocity = 4.0
+damping = 1.0
+angle = 360.0
+angle_random = 1.0
+scale = 4.0
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
+
+[node name="DustEffect" type="Particles"]
+material_override = ExtResource( 1 )
+amount = 200
+local_coords = false
+draw_order = 2
+process_material = SubResource( 1 )
+draw_pass_1 = ExtResource( 2 )

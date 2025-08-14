@@ -1,10 +1,11 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Assets/Meshes/Ship/ship_wing.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Meshes/Ship/ship_prism.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Assets/Materials/glowing_core.tres" type="Material" id=3]
 [ext_resource path="res://Scripts/Ship/ShipInput.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Ship/Ship.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Effects/DustEffect.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Materials/Trails/ship_core_material.tres" type="Material" id=7]
 [ext_resource path="res://Assets/Materials/Trails/ship_wings_material.tres" type="Material" id=8]
 [ext_resource path="res://Scripts/CameraFollow.gd" type="Script" id=9]
@@ -421,7 +422,7 @@ nodes/power/node = SubResource( 36 )
 nodes/power/position = Vector2( 580, 180 )
 nodes/speed/node = SubResource( 26 )
 nodes/speed/position = Vector2( 580, 40 )
-node_connections = [ "output", 0, "Add2", "Add2", 0, "speed", "Add2", 1, "power" ]
+node_connections = [ "Add2", 0, "speed", "Add2", 1, "power", "output", 0, "Add2" ]
 
 [sub_resource type="SphereShape" id=16]
 
@@ -442,12 +443,17 @@ glowing_core_light = NodePath("../Model/Core/OmniLight")
 core_trail = NodePath("../Model/Core/Trail3D")
 right_wing_trail = NodePath("../Model/RightWing/Trail3D")
 left_wing_trail = NodePath("../Model/LeftWing/Trail3D")
+dust_effect = NodePath("../DustEffect")
 
 [node name="Audio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 12 )
 unit_db = -80.0
 autoplay = true
 bus = "SFX"
+
+[node name="DustEffect" parent="." instance=ExtResource( 6 )]
+
+[node name="Pivot" type="Spatial" parent="."]
 
 [node name="Model" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0 )
@@ -457,7 +463,7 @@ transform = Transform( 1, 0, 0, 0, -1, -1.50996e-07, 0, 1.50996e-07, -1, 0, 1.50
 light_bake_mode = 0
 spot_range = 50.0
 spot_attenuation = 2.0
-spot_angle_attenuation = 0.75
+spot_angle_attenuation = 2.0
 
 [node name="Core" type="MeshInstance" parent="Model"]
 material_override = ExtResource( 3 )

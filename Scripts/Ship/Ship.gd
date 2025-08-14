@@ -23,7 +23,10 @@ export(float, 0, 1) var gravity_correction_amount: float = 0.02
 # Movement variables
 var speed: float
 var prev_speed: float
+var speed_amount: float
+var ground_distance: float
 var gravity_speed: float
+
 var velocity: Vector3
 
 # Collision variables
@@ -70,7 +73,7 @@ func _process(delta):
 	var target_accel: float = acceleration if dir != 0 else deceleration
 	prev_speed = speed
 	speed += target_accel * delta * sign(target_speed - speed)
-	var speed_amount = speed / max_speed # for later
+	speed_amount = speed / max_speed # for later
 	
 	# POWER - Smoothed version of dir
 	# Framerate-independant lerping
@@ -95,9 +98,15 @@ func _process(delta):
 	_ShipEffects.core_trail_width = max(power, 0.0) * 0.3
 	_ShipEffects.wing_trails_emitting = speed_amount > 0.9;
 	
+	if gravity_enabled:
+		_ShipEffects.dust_effect_emitting = (ground_distance < gravity_ray_length and abs(speed_amount) > 0.1)
+		_ShipEffects.move_dust_effect(global_translation + Vector3.DOWN * ground_distance)
+	else:
+		_ShipEffects.dust_effect_emitting = false
+	
 	# Camera
 	if _Camera:
-		_Camera.fov = lerp(70, 100, speed_amount)
+		_Camera.fov = lerp(70, 100, speed / max_speed) # need signed speed amount
 	
 	# Audio
 	_ShipAudio.pitch_scale = clamp(
@@ -127,10 +136,12 @@ func _physics_process(delta):
 		var result: Dictionary = space_state.intersect_ray(
 			global_translation, global_translation + cast_vector, [], gravity_ray_mask)
 		if not result.empty():
-			var ground_distance: float = (result.position - global_translation).length()
+			ground_distance = (result.position - global_translation).length()
 			var ground_offset: float = gravity_ray_length - ground_distance
 			gravity_speed += ((ground_offset * spring_strength) - (gravity_speed * spring_damping)) * delta
-			collision_correction += calculate_correction(result.normal) * gravity_correction_amount
+			collision_correction += calculate_correction(result.normal) * gravity_correction_amount * abs(speed_amount)
+		else:
+			ground_distance = gravity_ray_length
 	else:
 		gravity_speed = move_toward(gravity_speed, 0.0, gravity * delta)
 	
@@ -146,7 +157,7 @@ func _physics_process(delta):
 			var col: KinematicCollision = get_slide_collision(0)
 			col_normal += col.normal
 		col_normal = col_normal.normalized()
-		collision_correction += calculate_correction(col_normal) * collision_correction_amount
+		collision_correction += calculate_correction(col_normal) * collision_correction_amount * abs(speed_amount)
 	
 	Debug.draw_line(global_translation, global_translation - global_transform.basis.z * 10.0, Color.blue)
 

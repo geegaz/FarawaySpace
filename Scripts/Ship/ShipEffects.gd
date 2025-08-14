@@ -8,6 +8,7 @@ export(float, 0, 10) var core_light_multiplier: float = 1.0
 
 export(float, 0, 10) var core_trail_width: float = 0.0 setget set_core_trail_width
 export var wing_trails_emitting: bool = true setget set_wing_trails_emitting
+export var dust_effect_emitting: bool = true setget set_dust_effect_emitting
 
 export(ShaderMaterial) var glowing_core_material
 
@@ -23,9 +24,13 @@ onready var _RightWingTrail: Spatial = get_node_or_null(right_wing_trail)
 export var left_wing_trail: NodePath
 onready var _LeftWingTrail: Spatial = get_node_or_null(left_wing_trail)
 
+export var dust_effect: NodePath
+onready var _DustEffect: Particles = get_node_or_null(dust_effect)
+
 
 func _ready():
-	set_core_opening(core_light_opening)
+	if _DustEffect:
+		_DustEffect.set_as_toplevel(true)
 
 func set_core_opening(new_value: float):
 	core_light_opening = new_value
@@ -54,3 +59,13 @@ func set_wing_trails_emitting(new_value: bool):
 		_RightWingTrail.sampling_mode = _RightWingTrail.SamplingMode.Idle if new_value else _RightWingTrail.SamplingMode.None
 	if _LeftWingTrail:
 		_LeftWingTrail.sampling_mode = _LeftWingTrail.SamplingMode.Idle if new_value else _LeftWingTrail.SamplingMode.None
+
+func set_dust_effect_emitting(new_value: bool):
+	dust_effect_emitting = new_value
+	
+	if _DustEffect:
+		_DustEffect.emitting = new_value
+
+func move_dust_effect(position: Vector3):
+	if _DustEffect:
+		_DustEffect.translation = position

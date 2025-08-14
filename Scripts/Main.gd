@@ -15,5 +15,5 @@ func _on_Ship_started_moving() -> void:
 		return
 	
 	has_started = true
-	_WorldAnimationPlayer.play("title")
+#	_WorldAnimationPlayer.play("title")
 #	_WorldMusicPlayer.play()
