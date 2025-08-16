@@ -100,7 +100,7 @@ func _process(delta):
 	_ShipEffects.wing_trails_emitting = speed_amount > 0.9;
 	
 	if gravity_enabled:
-		_ShipEffects.dust_effect_emitting = (ground_distance < ground_ray_length and abs(speed_amount) > 0.1)
+		_ShipEffects.dust_effect_emitting = (ground_distance < ground_ray_length and abs(speed_amount) > 0.2)
 		_GroundEffects.global_translation = ground_position
 	else:
 		_ShipEffects.dust_effect_emitting = false

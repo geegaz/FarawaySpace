@@ -28,6 +28,7 @@ angle_random = 1.0
 scale = 4.0
 scale_curve = SubResource( 5 )
 color_ramp = SubResource( 3 )
+anim_speed = 1.0
 
 [node name="DustEffect" type="Particles"]
 material_override = ExtResource( 1 )
