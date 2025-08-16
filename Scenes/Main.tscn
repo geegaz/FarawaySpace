@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Environments/env_high.tres" type="Environment" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/UI/Pause.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Sounds/Music/music-002.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Scripts/ShipSpawner.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/MainData/data.hterrain" type="Resource" id=8]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=9]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=10]
@@ -152,8 +153,10 @@ monitorable = false
 [node name="CollisionShape" type="CollisionShape" parent="World/Bounds"]
 shape = SubResource( 8 )
 
-[node name="Spawn" type="Position3D" parent="World"]
-transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 832, 11, 538 )
+[node name="Spawner" type="Position3D" parent="World"]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 826, 20, 539 )
+script = ExtResource( 7 )
+ship = NodePath("../../Ship")
 
 [connection signal="body_entered" from="World/Bounds" to="." method="_on_Bounds_body_entered"]
 [connection signal="body_exited" from="World/Bounds" to="." method="_on_Bounds_body_exited"]

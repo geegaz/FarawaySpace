@@ -53,6 +53,11 @@ _global_script_classes=[ {
 "class": "ShipInput",
 "language": "GDScript",
 "path": "res://Scripts/Ship/ShipInput.gd"
+}, {
+"base": "Spatial",
+"class": "ShipSpawner",
+"language": "GDScript",
+"path": "res://Scripts/ShipSpawner.gd"
 } ]
 _global_script_class_icons={
 "HTerrainDataLoader": "",
@@ -63,7 +68,8 @@ _global_script_class_icons={
 "Rope3D": "",
 "Ship": "",
 "ShipEffects": "",
-"ShipInput": ""
+"ShipInput": "",
+"ShipSpawner": ""
 }
 
 [application]

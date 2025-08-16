@@ -3,27 +3,27 @@ extends KinematicBody
 
 signal started_moving
 signal stopped_moving
+signal gravity_changed(value)
 
 # Movement exports
-export var max_speed: float = 25 # m/s
-export var acceleration: float = 10 # m/s/s
-export var deceleration: float = 5 # m/s/s
+export var max_speed: float = 25.0 # m/s
+export var acceleration: float = 10.0 # m/s/s
+export var deceleration: float = 5.0 # m/s/s
 export var forward_multiplier: float = 1.0
 export var backward_multiplier: float = 0.5
 export(float, 0, 1) var collision_correction_amount: float = 0.05
 # Garvity exports
-export var gravity_enabled: bool = true
+export var gravity_enabled: bool = true setget set_gravity_enabled
 export var gravity: float = 9.8
-export var gravity_max_speed: float = 100.0
+export var gravity_max_speed: float = 50.0
 export var ground_ray_length: float = 4.0
 export(float, 0.0, 100.0) var spring_strength: float = 20.0
 export(float, 0.0, 10.0) var spring_damping: float = 4.0
-export(float, 0, 1) var ground_correction_amount: float = 0.02
+export(float, 0, 1) var ground_correction_amount: float = 0.025
 
 # Movement variables
 var speed: float
 var prev_speed: float
-var speed_amount: float
 var gravity_speed: float
 var velocity: Vector3
 
@@ -37,24 +37,27 @@ var ground_distance: float
 var dir: float = 0.0
 var power: float = 0.0
 var tilt: float = 0.0
+var speed_amount: float
 
 # Gameplay nodes
 onready var _Camera: Camera = $Camera
 onready var _ShipInput: ShipInput = $Input
+onready var _ShipInterpolation: PhysInterp = $Interpolation
 onready var _ShipPivot: Spatial = $Interpolation/Pivot
 onready var _GroundRayCast: RayCast = $GroundRayCast
 # Visuals nodes
 onready var _ShipModel: Spatial = $Interpolation/Pivot/Model
-onready var _ShipEffects: ShipEffects = $Interpolation/Pivot/Model/Effects
 onready var _AnimationTree: AnimationTree = $Interpolation/Pivot/Model/AnimationTree
-onready var _GroundEffects: Spatial = $GroundEffects
+onready var _ShipEffects: ShipEffects = $ShipEffects
+onready var _GroundEffects: Spatial = $Interpolation/GroundEffects
 # Audio nodes
-onready var _ShipAudio: AudioStreamPlayer3D = $Audio
+onready var _ShipAudio: AudioStreamPlayer3D = $Interpolation/Audio
 
 onready var space_state: PhysicsDirectSpaceState = get_world().direct_space_state
 
 func _ready() -> void:
 	_GroundRayCast.cast_to = Vector3.DOWN * ground_ray_length
+	connect("gravity_changed", self, "_on_gravity_changed")
 
 func _process(delta):
 	# Do all gameplay-related calculation that don't depend on physics
@@ -74,7 +77,8 @@ func _process(delta):
 	var target_accel: float = acceleration if dir != 0 else deceleration
 	prev_speed = speed
 	speed += target_accel * delta * sign(target_speed - speed)
-	speed_amount = speed / max_speed # for later
+	# Smoothed version of speed/max_speed
+	speed_amount = lerp(speed_amount, speed / max_speed, 1.0 - pow(10, -delta))  # for later
 	
 	# POWER - Smoothed version of dir
 	# Framerate-independant lerping
@@ -101,13 +105,13 @@ func _process(delta):
 	
 	if gravity_enabled:
 		_ShipEffects.dust_effect_emitting = (ground_distance < ground_ray_length and abs(speed_amount) > 0.2)
-		_GroundEffects.global_translation = ground_position
+		_GroundEffects.translation = Vector3.DOWN * ground_distance # interpolated
 	else:
 		_ShipEffects.dust_effect_emitting = false
 	
 	# Camera
 	if _Camera:
-		_Camera.fov = lerp(70, 100, speed / max_speed) # need signed speed amount
+		_Camera.fov = lerp(70, 100, speed_amount) # need signed speed amount
 	
 	# Audio
 	_ShipAudio.pitch_scale = clamp(
@@ -118,8 +122,8 @@ func _process(delta):
 	_ShipAudio.unit_db = linear2db(abs(power) * 3.0)
 	
 	# Animation
-	_AnimationTree.set("parameters/speed/blend_position", speed_amount)
-	_AnimationTree.set("parameters/power/blend_position", power)
+	_AnimationTree["parameters/flying/power/blend_position"] = power
+	_AnimationTree["parameters/grounded/power/blend_position"] = power
 	
 	Debug.write_to_screen("Ship", "Speed: %s"%speed)
 	Debug.write_to_screen("Ship", "Speed Amount: %s"%speed_amount)
@@ -144,7 +148,7 @@ func _physics_process(delta):
 			# Spring force when close to the ground
 			gravity_speed += calculate_spring(ground_offset, spring_strength, spring_damping) * delta
 			# Additional correction when close to the ground (to help stay horizontal)
-			collision_correction += calculate_correction(ground_normal) * ground_correction_amount * abs(speed_amount)
+			collision_correction += calculate_correction(ground_normal) * ground_correction_amount * abs(speed / max_speed)
 		else:
 			ground_position = global_translation + _GroundRayCast.cast_to
 			ground_normal = Vector3.UP
@@ -164,12 +168,12 @@ func _physics_process(delta):
 			var col: KinematicCollision = get_slide_collision(0)
 			col_normal += col.normal
 		col_normal = col_normal.normalized()
-		collision_correction += calculate_correction(col_normal) * collision_correction_amount * abs(speed_amount)
+		collision_correction += calculate_correction(col_normal) * collision_correction_amount * abs(speed / max_speed)
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug_switch_gravity"):
-		gravity_enabled = !gravity_enabled
+		set_gravity_enabled(!gravity_enabled)
 
 
 func calculate_correction(collison_normal: Vector3)->Vector2:
@@ -192,8 +196,10 @@ func calculate_correction(collison_normal: Vector3)->Vector2:
 	
 	return correction
 
+
 func calculate_spring(offset: float, strength: float, damping: float)->float:
 	return (offset * strength) - (gravity_speed * damping)
+
 
 func rotate_pivot(turn: Vector2)->void:
 	_ShipPivot.rotation.y -= deg2rad(turn.x)
@@ -201,15 +207,27 @@ func rotate_pivot(turn: Vector2)->void:
 	_ShipPivot.rotation.x = clamp(_ShipPivot.rotation.x, deg2rad(-90), deg2rad(90))
 	_ShipPivot.orthonormalize()
 
+
 func get_pivot_basis(global: bool = true)->Basis:
 	if global:
 		return _ShipPivot.global_transform.basis
 	return _ShipPivot.transform.basis
 
+
 # Teleport to a global position & rotation
 func teleport(target_position: Vector3, target_rotation: Vector3)->void:
 	global_translation = target_position
 	_ShipPivot.global_rotation = target_rotation
-	$Interpolation.reset_interpolation()
-	$Camera.reset_interpolation()
-	
+	_ShipInterpolation.reset_interpolation()
+	_Camera.reset_interpolation()
+
+
+func set_gravity_enabled(new_value: bool)->void:
+	gravity_enabled = new_value
+	emit_signal("gravity_changed", new_value)
+
+func _on_gravity_changed(value: bool)->void:
+	if value:
+		_AnimationTree["parameters/playback"].travel("grounded")
+	else:
+		_AnimationTree["parameters/playback"].travel("flying")

@@ -2,11 +2,12 @@
 
 [resource]
 code = "shader_type spatial;
-render_mode cull_back, blend_mix, depth_draw_opaque, unshaded;
+render_mode cull_back, blend_mix, depth_draw_opaque;
 
 uniform float amount : hint_range(0.0, 10.0) = 1.0;
 uniform vec4 color : hint_color = vec4(1.0);
 
 void fragment() {
-	ALBEDO = color.rgb * amount;
+	ALBEDO = color.rgb;
+	EMISSION = color.rgb * amount;
 }"

@@ -7,6 +7,8 @@ render_mode cull_back, blend_add, depth_draw_never, unshaded;
 uniform float amount : hint_range(0.0, 10.0) = 1.0;
 uniform vec4 color : hint_color = vec4(1.0);
 uniform sampler2D texture_color : hint_albedo;
+uniform float distance_fade_min;
+uniform float distance_fade_max;
 
 uniform int particles_anim_h_frames;
 uniform int particles_anim_v_frames;
@@ -44,5 +46,6 @@ void fragment() {
 	float alpha_tex = texture(texture_color,base_uv).a;
 	ALBEDO = color.rgb * COLOR.rgb * amount;
 	ALPHA = color.a * alpha_tex * COLOR.a;
+	ALPHA *= clamp(smoothstep(distance_fade_min,distance_fade_max,-VERTEX.z),0.0,1.0);
 }
 "

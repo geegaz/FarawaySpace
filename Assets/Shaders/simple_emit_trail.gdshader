@@ -5,6 +5,14 @@ render_mode cull_disabled, blend_add, depth_draw_never, unshaded;
 uniform float line_width = 0.1;
 uniform sampler2D width_curve : hint_albedo;
 uniform bool tangent_facing = false;
+
+uniform sampler2D albedo_tex : hint_albedo;
+uniform bool tex_stretch = true;
+uniform vec2 tex_scale = vec2(1.0,1.0);
+
+uniform float amount : hint_range(0.0, 10.0) = 1.0;
+uniform vec4 color : hint_color = vec4(vec3(1.0),1.0);
+
 void line_process(float width, inout vec3 vertex, vec3 dir_to_cam, vec2 uv,
 					inout vec3 normal, inout vec3 tangent){
 	vec3 dir_to_next_point = normal;
@@ -36,12 +44,6 @@ void vertex(){
 	UV2.x *= line_length;
 }
 
-uniform sampler2D albedo_tex : hint_albedo;
-uniform bool tex_stretch = true;
-uniform vec2 tex_scale = vec2(1.0,1.0);
-
-uniform float amount : hint_range(0.0, 10.0) = 1.0;
-uniform vec4 color : hint_color = vec4(vec3(1.0),1.0);
 void fragment() {
 	if (!FRONT_FACING) { NORMAL = -NORMAL; }
 	
