@@ -875,76 +875,70 @@ script = ExtResource( 4 )
 
 [node name="ShipEffects" type="Node" parent="."]
 script = ExtResource( 11 )
-core_trail = NodePath("../Interpolation/Pivot/Model/Core/Trail3D")
-right_wing_trail = NodePath("../Interpolation/Pivot/Model/RightWing/Trail3D")
-left_wing_trail = NodePath("../Interpolation/Pivot/Model/LeftWing/Trail3D")
-dust_effect = NodePath("../Interpolation/GroundEffects/DustEffect")
+core_trail = NodePath("../Pivot/Interpolation/Model/Core/Trail3D")
+right_wing_trail = NodePath("../Pivot/Interpolation/Model/RightWing/Trail3D")
+left_wing_trail = NodePath("../Pivot/Interpolation/Model/LeftWing/Trail3D")
+dust_effect = NodePath("../Pivot/Interpolation/GroundEffects/DustEffect")
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2, 6 )
 current = true
 far = 1000.0
 script = ExtResource( 9 )
-target = NodePath("../Interpolation/Pivot")
+target = NodePath("../Pivot")
 
-[node name="Interpolation" type="Spatial" parent="."]
+[node name="Pivot" type="Spatial" parent="."]
+
+[node name="Interpolation" type="Spatial" parent="Pivot"]
 script = ExtResource( 13 )
 
-[node name="Audio" type="AudioStreamPlayer3D" parent="Interpolation"]
-stream = ExtResource( 12 )
-unit_db = -80.0
-autoplay = true
-bus = "SFX"
-
-[node name="Pivot" type="Spatial" parent="Interpolation"]
-
-[node name="Model" type="Spatial" parent="Interpolation/Pivot"]
+[node name="Model" type="Spatial" parent="Pivot/Interpolation"]
 transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0 )
 
-[node name="SpotLight" type="SpotLight" parent="Interpolation/Pivot/Model"]
+[node name="SpotLight" type="SpotLight" parent="Pivot/Interpolation/Model"]
 transform = Transform( 1, 0, 0, 0, -1, -1.50996e-07, 0, 1.50996e-07, -1, 0, 1.50996e-07, 1 )
 light_bake_mode = 0
 spot_range = 50.0
 spot_attenuation = 2.0
 spot_angle_attenuation = 2.0
 
-[node name="Core" type="MeshInstance" parent="Interpolation/Pivot/Model"]
+[node name="Core" type="MeshInstance" parent="Pivot/Interpolation/Model"]
 material_override = ExtResource( 3 )
 mesh = ExtResource( 2 )
 
-[node name="OmniLight" type="OmniLight" parent="Interpolation/Pivot/Model/Core"]
+[node name="OmniLight" type="OmniLight" parent="Pivot/Interpolation/Model/Core"]
 light_energy = 0.1
 light_bake_mode = 0
 omni_attenuation = 2.0
 
-[node name="Trail3D" type="Spatial" parent="Interpolation/Pivot/Model/Core"]
+[node name="Trail3D" type="Spatial" parent="Pivot/Interpolation/Model/Core"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.50996e-07, -1 )
 script = ExtResource( 10 )
 max_points = 25
 material = ExtResource( 7 )
 
-[node name="RightWing" type="MeshInstance" parent="Interpolation/Pivot/Model"]
+[node name="RightWing" type="MeshInstance" parent="Pivot/Interpolation/Model"]
 mesh = ExtResource( 1 )
 
-[node name="Trail3D" type="Spatial" parent="Interpolation/Pivot/Model/RightWing"]
+[node name="Trail3D" type="Spatial" parent="Pivot/Interpolation/Model/RightWing"]
 transform = Transform( 0.984338, -0.175317, -0.018538, 0.175276, 0.984512, -0.003823, 0.0189211, 0.000513852, 0.999821, -2.46776, -0.165341, -1.04708 )
 script = ExtResource( 10 )
 sampling_mode = 2
 max_points = 20
 material = ExtResource( 8 )
 
-[node name="LeftWing" type="MeshInstance" parent="Interpolation/Pivot/Model"]
+[node name="LeftWing" type="MeshInstance" parent="Pivot/Interpolation/Model"]
 transform = Transform( -0.999999, -8.74228e-08, 0, 8.74227e-08, -1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = ExtResource( 1 )
 
-[node name="Trail3D" type="Spatial" parent="Interpolation/Pivot/Model/LeftWing"]
+[node name="Trail3D" type="Spatial" parent="Pivot/Interpolation/Model/LeftWing"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -1 )
 script = ExtResource( 10 )
 sampling_mode = 2
 max_points = 20
 material = ExtResource( 8 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Interpolation/Pivot/Model"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/Interpolation/Model"]
 autoplay = "grounded_idle"
 anims/RESET = SubResource( 18 )
 anims/flying_back = SubResource( 28 )
@@ -954,7 +948,7 @@ anims/grounded_back = SubResource( 46 )
 anims/grounded_forward = SubResource( 45 )
 anims/grounded_idle = SubResource( 44 )
 
-[node name="AnimationTree" type="AnimationTree" parent="Interpolation/Pivot/Model"]
+[node name="AnimationTree" type="AnimationTree" parent="Pivot/Interpolation/Model"]
 tree_root = SubResource( 33 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
@@ -962,10 +956,16 @@ parameters/playback = SubResource( 34 )
 parameters/flying/power/blend_position = 0.0102708
 parameters/grounded/power/blend_position = 0.0
 
-[node name="GroundEffects" type="Spatial" parent="Interpolation"]
+[node name="GroundEffects" type="Spatial" parent="Pivot/Interpolation"]
 
-[node name="DustEffect" parent="Interpolation/GroundEffects" instance=ExtResource( 6 )]
+[node name="DustEffect" parent="Pivot/Interpolation/GroundEffects" instance=ExtResource( 6 )]
 emitting = false
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="Pivot/Interpolation"]
+stream = ExtResource( 12 )
+unit_db = -80.0
+autoplay = true
+bus = "SFX"
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )

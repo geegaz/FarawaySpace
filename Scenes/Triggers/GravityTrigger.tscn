@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Triggers/GravityTrigger.gd" type="Script" id=1]
+
+[sub_resource type="BoxShape" id=1]
+
+[node name="GravityTrigger" type="Area"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource( 1 )
+debug_wire_color = Color( 0, 0.498039, 1, 1 )
+debug_solid_color = Color( 0, 0.498039, 1, 0.2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )

@@ -2,7 +2,7 @@
 
 [resource]
 code = "shader_type spatial;
-render_mode unshaded, depth_draw_never;
+render_mode blend_mix, unshaded, cull_disabled, depth_draw_never;
 
 void fragment() {
 	ALBEDO = COLOR.rgb;

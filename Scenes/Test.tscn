@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Assets/Meshes/station_model.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Materials/simple_diffuse.tres" type="Material" id=2]
-[ext_resource path="res://Assets/Environments/env_high.tres" type="Environment" id=3]
+[ext_resource path="res://Assets/Environments/env_main.tres" type="Environment" id=3]
 [ext_resource path="res://Scenes/Ship.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Effects/DustEffect.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/UI/Pause.tscn" type="PackedScene" id=8]

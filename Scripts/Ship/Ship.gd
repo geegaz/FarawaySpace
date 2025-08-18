@@ -42,16 +42,16 @@ var speed_amount: float
 # Gameplay nodes
 onready var _Camera: Camera = $Camera
 onready var _ShipInput: ShipInput = $Input
-onready var _ShipInterpolation: PhysInterp = $Interpolation
-onready var _ShipPivot: Spatial = $Interpolation/Pivot
+onready var _ShipPivot: Spatial = $Pivot
+onready var _ShipInterpolation: PhysInterp = $Pivot/Interpolation
 onready var _GroundRayCast: RayCast = $GroundRayCast
 # Visuals nodes
-onready var _ShipModel: Spatial = $Interpolation/Pivot/Model
-onready var _AnimationTree: AnimationTree = $Interpolation/Pivot/Model/AnimationTree
+onready var _ShipModel: Spatial = $Pivot/Interpolation/Model
+onready var _AnimationTree: AnimationTree = $Pivot/Interpolation/Model/AnimationTree
+onready var _GroundEffects: Spatial = $Pivot/Interpolation/GroundEffects
 onready var _ShipEffects: ShipEffects = $ShipEffects
-onready var _GroundEffects: Spatial = $Interpolation/GroundEffects
 # Audio nodes
-onready var _ShipAudio: AudioStreamPlayer3D = $Interpolation/Audio
+onready var _ShipAudio: AudioStreamPlayer3D = $Pivot/Interpolation/Audio
 
 onready var space_state: PhysicsDirectSpaceState = get_world().direct_space_state
 
@@ -124,17 +124,15 @@ func _process(delta):
 	# Animation
 	_AnimationTree["parameters/flying/power/blend_position"] = power
 	_AnimationTree["parameters/grounded/power/blend_position"] = power
-	
-	Debug.write_to_screen("Ship", "Speed: %s"%speed)
-	Debug.write_to_screen("Ship", "Speed Amount: %s"%speed_amount)
 
 
 func _physics_process(delta):
 	# Only do necessary physics calculations
 	var pivot_basis: Basis = get_pivot_basis()
+	var forward: = -pivot_basis.z
 	
 	collision_correction = Vector2.ZERO
-	velocity = -pivot_basis.z * speed
+	velocity = forward * speed
 	
 	if gravity_enabled:
 		# Gravity acceleration
@@ -169,6 +167,9 @@ func _physics_process(delta):
 			col_normal += col.normal
 		col_normal = col_normal.normalized()
 		collision_correction += calculate_correction(col_normal) * collision_correction_amount * abs(speed / max_speed)
+		Debug.draw_line(global_translation, global_translation + col_normal * 10.0, Color.red)
+	
+	Debug.draw_line(global_translation, global_translation + forward * 10.0, Color.blue)
 
 
 func _unhandled_input(event: InputEvent) -> void:
