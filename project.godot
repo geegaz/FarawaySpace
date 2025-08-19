@@ -64,7 +64,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Ship/ShipInput.gd"
 }, {
-"base": "Reference",
+"base": "Spatial",
 "class": "ShipSpawner",
 "language": "GDScript",
 "path": "res://Scripts/Ship/ShipSpawner.gd"
@@ -99,9 +99,10 @@ config/icon="res://icon.png"
 
 [autoload]
 
-AudioManager="*res://Scenes/AudioManager.tscn"
-Screenshake="*res://Scenes/Screenshake.tscn"
-Debug="*res://Scripts/Debug.gd"
+PlayerManager="*res://Scripts/Autoloads/PlayerManager.gd"
+AudioManager="*res://Scenes/Autoloads/AudioManager.tscn"
+Screenshake="*res://Scripts/Autoloads/Screenshake.gd"
+DebugDraw="*res://Scripts/Autoloads/DebugDraw.gd"
 
 [editor_plugins]
 
@@ -242,10 +243,6 @@ debug_switch_gravity={
 3d_physics/layer_2="Players"
 3d_physics/layer_3="Enemies"
 3d_physics/layer_4="Items"
-
-[physics]
-
-common/physics_fps=30
 
 [rendering]
 

@@ -55,6 +55,12 @@ onready var _ShipAudio: AudioStreamPlayer3D = $Pivot/Interpolation/Audio
 
 onready var space_state: PhysicsDirectSpaceState = get_world().direct_space_state
 
+func _enter_tree() -> void:
+	PlayerManager.player = self
+
+func _exit_tree() -> void:
+	PlayerManager.player = null
+
 func _ready() -> void:
 	_GroundRayCast.cast_to = Vector3.DOWN * ground_ray_length
 	connect("gravity_changed", self, "_on_gravity_changed")
@@ -147,6 +153,8 @@ func _physics_process(delta):
 			gravity_speed += calculate_spring(ground_offset, spring_strength, spring_damping) * delta
 			# Additional correction when close to the ground (to help stay horizontal)
 			collision_correction += calculate_correction(ground_normal) * ground_correction_amount * abs(speed / max_speed)
+			
+			DebugDraw.draw_point(ground_position, Color.red, 1.0)
 		else:
 			ground_position = global_translation + _GroundRayCast.cast_to
 			ground_normal = Vector3.UP
@@ -167,9 +175,9 @@ func _physics_process(delta):
 			col_normal += col.normal
 		col_normal = col_normal.normalized()
 		collision_correction += calculate_correction(col_normal) * collision_correction_amount * abs(speed / max_speed)
-		Debug.draw_line(global_translation, global_translation + col_normal * 10.0, Color.red)
+		DebugDraw.draw_line(global_translation, global_translation + col_normal * 10.0, Color.red)
 	
-	Debug.draw_line(global_translation, global_translation + forward * 10.0, Color.blue)
+	DebugDraw.draw_line(global_translation, global_translation + forward * 10.0, Color.blue)
 
 
 func _unhandled_input(event: InputEvent) -> void:

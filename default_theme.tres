@@ -6,7 +6,7 @@
 [ext_resource path="res://Assets/Styles/Button/style_pressed.tres" type="StyleBox" id=4]
 [ext_resource path="res://Assets/Styles/Button/style_hover.tres" type="StyleBox" id=5]
 [ext_resource path="res://Assets/Styles/Button/style_disabled.tres" type="StyleBox" id=6]
-[ext_resource path="res://Assets/Fonts/hydrogen.tres" type="DynamicFont" id=7]
+[ext_resource path="res://Assets/Fonts/galiver-sans.tres" type="DynamicFont" id=7]
 
 [resource]
 Button/colors/font_color = Color( 1, 1, 1, 1 )
