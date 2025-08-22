@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Assets/Materials/Particles/smoke_material.tres" type="Material" id=1]
+[ext_resource path="res://Assets/Materials/mat_particles_dust.tres" type="Material" id=1]
 [ext_resource path="res://Assets/Meshes/Effects/rounded_quad.obj" type="ArrayMesh" id=2]
 
 [sub_resource type="Gradient" id=2]

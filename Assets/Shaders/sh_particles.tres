@@ -2,33 +2,21 @@
 
 [resource]
 code = "shader_type spatial;
-render_mode blend_mix, depth_draw_never, cull_back, diffuse_lambert;
+render_mode blend_mix, cull_back, depth_draw_never;
 
-uniform vec4 albedo : hint_color= vec4(1.0);
+uniform vec4 color : hint_color= vec4(1.0);
 uniform sampler2D texture_albedo : hint_albedo;
+uniform float proximity_fade_distance;
 uniform float distance_fade_min;
 uniform float distance_fade_max;
-uniform float transmission : hint_range(0.0, 1.0, 0.01) = 0.0;
-uniform float alpha_as_transmission : hint_range(0.0, 1.0, 0.01) = 0.0;
+uniform vec4 transmission : hint_color;
 uniform bool billboard = true;
 
 uniform int particles_anim_h_frames;
 uniform int particles_anim_v_frames;
 uniform bool particles_anim_loop;
 
-uniform vec3 uv1_scale;
-uniform vec3 uv1_offset;
-uniform vec3 uv2_scale;
-uniform vec3 uv2_offset;
-
-float remap(float value, float in_low, float in_high, float out_low, float out_high)
-{
-	return out_low + (value - in_low) * (out_high - out_low) / (in_high - in_low);
-}
-
 void vertex() {
-	UV=UV*uv1_scale.xy+uv1_offset.xy;
-	
 	if (billboard)
 	{
 		mat4 mat_world = mat4(normalize(CAMERA_MATRIX[0])*length(WORLD_MATRIX[0]),normalize(CAMERA_MATRIX[1])*length(WORLD_MATRIX[0]),normalize(CAMERA_MATRIX[2])*length(WORLD_MATRIX[2]),WORLD_MATRIX[3]);
@@ -51,19 +39,19 @@ void vertex() {
 
 void fragment() {
 	//if (!FRONT_FACING) { NORMAL = -NORMAL; }
-	
 	vec2 base_uv = UV;
-	float alpha_tex = texture(texture_albedo,base_uv).a;
-	ALBEDO = albedo.rgb * COLOR.rgb;
-	ALPHA = albedo.a * alpha_tex * COLOR.a;
+	float alpha_tex = texture(texture_albedo, base_uv).a;
+	
+	ALBEDO = color.rgb * COLOR.rgb;
+	ALPHA = color.a * alpha_tex * COLOR.a;
+	
+	float depth_tex = textureLod(DEPTH_TEXTURE,SCREEN_UV,0.0).r;
+	vec4 world_pos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV*2.0-1.0,depth_tex*2.0-1.0,1.0);
+	world_pos.xyz/=world_pos.w;
+	ALPHA *= clamp(1.0-smoothstep(world_pos.z+proximity_fade_distance,world_pos.z,VERTEX.z),0.0,1.0);
+	
 	ALPHA *= clamp(smoothstep(distance_fade_min,distance_fade_max,-VERTEX.z),0.0,1.0);
-}
-
-void light() 
-{
-	float lambert = clamp(dot(NORMAL, LIGHT), 0.0, 1.0);
-	float transmit = mix(transmission, 1.0 - ALPHA, alpha_as_transmission);
-	lambert = remap(lambert, 0.0, 1.0, transmit, 1.0);
-	DIFFUSE_LIGHT += lambert * ATTENUATION * ALBEDO;
+	
+	TRANSMISSION = transmission.rgb;
 }
 "

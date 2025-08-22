@@ -1,6 +1,6 @@
 shader_type spatial;
 render_mode skip_vertex_transform;
-render_mode cull_disabled, blend_add, depth_draw_never, unshaded;
+render_mode blend_add, cull_disabled, depth_draw_never, unshaded;
 
 uniform float line_width = 0.1;
 uniform sampler2D width_curve : hint_albedo;
@@ -13,8 +13,8 @@ uniform vec2 tex_scale = vec2(1.0,1.0);
 uniform float amount : hint_range(0.0, 10.0) = 1.0;
 uniform vec4 color : hint_color = vec4(vec3(1.0),1.0);
 
-void line_process(float width, inout vec3 vertex, vec3 dir_to_cam, vec2 uv,
-					inout vec3 normal, inout vec3 tangent){
+void line_process(float width, inout vec3 vertex, vec3 dir_to_cam, vec2 uv, inout vec3 normal, inout vec3 tangent)
+{
 	vec3 dir_to_next_point = normal;
 	vec3 perp = tangent;
 	if (!tangent_facing) {
@@ -29,7 +29,8 @@ void line_process(float width, inout vec3 vertex, vec3 dir_to_cam, vec2 uv,
 	normal = cross(perp,dir_to_next_point);
 }
 
-void vertex(){
+void vertex()
+{
 	VERTEX = (MODELVIEW_MATRIX * vec4(VERTEX,1.0)).xyz;
 	NORMAL = mat3(MODELVIEW_MATRIX) * NORMAL;
 	TANGENT = mat3(MODELVIEW_MATRIX) * TANGENT;
@@ -44,8 +45,9 @@ void vertex(){
 	UV2.x *= line_length;
 }
 
-void fragment() {
-	if (!FRONT_FACING) { NORMAL = -NORMAL; }
+void fragment() 
+{
+//	if (!FRONT_FACING) { NORMAL = -NORMAL; }
 	
 	vec2 base_uv = UV2;
 	if (tex_stretch) {

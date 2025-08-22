@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=2]
 
-[ext_resource path="res://Assets/Shaders/normal_displacement.tres" type="Shader" id=1]
+[ext_resource path="res://Assets/Shaders/sh_normal_displacement.tres" type="Shader" id=1]
 
 [sub_resource type="OpenSimplexNoise" id=2]
 

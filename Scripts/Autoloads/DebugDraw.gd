@@ -169,7 +169,7 @@ var enabled: bool = true
 var instance_RID: RID
 var scenario_RID: RID
 var base_RID: RID
-var base_material: Material = preload("res://Assets/Materials/debug.tres")
+var base_material: Material = preload("res://Assets/Materials/mat_debug.tres")
 
 class DrawStep:
 	var primitive_type: int

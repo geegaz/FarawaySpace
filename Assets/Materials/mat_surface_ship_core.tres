@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Shaders/sh_surfaces.tres" type="Shader" id=1]
+[ext_resource path="res://Assets/Materials/mat_surface_ship_core_displacement.tres" type="Material" id=2]
+
+[resource]
+next_pass = ExtResource( 2 )
+shader = ExtResource( 1 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/emission = Color( 1, 1, 1, 1 )
+shader_param/emission_amount = 1.5
