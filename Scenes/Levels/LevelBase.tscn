@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Ship/ShipSpawner.gd" type="Script" id=1]
+[ext_resource path="res://default_env.tres" type="Environment" id=3]
+
+[node name="LevelBase" type="Spatial"]
+
+[node name="LevelUI" type="CanvasLayer" parent="."]
+
+[node name="Lighting" type="Spatial" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
+environment = ExtResource( 3 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="Lighting"]
+transform = Transform( -0.939693, 0.196175, -0.280166, 0, 0.819152, 0.573577, 0.34202, 0.538986, -0.769751, 0, 0, 0 )
+shadow_enabled = true
+directional_shadow_split_1 = 0.05
+directional_shadow_normal_bias = 1.0
+directional_shadow_bias_split_scale = 0.5
+directional_shadow_max_distance = 500.0
+
+[node name="ShipSpawner" type="Position3D" parent="."]
+script = ExtResource( 1 )

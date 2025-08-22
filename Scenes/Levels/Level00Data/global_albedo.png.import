@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/splat.png-5200bf7832b2d1a36f7e715ae922ecdf.stex"
+path="res://.import/global_albedo.png-ae2bbc6e8c1ac8554328710edabed30a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/MainData/splat.png"
-dest_files=[ "res://.import/splat.png-5200bf7832b2d1a36f7e715ae922ecdf.stex" ]
+source_file="res://Scenes/Levels/Level00Data/global_albedo.png"
+dest_files=[ "res://.import/global_albedo.png-ae2bbc6e8c1ac8554328710edabed30a.stex" ]
 
 [params]
 
@@ -23,7 +23,7 @@ flags/repeat=0
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
-flags/srgb=0
+flags/srgb=2
 process/fix_alpha_border=false
 process/premult_alpha=false
 process/HDR_as_SRGB=false
