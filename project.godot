@@ -100,7 +100,6 @@ config/icon="res://icon.png"
 [autoload]
 
 PlayerManager="*res://Scripts/Autoloads/PlayerManager.gd"
-AudioManager="*res://Scenes/Autoloads/AudioManager.tscn"
 Screenshake="*res://Scripts/Autoloads/Screenshake.gd"
 DebugDraw="*res://Scripts/Autoloads/DebugDraw.gd"
 

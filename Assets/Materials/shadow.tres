@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Shaders/shadow.gdshader" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/color = null
+shader_param/proximity_fade_distance = 5.0
+shader_param/distance_fade_min = 0.0
+shader_param/distance_fade_max = 10.0
+shader_param/shadow_power = 2.0
