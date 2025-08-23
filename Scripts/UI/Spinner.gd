@@ -1,0 +1,6 @@
+extends Control
+
+export var rotation_speed: float = 180.0
+
+func _process(delta: float) -> void:
+	rect_rotation += rotation_speed * delta

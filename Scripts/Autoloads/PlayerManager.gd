@@ -1,22 +1,39 @@
 extends Node
 
+## PlayerManager
+# Handle creating the player and its input controller, but also respawning
+
 signal player_respawned
 
-var player: Ship # Provided by the ship when it enters the tree
-var spawner: ShipSpawner # Provided by the spawner when it enters the tree
+var player_scene: PackedScene = preload("res://Scenes/Ship.tscn")
 
-var respawn_requested: bool
+var player: Ship
+var player_input: ShipInput
+
+var spawner: ShipSpawner # Provided by the spawner when it enters the tree
+var respawn_requested: bool = false
+
+
+func _ready() -> void:
+	# Create the controller
+	player_input = ShipInput.new()
+	add_child(player_input)
+	# Create the player
+	player = player_scene.instance()
+	add_child(player)
+
+func _process(delta: float) -> void:
+	# Ensure the player exists before making them respawn
+	if respawn_requested and player:
+		_respawn()
 
 func respawn()->void:
 	respawn_requested = true
 
-func _process(delta: float) -> void:
-	# Ensure all conditions are met before respawning
-	# (player or spawner might not be set yet)
-	if respawn_requested and player:
-		if spawner:
-			player.teleport(spawner.global_translation, spawner.global_rotation)
-		else:
-			player.teleport(Vector3.ZERO, Vector3.ZERO)
-		respawn_requested = false
-		emit_signal("player_respawned")
+func _respawn() ->void:
+	if spawner:
+		player.teleport(spawner.global_translation, spawner.global_rotation)
+	else:
+		player.teleport(Vector3.ZERO, Vector3.ZERO)
+	respawn_requested = false
+	emit_signal("player_respawned")

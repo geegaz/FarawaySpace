@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=2]
+[gd_resource type="Theme" load_steps=10 format=2]
 
 [ext_resource path="res://Assets/Fonts/millennia.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Styles/Button/style_focused.tres" type="StyleBox" id=2]
@@ -7,6 +7,18 @@
 [ext_resource path="res://Assets/Styles/Button/style_hover.tres" type="StyleBox" id=5]
 [ext_resource path="res://Assets/Styles/Button/style_disabled.tres" type="StyleBox" id=6]
 [ext_resource path="res://Assets/Fonts/galiver-sans.tres" type="DynamicFont" id=7]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 1, 1, 1 )
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 1, 1 )
 
 [resource]
 Button/colors/font_color = Color( 1, 1, 1, 1 )
@@ -21,5 +33,9 @@ Button/styles/hover = ExtResource( 5 )
 Button/styles/normal = ExtResource( 3 )
 Button/styles/pressed = ExtResource( 4 )
 Label/fonts/font = ExtResource( 1 )
+ProgressBar/colors/font_color = Color( 0.498039, 0.498039, 0.498039, 1 )
+ProgressBar/fonts/font = ExtResource( 1 )
+ProgressBar/styles/bg = SubResource( 3 )
+ProgressBar/styles/fg = SubResource( 2 )
 TitleLabel/base_type = "Label"
 TitleLabel/fonts/font = ExtResource( 7 )

@@ -4,6 +4,7 @@ extends Node
 const MOUSE_MULTIPLIER: float = 0.1
 const CONTROLLER_MULTIPLIER: float = 4.0
 
+export var enabled: bool = true
 export var mouse_sensitivity: float = 0.5
 export var mouse_invert_vertical: bool = false
 export var controller_sensitivity: float = 0.5
@@ -11,13 +12,11 @@ export var controller_invert_vertical: bool = false
 
 var mouse_motion: Vector2
 
-var forward_input: float
-var backward_input: float
-var turn_input: Vector2
-
 func _ready() -> void:
 	Input.use_accumulated_input = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	set_enabled(enabled) # Ensure processing is set correctly
 	
 func _process(delta: float) -> void:
 	# Turning (with a controller)
@@ -27,9 +26,10 @@ func _process(delta: float) -> void:
 	if controller_invert_vertical:
 		controller_motion.y = -controller_motion.y
 	
-	forward_input = Input.get_action_strength("move_front")
-	backward_input = Input.get_action_strength("move_back")
-	turn_input = mouse_motion + controller_motion
+	set_player_input(
+		Input.get_action_strength("move_front"),
+		Input.get_action_strength("move_back"),
+		mouse_motion + controller_motion)
 	
 	mouse_motion = Vector2.ZERO
 
@@ -44,3 +44,16 @@ func _unhandled_input(event: InputEvent) -> void:
 			motion.y = -motion.y
 		mouse_motion += motion
 		return
+
+func set_player_input(forward: float, backward: float, turn: Vector2)->void:
+	if PlayerManager.player:
+		PlayerManager.player.forward_input = forward
+		PlayerManager.player.backward_input = backward
+		PlayerManager.player.turn_input = turn
+
+func set_enabled(value: bool)->void:
+	enabled = value
+	if not value:
+		set_player_input(0.0, 0.0, Vector2.ZERO)
+	set_process(value)
+	set_process_unhandled_input(value)

@@ -40,6 +40,21 @@ _global_script_classes=[ {
 "path": "res://addons/godot-polyliner/LineGen3D/ImmediateSurface.gd"
 }, {
 "base": "Resource",
+"class": "LevelData",
+"language": "GDScript",
+"path": "res://Scripts/Levels/LevelData.gd"
+}, {
+"base": "Node",
+"class": "LevelLoader",
+"language": "GDScript",
+"path": "res://Scripts/Levels/LevelLoader.gd"
+}, {
+"base": "Trigger",
+"class": "LevelTrigger",
+"language": "GDScript",
+"path": "res://Scripts/Triggers/LevelTrigger.gd"
+}, {
+"base": "Resource",
 "class": "LineGen3D",
 "language": "GDScript",
 "path": "res://addons/godot-polyliner/LineGen3D/LineGen3D.gd"
@@ -91,6 +106,9 @@ _global_script_class_icons={
 "HTerrainDataLoader": "",
 "HTerrainDataSaver": "",
 "ImmediateSurface": "",
+"LevelData": "",
+"LevelLoader": "",
+"LevelTrigger": "",
 "LineGen3D": "",
 "PhysInterp": "",
 "Rope3D": "",
@@ -112,6 +130,7 @@ config/icon="res://icon.png"
 [autoload]
 
 PlayerManager="*res://Scripts/Autoloads/PlayerManager.gd"
+SceneManager="*res://Scripts/Autoloads/SceneManager.gd"
 Screenshake="*res://Scripts/Autoloads/Screenshake.gd"
 DebugDraw="*res://Scripts/Autoloads/DebugDraw.gd"
 

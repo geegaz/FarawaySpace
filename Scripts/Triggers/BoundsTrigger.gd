@@ -13,6 +13,6 @@ onready var _Transition: Transition = get_node_or_null(transition)
 func trigger_exited(ship: Ship)->void:
 	if _Transition:
 		var callable: = Callable.new(PlayerManager, "respawn")
-		_Transition.transition("bounds", transition_color, transition_color, callable)
+		_Transition.transition(transition_color, callable)
 	else:
 		PlayerManager.respawn()

@@ -21,6 +21,11 @@ export(float, 0.0, 100.0) var spring_strength: float = 20.0
 export(float, 0.0, 10.0) var spring_damping: float = 4.0
 export(float, 0, 1) var ground_correction_amount: float = 0.025
 
+# Input variables
+var forward_input: float
+var backward_input: float
+var turn_input: Vector2
+
 # Movement variables
 var speed: float
 var prev_speed: float
@@ -41,7 +46,6 @@ var speed_amount: float
 
 # Gameplay nodes
 onready var _Camera: Camera = $Camera
-onready var _ShipInput: ShipInput = $Input
 onready var _ShipPivot: Spatial = $Pivot
 onready var _ShipInterpolation: PhysInterp = $Pivot/Interpolation
 onready var _GroundRayCast: RayCast = $GroundRayCast
@@ -53,7 +57,6 @@ onready var _ShipEffects: ShipEffects = $ShipEffects
 # Audio nodes
 onready var _ShipAudio: AudioStreamPlayer3D = $Pivot/Interpolation/Audio
 
-onready var space_state: PhysicsDirectSpaceState = get_world().direct_space_state
 
 func _enter_tree() -> void:
 	PlayerManager.player = self
@@ -69,14 +72,14 @@ func _process(delta):
 	# Do all gameplay-related calculation that don't depend on physics
 	
 	# Ship rotation
-	var target_turn = _ShipInput.turn_input + collision_correction
+	var target_turn = turn_input + collision_correction
 	if target_turn != Vector2.ZERO:
 		rotate_pivot(target_turn)
 	
 	# Movement calculations
 	
 	# DIR - The amount of movement forward or backward
-	dir = _ShipInput.forward_input * forward_multiplier - _ShipInput.backward_input * backward_multiplier
+	dir = forward_input * forward_multiplier - backward_input * backward_multiplier
 	
 	# SPEED - The length of the velocity applied each frame
 	var target_speed: float = dir * max_speed
@@ -92,7 +95,7 @@ func _process(delta):
 	power = lerp(power, dir, 1.0 - pow(10, -delta))
 	
 	# TILT - Rotation of the ship on the forward axis when turning
-	var target_tilt: float = _ShipInput.turn_input.x * 0.5
+	var target_tilt: float = turn_input.x * 0.5
 	tilt = lerp(tilt, target_tilt, 1.0 - pow(10, -delta))
 	tilt = clamp(tilt, -deg2rad(90.0), deg2rad(90.0))
 	
@@ -122,7 +125,7 @@ func _process(delta):
 	# Audio
 	_ShipAudio.pitch_scale = clamp(
 		abs(power) + 0.1 + 
-		abs(_ShipInput.turn_input.x) * 0.1 + 
+		abs(turn_input.x) * 0.1 + 
 		rotation.x * 0.2, 
 		0.01, 4)
 	_ShipAudio.unit_db = linear2db(abs(power) * 3.0)

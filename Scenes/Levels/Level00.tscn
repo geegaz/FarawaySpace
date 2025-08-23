@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Levels/LevelBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Sounds/Music/music-002.ogg" type="AudioStream" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://default_theme.tres" type="Theme" id=8]
 [ext_resource path="res://Scripts/Levels/Level00.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/UI/Transition.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Levels/level_00_data.tres" type="Resource" id=11]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -36,18 +37,6 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("WorldMusicPlayer:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -77,18 +66,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("WorldMusicPlayer:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
 
 [sub_resource type="Resource" id=3]
 script = ExtResource( 6 )
@@ -98,6 +75,13 @@ textures = [ [  ], [  ] ]
 [node name="Level00" instance=ExtResource( 1 )]
 script = ExtResource( 9 )
 has_started = true
+
+[node name="WorldAnimationPlayer" type="AnimationPlayer" parent="." index="0"]
+anims/RESET = SubResource( 1 )
+anims/title = SubResource( 2 )
+
+[node name="WorldMusicPlayer" type="AudioStreamPlayer" parent="." index="1"]
+stream = ExtResource( 2 )
 
 [node name="Title" type="Control" parent="LevelUI" index="0"]
 visible = false
@@ -116,13 +100,7 @@ align = 1
 valign = 1
 
 [node name="Transition" parent="LevelUI" index="1" instance=ExtResource( 10 )]
-
-[node name="WorldAnimationPlayer" type="AnimationPlayer" parent="." index="1"]
-anims/RESET = SubResource( 1 )
-anims/title = SubResource( 2 )
-
-[node name="WorldMusicPlayer" type="AudioStreamPlayer" parent="." index="2"]
-stream = ExtResource( 2 )
+visible = false
 
 [node name="ShipSpawner" parent="." index="4"]
 transform = Transform( -0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 824, 19, 575 )
@@ -151,3 +129,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1024, 0, 1024 )
 transform = Transform( 750, 0, 0, 0, 400, 0, 0, 0, 750, 1024, 200, 1024 )
 transition_color = Color( 0.768627, 0.768627, 0.768627, 1 )
 transition = NodePath("../LevelUI/Transition")
+
+[node name="LevelTrigger" parent="." index="8"]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 1024, 0, 1024 )
+level_data = ExtResource( 11 )

@@ -3,6 +3,7 @@ extends Node
 export(bool) var has_started = false
 
 onready var _WorldAnimationPlayer: AnimationPlayer = $WorldAnimationPlayer
+onready var _WorldMusicPlayer: AudioStreamPlayer = $WorldMusicPlayer
 
 func _ready()->void:
 	if PlayerManager.player:
@@ -15,3 +16,4 @@ func _on_Ship_started_moving() -> void:
 	
 	has_started = true
 	_WorldAnimationPlayer.play("title")
+	_WorldMusicPlayer.play()
