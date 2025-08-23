@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Levels/LevelBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Sounds/Music/music-002.ogg" type="AudioStream" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Scenes/Triggers/BoundsTrigger.tscn" type="PackedScene" id=7]
 [ext_resource path="res://default_theme.tres" type="Theme" id=8]
 [ext_resource path="res://Scripts/Levels/Level00.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/UI/Transition.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -96,6 +97,7 @@ textures = [ [  ], [  ] ]
 
 [node name="Level00" instance=ExtResource( 1 )]
 script = ExtResource( 9 )
+has_started = true
 
 [node name="Title" type="Control" parent="LevelUI" index="0"]
 visible = false
@@ -112,6 +114,8 @@ theme_type_variation = "TitleLabel"
 text = "Də Pasaʒ"
 align = 1
 valign = 1
+
+[node name="Transition" parent="LevelUI" index="1" instance=ExtResource( 10 )]
 
 [node name="WorldAnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 anims/RESET = SubResource( 1 )
@@ -145,4 +149,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1024, 0, 1024 )
 
 [node name="BoundsTrigger" parent="." index="7" instance=ExtResource( 7 )]
 transform = Transform( 750, 0, 0, 0, 400, 0, 0, 0, 750, 1024, 200, 1024 )
-ship_spawner = NodePath("../ShipSpawner")
+transition_color = Color( 0.768627, 0.768627, 0.768627, 1 )
+transition = NodePath("../LevelUI/Transition")
