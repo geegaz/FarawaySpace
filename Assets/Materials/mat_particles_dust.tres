@@ -5,7 +5,7 @@
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/color = Color( 0.768627, 0.768627, 0.768627, 1 )
 shader_param/proximity_fade_distance = 1.0
 shader_param/distance_fade_min = 0.0
 shader_param/distance_fade_max = 1.0
