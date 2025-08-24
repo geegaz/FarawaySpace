@@ -1,21 +1,14 @@
 extends Node
 
-const MAIN_SCENE_NAME: = "Main"
-
 var changing_level: bool
 var current_level: LevelData
 var current_level_node: Node
 
-var using_main_scene: bool = false
+var load_additive: bool = false
 var first_loading: bool = true
 
 onready var tree: SceneTree = get_tree()
 onready var transition: Transition = UIManager.controls[UIManager.TRANSITION_NAME]
-
-
-func _ready() -> void:
-	if tree.current_scene.name == MAIN_SCENE_NAME:
-		using_main_scene = true
 
 
 func change_level(level: LevelData)->void:
@@ -49,7 +42,7 @@ func change_level(level: LevelData)->void:
 	if loaded_scene is GDScriptFunctionState:
 		loaded_scene = yield(loaded_scene, "completed")
 	
-	if using_main_scene:
+	if load_additive:
 		# Add the level to the main scene
 		if current_level_node:
 			current_level_node.queue_free()
