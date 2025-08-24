@@ -1,21 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/Levels/LevelLoader.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Levels/level_00_data.tres" type="Resource" id=2]
-[ext_resource path="res://Scenes/UI/Transition.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/UI/Pause.tscn" type="PackedScene" id=5]
 
 [node name="Main" type="Node"]
-
-[node name="SceneUI" type="CanvasLayer" parent="."]
-layer = 2
-
-[node name="Pause" parent="SceneUI" instance=ExtResource( 5 )]
-
-[node name="Transition" parent="SceneUI" instance=ExtResource( 3 )]
-visible = false
 
 [node name="LevelLoader" type="Node" parent="."]
 script = ExtResource( 1 )
 start_level = ExtResource( 2 )
-transition = NodePath("../SceneUI/Transition")

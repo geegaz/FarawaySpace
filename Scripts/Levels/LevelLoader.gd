@@ -4,8 +4,8 @@ extends Node
 export var start_level: Resource
 
 export var transition_color: Color
-export var transition: NodePath
-onready var _Transition: Transition = get_node_or_null(transition)
+
+onready var _Transition: Transition = UIManager.controls[UIManager.TRANSITION_NAME]
 
 var current_level: Node
 

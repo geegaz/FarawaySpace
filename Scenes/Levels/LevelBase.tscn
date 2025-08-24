@@ -6,8 +6,6 @@
 
 [node name="LevelBase" type="Spatial"]
 
-[node name="LevelUI" type="CanvasLayer" parent="."]
-
 [node name="Lighting" type="Spatial" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]

@@ -11,6 +11,9 @@ onready var _Color: ColorRect = $TransitionColor
 onready var _Progress: ProgressBar = $TransitionColor/Progress
 
 
+func _ready() -> void:
+	hide()
+
 func set_visible(value: bool)->void:
 	self.visible = value
 
@@ -66,3 +69,4 @@ func _add_fade_out(duration: float) -> void:
 	tween.tween_property(self, "modulate:a", 0.0, duration)
 	tween.tween_callback(self, "hide")
 	tween.tween_callback(self, "emit_signal", ["fade_out_finished"])
+

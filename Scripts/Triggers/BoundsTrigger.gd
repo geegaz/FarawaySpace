@@ -4,15 +4,13 @@ extends Trigger
 
 export var transition_color: Color
 
-export var transition: NodePath
-onready var _Transition: Transition = get_node_or_null(transition)
-
 #func trigger_entered(ship: Ship)->void:
 #	pass
 
 func trigger_exited(ship: Ship)->void:
-	if _Transition:
+	var transition: Transition = UIManager.controls[UIManager.TRANSITION_NAME]
+	if transition:
 		var callable: = Callable.new(PlayerManager, "respawn")
-		_Transition.transition(transition_color, callable)
+		transition.transition(transition_color, callable)
 	else:
 		PlayerManager.respawn()
