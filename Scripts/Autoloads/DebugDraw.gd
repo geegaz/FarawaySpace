@@ -245,8 +245,6 @@ func _exit_tree() -> void:
 	VisualServer.free_rid(base_RID)
 
 func _process(delta: float) -> void:
-	if not enabled:
-		return
 	_debug_draw(delta)
 
 func _debug_draw(delta: float)->void:

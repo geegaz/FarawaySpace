@@ -17,7 +17,6 @@ func _ready()->void:
 func _enter_tree() -> void:
 	UIManager.add_control(TITLE_NAME, title_scene)
 	UIManager.add_control_to_layer(TITLE_NAME, "LevelUI")
-	title_control = UIManager.controls[TITLE_NAME]
 
 func _exit_tree() -> void:
 	UIManager.remove_control(TITLE_NAME)
@@ -28,5 +27,5 @@ func _on_Ship_started_moving() -> void:
 		return
 	
 	has_started = true
-	title_control.play()
+	UIManager.controls[TITLE_NAME].play()
 	_WorldMusicPlayer.play()

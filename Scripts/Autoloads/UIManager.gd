@@ -4,32 +4,29 @@ const PAUSE_NAME: = "Pause"
 const TRANSITION_NAME: = "Transition"
 
 const DEFAULT_LAYERS: = {
-	"SceneUI": 2,
+	"GlobalUI": 2,
 	"LevelUI": 1
 }
 const DEFAULT_CONTROLS: = {
 	PAUSE_NAME: preload("res://Scenes/UI/Pause.tscn"),
 	TRANSITION_NAME: preload("res://Scenes/UI/Transition.tscn")
 }
-const DEFAULT_SETUP: = {
-	"SceneUI":[
-		PAUSE_NAME,
-		TRANSITION_NAME
-	]
+const DEFAULT_CONTROL_LAYERS: = {
+	PAUSE_NAME: "GlobalUI",
+	TRANSITION_NAME: "GlobalUI"
 }
 
 var layers: Dictionary
 var controls: Dictionary
-
+var control_layers: Dictionary
 
 func _enter_tree() -> void:
 	for layer in DEFAULT_LAYERS:
 		add_layer(layer, DEFAULT_LAYERS[layer])
 	for control in DEFAULT_CONTROLS:
 		add_control(control, DEFAULT_CONTROLS[control])
-	for layer in DEFAULT_SETUP:
-		for control in DEFAULT_SETUP[layer]:
-			add_control_to_layer(control, layer)
+	for control in DEFAULT_CONTROL_LAYERS:
+		add_control_to_layer(control, DEFAULT_CONTROL_LAYERS[control])
 
 
 func add_layer(layer_name: String, layer_index: int)->void:
@@ -47,6 +44,14 @@ func remove_layer(layer_name: String)->void:
 	var layer: CanvasLayer = layers[layer_name]
 	layer.queue_free()
 	layers.erase(layer_name)
+	
+	# Remove all attached controls
+	for control in control_layers.keys(): # use keys to not break the loop when erasing keys
+		if control_layers[control] == layer_name:
+			# Remove the controls manually instead of relying on remove_control
+			controls[control].queue_free()
+			controls.erase(control)
+			control_layers.erase(control)
 
 
 func add_control(control_name: String, control_scene: PackedScene)->void:
@@ -64,6 +69,9 @@ func remove_control(control_name: String)->void:
 	var control: Control = controls[control_name]
 	control.queue_free()
 	controls.erase(control_name)
+	# Remove the relation to its layer
+	if control_layers.has(control_name):
+		control_layers.erase(control_name)
 
 func add_control_to_layer(control_name: String, layer_name: String)->void:
 	if not layers.has(layer_name):
@@ -77,6 +85,8 @@ func add_control_to_layer(control_name: String, layer_name: String)->void:
 	
 	if not control_parent:
 		layer.add_child(control)
+		# Add the relation
+		control_layers[control_name] = layer_name
 	else:
 		printerr("Can't add control %s to layer %s: control is already child of %s"%[
 			control, layer, control_parent])
@@ -93,9 +103,13 @@ func remove_control_from_layer(control_name: String, layer_name: String)->void:
 	
 	if control_parent == layer:
 		layer.remove_child(control)
+		# Remove the relation
+		control_layers.erase(control_name)
 	elif control_parent == null:
 		printerr("Can't remove control %s from layer %s: control has no parent"%[
 			control, layer])
 	else:
 		printerr("Can't remove control %s from layer %s: control is already child of %s"%[
 			control, layer, control_parent])
+
+

@@ -2,7 +2,6 @@ class_name LevelLoader
 extends Node
 
 export var start_level: Resource
-
 export var transition_color: Color
 
 onready var _Transition: Transition = UIManager.controls[UIManager.TRANSITION_NAME]
