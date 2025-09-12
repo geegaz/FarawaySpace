@@ -1,7 +1,16 @@
 extends Node
 
+const levels: = {
+	"Tutorial": {
+		"path": "res://Scenes/Levels/LevelTutorial.tscn"
+	},
+	"Level 0": {
+		"path": "res://Scenes/Levels/Level00.tscn"
+	}
+}
+
 var changing_level: bool
-var current_level: LevelData
+var current_level_name: String
 var current_level_node: Node
 
 var load_additive: bool = false
@@ -10,16 +19,17 @@ var first_loading: bool = true
 onready var tree: SceneTree = get_tree()
 onready var transition: Transition = UIManager.controls[UIManager.TRANSITION_NAME]
 
-
-func change_level(level: LevelData)->void:
-	if not level:
-		return # Don't load an invalid level
-	if level == current_level:
+func change_level(level_name: String)->void:
+	if level_name == current_level_name:
 		return # Don't load the current level
 	if changing_level:
 		return # Can't change level if already changing
+	var level = levels.get(level_name)
+	if not level:
+		return # Level name is not in the dictionary
 	
 	changing_level = true
+	PlayerManager.player.enabled = false
 	
 	# Steps:
 	# - Fade in the transition
@@ -52,7 +62,7 @@ func change_level(level: LevelData)->void:
 		# Change the scene directly
 		tree.change_scene_to(loaded_scene)
 		current_level_node = tree.current_scene
-	current_level = level
+	current_level_name = level_name
 	
 	transition.set_progress_value(1.0)
 	transition.set_progress_visible(false)
@@ -61,6 +71,7 @@ func change_level(level: LevelData)->void:
 	yield(transition, "fade_out_finished")
 	
 	changing_level = false
+	PlayerManager.player.enabled = true
 
 
 func _load_level_async(path: String)->PackedScene:

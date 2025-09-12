@@ -5,6 +5,7 @@ signal started_moving
 signal stopped_moving
 signal gravity_changed(value)
 
+export var enabled: bool = false setget set_enabled
 # Movement exports
 export var max_speed: float = 25.0 # m/s
 export var acceleration: float = 10.0 # m/s/s
@@ -32,17 +33,17 @@ var prev_speed: float
 var gravity_speed: float
 var velocity: Vector3
 
-# Collision variables
-var collision_correction: Vector2
-var ground_position: Vector3
-var ground_normal: Vector3
-var ground_distance: float
-
 # Visuals variables
 var dir: float = 0.0
 var power: float = 0.0
 var tilt: float = 0.0
 var speed_amount: float
+
+# Collision variables
+var collision_correction: Vector2
+var ground_position: Vector3
+var ground_normal: Vector3
+var ground_distance: float
 
 # Gameplay nodes
 onready var _Camera: Camera = $Camera
@@ -88,6 +89,13 @@ func _process(delta):
 	speed += target_accel * delta * sign(target_speed - speed)
 	# Smoothed version of speed/max_speed
 	speed_amount = lerp(speed_amount, speed / max_speed, 1.0 - pow(10, -delta))  # for later
+	
+	# GRAVITY SPEED - The length of the downward velocity applied by gravity
+	if gravity_enabled:
+		# Gravity acceleration
+		gravity_speed = max(gravity_speed - gravity * delta, -gravity_max_speed)
+	else:
+		gravity_speed = move_toward(gravity_speed, 0.0, gravity * delta)
 	
 	# POWER - Smoothed version of dir
 	# Framerate-independant lerping
@@ -144,9 +152,6 @@ func _physics_process(delta):
 	velocity = forward * speed
 	
 	if gravity_enabled:
-		# Gravity acceleration
-		gravity_speed = max(gravity_speed - gravity * delta, -gravity_max_speed)
-		
 		if _GroundRayCast.is_colliding():
 			ground_position = _GroundRayCast.get_collision_point()
 			ground_normal = _GroundRayCast.get_collision_normal()
@@ -163,8 +168,6 @@ func _physics_process(delta):
 			ground_position = global_translation + _GroundRayCast.cast_to
 			ground_normal = Vector3.UP
 			ground_distance = ground_ray_length
-	else:
-		gravity_speed = move_toward(gravity_speed, 0.0, gravity * delta)
 	
 	# Add the gravity to the velocity
 	var final_velocity: Vector3 = velocity + Vector3.UP * gravity_speed
@@ -236,9 +239,20 @@ func teleport(target_position: Vector3, target_rotation: Vector3)->void:
 	_Camera.reset_interpolation()
 
 
+func set_enabled(value: bool)->void:
+	enabled = value
+	forward_input = 0.0
+	backward_input = 0.0
+	turn_input = Vector2.ZERO
+	speed = 0.0
+	gravity_speed = 0.0
+	set_physics_process(value)
+
+
 func set_gravity_enabled(new_value: bool)->void:
 	gravity_enabled = new_value
 	emit_signal("gravity_changed", new_value)
+
 
 func _on_gravity_changed(value: bool)->void:
 	if value:

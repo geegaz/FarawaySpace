@@ -1,8 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Assets/Levels/level_00_data.tres" type="Resource" id=2]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=4]
 
 [node name="Main" type="Node"]
 script = ExtResource( 4 )
-start_level = ExtResource( 2 )
+start_name = "Tutorial"

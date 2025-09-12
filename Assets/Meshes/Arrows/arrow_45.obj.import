@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/arrow_45.obj-a178894c4546cf536a82d05aa2418e1f.mesh"
+
+[deps]
+
+files=[ "res://.import/arrow_45.obj-a178894c4546cf536a82d05aa2418e1f.mesh" ]
+
+source_file="res://Assets/Meshes/Arrows/arrow_45.obj"
+dest_files=[ "res://.import/arrow_45.obj-a178894c4546cf536a82d05aa2418e1f.mesh", "res://.import/arrow_45.obj-a178894c4546cf536a82d05aa2418e1f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

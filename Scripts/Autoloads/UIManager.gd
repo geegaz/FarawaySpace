@@ -1,19 +1,19 @@
 extends Node
 
-const PAUSE_NAME: = "Pause"
 const TRANSITION_NAME: = "Transition"
+const PAUSE_NAME: = "Pause"
 
 const DEFAULT_LAYERS: = {
 	"GlobalUI": 2,
 	"LevelUI": 1
 }
 const DEFAULT_CONTROLS: = {
-	PAUSE_NAME: preload("res://Scenes/UI/Pause.tscn"),
-	TRANSITION_NAME: preload("res://Scenes/UI/Transition.tscn")
+	TRANSITION_NAME: preload("res://Scenes/UI/Transition.tscn"),
+	PAUSE_NAME: preload("res://Scenes/UI/Pause.tscn")
 }
 const DEFAULT_CONTROL_LAYERS: = {
-	PAUSE_NAME: "GlobalUI",
-	TRANSITION_NAME: "GlobalUI"
+	TRANSITION_NAME: "GlobalUI",
+	PAUSE_NAME: "GlobalUI"
 }
 
 var layers: Dictionary
