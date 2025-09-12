@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Assets/Meshes/Arrows/arrow_45.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://addons/kenney_input-prompts_1.4/Keyboard & Mouse/keyboard-&-mouse_sheet_double.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Materials/mat_surface_level_emissive.tres" type="Material" id=3]
+[ext_resource path="res://Assets/Materials/mat_debug.tres" type="Material" id=3]
 
 [node name="TutorialMouseVertical" type="Spatial"]
 

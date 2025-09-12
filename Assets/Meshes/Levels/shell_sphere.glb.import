@@ -2,17 +2,17 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/level_tutorial.glb-bfd7ff9fd03238804c2075afde76b360.scn"
+path="res://.import/shell_sphere.glb-64626e8d9cfc2935896f11f054293762.scn"
 
 [deps]
 
-source_file="res://Assets/Meshes/Levels/level_tutorial.glb"
-dest_files=[ "res://.import/level_tutorial.glb-bfd7ff9fd03238804c2075afde76b360.scn" ]
+source_file="res://Assets/Meshes/Levels/shell_sphere.glb"
+dest_files=[ "res://.import/shell_sphere.glb-64626e8d9cfc2935896f11f054293762.scn" ]
 
 [params]
 
-nodes/root_type="Spatial"
-nodes/root_name="Level"
+nodes/root_type="StaticBody"
+nodes/root_name="ShellSphere"
 nodes/root_scale=1.0
 nodes/custom_script=""
 nodes/storage=0

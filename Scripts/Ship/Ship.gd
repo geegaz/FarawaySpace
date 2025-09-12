@@ -5,7 +5,7 @@ signal started_moving
 signal stopped_moving
 signal gravity_changed(value)
 
-export var enabled: bool = false setget set_enabled
+export var enabled: bool = true setget set_enabled
 # Movement exports
 export var max_speed: float = 25.0 # m/s
 export var acceleration: float = 10.0 # m/s/s
