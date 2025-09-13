@@ -84,5 +84,6 @@ bounces = 4
 capture_enabled = false
 light_data = ExtResource( 12 )
 
+[editable path="LevelTrigger"]
 [editable path="ShellSphere"]
 [editable path="ShellSphereInside"]
