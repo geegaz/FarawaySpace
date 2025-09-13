@@ -1,7 +1,4 @@
-[gd_resource type="Shader" format=2]
-
-[resource]
-code = "shader_type spatial;
+shader_type spatial;
 render_mode blend_mix, cull_back, depth_draw_never;
 
 uniform vec4 color : hint_color= vec4(1.0);
@@ -54,4 +51,3 @@ void fragment() {
 	
 	TRANSMISSION = transmission.rgb;
 }
-"

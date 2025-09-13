@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/yellowcloud_rt.jpg-ae48df63cfb732c51ef2dd042f81f7fc.image"
+
+[deps]
+
+source_file="res://Assets/Textures/cloudy/yellowcloud_rt.jpg"
+dest_files=[ "res://.import/yellowcloud_rt.jpg-ae48df63cfb732c51ef2dd042f81f7fc.image" ]
+
+[params]
+

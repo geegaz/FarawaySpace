@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Shaders/sh_tutorial.gdshader" type="Shader" id=1]
+[ext_resource path="res://Scenes/Tutorials/TutorialBase.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Meshes/Arrows/arrow_45.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://Assets/Materials/mat_tutorial.tres" type="Material" id=4]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/modulate = Color( 1, 1, 1, 1 )
+
+[node name="TutorialTurnHorizontal" instance=ExtResource( 2 )]
+tutorial_material = SubResource( 1 )
+mesh_instances = [ NodePath("ArrowLeft"), NodePath("ArrowRight") ]
+
+[node name="ArrowLeft" type="MeshInstance" parent="." index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+layers = 4
+mesh = ExtResource( 3 )
+material/0 = ExtResource( 4 )
+
+[node name="ArrowRight" type="MeshInstance" parent="." index="3"]
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -1, 0, 0 )
+layers = 4
+mesh = ExtResource( 3 )
+material/0 = ExtResource( 4 )

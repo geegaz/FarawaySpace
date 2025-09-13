@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/bluecloud_dn.jpg-3929c50560d463b6bc08dad78168d2bb.image"
+
+[deps]
+
+source_file="res://Assets/Textures/cloudy/bluecloud_dn.jpg"
+dest_files=[ "res://.import/bluecloud_dn.jpg-3929c50560d463b6bc08dad78168d2bb.image" ]
+
+[params]
+

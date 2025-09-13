@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/browncloud_lf.jpg-c3856c2dbd76411952aeb2ee25f3d793.image"
+
+[deps]
+
+source_file="res://Assets/Textures/cloudy/browncloud_lf.jpg"
+dest_files=[ "res://.import/browncloud_lf.jpg-c3856c2dbd76411952aeb2ee25f3d793.image" ]
+
+[params]
+

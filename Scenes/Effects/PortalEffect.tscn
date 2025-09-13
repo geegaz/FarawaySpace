@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Shaders/sh_portal.gdshader" type="Shader" id=1]
+[ext_resource path="res://Assets/Meshes/Effects/icosphere_high.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Assets/Textures/test_cubemap.tres" type="CubeMap" id=3]
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 1 )
+shader_param/cubemap = ExtResource( 3 )
+
+[node name="PortalEffect" type="Spatial"]
+
+[node name="PortalSphere" type="MeshInstance" parent="."]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+material_override = SubResource( 3 )
+mesh = ExtResource( 2 )

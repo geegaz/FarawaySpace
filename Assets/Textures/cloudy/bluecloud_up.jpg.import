@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/bluecloud_up.jpg-e34f2c0a7a4dd87c3cf7b7f82266bfb5.image"
+
+[deps]
+
+source_file="res://Assets/Textures/cloudy/bluecloud_up.jpg"
+dest_files=[ "res://.import/bluecloud_up.jpg-e34f2c0a7a4dd87c3cf7b7f82266bfb5.image" ]
+
+[params]
+

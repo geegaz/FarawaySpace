@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/browncloud_bk.jpg-6c35904828b7d9851dd5a49a1fa8a04f.image"
+
+[deps]
+
+source_file="res://Assets/Textures/cloudy/browncloud_bk.jpg"
+dest_files=[ "res://.import/browncloud_bk.jpg-6c35904828b7d9851dd5a49a1fa8a04f.image" ]
+
+[params]
+

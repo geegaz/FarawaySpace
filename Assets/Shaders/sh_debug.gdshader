@@ -1,7 +1,4 @@
-[gd_resource type="Shader" format=2]
-
-[resource]
-code = "shader_type spatial;
+shader_type spatial;
 render_mode blend_mix, unshaded, cull_disabled, depth_draw_never;
 
 void vertex() {
@@ -11,4 +8,4 @@ void vertex() {
 void fragment() {
 	ALBEDO = COLOR.rgb;
 	ALPHA = COLOR.a;
-}"
+}

@@ -4,4 +4,5 @@
 
 [node name="Main" type="Node"]
 script = ExtResource( 4 )
+debug_draw_enabled = false
 start_name = "Tutorial"

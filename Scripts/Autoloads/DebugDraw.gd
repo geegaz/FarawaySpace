@@ -164,7 +164,7 @@ const CUBE_UVS: = PoolVector2Array([
 	Vector2(0.0, 0.0)
 ])
 
-var enabled: bool = true
+var enabled: bool = false
 
 var instance_RID: RID
 var scenario_RID: RID

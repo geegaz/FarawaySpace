@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=2]
 
-[ext_resource path="res://Assets/Shaders/sh_surfaces.tres" type="Shader" id=1]
+[ext_resource path="res://Assets/Shaders/sh_surfaces.gdshader" type="Shader" id=1]
 [ext_resource path="res://Assets/Materials/mat_surface_ship_core_displacement.tres" type="Material" id=2]
 
 [resource]

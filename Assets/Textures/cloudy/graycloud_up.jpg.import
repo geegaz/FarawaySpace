@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/graycloud_up.jpg-67e4fe936676d6e45c3ef3314c55dfa2.image"
+
+[deps]
+
+source_file="res://Assets/Textures/cloudy/graycloud_up.jpg"
+dest_files=[ "res://.import/graycloud_up.jpg-67e4fe936676d6e45c3ef3314c55dfa2.image" ]
+
+[params]
+
