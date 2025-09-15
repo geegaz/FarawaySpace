@@ -20,9 +20,9 @@ _global_script_classes=[ {
 "path": "res://Scripts/Callable.gd"
 }, {
 "base": "Spatial",
-"class": "CubemapCapture",
+"class": "CubemapGenerator",
 "language": "GDScript",
-"path": "res://Scripts/CubemapCapture.gd"
+"path": "res://addons/cubemap_generator/cubemap_generator.gd"
 }, {
 "base": "Trigger",
 "class": "GravityTrigger",
@@ -107,7 +107,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "BoundsTrigger": "",
 "Callable": "",
-"CubemapCapture": "",
+"CubemapGenerator": "",
 "GravityTrigger": "",
 "HTerrainDataLoader": "",
 "HTerrainDataSaver": "",
@@ -144,6 +144,10 @@ DebugDraw="*res://Scripts/Autoloads/DebugDraw.gd"
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/godot-polyliner/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
+
+[global]
+
+scaling=false
 
 [godots]
 

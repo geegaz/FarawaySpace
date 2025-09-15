@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Levels/Level00Data/cubemap.tres" type="CubeMap" id=1]
+[ext_resource path="res://Assets/Shaders/sh_portal.gdshader" type="Shader" id=2]
+
+[resource]
+shader = ExtResource( 2 )
+shader_param/cubemap = ExtResource( 1 )

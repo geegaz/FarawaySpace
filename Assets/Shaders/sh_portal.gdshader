@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode cull_front, world_vertex_coords;
+render_mode unshaded, cull_front, world_vertex_coords;
 
 uniform samplerCube cubemap : hint_albedo;
 
