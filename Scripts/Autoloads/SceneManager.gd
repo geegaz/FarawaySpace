@@ -12,21 +12,15 @@ var current_level_node: Node
 var load_additive: bool = false
 var first_loading: bool = true
 
-var transition_scene: = preload("res://Scenes/UI/Transition.tscn")
 var transition: Transition
-var loading_bar_scene: = preload("res://Scenes/UI/LoadingBar.tscn")
 var loading_bar: LoadingBar
 
 onready var tree: SceneTree = get_tree()
 
 func _ready() -> void:
-	UIManager.add_control("LevelTransition", transition_scene)
-	UIManager.add_control_to_layer("LevelTransition", UIManager.LAYER_GLOBAL)
 	transition = UIManager.controls.LevelTransition
 	transition.hide()
 	
-	UIManager.add_control("LevelLoadingBar", loading_bar_scene)
-	UIManager.add_control_to_layer("LevelLoadingBar", UIManager.LAYER_GLOBAL)
 	loading_bar = UIManager.controls.LevelLoadingBar
 	loading_bar.hide()
 

@@ -1,24 +1,24 @@
 extends Control
 
+var tween: SceneTreeTween
 
 onready var _Resume: Button = $ButtonsContainer/Resume
 onready var _Quit: Button = $ButtonsContainer/Quit
 
 func _ready() -> void:
-	_Resume.connect("pressed",self,"pause",[false])
-	_Quit.connect("pressed", get_tree(), "quit")
-	pause(false)
+	_Resume.connect("pressed", self, "_on_resume_pressed")
+	_Quit.connect("pressed", self, "_on_quit_pressed")
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_pause"):
-		pause(not get_tree().paused)
-	if event.is_action_pressed("ui_fullscreen"):
-		OS.window_fullscreen = not OS.window_fullscreen
+func _on_resume_pressed()->void:
+	UIManager.pause(false)
 
-func pause(value: bool):
-	get_tree().paused = value
-	visible = value
-	if visible:
-		_Resume.grab_focus()
-	
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE if value else Input.MOUSE_MODE_CAPTURED)
+func _on_quit_pressed()->void:
+	UIManager.quit()
+
+
+func enter_state()->void:
+	visible = true
+	_Resume.grab_focus()
+
+func exit_state()->void:
+	visible = false

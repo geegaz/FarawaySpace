@@ -67,6 +67,7 @@ func _exit_tree() -> void:
 	PlayerManager.player = null
 
 func _ready() -> void:
+	set_gravity_enabled(gravity_enabled)
 	_GroundRayCast.cast_to = Vector3.DOWN * ground_ray_length
 
 func _process(delta):

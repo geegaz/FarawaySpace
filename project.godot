@@ -147,7 +147,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-UIManager="*res://Scripts/Autoloads/UIManager.gd"
+UIManager="*res://Scenes/UI/UIManager.tscn"
 PlayerManager="*res://Scripts/Autoloads/PlayerManager.gd"
 SceneManager="*res://Scripts/Autoloads/SceneManager.gd"
 Screenshake="*res://Scripts/Autoloads/Screenshake.gd"

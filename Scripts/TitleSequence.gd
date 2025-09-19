@@ -4,18 +4,13 @@ const TITLE_NAME: = "Title"
 
 export(bool) var has_started = false
 export var music_player: NodePath
+export var title: NodePath
 
 var title_scene: PackedScene = preload("res://Scenes/UI/Title.tscn")
 var title_control: Control
 
 onready var _WorldMusicPlayer: AudioStreamPlayer = get_node_or_null(music_player)
-
-func _enter_tree() -> void:
-	UIManager.add_control(TITLE_NAME, title_scene)
-	UIManager.add_control_to_layer(TITLE_NAME, "LevelUI")
-
-func _exit_tree() -> void:
-	UIManager.remove_control(TITLE_NAME)
+onready var _Title: AudioStreamPlayer = get_node_or_null(title)
 
 func _ready()->void:
 	if PlayerManager.player:
@@ -26,6 +21,7 @@ func _on_Ship_started_moving() -> void:
 		return
 	
 	has_started = true
-	UIManager.controls[TITLE_NAME].play()
+	if _Title:
+		_Title.play()
 	if _WorldMusicPlayer:
 		_WorldMusicPlayer.play()

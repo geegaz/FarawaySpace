@@ -1,18 +1,24 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scripts/UI/Pause.gd" type="Script" id=1]
-[ext_resource path="res://default_theme.tres" type="Theme" id=3]
+[ext_resource path="res://default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Scripts/UI/Pause.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Shaders/sh_ui_blur.gdshader" type="Shader" id=3]
 
-[node name="Pause" type="Control"]
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 3 )
+shader_param/blur_amount = 2.0
+
+[node name="PauseScreen" type="Control"]
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 3 )
-script = ExtResource( 1 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0.498039 )
@@ -41,7 +47,7 @@ anchor_bottom = 0.5
 margin_left = -128.0
 margin_top = 20.0
 margin_right = 128.0
-margin_bottom = 98.0
+margin_bottom = 102.0
 custom_constants/separation = 8
 
 [node name="Resume" type="Button" parent="ButtonsContainer"]

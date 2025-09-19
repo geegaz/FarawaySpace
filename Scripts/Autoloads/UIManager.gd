@@ -1,20 +1,46 @@
 extends Node
 
-const LAYER_GLOBAL: = "Global"
-const LAYER_LEVEL: = "Level"
-
-const DEFAULT_LAYERS: = {
-	LAYER_GLOBAL: 2,
-	LAYER_LEVEL: 1
-}
-
 var layers: Dictionary
 var controls: Dictionary
 var control_layers: Dictionary
 
+onready var tree: SceneTree = get_tree()
+
 func _enter_tree() -> void:
-	for layer in DEFAULT_LAYERS:
-		add_layer(layer, DEFAULT_LAYERS[layer])
+	pause_mode = Node.PAUSE_MODE_PROCESS
+	
+	for child in get_children():
+		if child is CanvasLayer:
+			layers[child.name] = child
+	for layer in layers:
+		var layer_node: CanvasLayer = layers[layer]
+		for child in layer_node.get_children():
+			if child is Control:
+				controls[child.name] = child
+				control_layers[child.name] = layer
+
+func _ready() -> void:
+	pause(false)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_pause"):
+		pause(not tree.paused)
+	
+	if event.is_action_pressed("ui_fullscreen"):
+		OS.window_fullscreen = not OS.window_fullscreen
+
+func pause(value: bool)->void:
+	tree.paused = value
+	var pause_screen: Control = controls.PauseScreen
+	if value:
+		pause_screen.enter_state()
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	else:
+		pause_screen.exit_state()
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func quit()->void:
+	tree.quit()
 
 
 func add_layer(layer_name: String, layer_index: int)->void:

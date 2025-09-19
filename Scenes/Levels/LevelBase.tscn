@@ -8,6 +8,8 @@
 script = ExtResource( 2 )
 checkpoints = [ NodePath("ShipSpawner") ]
 
+[node name="LevelUI" type="CanvasLayer" parent="."]
+
 [node name="Lighting" type="Spatial" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
