@@ -4,6 +4,7 @@ extends Node
 const MOUSE_MULTIPLIER: float = 0.1
 const CONTROLLER_MULTIPLIER: float = 4.0
 
+export var enabled: bool = true setget set_enabled
 export var mouse_sensitivity: float = 0.5
 export var mouse_invert_vertical: bool = false
 export var controller_sensitivity: float = 0.5
@@ -44,3 +45,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			motion.y = -motion.y
 		mouse_motion += motion
 		return
+
+func set_enabled(value: bool)->void:
+	enabled = value
+	set_process(enabled)
+	set_process_unhandled_input(enabled)
+	if PlayerManager.player and not enabled:
+		PlayerManager.player.forward_input = 0.0
+		PlayerManager.player.backward_input = 0.0
+		PlayerManager.player.turn_input = Vector2.ZERO

@@ -1,7 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Assets/Materials/mat_portal.tres" type="Material" id=1]
-[ext_resource path="res://Assets/Meshes/Effects/icosphere_high.obj" type="ArrayMesh" id=2]
+
+[sub_resource type="SphereMesh" id=1]
+flip_faces = true
 
 [node name="PortalEffect" type="Spatial"]
 
@@ -9,4 +11,4 @@
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
 layers = 4
 material_override = ExtResource( 1 )
-mesh = ExtResource( 2 )
+mesh = SubResource( 1 )

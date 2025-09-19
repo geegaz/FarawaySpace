@@ -29,32 +29,34 @@ func generate_cubemap(value: bool):
 		var _temp_viewport = Viewport.new()
 		var _temp_camera = Camera.new()
 		match side:
-			CubeMap.SIDE_FRONT:
+			CubeMap.SIDE_LEFT:
 				_temp_camera.rotation_degrees.y = -90
-			CubeMap.SIDE_BACK:
-				_temp_camera.rotation_degrees.y = 90
-			CubeMap.SIDE_TOP:
-				_temp_camera.rotation_degrees.x = 90
+			CubeMap.SIDE_RIGHT:
 				_temp_camera.rotation_degrees.y = 90
 			CubeMap.SIDE_BOTTOM:
 				_temp_camera.rotation_degrees.x = -90
-				_temp_camera.rotation_degrees.y = 90
-			CubeMap.SIDE_RIGHT:
-				pass # The camera is facing RIGHT by default
-			CubeMap.SIDE_LEFT:
 				_temp_camera.rotation_degrees.y = 180
+			CubeMap.SIDE_TOP:
+				_temp_camera.rotation_degrees.x = 90
+				_temp_camera.rotation_degrees.y = -180
+			CubeMap.SIDE_FRONT:
+				pass # The camera is facing this way by default
+			CubeMap.SIDE_BACK:
+				_temp_camera.rotation_degrees.y = 180
+				
 		
 		_temp_camera.fov = 90.0
 		_temp_camera.cull_mask = cull_mask
 		_temp_camera.near = camera_near
 		_temp_camera.far = camera_far
+		
 		_temp_viewport.render_target_update_mode = Viewport.UPDATE_ALWAYS
 		_temp_viewport.size = Vector2(resolution, resolution)
 		_temp_viewport.keep_3d_linear = true
 		_temp_viewport.shadow_atlas_size = shadow_atlas_size
 		if anti_aliasing: 
 			_temp_viewport.msaa = Viewport.MSAA_8X
-#		_temp_viewport.scaling_3d_scale = 2.0 # Godot 4 only
+		
 		_temp_viewport.add_child(_temp_camera)
 		add_child(_temp_viewport)
 		_temp_camera.global_translation = global_translation
@@ -71,22 +73,12 @@ func generate_cubemap(value: bool):
 		_view_textures.push_back(_tex)
 	
 	var _temp_path: = "%s/%s.tres" % [path, file_name]
-#	var _cubemap = TextureArray.new()
-#	_cubemap.create_from_images(_view_texture) # Godot 4 only
-#	var _format: int = _view_textures.front().get_format()
-#	_cubemap.create(resolution, resolution, SIDES, _format)
-#	var _temp_array : Array
-#	for side in SIDES:
-#		_cubemap.set_layer_data(_view_textures[side], side)
-#		_temp_array.append(_cubemap.get_layer_data(side))
-	
-	var _cubemap_fix = CubeMap.new()
-#	_cubemap_fix.create_from_images(_temp_array) # Godot 4 only
+	var _cubemap = CubeMap.new()
 	for side in SIDES:
-		_cubemap_fix.set_side(side, _view_textures[side])
+		_cubemap.set_side(side, _view_textures[side])
 	
-	_cubemap_fix.take_over_path(_temp_path)
-	ResourceSaver.save(_temp_path, _cubemap_fix, ResourceSaver.FLAG_COMPRESS)
+	_cubemap.take_over_path(_temp_path)
+	ResourceSaver.save(_temp_path, _cubemap, ResourceSaver.FLAG_COMPRESS)
 	
 	for _cleanup in get_children():
 		_cleanup.queue_free()

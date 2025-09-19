@@ -1,10 +1,10 @@
 extends Node
 
-export var debug_draw_enabled: bool = true
-export var start_name: String
+export var start_level: Resource
+export var start_input_active: bool
 
 func _ready() -> void:
-	DebugDraw.enabled = debug_draw_enabled
+	PlayerManager.player_input.enabled = start_input_active
 	
 	SceneManager.load_additive = true
-	SceneManager.change_level(start_name)
+	SceneManager.change_level(start_level)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
+[ext_resource path="res://Scenes/Levels/LevelTutorialData/level_tutorial.tres" type="Resource" id=1]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=4]
 
 [node name="Main" type="Node"]
 script = ExtResource( 4 )
-debug_draw_enabled = false
-start_name = "Tutorial"
+start_level = ExtResource( 1 )
+start_input_active = true

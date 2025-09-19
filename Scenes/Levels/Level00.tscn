@@ -1,14 +1,15 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Levels/LevelBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Sounds/Music/music-002.ogg" type="AudioStream" id=2]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/Levels/Level00Data/data.hterrain" type="Resource" id=4]
+[ext_resource path="res://Scenes/Levels/Level00Data/Terrain/data.hterrain" type="Resource" id=4]
 [ext_resource path="res://Scenes/Megastructures/Tower.tscn" type="PackedScene" id=5]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/Triggers/BoundsTrigger.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Levels/LevelTutorialData/level_tutorial.tres" type="Resource" id=7]
 [ext_resource path="res://addons/cubemap_generator/CubemapGenerator.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scripts/Levels/Level00.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/Triggers/LevelTrigger.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scripts/TitleSequence.gd" type="Script" id=10]
 
 [sub_resource type="Resource" id=3]
 script = ExtResource( 6 )
@@ -16,16 +17,19 @@ mode = 0
 textures = [ [  ], [  ] ]
 
 [node name="Level00" instance=ExtResource( 1 )]
-script = ExtResource( 9 )
-has_started = true
+has_gravity = true
 
-[node name="WorldMusicPlayer" type="AudioStreamPlayer" parent="." index="0"]
+[node name="TitleSequence" type="Node" parent="." index="0"]
+script = ExtResource( 10 )
+music_player = NodePath("../WorldMusicPlayer")
+
+[node name="WorldMusicPlayer" type="AudioStreamPlayer" parent="." index="1"]
 stream = ExtResource( 2 )
 
-[node name="ShipSpawner" parent="." index="2"]
+[node name="ShipSpawner" parent="." index="3"]
 transform = Transform( -0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 824, 19, 575 )
 
-[node name="Terrain" type="Spatial" parent="." index="3"]
+[node name="Terrain" type="Spatial" parent="." index="4"]
 script = ExtResource( 3 )
 lod_scale = 2.0
 _terrain_data = ExtResource( 4 )
@@ -42,12 +46,12 @@ shader_params/u_depth_blending = true
 shader_params/u_triplanar = false
 shader_params/u_tile_reduction = Plane( 0, 0, 0, 0 )
 
-[node name="Tower" parent="." index="4" instance=ExtResource( 5 )]
+[node name="LevelTrigger" parent="." index="5" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1024, 0, 1024 )
+level = ExtResource( 7 )
+
+[node name="Tower" parent="." index="6" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1024, 0, 1024 )
 
-[node name="BoundsTrigger" parent="." index="5" instance=ExtResource( 7 )]
-transform = Transform( 750, 0, 0, 0, 400, 0, 0, 0, 750, 1024, 200, 1024 )
-transition_color = Color( 0.768627, 0.768627, 0.768627, 1 )
-
-[node name="CubemapGenerator" parent="." index="6" instance=ExtResource( 8 )]
+[node name="CubemapGenerator" parent="." index="7" instance=ExtResource( 8 )]
 path = "res://Scenes/Levels/Level00Data"

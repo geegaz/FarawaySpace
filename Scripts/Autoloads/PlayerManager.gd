@@ -18,9 +18,7 @@ func _ready() -> void:
 	# Create the controller
 	player_input = ShipInput.new()
 	add_child(player_input)
-	# Create the player
-	player = player_scene.instance()
-	add_child(player)
+	# Creating the player is handled by the levels
 
 func _process(delta: float) -> void:
 	# Ensure the player exists before making them respawn

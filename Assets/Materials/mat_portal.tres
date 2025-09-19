@@ -1,8 +1,14 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=2]
 
-[ext_resource path="res://Scenes/Levels/Level00Data/cubemap.tres" type="CubeMap" id=1]
+[ext_resource path="res://Assets/Textures/default_cubemap/default_cubemap.tres" type="CubeMap" id=1]
 [ext_resource path="res://Assets/Shaders/sh_portal.gdshader" type="Shader" id=2]
 
 [resource]
 shader = ExtResource( 2 )
+shader_param/min_eta = 0.5
+shader_param/max_eta = 0.9
+shader_param/distorted_eta_start = 0.3
+shader_param/fade_start = 0.5
+shader_param/chromatic_dispersion_start = 0.5
+shader_param/chromatic_dispersion_multiplier = 4.0
 shader_param/cubemap = ExtResource( 1 )

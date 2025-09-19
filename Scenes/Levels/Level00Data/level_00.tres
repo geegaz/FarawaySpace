@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Levels/LevelData.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Levels/Level00Data/cubemap.tres" type="CubeMap" id=2]
+
+[resource]
+resource_name = "Level 0"
+script = ExtResource( 1 )
+level_name = "Level 0"
+level_scene_path = "res://Scenes/Levels/Level00.tscn"
+level_cubemap = ExtResource( 2 )
+level_color = Color( 1, 1, 1, 1 )

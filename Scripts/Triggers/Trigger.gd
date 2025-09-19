@@ -1,17 +1,13 @@
 class_name Trigger
 extends Area
 
-export var debug_wire_color: Color = Color(1.0, 1.0, 1.0, 1.0)
-export var debug_solid_color: Color = Color(1.0, 1.0, 1.0, 0.2)
+func _enter_tree() -> void:
+	connect("body_entered", self, "_on_body_entered")
+	connect("body_exited", self, "_on_body_exited")
 
-func _ready() -> void:
-	if not Engine.editor_hint:
-		connect("body_entered", self, "_on_body_entered")
-		connect("body_exited", self, "_on_body_exited")
-
-func _process(delta: float) -> void:
-	DebugDraw.draw_cube(global_transform, debug_solid_color)
-	DebugDraw.draw_wire_cube(global_transform, debug_wire_color)
+func _exit_tree() -> void:
+	disconnect("body_entered", self, "_on_body_entered")
+	disconnect("body_exited", self, "_on_body_exited")
 
 func _on_body_entered(body: Node)->void:
 	if body is Ship:

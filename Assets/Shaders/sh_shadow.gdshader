@@ -1,7 +1,8 @@
 // NOTE: Shader automatically converted from Godot Engine 3.5.3.stable's SpatialMaterial.
 
 shader_type spatial;
-render_mode async_visible,blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx,unshaded;
+render_mode unshaded, async_visible, blend_mix;
+
 uniform vec4 color : hint_color;
 uniform float proximity_fade_distance = 5.0;
 uniform float distance_fade_min = 0.0;

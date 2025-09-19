@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/side_right.jpg-4d3aa90f590dbd3ee55a28c96eb989ce.image"
+
+[deps]
+
+source_file="res://Assets/Textures/default_cubemap/side_right.jpg"
+dest_files=[ "res://.import/side_right.jpg-4d3aa90f590dbd3ee55a28c96eb989ce.image" ]
+
+[params]
+

@@ -61,13 +61,13 @@ onready var _ShipAudio: AudioStreamPlayer3D = $Pivot/Interpolation/Audio
 
 func _enter_tree() -> void:
 	PlayerManager.player = self
+	connect("gravity_changed", self, "_on_gravity_changed")
 
 func _exit_tree() -> void:
 	PlayerManager.player = null
 
 func _ready() -> void:
 	_GroundRayCast.cast_to = Vector3.DOWN * ground_ray_length
-	connect("gravity_changed", self, "_on_gravity_changed")
 
 func _process(delta):
 	# Do all gameplay-related calculation that don't depend on physics

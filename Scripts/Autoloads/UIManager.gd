@@ -1,19 +1,11 @@
 extends Node
 
-const TRANSITION_NAME: = "Transition"
-const PAUSE_NAME: = "Pause"
+const LAYER_GLOBAL: = "Global"
+const LAYER_LEVEL: = "Level"
 
 const DEFAULT_LAYERS: = {
-	"GlobalUI": 2,
-	"LevelUI": 1
-}
-const DEFAULT_CONTROLS: = {
-	TRANSITION_NAME: preload("res://Scenes/UI/Transition.tscn"),
-	PAUSE_NAME: preload("res://Scenes/UI/Pause.tscn")
-}
-const DEFAULT_CONTROL_LAYERS: = {
-	TRANSITION_NAME: "GlobalUI",
-	PAUSE_NAME: "GlobalUI"
+	LAYER_GLOBAL: 2,
+	LAYER_LEVEL: 1
 }
 
 var layers: Dictionary
@@ -23,10 +15,6 @@ var control_layers: Dictionary
 func _enter_tree() -> void:
 	for layer in DEFAULT_LAYERS:
 		add_layer(layer, DEFAULT_LAYERS[layer])
-	for control in DEFAULT_CONTROLS:
-		add_control(control, DEFAULT_CONTROLS[control])
-	for control in DEFAULT_CONTROL_LAYERS:
-		add_control_to_layer(control, DEFAULT_CONTROL_LAYERS[control])
 
 
 func add_layer(layer_name: String, layer_index: int)->void:
