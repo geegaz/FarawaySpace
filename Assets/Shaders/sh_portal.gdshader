@@ -44,9 +44,9 @@ void fragment()
 	float chromatic_deform = 0.01 * chromatic_dispersion_multiplier * chromatic_distorsion_amount;
 	
 //	vec3 refracted = refract(view_dir, world_normal, eta); // Simple refract
-	vec3 refracted_r = refract(view_dir, world_normal, distorted_eta - chromatic_deform * 2.0);
-	vec3 refracted_g = refract(view_dir, world_normal, distorted_eta + chromatic_deform);
-	vec3 refracted_b = refract(view_dir, world_normal, distorted_eta + chromatic_deform * 2.0);
+	vec3 refracted_r = refract(view_dir, world_normal, distorted_eta - chromatic_deform);
+	vec3 refracted_g = refract(view_dir, world_normal, distorted_eta);
+	vec3 refracted_b = refract(view_dir, world_normal, distorted_eta + chromatic_deform);
 	// Need to flip the X direction since the OpenGL cubemaps use left-handed coordinates
 	refracted_r.x = -refracted_r.x;
 	refracted_g.x = -refracted_g.x;
