@@ -10,7 +10,7 @@ var title_scene: PackedScene = preload("res://Scenes/UI/Title.tscn")
 var title_control: Control
 
 onready var _WorldMusicPlayer: AudioStreamPlayer = get_node_or_null(music_player)
-onready var _Title: AudioStreamPlayer = get_node_or_null(title)
+onready var _Title: Control = get_node_or_null(title)
 
 func _ready()->void:
 	if PlayerManager.player:

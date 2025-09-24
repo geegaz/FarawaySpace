@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/shell_sphere.glb-64626e8d9cfc2935896f11f054293762.scn"
+path="res://.import/shell_sphere.glb-7f302b25718134c6e1a3dbf5af9ac5f4.scn"
 
 [deps]
 
-source_file="res://Assets/Meshes/Levels/shell_sphere.glb"
-dest_files=[ "res://.import/shell_sphere.glb-64626e8d9cfc2935896f11f054293762.scn" ]
+source_file="res://Assets/Meshes/LevelElements/shell_sphere.glb"
+dest_files=[ "res://.import/shell_sphere.glb-7f302b25718134c6e1a3dbf5af9ac5f4.scn" ]
 
 [params]
 

@@ -190,11 +190,6 @@ func _physics_process(delta):
 	DebugDraw.draw_line(global_translation, global_translation + forward * 10.0, Color.blue)
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("debug_switch_gravity"):
-		set_gravity_enabled(!gravity_enabled)
-
-
 func calculate_correction(collison_normal: Vector3)->Vector2:
 	# Calculate the correction angle
 	
@@ -249,7 +244,6 @@ func set_enabled(value: bool)->void:
 	speed = 0.0
 	gravity_speed = 0.0
 	set_physics_process(value)
-
 
 func set_gravity_enabled(new_value: bool)->void:
 	gravity_enabled = new_value

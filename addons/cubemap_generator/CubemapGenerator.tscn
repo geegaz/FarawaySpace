@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://addons/cubemap_generator/cubemap_generator.gd" type="Script" id=1]
+[ext_resource path="res://addons/cubemap_generator/CubemapGenerator.gd" type="Script" id=1]
 
 [node name="CubemapGenerator" type="Spatial"]
 transform = Transform( -0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 824, 19, 575 )

@@ -1,8 +1,9 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Assets/Meshes/Ship/ship_wing.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Meshes/Ship/ship_prism.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Assets/Materials/mat_surface_ship_core.tres" type="Material" id=3]
+[ext_resource path="res://Scripts/DebugAction.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Ship/Ship.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Effects/DustEffect.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Materials/mat_trail_ship_core.tres" type="Material" id=7]
@@ -872,6 +873,20 @@ collision_layer = 2
 collision_mask = 15
 moving_platform_apply_velocity_on_leave = 2
 script = ExtResource( 5 )
+
+[node name="DebugActionGravityOn" type="Node" parent="."]
+script = ExtResource( 4 )
+target = NodePath("..")
+code = "gon"
+function = "set_gravity_enabled"
+args = [ true ]
+
+[node name="DebugActionGravityOff" type="Node" parent="."]
+script = ExtResource( 4 )
+target = NodePath("..")
+code = "goff"
+function = "set_gravity_enabled"
+args = [ false ]
 
 [node name="ShipEffects" type="Node" parent="."]
 script = ExtResource( 11 )

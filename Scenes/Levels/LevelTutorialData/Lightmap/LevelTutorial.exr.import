@@ -22,4 +22,4 @@ flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=false
 slices/horizontal=1
-slices/vertical=1
+slices/vertical=2

@@ -2,17 +2,17 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/shell_sphere_inside.glb-13ead1dc8349f3ed714815b8bd96aaa9.scn"
+path="res://.import/door_petal.glb-358b682292e00c7b3a770bc6d5d7fdf4.scn"
 
 [deps]
 
-source_file="res://Assets/Meshes/Levels/shell_sphere_inside.glb"
-dest_files=[ "res://.import/shell_sphere_inside.glb-13ead1dc8349f3ed714815b8bd96aaa9.scn" ]
+source_file="res://Assets/Meshes/LevelElements/door_petal.glb"
+dest_files=[ "res://.import/door_petal.glb-358b682292e00c7b3a770bc6d5d7fdf4.scn" ]
 
 [params]
 
-nodes/root_type="StaticBody"
-nodes/root_name="ShellSphereInside"
+nodes/root_type="Spatial"
+nodes/root_name="DoorPetal"
 nodes/root_scale=1.0
 nodes/custom_script=""
 nodes/storage=0
@@ -25,10 +25,10 @@ meshes/compress=4286
 meshes/ensure_tangents=true
 meshes/storage=0
 meshes/light_baking=2
-meshes/lightmap_texel_size=0.8
+meshes/lightmap_texel_size=0.2
 skins/use_named_skins=true
 external_files/store_in_subdir=false
-animation/import=true
+animation/import=false
 animation/fps=15
 animation/filter_script=""
 animation/storage=false
