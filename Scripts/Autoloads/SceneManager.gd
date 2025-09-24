@@ -13,7 +13,7 @@ var load_additive: bool = false
 var first_loading: bool = true
 
 var transition: Transition
-var loading_bar: LoadingBar
+var spinner: Spinner
 
 onready var tree: SceneTree = get_tree()
 
@@ -21,8 +21,8 @@ func _ready() -> void:
 	transition = UIManager.controls.LevelTransition
 	transition.hide()
 	
-	loading_bar = UIManager.controls.LevelLoadingBar
-	loading_bar.hide()
+	spinner = UIManager.controls.LevelSpinner
+	spinner.hide()
 
 func change_level(level: LevelData)->void:
 	if changing_level:
@@ -40,6 +40,7 @@ func change_level(level: LevelData)->void:
 		printerr("Level scene path is invalid")
 		return # Can't load an invalid path
 	
+	PlayerManager.player_input.enabled = false
 	changing_level = true
 	
 	if first_loading: # When starting the game
@@ -52,20 +53,17 @@ func change_level(level: LevelData)->void:
 		transition.fade_in()
 		yield(transition, "fade_in_finished")
 		
-		var too_bright: = level.level_color.get_luminance() > 0.5
-		loading_bar.modulate = Color.black if too_bright else Color.white
-	
-	loading_bar.text = "Loading..."
-	loading_bar.progress = 0.0
-	loading_bar.show()
+	var bright: bool = transition.color.get_luminance() > 0.5
+	spinner.modulate = Color.black if bright else Color.white
+	spinner.show()
 	
 	### LOADING ###
 	
 	# Remove previous level
-	current_level = null
 	if current_level_node:
-		current_level_node.queue_free()
+		remove_current_level_node_from_scene()
 		current_level_node = null
+	current_level = null
 	
 	# Start loading in the background
 	loading_thread.start(self, "_load_level_threaded", level.level_scene_path)
@@ -79,15 +77,23 @@ func change_level(level: LevelData)->void:
 	
 	###############
 	
-	loading_bar.progress = 1.0
-	loading_bar.text = "Done !"
-	yield(tree.create_timer(0.5), "timeout")
-	
-	loading_bar.hide()
+	spinner.hide()
 	transition.fade_out()
 	yield(transition, "fade_out_finished")
 	
 	changing_level = false
+	PlayerManager.player_input.enabled = true
+
+
+func remove_current_level_node_from_scene(delete: bool = true)->void:
+	if load_additive:
+		tree.current_scene.remove_child(current_level_node)
+	else:
+		tree.root.remove_child(current_level_node)
+		tree.current_scene = null
+	
+	if delete:
+		current_level_node.queue_free()
 
 func add_current_level_node_to_scene()->void:
 	if load_additive:
@@ -101,24 +107,18 @@ func add_current_level_node_to_scene()->void:
 
 func _load_level_threaded(path: String)->PackedScene:
 	if ResourceLoader.has_cached(path):
-		call_deferred("emit_signal", "loading_completed")
 		return ResourceLoader.load(path) as PackedScene
 		
 	var loader: = ResourceLoader.load_interactive(path, "PackedScene")
-	var progress: float
-	
 	var error: = OK
 	while error == OK:
+		OS.delay_msec(5)
 		error = loader.poll()
-		progress = float(loader.get_stage()) / (loader.get_stage_count() - 1)
-		# Update progress in the main thread
-		loading_mutex.lock()
-		loading_bar.progress = progress
-		loading_mutex.unlock()
 	
 	call_deferred("emit_signal", "loading_completed")
 	
 	if error != ERR_FILE_EOF:
-		printerr("Failed to load scene %s: "%path, error)
+		printerr("Failed to load scene %s"%path, error)
 	return loader.get_resource() as PackedScene
+	
 

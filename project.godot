@@ -100,6 +100,11 @@ _global_script_classes=[ {
 "path": "res://Scripts/Ship/ShipSpawner.gd"
 }, {
 "base": "Control",
+"class": "Spinner",
+"language": "GDScript",
+"path": "res://Scripts/UI/Spinner.gd"
+}, {
+"base": "Control",
 "class": "Transition",
 "language": "GDScript",
 "path": "res://Scripts/UI/Transition.gd"
@@ -133,6 +138,7 @@ _global_script_class_icons={
 "ShipEffects": "",
 "ShipInput": "",
 "ShipSpawner": "",
+"Spinner": "",
 "Transition": "",
 "Trigger": "",
 "Tutorial": ""
@@ -147,7 +153,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-UIManager="*res://Scenes/UI/UIManager.tscn"
+UIManager="*res://Scenes/Autoloads/UIManager.tscn"
 PlayerManager="*res://Scripts/Autoloads/PlayerManager.gd"
 SceneManager="*res://Scripts/Autoloads/SceneManager.gd"
 Screenshake="*res://Scripts/Autoloads/Screenshake.gd"

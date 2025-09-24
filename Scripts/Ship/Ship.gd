@@ -64,6 +64,7 @@ func _enter_tree() -> void:
 	connect("gravity_changed", self, "_on_gravity_changed")
 
 func _exit_tree() -> void:
+#	if PlayerManager.player == self:
 	PlayerManager.player = null
 
 func _ready() -> void:

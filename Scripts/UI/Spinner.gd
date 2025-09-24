@@ -1,3 +1,4 @@
+class_name Spinner
 extends Control
 
 export var rotation_speed: float = 180.0
