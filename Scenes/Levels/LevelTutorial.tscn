@@ -22,7 +22,7 @@ data = PoolVector3Array( 0, 70.7107, -70.7107, 10.8386, 83.147, -54.4895, 13.795
 environment = ExtResource( 7 )
 
 [node name="DirectionalLight" parent="Lighting" index="1"]
-light_color = Color( 0.34902, 0.564706, 0.615686, 1 )
+visible = false
 
 [node name="ShellSphere" parent="." index="2" instance=ExtResource( 2 )]
 
@@ -48,6 +48,9 @@ quality = 2
 bounces = 4
 capture_enabled = false
 light_data = ExtResource( 12 )
+
+[node name="CubemapGenerator" parent="." index="6"]
+path = "res://Scenes/Levels/LevelTutorialData"
 
 [node name="LevelDoor" parent="." index="7" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -78 )

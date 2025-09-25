@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Triggers/LevelTrigger.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Materials/mat_portal.tres" type="Material" id=2]
 [ext_resource path="res://Assets/Materials/mat_shadow.tres" type="Material" id=3]
+[ext_resource path="res://addons/SIsilicon.vfx.godrays/GodRays.gd" type="Script" id=4]
 
 [sub_resource type="SphereShape" id=1]
 radius = 2.0
@@ -10,17 +11,16 @@ radius = 2.0
 [sub_resource type="QuadMesh" id=4]
 size = Vector2( 20, 20 )
 
-[sub_resource type="SphereMesh" id=3]
+[sub_resource type="SphereMesh" id=5]
 flip_faces = true
-radius = 2.0
-height = 4.0
+radius = 4.0
+height = 8.0
 
 [node name="LevelTrigger" type="Area"]
 collision_layer = 0
 collision_mask = 2
 monitorable = false
 script = ExtResource( 1 )
-portal_material = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
@@ -31,15 +31,17 @@ cast_shadow = 0
 mesh = SubResource( 4 )
 
 [node name="PortalSphere" type="MeshInstance" parent="."]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
 layers = 4
 material_override = ExtResource( 2 )
-mesh = SubResource( 3 )
+mesh = SubResource( 5 )
 skeleton = NodePath("")
 
 [node name="PortalLight" type="OmniLight" parent="."]
 layers = 4
-light_color = Color( 0.796078, 0.866667, 0.866667, 1 )
+light_color = Color( 0.654902, 0.737255, 0.752941, 1 )
 light_bake_mode = 0
 omni_range = 40.0
 omni_attenuation = 2.0
+
+[node name="GodRays" type="Spatial" parent="PortalLight"]
+script = ExtResource( 4 )

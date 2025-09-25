@@ -3,7 +3,7 @@
 [ext_resource path="res://Assets/Shaders/sh_shadow.gdshader" type="Shader" id=1]
 
 [resource]
-render_priority = -1
+render_priority = -2
 shader = ExtResource( 1 )
 shader_param/color = null
 shader_param/proximity_fade_distance = 5.0

@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Trigger",
-"class": "BoundsTrigger",
-"language": "GDScript",
-"path": "res://Scripts/Triggers/BoundsTrigger.gd"
-}, {
 "base": "Reference",
 "class": "Callable",
 "language": "GDScript",
@@ -52,12 +47,12 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "Level",
 "language": "GDScript",
-"path": "res://Scripts/Levels/Level.gd"
+"path": "res://Scripts/Level.gd"
 }, {
 "base": "Resource",
 "class": "LevelData",
 "language": "GDScript",
-"path": "res://Scripts/Levels/LevelData.gd"
+"path": "res://Scripts/ResourceTypes/LevelData.gd"
 }, {
 "base": "Spatial",
 "class": "LevelDoor",
@@ -130,7 +125,6 @@ _global_script_classes=[ {
 "path": "res://Scripts/Tutorial.gd"
 } ]
 _global_script_class_icons={
-"BoundsTrigger": "",
 "Callable": "",
 "CubemapGenerator": "",
 "DebugAction": "",
@@ -171,9 +165,14 @@ SceneManager="*res://Scripts/Autoloads/SceneManager.gd"
 Screenshake="*res://Scripts/Autoloads/Screenshake.gd"
 DebugDraw="*res://Scripts/Autoloads/DebugDraw.gd"
 
+[display]
+
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
+
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/godot-polyliner/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/SIsilicon.vfx.godrays/plugin.cfg", "res://addons/godot-polyliner/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
 
 [global]
 
@@ -323,3 +322,6 @@ debug={
 
 quality/filters/use_fxaa=true
 environment/default_environment="res://default_env.tres"
+quality/godrays/sample_number=50
+quality/godrays/use_pcf5=false
+quality/godrays/dither_amount=1.0

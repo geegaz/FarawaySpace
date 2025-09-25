@@ -43,7 +43,7 @@ func change_level(level: LevelData)->void:
 	PlayerManager.player_input.enabled = false
 	changing_level = true
 	
-	if first_loading: # When starting the game
+	if load_additive and first_loading: # When starting the game
 		transition.color = Color.black
 		transition.show()
 		first_loading = false
@@ -77,6 +77,7 @@ func change_level(level: LevelData)->void:
 	
 	###############
 	
+	yield(current_level_node, "ready")
 	spinner.hide()
 	transition.fade_out()
 	yield(transition, "fade_out_finished")

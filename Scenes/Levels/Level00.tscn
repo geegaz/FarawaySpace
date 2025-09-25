@@ -55,6 +55,3 @@ level = ExtResource( 7 )
 
 [node name="Tower" parent="." index="7" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1024, 0, 1024 )
-
-[node name="CubemapBaker" parent="." index="8"]
-path = "res://Scenes/Levels/Level00Data"

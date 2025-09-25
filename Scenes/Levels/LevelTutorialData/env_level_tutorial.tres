@@ -10,10 +10,10 @@ ground_horizon_color = Color( 1, 1, 1, 1 )
 [resource]
 background_mode = 1
 background_sky = SubResource( 1 )
-background_color = Color( 0.121569, 0.172549, 0.192157, 1 )
-ambient_light_color = Color( 0.0509804, 0.129412, 0.129412, 1 )
+background_color = Color( 0.168627, 0.2, 0.215686, 1 )
+ambient_light_color = Color( 0.0941176, 0.0980392, 0.12549, 1 )
 fog_enabled = true
-fog_color = Color( 0.121569, 0.172549, 0.192157, 1 )
+fog_color = Color( 0.168627, 0.2, 0.215686, 1 )
 fog_sun_color = Color( 1, 1, 1, 1 )
 fog_depth_end = 500.0
 fog_transmit_enabled = true

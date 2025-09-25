@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
-[ext_resource path="res://Scripts/Levels/LevelData.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/ResourceTypes/LevelData.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Levels/LevelTutorialData/cubemap.tres" type="CubeMap" id=2]
 
 [resource]
@@ -9,4 +9,4 @@ script = ExtResource( 1 )
 level_name = "Tutorial"
 level_scene_path = "res://Scenes/Levels/LevelTutorial.tscn"
 level_cubemap = ExtResource( 2 )
-level_color = Color( 0.556863, 0.556863, 0.556863, 1 )
+level_color = Color( 0.168627, 0.2, 0.215686, 1 )
