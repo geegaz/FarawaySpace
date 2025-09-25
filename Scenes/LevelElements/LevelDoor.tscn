@@ -1,9 +1,9 @@
 [gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://Assets/Meshes/LevelElements/door_frame.glb" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Meshes/door_frame.glb" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Triggers/LevelTrigger.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/LevelElements/LevelDoor.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Meshes/LevelElements/door_petal.glb" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Meshes/door_petal.glb" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/DebugAction.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Textures/default_cubemap/default_cubemap.tres" type="CubeMap" id=7]
 [ext_resource path="res://Assets/Shaders/sh_portal.gdshader" type="Shader" id=8]

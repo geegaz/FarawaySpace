@@ -29,16 +29,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Triggers/GravityTrigger.gd"
 }, {
-"base": "ResourceFormatLoader",
-"class": "HTerrainDataLoader",
-"language": "GDScript",
-"path": "res://addons/zylann.hterrain/hterrain_resource_loader.gd"
-}, {
-"base": "ResourceFormatSaver",
-"class": "HTerrainDataSaver",
-"language": "GDScript",
-"path": "res://addons/zylann.hterrain/hterrain_resource_saver.gd"
-}, {
 "base": "Reference",
 "class": "ImmediateSurface",
 "language": "GDScript",
@@ -68,11 +58,6 @@ _global_script_classes=[ {
 "class": "LineGen3D",
 "language": "GDScript",
 "path": "res://addons/godot-polyliner/LineGen3D/LineGen3D.gd"
-}, {
-"base": "Control",
-"class": "LoadingBar",
-"language": "GDScript",
-"path": "res://Scripts/UI/LoadingBar.gd"
 }, {
 "base": "Spatial",
 "class": "PhysInterp",
@@ -129,15 +114,12 @@ _global_script_class_icons={
 "CubemapGenerator": "",
 "DebugAction": "",
 "GravityTrigger": "",
-"HTerrainDataLoader": "",
-"HTerrainDataSaver": "",
 "ImmediateSurface": "",
 "Level": "",
 "LevelData": "",
 "LevelDoor": "",
 "LevelTrigger": "",
 "LineGen3D": "",
-"LoadingBar": "",
 "PhysInterp": "",
 "Rope3D": "",
 "Ship": "",
@@ -172,7 +154,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/SIsilicon.vfx.godrays/plugin.cfg", "res://addons/godot-polyliner/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/SIsilicon.vfx.godrays/plugin.cfg", "res://addons/godot-polyliner/plugin.cfg" )
 
 [global]
 

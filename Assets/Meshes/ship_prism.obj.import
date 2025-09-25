@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/ship_prism.obj-ad652feb570cb6cc60da7a0e3c8696ea.mesh"
+
+[deps]
+
+files=[ "res://.import/ship_prism.obj-ad652feb570cb6cc60da7a0e3c8696ea.mesh" ]
+
+source_file="res://Assets/Meshes/ship_prism.obj"
+dest_files=[ "res://.import/ship_prism.obj-ad652feb570cb6cc60da7a0e3c8696ea.mesh", "res://.import/ship_prism.obj-ad652feb570cb6cc60da7a0e3c8696ea.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

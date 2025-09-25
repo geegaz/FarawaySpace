@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Levels/LevelBase.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Meshes/LevelElements/shell_sphere.glb" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Meshes/LevelElements/shell_sphere_inside.glb" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Meshes/shell_sphere.glb" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Meshes/shell_sphere_inside.glb" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Materials/mat_surface_level_emissive.tres" type="Material" id=4]
 [ext_resource path="res://Scenes/LevelElements/LevelDoor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Materials/mat_surface_level_diffuse.tres" type="Material" id=6]

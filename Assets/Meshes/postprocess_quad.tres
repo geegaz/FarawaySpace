@@ -1,5 +1,0 @@
-[gd_resource type="QuadMesh" format=2]
-
-[resource]
-flip_faces = true
-size = Vector2( 2, 2 )

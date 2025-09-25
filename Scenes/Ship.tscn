@@ -1,7 +1,7 @@
 [gd_scene load_steps=38 format=2]
 
-[ext_resource path="res://Assets/Meshes/Ship/ship_wing.obj" type="ArrayMesh" id=1]
-[ext_resource path="res://Assets/Meshes/Ship/ship_prism.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Assets/Meshes/ship_wing.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://Assets/Meshes/ship_prism.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Assets/Materials/mat_surface_ship_core.tres" type="Material" id=3]
 [ext_resource path="res://Scripts/DebugAction.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Ship/Ship.gd" type="Script" id=5]
