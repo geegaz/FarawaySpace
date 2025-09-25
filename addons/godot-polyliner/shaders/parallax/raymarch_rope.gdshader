@@ -133,7 +133,7 @@ float ao(vec3 p, vec3 n, vec2 fragcoord)
 	return occ;
 }
 
-uniform vec4 color : hint_color = vec4(vec3(1.0,1.0,0.5),1.0);
+uniform vec4 color : source_color = vec4(vec3(1.0,1.0,0.5),1.0);
 uniform float twirl_aspect = 0.5;
 
 void fragment(){

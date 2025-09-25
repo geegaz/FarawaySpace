@@ -1,15 +1,15 @@
-extends Spatial
+extends Node3D
 class_name PhysInterp
 
 
 enum InterpolationMode { POSITION, BASIS, TRANSFORM }
-export(InterpolationMode) var interpolation_mode: int = InterpolationMode.TRANSFORM
-export var exec_priority: int = 100
-onready var tr_cur: Transform = Transform()
-onready var tr_old: Transform = Transform()
-onready var tr_lerp: Transform = Transform()
-onready var suspend: bool = false
-onready var target: Spatial = get_parent()
+@export var interpolation_mode: InterpolationMode = InterpolationMode.TRANSFORM
+@export var exec_priority: int = 100
+@onready var tr_cur: Transform3D = Transform3D()
+@onready var tr_old: Transform3D = Transform3D()
+@onready var tr_lerp: Transform3D = Transform3D()
+@onready var suspend: bool = false
+@onready var target: Node3D = get_parent()
 
 
 func _ready() -> void:
@@ -17,7 +17,7 @@ func _ready() -> void:
 	set_process_priority(exec_priority)
 	set_process(true)
 	set_physics_process(true)
-	set_as_toplevel(true)
+	set_as_top_level(true)
 	reset_interpolation()
 
 
@@ -42,9 +42,9 @@ func _process(_delta: float) -> void:
 		if interpolation_mode == InterpolationMode.POSITION:
 			tr_lerp.origin = tr_old.origin + ((tr_cur.origin - tr_old.origin) * pif)
 		if interpolation_mode == InterpolationMode.BASIS:
-			tr_lerp.basis.x = tr_old.basis.x.linear_interpolate(tr_cur.basis.x, pif)
-			tr_lerp.basis.y = tr_old.basis.y.linear_interpolate(tr_cur.basis.y, pif)
-			tr_lerp.basis.z = tr_old.basis.z.linear_interpolate(tr_cur.basis.z, pif)
+			tr_lerp.basis.x = tr_old.basis.x.lerp(tr_cur.basis.x, pif)
+			tr_lerp.basis.y = tr_old.basis.y.lerp(tr_cur.basis.y, pif)
+			tr_lerp.basis.z = tr_old.basis.z.lerp(tr_cur.basis.z, pif)
 		transform = tr_lerp
 
 
@@ -56,7 +56,7 @@ func reset_interpolation() -> void:
 
 func suspend_interpolation(state: bool) -> void:
 	suspend = state
-	set_as_toplevel(!suspend)
+	set_as_top_level(!suspend)
 	set_process(!suspend)
 	set_physics_process(!suspend)
 	reset_interpolation()

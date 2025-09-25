@@ -1,13 +1,13 @@
 class_name Trigger
-extends Area
+extends Area3D
 
 func _enter_tree() -> void:
-	connect("body_entered", self, "_on_body_entered")
-	connect("body_exited", self, "_on_body_exited")
+	connect("body_entered", Callable(self, "_on_body_entered"))
+	connect("body_exited", Callable(self, "_on_body_exited"))
 
 func _exit_tree() -> void:
-	disconnect("body_entered", self, "_on_body_entered")
-	disconnect("body_exited", self, "_on_body_exited")
+	disconnect("body_entered", Callable(self, "_on_body_entered"))
+	disconnect("body_exited", Callable(self, "_on_body_exited"))
 
 func _on_body_entered(body: Node)->void:
 	if body is Ship:

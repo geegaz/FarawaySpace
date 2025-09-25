@@ -1,17 +1,17 @@
 class_name LevelTrigger
 extends Trigger
 
-export var level: Resource
+@export var level: Resource
 
-onready var _PortalSphere: MeshInstance = $PortalSphere
-onready var _PortalLight: OmniLight = $PortalLight
+@onready var _PortalSphere: MeshInstance3D = $PortalSphere
+@onready var _PortalLight: OmniLight3D = $PortalLight
 
 func _ready() -> void:
 	if not level:
 		return # Skip if no level was provided
 	
 	if level.level_cubemap:
-		_PortalSphere.material_override.set_shader_param("cubemap", level.level_cubemap)
+		_PortalSphere.material_override.set_shader_parameter("cubemap", level.level_cubemap)
 	_PortalLight.light_color = level.level_color
 
 func trigger_entered(ship: Ship)->void:

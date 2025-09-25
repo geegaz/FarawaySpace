@@ -1,4 +1,4 @@
 class_name ShipSpawner
-extends Spatial
+extends Node3D
 
 

@@ -1,4 +1,4 @@
-[gd_resource type="CubeMap" load_steps=7 format=2]
+[gd_resource type="Cubemap" load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Textures/default_cubemap/side_bottom.jpg" type="Image" id=1]
 [ext_resource path="res://Assets/Textures/default_cubemap/side_front.jpg" type="Image" id=2]

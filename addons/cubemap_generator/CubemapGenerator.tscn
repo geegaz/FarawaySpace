@@ -2,8 +2,8 @@
 
 [ext_resource path="res://addons/cubemap_generator/CubemapGenerator.gd" type="Script" id=1]
 
-[node name="CubemapGenerator" type="Spatial"]
-transform = Transform( -0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 824, 19, 575 )
+[node name="CubemapGenerator" type="Node3D"]
+transform = Transform3D( -0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 824, 19, 575 )
 script = ExtResource( 1 )
 shadow_atlas_size = 2048.0
 camera_far = 500.0

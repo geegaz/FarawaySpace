@@ -21,8 +21,8 @@ stream = ExtResource( 2 )
 [node name="Title" parent="LevelUI" index="0" instance=ExtResource( 11 )]
 
 [node name="ShipSpawner" parent="." index="4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 
 [node name="LevelTrigger" parent="." index="5" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 64 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 64 )
 level = ExtResource( 7 )

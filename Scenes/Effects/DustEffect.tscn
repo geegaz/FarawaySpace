@@ -4,10 +4,10 @@
 [ext_resource path="res://Assets/rounded_quad.obj" type="ArrayMesh" id=2]
 
 [sub_resource type="Gradient" id=2]
-offsets = PoolRealArray( 0, 0.1, 0.6, 1 )
-colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+offsets = PackedFloat32Array( 0, 0.1, 0.6, 1 )
+colors = PackedColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=3]
+[sub_resource type="GradientTexture2D" id=3]
 gradient = SubResource( 2 )
 
 [sub_resource type="Curve" id=4]
@@ -16,7 +16,7 @@ _data = [ Vector2( 0, 0.5 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 1.0, 0.0, 0, 0 ]
 [sub_resource type="CurveTexture" id=5]
 curve = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="ParticleProcessMaterial" id=1]
 direction = Vector3( 0, 0, -1 )
 spread = 180.0
 flatness = 0.8

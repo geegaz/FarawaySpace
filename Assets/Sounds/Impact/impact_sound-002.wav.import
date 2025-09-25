@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/impact_sound-002.wav-a5da5caad37e4463853ea0f2b4f94a75.sample"
+type="AudioStreamWAV"
+uid="uid://diwrg4aokcacy"
+path="res://.godot/imported/impact_sound-002.wav-a5da5caad37e4463853ea0f2b4f94a75.sample"
 
 [deps]
 
 source_file="res://Assets/Sounds/Impact/impact_sound-002.wav"
-dest_files=[ "res://.import/impact_sound-002.wav-a5da5caad37e4463853ea0f2b4f94a75.sample" ]
+dest_files=["res://.godot/imported/impact_sound-002.wav-a5da5caad37e4463853ea0f2b4f94a75.sample"]
 
 [params]
 

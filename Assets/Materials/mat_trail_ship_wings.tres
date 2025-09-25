@@ -3,10 +3,10 @@
 [ext_resource path="res://Assets/Shaders/sh_trails.gdshader" type="Shader" id=1]
 
 [sub_resource type="Gradient" id=45]
-offsets = PoolRealArray( 0, 0.2, 0.9 )
-colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.498039, 1, 1, 1, 0 )
+offsets = PackedFloat32Array( 0, 0.2, 0.9 )
+colors = PackedColorArray( 1, 1, 1, 0, 1, 1, 1, 0.498039, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=46]
+[sub_resource type="GradientTexture2D" id=46]
 gradient = SubResource( 45 )
 
 [sub_resource type="Curve" id=47]

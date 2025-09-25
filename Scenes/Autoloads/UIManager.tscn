@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/UI/Transition.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/UI/PauseScreen.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/UI/Spinner.gd" type="Script" id=4]
-[ext_resource path="res://Assets/Textures/visor_1.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Textures/visor_1.png" type="Texture2D" id=5]
 
 [node name="UIManager" type="Node"]
 script = ExtResource( 1 )
@@ -19,11 +19,11 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -96.0
-margin_top = -96.0
-margin_right = -32.0
-margin_bottom = -32.0
-rect_pivot_offset = Vector2( 32, 32 )
+offset_left = -96.0
+offset_top = -96.0
+offset_right = -32.0
+offset_bottom = -32.0
+pivot_offset = Vector2( 32, 32 )
 texture = ExtResource( 5 )
 expand = true
 script = ExtResource( 4 )

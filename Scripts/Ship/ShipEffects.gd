@@ -1,29 +1,29 @@
-tool
+@tool
 class_name ShipEffects
 extends Node
 
-export(float, 0, 10) var core_trail_width: float = 0.0 setget set_core_trail_width
-export var wing_trails_emitting: bool = true setget set_wing_trails_emitting
-export var dust_effect_emitting: bool = true setget set_dust_effect_emitting
+@export var core_trail_width: float = 0.0: set = set_core_trail_width
+@export var wing_trails_emitting: bool = true: set = set_wing_trails_emitting
+@export var dust_effect_emitting: bool = true: set = set_dust_effect_emitting
 
-export var core_trail: NodePath
-onready var _CoreTrail: Spatial = get_node_or_null(core_trail)
+@export var core_trail: NodePath
+@onready var _CoreTrail: Node3D = get_node_or_null(core_trail)
 
-export var right_wing_trail: NodePath
-onready var _RightWingTrail: Spatial = get_node_or_null(right_wing_trail)
+@export var right_wing_trail: NodePath
+@onready var _RightWingTrail: Node3D = get_node_or_null(right_wing_trail)
 
-export var left_wing_trail: NodePath
-onready var _LeftWingTrail: Spatial = get_node_or_null(left_wing_trail)
+@export var left_wing_trail: NodePath
+@onready var _LeftWingTrail: Node3D = get_node_or_null(left_wing_trail)
 
-export var dust_effect: NodePath
-onready var _DustEffect: Particles = get_node_or_null(dust_effect)
+@export var dust_effect: NodePath
+@onready var _DustEffect: Particles = get_node_or_null(dust_effect)
 
 
 func set_core_trail_width(new_value: float):
 	core_trail_width = new_value
 	
 	if _CoreTrail:
-		_CoreTrail.material.set_shader_param("line_width", core_trail_width)
+		_CoreTrail.material.set_shader_parameter("line_width", core_trail_width)
 
 func set_wing_trails_emitting(new_value: bool):
 	wing_trails_emitting = new_value

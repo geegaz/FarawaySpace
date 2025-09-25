@@ -1,21 +1,21 @@
-tool
+@tool
 class_name CubemapGenerator
-extends Spatial
+extends Node3D
 
 # Adapted from https://github.com/mentallysnail/godot-cubemap-generator
 
 const SIDES: int = 6
 
-export var bake_cubemap: bool = false setget generate_cubemap
-export var file_name: String = "cubemap"
-export(String, DIR) var path: String = "res://"
+@export var bake_cubemap: bool = false: set = generate_cubemap
+@export var file_name: String = "cubemap"
+@export var path: String = "res://" # (String, DIR)
 #export(float, 0.0,5.0) var intensity: float = 1.0
-export(int, 8,1024) var resolution: int = 256
-export var anti_aliasing : bool = true
-export(float, 0.0, 16384.0, 256.0) var shadow_atlas_size: float = 0.0
-export(float, EXP, 0.01, 8192.0) var camera_near: float = 0.05
-export(float, EXP, 0.1, 8192.0) var camera_far: float = 100.0
-export(int, LAYERS_3D_RENDER) var cull_mask: int
+@export var resolution: int = 256 # (int, 8,1024)
+@export var anti_aliasing : bool = true
+@export var shadow_atlas_size: float = 0.0 # (float, 0.0, 16384.0, 256.0)
+@export var camera_near: float = 0.05 # (float, EXP, 0.01, 8192.0)
+@export var camera_far: float = 100.0 # (float, EXP, 0.1, 8192.0)
+@export var cull_mask: int # (int, LAYERS_3D_RENDER)
 
 func generate_cubemap(value: bool):
 	if not value:
@@ -26,22 +26,22 @@ func generate_cubemap(value: bool):
 	
 	# Create 6 temporary viewports and their associated camera
 	for side in SIDES:
-		var _temp_viewport = Viewport.new()
-		var _temp_camera = Camera.new()
+		var _temp_viewport = SubViewport.new()
+		var _temp_camera = Camera3D.new()
 		match side:
-			CubeMap.SIDE_LEFT:
+			Cubemap.MARGIN_LEFT:
 				_temp_camera.rotation_degrees.y = -90
-			CubeMap.SIDE_RIGHT:
+			Cubemap.MARGIN_RIGHT:
 				_temp_camera.rotation_degrees.y = 90
-			CubeMap.SIDE_BOTTOM:
+			Cubemap.MARGIN_BOTTOM:
 				_temp_camera.rotation_degrees.x = -90
 				_temp_camera.rotation_degrees.y = 180
-			CubeMap.SIDE_TOP:
+			Cubemap.MARGIN_TOP:
 				_temp_camera.rotation_degrees.x = 90
 				_temp_camera.rotation_degrees.y = -180
-			CubeMap.SIDE_FRONT:
+			Cubemap.SIDE_FRONT:
 				pass # The camera is facing this way by default
-			CubeMap.SIDE_BACK:
+			Cubemap.SIDE_BACK:
 				_temp_camera.rotation_degrees.y = 180
 				
 		
@@ -50,22 +50,22 @@ func generate_cubemap(value: bool):
 		_temp_camera.near = camera_near
 		_temp_camera.far = camera_far
 		
-		_temp_viewport.render_target_update_mode = Viewport.UPDATE_ALWAYS
+		_temp_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 		_temp_viewport.size = Vector2(resolution, resolution)
 		_temp_viewport.keep_3d_linear = true
 		_temp_viewport.shadow_atlas_size = shadow_atlas_size
 		if anti_aliasing: 
-			_temp_viewport.msaa = Viewport.MSAA_8X
+			_temp_viewport.msaa = SubViewport.MSAA_8X
 		
 		_temp_viewport.add_child(_temp_camera)
 		add_child(_temp_viewport)
-		_temp_camera.global_translation = global_translation
+		_temp_camera.global_position = global_position
 		_views.append(_temp_viewport)
 	
 	# Render every viewport to an array of images
-	yield(VisualServer, "frame_post_draw")
+	await RenderingServer.frame_post_draw
 	for _temp_viewport in _views:
-		yield(VisualServer, "frame_post_draw")
+		await RenderingServer.frame_post_draw
 		var _tex: Image = _temp_viewport.get_texture().get_data()
 		_tex.generate_mipmaps()
 		_tex.flip_y()
@@ -73,7 +73,7 @@ func generate_cubemap(value: bool):
 		_view_textures.push_back(_tex)
 	
 	var _temp_path: = "%s/%s.tres" % [path, file_name]
-	var _cubemap = CubeMap.new()
+	var _cubemap = Cubemap.new()
 	for side in SIDES:
 		_cubemap.set_side(side, _view_textures[side])
 	

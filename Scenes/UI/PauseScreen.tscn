@@ -9,7 +9,7 @@ shader = ExtResource( 3 )
 shader_param/blur_amount = 2.0
 
 [node name="PauseScreen" type="Control"]
-pause_mode = 2
+process_mode = 3
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -28,10 +28,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -232.0
-margin_top = -132.0
-margin_right = 236.0
-margin_bottom = -3.0
+offset_left = -232.0
+offset_top = -132.0
+offset_right = 236.0
+offset_bottom = -3.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 theme_type_variation = "TitleLabel"
@@ -44,19 +44,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -128.0
-margin_top = 20.0
-margin_right = 128.0
-margin_bottom = 102.0
-custom_constants/separation = 8
+offset_left = -128.0
+offset_top = 20.0
+offset_right = 128.0
+offset_bottom = 102.0
+theme_override_constants/separation = 8
 
 [node name="Resume" type="Button" parent="ButtonsContainer"]
-margin_right = 256.0
-margin_bottom = 37.0
+offset_right = 256.0
+offset_bottom = 37.0
 text = "Resume"
 
 [node name="Quit" type="Button" parent="ButtonsContainer"]
-margin_top = 45.0
-margin_right = 256.0
-margin_bottom = 82.0
+offset_top = 45.0
+offset_right = 256.0
+offset_bottom = 82.0
 text = "Quit"

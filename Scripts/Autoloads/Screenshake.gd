@@ -1,7 +1,7 @@
 extends Node
 
-onready var _Camera: = get_viewport().get_camera()
-onready var noise: = OpenSimplexNoise.new()
+@onready var _Camera: = get_viewport().get_camera_3d()
+@onready var noise: = FastNoiseLite.new()
 
 var shake_power: int = 2
 var shake_decay: float = 0.8
@@ -18,7 +18,7 @@ var offset_transform: Transform2D
 func _ready() -> void:
 	noise.seed = randi()
 	noise.period = 4
-	noise.octaves = 2
+	noise.fractal_octaves = 2
 
 func _process(delta: float)->void:
 	if duration > 0.0:
@@ -27,7 +27,7 @@ func _process(delta: float)->void:
 		var amount: float = pow(duration, shake_power)
 		offset.x = offset_multiplier.x * shake_intensity * amount * noise.get_noise_2d(noise.seed, noise_pos)
 		offset.y = offset_multiplier.y * shake_intensity * amount * noise.get_noise_2d(noise.seed * 2, noise_pos)
-		offset = offset_transform.xform(offset)
+		offset = offset_transform * (offset)
 		noise_pos += delta * shake_speed
 	
 		_Camera.h_offset = offset.x

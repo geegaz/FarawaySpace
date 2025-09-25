@@ -1,10 +1,10 @@
 class_name Level
-extends Spatial
+extends Node3D
 
-export var has_gravity: bool
-export var start_checkpoint: int
-export(Array, NodePath) var checkpoints: Array
-export var override_player_scene: PackedScene
+@export var has_gravity: bool
+@export var start_checkpoint: int
+@export var checkpoints: Array # (Array, NodePath)
+@export var override_player_scene: PackedScene
 
 var current_checkpoint: ShipSpawner
 
@@ -32,8 +32,8 @@ func spawn_player(at: ShipSpawner)->void:
 	if not player_scene:
 		player_scene = PlayerManager.player_scene
 	
-	var player: Ship = player_scene.instance()
-	player.translation = at.global_translation
+	var player: Ship = player_scene.instantiate()
+	player.position = at.global_position
 	player.rotation = at.global_rotation
 	player.gravity_enabled = has_gravity
 	add_child(player)

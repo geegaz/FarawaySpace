@@ -30,7 +30,7 @@ func respawn()->void:
 
 func _respawn() ->void:
 	if spawner:
-		player.teleport(spawner.global_translation, spawner.global_rotation)
+		player.teleport(spawner.global_position, spawner.global_rotation)
 	else:
 		player.teleport(Vector3.ZERO, Vector3.ZERO)
 	respawn_requested = false

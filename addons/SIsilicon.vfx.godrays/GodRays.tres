@@ -4,7 +4,7 @@
 code = "shader_type spatial;
 render_mode unshaded, cull_disabled, skip_vertex_transform, blend_add;
 
-uniform vec4 light_color: hint_color;
+uniform vec4 light_color: source_color;
 uniform vec3 light_pos;
 uniform float size = 1.0;
 uniform int light_type = 0; //0 = directional, 1 = omni
@@ -12,7 +12,7 @@ uniform int light_type = 0; //0 = directional, 1 = omni
 uniform float exposure: hint_range(0,2);
 uniform float attenuate = 1.0;
 
-uniform sampler2D clouds : hint_albedo;
+uniform sampler2D clouds : source_color;
 uniform bool use_clouds = false;
 
 uniform int num_samples = 100;
@@ -29,15 +29,15 @@ varying float far_plane;
 varying float attenuate_size;
 
 void vertex() {
-	light_screen_pos = INV_CAMERA_MATRIX * vec4(light_pos, float(light_type));
+	light_screen_pos = VIEW_MATRIX * vec4(light_pos, float(light_type));
 	attenuate_size = 1.0 / length(light_screen_pos) * size;
 	
 	light_screen_pos = PROJECTION_MATRIX * light_screen_pos;
 	light_screen_pos.xyz /= light_screen_pos.w;
 	light_screen_pos.xy = light_screen_pos.xy * 0.5 + 0.5;
-	light_screen_pos.z = -(INV_CAMERA_MATRIX * vec4(light_pos, float(light_type))).z;
+	light_screen_pos.z = -(VIEW_MATRIX * vec4(light_pos, float(light_type))).z;
 	
-	camera_pos = CAMERA_MATRIX[3].xyz;
+	camera_pos = INV_VIEW_MATRIX[3].xyz;
 	inv_project_mat = INV_PROJECTION_MATRIX;
 	vec4 _far_plane = (INV_PROJECTION_MATRIX * vec4(0,0,1,1));
 	far_plane = -_far_plane.z / _far_plane.w;
@@ -143,7 +143,7 @@ void fragment() {
 	uint seed = hash(uint(FRAGCOORD.x + FRAGCOORD.y * float(textureSize(SCREEN_TEXTURE, 0).x)));
 	screen_uv += delta_uv * dither * rand_from_seed(seed);
 	for(int i = 0; i < num_samples; i++) {
-		vec3 ray = uv_to_ray(screen_uv, INV_CAMERA_MATRIX);
+		vec3 ray = uv_to_ray(screen_uv, VIEW_MATRIX);
 		float sample = sun_light(DEPTH_TEXTURE, camera_pos, ray, screen_uv, pixel_size);
 		
 		light += sample;
@@ -151,7 +151,7 @@ void fragment() {
 	}
 	
 	vec3 light_dir = light_type == 0 ? light_pos : normalize(light_pos - camera_pos);
-	float facing_weight = dot(uv_to_ray(vec2(0.5), INV_CAMERA_MATRIX), light_dir);
+	float facing_weight = dot(uv_to_ray(vec2(0.5), VIEW_MATRIX), light_dir);
 	
 	ALBEDO = variable_smoothstep(light / float(num_samples), attenuate) * exposure * light_color.rgb * max(facing_weight * facing_weight, 0.0);
 	

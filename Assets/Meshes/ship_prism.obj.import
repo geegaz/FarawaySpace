@@ -1,20 +1,25 @@
 [remap]
 
 importer="wavefront_obj"
+importer_version=1
 type="Mesh"
-path="res://.import/ship_prism.obj-ad652feb570cb6cc60da7a0e3c8696ea.mesh"
+uid="uid://bl067x0m5ancu"
+path="res://.godot/imported/ship_prism.obj-ad652feb570cb6cc60da7a0e3c8696ea.mesh"
 
 [deps]
 
-files=[ "res://.import/ship_prism.obj-ad652feb570cb6cc60da7a0e3c8696ea.mesh" ]
+files=["res://.godot/imported/ship_prism.obj-ad652feb570cb6cc60da7a0e3c8696ea.mesh"]
 
 source_file="res://Assets/Meshes/ship_prism.obj"
-dest_files=[ "res://.import/ship_prism.obj-ad652feb570cb6cc60da7a0e3c8696ea.mesh", "res://.import/ship_prism.obj-ad652feb570cb6cc60da7a0e3c8696ea.mesh" ]
+dest_files=["res://.godot/imported/ship_prism.obj-ad652feb570cb6cc60da7a0e3c8696ea.mesh", "res://.godot/imported/ship_prism.obj-ad652feb570cb6cc60da7a0e3c8696ea.mesh"]
 
 [params]
 
 generate_tangents=true
-scale_mesh=Vector3( 1, 1, 1 )
-offset_mesh=Vector3( 0, 0, 0 )
-octahedral_compression=true
-optimize_mesh_flags=4286
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

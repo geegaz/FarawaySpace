@@ -1,12 +1,12 @@
 shader_type spatial;
 render_mode blend_mix, cull_back, depth_draw_never;
 
-uniform vec4 color : hint_color= vec4(1.0);
-uniform sampler2D texture_albedo : hint_albedo;
+uniform vec4 color : source_color= vec4(1.0);
+uniform sampler2D texture_albedo : source_color;
 uniform float proximity_fade_distance;
 uniform float distance_fade_min;
 uniform float distance_fade_max;
-uniform vec4 transmission : hint_color;
+uniform vec4 transmission : source_color;
 uniform bool billboard = true;
 
 uniform int particles_anim_h_frames;
@@ -16,9 +16,9 @@ uniform bool particles_anim_loop;
 void vertex() {
 	if (billboard)
 	{
-		mat4 mat_world = mat4(normalize(CAMERA_MATRIX[0])*length(WORLD_MATRIX[0]),normalize(CAMERA_MATRIX[1])*length(WORLD_MATRIX[0]),normalize(CAMERA_MATRIX[2])*length(WORLD_MATRIX[2]),WORLD_MATRIX[3]);
+		mat4 mat_world = mat4(normalize(INV_VIEW_MATRIX[0])*length(MODEL_MATRIX[0]),normalize(INV_VIEW_MATRIX[1])*length(MODEL_MATRIX[0]),normalize(INV_VIEW_MATRIX[2])*length(MODEL_MATRIX[2]),MODEL_MATRIX[3]);
 		mat_world = mat_world * mat4( vec4(cos(INSTANCE_CUSTOM.x),-sin(INSTANCE_CUSTOM.x), 0.0, 0.0), vec4(sin(INSTANCE_CUSTOM.x), cos(INSTANCE_CUSTOM.x), 0.0, 0.0),vec4(0.0, 0.0, 1.0, 0.0),vec4(0.0, 0.0, 0.0, 1.0));
-		MODELVIEW_MATRIX = INV_CAMERA_MATRIX * mat_world;
+		MODELVIEW_MATRIX = VIEW_MATRIX * mat_world;
 	}
 	
 	float h_frames = float(particles_anim_h_frames);
@@ -49,5 +49,5 @@ void fragment() {
 	
 	ALPHA *= clamp(smoothstep(distance_fade_min,distance_fade_max,-VERTEX.z),0.0,1.0);
 	
-	TRANSMISSION = transmission.rgb;
+	BACKLIGHT = transmission.rgb;
 }

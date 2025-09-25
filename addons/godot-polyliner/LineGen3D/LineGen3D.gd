@@ -1,9 +1,9 @@
-tool
+@tool
 extends Resource
 
 class_name LineGen3D
 
-var immediate_canvas : ImmediateGeometry = null
+var immediate_canvas : ImmediateMesh = null
 
 var render_mode = Mesh.PRIMITIVE_TRIANGLES
 var uv_scale = 1.0
@@ -16,7 +16,7 @@ var _is = ImmediateSurface.new()
 # inv_origin_xform = the inverse of the Trail3D node's transform
 # it is used to keep vertex float values near 0.0
 func draw_from_xforms_strip(p : Array = Array(),
-					inv_origin_xform : Transform = Transform(),
+					inv_origin_xform : Transform3D = Transform3D(),
 					tangent_axis : int = 0) -> ArrayMesh:
 	_sf.begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
 	
@@ -67,7 +67,7 @@ func draw_from_xforms_strip(p : Array = Array(),
 	return _sf.commit(null,Mesh.ARRAY_COMPRESS_DEFAULT)
 
 func draw_from_xforms_indexed(p : Array = Array(),
-					inv_origin_xform : Transform = Transform()) -> ArrayMesh:
+					inv_origin_xform : Transform3D = Transform3D()) -> ArrayMesh:
 	_sf.begin(render_mode)
 	
 	var last = null
@@ -129,7 +129,7 @@ func draw_from_xforms_indexed(p : Array = Array(),
 	return _sf.commit(null,Mesh.ARRAY_COMPRESS_DEFAULT-Mesh.ARRAY_COMPRESS_COLOR)
 	
 func draw_from_xforms_indexed_olreliable(p : Array = Array(),
-					inv_origin_xform : Transform = Transform()) -> ArrayMesh:
+					inv_origin_xform : Transform3D = Transform3D()) -> ArrayMesh:
 	_sf.begin(render_mode)
 	
 	var last = null
@@ -182,12 +182,12 @@ func draw_from_xforms_indexed_olreliable(p : Array = Array(),
 	return _sf.commit(null,Mesh.ARRAY_COMPRESS_DEFAULT-Mesh.ARRAY_COMPRESS_COLOR)
 
 # Experimental, do not use
-func draw_from_points_arrays(p : PoolVector3Array = PoolVector3Array(),
+func draw_from_points_arrays(p : PackedVector3Array = PackedVector3Array(),
 						total_length : float = 1.0) -> ArrayMesh:
-	if p.empty():
+	if p.is_empty():
 #		push_warning("p is empty, mesh will not be updated")
 		return ArrayMesh.new()
-	assert(p is PoolVector3Array, "p must be PoolVector3Array")
+	assert(p is PackedVector3Array, "p must be PackedVector3Array")
 	var uvs = total_length
 	
 	var vert_arr = []
@@ -246,7 +246,7 @@ func draw_from_points_arrays(p : PoolVector3Array = PoolVector3Array(),
 	return _sf.commit(null,Mesh.ARRAY_COMPRESS_DEFAULT-Mesh.ARRAY_COMPRESS_COLOR)
 
 
-func draw_from_points_strip(p : PoolVector3Array = PoolVector3Array(),
+func draw_from_points_strip(p : PackedVector3Array = PackedVector3Array(),
 					line_length : float = 1.0
 					) -> ArrayMesh:
 	_sf.begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)

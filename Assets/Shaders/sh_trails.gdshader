@@ -3,15 +3,15 @@ render_mode skip_vertex_transform;
 render_mode blend_add, cull_disabled, depth_draw_never, unshaded;
 
 uniform float line_width = 0.1;
-uniform sampler2D width_curve : hint_albedo;
+uniform sampler2D width_curve : source_color;
 uniform bool tangent_facing = false;
 
-uniform sampler2D albedo_tex : hint_albedo;
+uniform sampler2D albedo_tex : source_color;
 uniform bool tex_stretch = true;
 uniform vec2 tex_scale = vec2(1.0,1.0);
 
 uniform float amount : hint_range(0.0, 10.0) = 1.0;
-uniform vec4 color : hint_color = vec4(vec3(1.0),1.0);
+uniform vec4 color : source_color = vec4(vec3(1.0),1.0);
 
 void line_process(float width, inout vec3 vertex, vec3 dir_to_cam, vec2 uv, inout vec3 normal, inout vec3 tangent)
 {

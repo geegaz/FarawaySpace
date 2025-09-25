@@ -1,27 +1,27 @@
 class_name Tutorial
-extends Spatial
+extends Node3D
 
-export(float, 0.0, 1.0) var start_fade: float = 0.0
-export var tutorial_material: ShaderMaterial
-export var visibility: NodePath
-export var icon: NodePath
-export(Array, NodePath) var mesh_instances: Array
+@export var start_fade: float = 0.0 # (float, 0.0, 1.0)
+@export var tutorial_material: ShaderMaterial
+@export var visibility: NodePath
+@export var icon: NodePath
+@export var mesh_instances: Array # (Array, NodePath)
 
-var tween: SceneTreeTween
+var tween: Tween
 var fade: float = 0.0
 
-onready var _Icon: Sprite3D = get_node_or_null(icon)
-onready var _VisibilityNotifier: VisibilityNotifier = get_node_or_null(visibility)
+@onready var _Icon: Sprite3D = get_node_or_null(icon)
+@onready var _VisibilityNotifier: VisibleOnScreenNotifier3D = get_node_or_null(visibility)
 
 func _ready() -> void:
 	for node_path in mesh_instances:
-		var node: MeshInstance = get_node_or_null(node_path)
+		var node: MeshInstance3D = get_node_or_null(node_path)
 		if node:
 			node.material_override = tutorial_material
 	
 	if _VisibilityNotifier:
-		_VisibilityNotifier.connect("screen_entered", self, "_on_VisibilityNotifier_screen_entered")
-		_VisibilityNotifier.connect("screen_exited", self, "_on_VisibilityNotifier_screen_exited")
+		_VisibilityNotifier.connect("screen_entered", Callable(self, "_on_VisibilityNotifier_screen_entered"))
+		_VisibilityNotifier.connect("screen_exited", Callable(self, "_on_VisibilityNotifier_screen_exited"))
 	
 	set_fade(start_fade)
 	if _VisibilityNotifier.is_on_screen():
@@ -32,21 +32,21 @@ func fade_in(duration: float, delay: float = 0.0)->void:
 		tween.kill()
 	tween = create_tween()
 	tween.tween_interval(delay)
-	tween.tween_method(self, "set_fade", fade, 1.0, duration).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tween.tween_method(Callable(self, "set_fade"), fade, 1.0, duration).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 
 func fade_out(duration: float, delay: float = 0.0)->void:
 	if tween:
 		tween.kill()
 	tween = create_tween()
 	tween.tween_interval(delay)
-	tween.tween_method(self, "set_fade", fade, 0.0, duration).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tween.tween_method(Callable(self, "set_fade"), fade, 0.0, duration).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 
 func set_fade(value: float)->void:
 	fade = value
 	if tutorial_material:
-		var color: Color = tutorial_material.get_shader_param("modulate")
+		var color: Color = tutorial_material.get_shader_parameter("modulate")
 		color.a = value
-		tutorial_material.set_shader_param("modulate", color)
+		tutorial_material.set_shader_parameter("modulate", color)
 	if _Icon:
 		_Icon.modulate.a = value
 

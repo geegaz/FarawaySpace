@@ -8,7 +8,7 @@ render_mode unshaded;
 // with Tangent Facing enabled
 
 uniform float line_width = 0.4;
-uniform sampler2D width_curve : hint_albedo;
+uniform sampler2D width_curve : source_color;
 uniform bool tangent_facing = true;
 uniform float tangent_offset = 0.5;
 float line_process(float width, inout vec3 vertex, vec3 dir_to_cam, vec2 uv,
@@ -39,7 +39,7 @@ void vertex() {
 	VERTEX += TANGENT * tangent_offset;
 }
 
-uniform vec4 color : hint_color = vec4(vec3(1.0),1.0);
+uniform vec4 color : source_color = vec4(vec3(1.0),1.0);
 uniform float alpha_curve : hint_range(0.0,1.0,0.005) = 0.5;
 void fragment(){
 	NORMAL = FRONT_FACING ? NORMAL : -NORMAL;

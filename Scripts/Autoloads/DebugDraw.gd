@@ -1,10 +1,10 @@
-tool
+@tool
 extends Node
 
-const COLOR_DEFAULT_WIRE: = Color.white
+const COLOR_DEFAULT_WIRE: = Color.WHITE
 const COLOR_DEFAULT_SOLID: = Color(1.0,1.0,1.0,0.2)
 # Pre-calculated models
-const WIRE_CUBE_VERTICES: = PoolVector3Array([
+const WIRE_CUBE_VERTICES: = PackedVector3Array([
 	# Lower edges
 	Vector3(-1,-1,-1),
 	Vector3(1,-1,-1),
@@ -33,7 +33,7 @@ const WIRE_CUBE_VERTICES: = PoolVector3Array([
 	Vector3(-1,1,1),
 	Vector3(-1,1,-1),
 ])
-const CUBE_VERTICES: = PoolVector3Array([
+const CUBE_VERTICES: = PackedVector3Array([
 	# -X
 	Vector3(-1,-1,-1),
 	Vector3(-1,1,-1),
@@ -77,7 +77,7 @@ const CUBE_VERTICES: = PoolVector3Array([
 	Vector3(1,-1,1),
 	Vector3(-1,-1,1)
 ])
-const CUBE_NORMALS: = PoolVector3Array([
+const CUBE_NORMALS: = PackedVector3Array([
 	Vector3.LEFT,
 	Vector3.LEFT,
 	Vector3.LEFT,
@@ -120,7 +120,7 @@ const CUBE_NORMALS: = PoolVector3Array([
 	Vector3.BACK,
 	Vector3.BACK
 ])
-const CUBE_UVS: = PoolVector2Array([
+const CUBE_UVS: = PackedVector2Array([
 	Vector2(0.0, 0.0),
 	Vector2(0.0, 1.0),
 	Vector2(1.0, 1.0),
@@ -173,9 +173,9 @@ var base_material: Material = preload("res://Assets/Materials/mat_debug.tres")
 
 class DrawStep:
 	var primitive_type: int
-	var vertices: PoolVector3Array
-	var normals: PoolVector3Array
-	var uvs: PoolVector2Array
+	var vertices: PackedVector3Array
+	var normals: PackedVector3Array
+	var uvs: PackedVector2Array
 	var color: Color
 	var time: float
 
@@ -212,54 +212,54 @@ func draw_line(start: Vector3, end: Vector3, color: Color = COLOR_DEFAULT_WIRE, 
 	new_step.time = time
 	draw_queue.append(new_step)
 
-func draw_cube(transform: Transform, color: Color = COLOR_DEFAULT_SOLID, time: float = 0.0)->void:
+func draw_cube(transform: Transform3D, color: Color = COLOR_DEFAULT_SOLID, time: float = 0.0)->void:
 	if not enabled:
 		return
 	var new_step: = DrawStep.new()
 	new_step.primitive_type = Mesh.PRIMITIVE_TRIANGLES
-	new_step.vertices = transform.xform(CUBE_VERTICES)
-	new_step.normals = transform.xform(CUBE_NORMALS)
+	new_step.vertices = transform * (CUBE_VERTICES)
+	new_step.normals = transform * (CUBE_NORMALS)
 	new_step.uvs = CUBE_UVS
 	new_step.color = color
 	new_step.time = time
 	draw_queue.append(new_step)
 
-func draw_wire_cube(transform: Transform, color: Color = COLOR_DEFAULT_WIRE, time: float = 0.0)->void:
+func draw_wire_cube(transform: Transform3D, color: Color = COLOR_DEFAULT_WIRE, time: float = 0.0)->void:
 	if not enabled:
 		return
 	var new_step: = DrawStep.new()
 	new_step.primitive_type = Mesh.PRIMITIVE_LINES
-	new_step.vertices = transform.xform(WIRE_CUBE_VERTICES)
+	new_step.vertices = transform * (WIRE_CUBE_VERTICES)
 	new_step.color = color
 	new_step.time = time
 	draw_queue.append(new_step)
 
 func _enter_tree() -> void:
 	scenario_RID = get_viewport().world.scenario
-	base_RID = VisualServer.immediate_create()
-	instance_RID = VisualServer.instance_create2(base_RID, scenario_RID)
-	VisualServer.instance_geometry_set_material_override(instance_RID, base_material.get_rid())
+	base_RID = RenderingServer.immediate_create()
+	instance_RID = RenderingServer.instance_create2(base_RID, scenario_RID)
+	RenderingServer.instance_geometry_set_material_override(instance_RID, base_material.get_rid())
 
 func _exit_tree() -> void:
-	VisualServer.free_rid(instance_RID)
-	VisualServer.free_rid(base_RID)
+	RenderingServer.free_rid(instance_RID)
+	RenderingServer.free_rid(base_RID)
 
 func _process(delta: float) -> void:
 	_debug_draw(delta)
 
 func _debug_draw(delta: float)->void:
-	VisualServer.immediate_clear(base_RID)
+	RenderingServer.immediate_clear(base_RID)
 	for step in draw_queue:
 		# Draw a single draw step
-		VisualServer.immediate_begin(base_RID, step.primitive_type)
+		RenderingServer.immediate_begin(base_RID, step.primitive_type)
 		for v in step.vertices.size():
-			VisualServer.immediate_color(base_RID, step.color)
+			RenderingServer.immediate_color(base_RID, step.color)
 			if step.normals:
-				VisualServer.immediate_normal(base_RID, step.normals[v])
+				RenderingServer.immediate_normal(base_RID, step.normals[v])
 			if step.uvs:
-				VisualServer.immediate_uv(base_RID, step.uvs[v])
-			VisualServer.immediate_vertex(base_RID, step.vertices[v])
-		VisualServer.immediate_end(base_RID)
+				RenderingServer.immediate_uv(base_RID, step.uvs[v])
+			RenderingServer.immediate_vertex(base_RID, step.vertices[v])
+		RenderingServer.immediate_end(base_RID)
 		# If the draw step is supposed to stay longer, add it to
 		# the queue for the next frame
 		step.time -= delta

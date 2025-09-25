@@ -4,10 +4,10 @@ var layers: Dictionary
 var controls: Dictionary
 var control_layers: Dictionary
 
-onready var tree: SceneTree = get_tree()
+@onready var tree: SceneTree = get_tree()
 
 func _enter_tree() -> void:
-	pause_mode = Node.PAUSE_MODE_PROCESS
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	
 	for child in get_children():
 		if child is CanvasLayer:
@@ -27,7 +27,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		pause(not tree.paused)
 	
 	if event.is_action_pressed("ui_fullscreen"):
-		OS.window_fullscreen = not OS.window_fullscreen
+		get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (not ((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN))) else Window.MODE_WINDOWED
 
 func pause(value: bool)->void:
 	tree.paused = value
@@ -73,7 +73,7 @@ func add_control(control_name: String, control_scene: PackedScene)->void:
 		return # Control already exists
 	if not control_scene:
 		return # No scene provided
-	var control: Control = control_scene.instance()
+	var control: Control = control_scene.instantiate()
 	control.name = control_name
 	controls[control_name] = control
 

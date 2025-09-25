@@ -1,22 +1,22 @@
 class_name LevelDoor
-extends Spatial
+extends Node3D
 
-export var level: Resource
-export(Array, String) var locks: Array
-export(Array, NodePath) var petal_animations: Array
-export var petal_animation_name: String = "DoorPetal_ARMAction"
+@export var level: Resource
+@export var locks: Array # (Array, String)
+@export var petal_animations: Array # (Array, NodePath)
+@export var petal_animation_name: String = "DoorPetal_ARMAction"
 
 var open: bool
 
-onready var _DoorAnimation: AnimationPlayer = $AnimationPlayer
+@onready var _DoorAnimation: AnimationPlayer = $AnimationPlayer
 
 func _enter_tree() -> void:
 	var trigger: LevelTrigger = $LevelTrigger
 	trigger.level = level
 	
-	var door_trigger: Area = $DoorTrigger
-	door_trigger.connect("body_entered", self, "_on_door_trigger_body_entered")
-	door_trigger.connect("body_exited", self, "_on_door_trigger_body_exited")
+	var door_trigger: Area3D = $DoorTrigger
+	door_trigger.connect("body_entered", Callable(self, "_on_door_trigger_body_entered"))
+	door_trigger.connect("body_exited", Callable(self, "_on_door_trigger_body_exited"))
 
 func _on_door_trigger_body_entered(body: Node)->void:
 	if body is Ship:

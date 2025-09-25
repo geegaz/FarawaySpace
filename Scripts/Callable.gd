@@ -1,5 +1,5 @@
 class_name Callable
-extends Reference
+extends RefCounted
 
 var target_object: Object
 var target_method: String

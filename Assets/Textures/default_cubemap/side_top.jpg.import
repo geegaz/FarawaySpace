@@ -2,12 +2,13 @@
 
 importer="image"
 type="Image"
-path="res://.import/side_top.jpg-d7a48c01f846d7408a790ab19855e542.image"
+uid="uid://dsc61deg1atgc"
+path="res://.godot/imported/side_top.jpg-d7a48c01f846d7408a790ab19855e542.image"
 
 [deps]
 
 source_file="res://Assets/Textures/default_cubemap/side_top.jpg"
-dest_files=[ "res://.import/side_top.jpg-d7a48c01f846d7408a790ab19855e542.image" ]
+dest_files=["res://.godot/imported/side_top.jpg-d7a48c01f846d7408a790ab19855e542.image"]
 
 [params]
 

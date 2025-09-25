@@ -3,14 +3,14 @@
 shader_type spatial;
 render_mode unshaded, async_visible, blend_mix;
 
-uniform vec4 color : hint_color;
+uniform vec4 color : source_color;
 uniform float proximity_fade_distance = 5.0;
 uniform float distance_fade_min = 0.0;
 uniform float distance_fade_max = 10.0;
 uniform float shadow_power : hint_range(0.1, 10.0, 0.01) = 2.0;
 
 void vertex() {
-	MODELVIEW_MATRIX = INV_CAMERA_MATRIX * mat4(CAMERA_MATRIX[0],CAMERA_MATRIX[1],CAMERA_MATRIX[2],WORLD_MATRIX[3]);
+	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0],INV_VIEW_MATRIX[1],INV_VIEW_MATRIX[2],MODEL_MATRIX[3]);
 }
 
 

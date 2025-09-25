@@ -2,12 +2,13 @@
 
 importer="image"
 type="Image"
-path="res://.import/side_back.jpg-418977de64a736484532c93680ab6c83.image"
+uid="uid://fwysyhuh1qd0"
+path="res://.godot/imported/side_back.jpg-418977de64a736484532c93680ab6c83.image"
 
 [deps]
 
 source_file="res://Assets/Textures/default_cubemap/side_back.jpg"
-dest_files=[ "res://.import/side_back.jpg-418977de64a736484532c93680ab6c83.image" ]
+dest_files=["res://.godot/imported/side_back.jpg-418977de64a736484532c93680ab6c83.image"]
 
 [params]
 

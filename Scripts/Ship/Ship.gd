@@ -1,26 +1,26 @@
 class_name Ship
-extends KinematicBody
+extends CharacterBody3D
 
 signal started_moving
 signal stopped_moving
 signal gravity_changed(value)
 
-export var enabled: bool = true setget set_enabled
+@export var enabled: bool = true: set = set_enabled
 # Movement exports
-export var max_speed: float = 25.0 # m/s
-export var acceleration: float = 10.0 # m/s/s
-export var deceleration: float = 5.0 # m/s/s
-export var forward_multiplier: float = 1.0
-export var backward_multiplier: float = 0.5
-export(float, 0, 1) var collision_correction_amount: float = 0.05
+@export var max_speed: float = 25.0 # m/s
+@export var acceleration: float = 10.0 # m/s/s
+@export var deceleration: float = 5.0 # m/s/s
+@export var forward_multiplier: float = 1.0
+@export var backward_multiplier: float = 0.5
+@export var collision_correction_amount: float = 0.05 # (float, 0, 1)
 # Garvity exports
-export var gravity_enabled: bool = true setget set_gravity_enabled
-export var gravity: float = 9.8
-export var gravity_max_speed: float = 50.0
-export var ground_ray_length: float = 4.0
-export(float, 0.0, 100.0) var spring_strength: float = 20.0
-export(float, 0.0, 10.0) var spring_damping: float = 4.0
-export(float, 0, 1) var ground_correction_amount: float = 0.025
+@export var gravity_enabled: bool = true: set = set_gravity_enabled
+@export var gravity: float = 9.8
+@export var gravity_max_speed: float = 50.0
+@export var ground_ray_length: float = 4.0
+@export var spring_strength: float = 20.0 # (float, 0.0, 100.0)
+@export var spring_damping: float = 4.0 # (float, 0.0, 10.0)
+@export var ground_correction_amount: float = 0.025 # (float, 0, 1)
 
 # Input variables
 var forward_input: float
@@ -46,22 +46,22 @@ var ground_normal: Vector3
 var ground_distance: float
 
 # Gameplay nodes
-onready var _Camera: Camera = $Camera
-onready var _ShipPivot: Spatial = $Pivot
-onready var _ShipInterpolation: PhysInterp = $Pivot/Interpolation
-onready var _GroundRayCast: RayCast = $GroundRayCast
+@onready var _Camera: Camera3D = $Camera3D
+@onready var _ShipPivot: Node3D = $Pivot
+@onready var _ShipInterpolation: PhysInterp = $Pivot/Interpolation
+@onready var _GroundRayCast: RayCast3D = $GroundRayCast
 # Visuals nodes
-onready var _ShipModel: Spatial = $Pivot/Interpolation/Model
-onready var _AnimationTree: AnimationTree = $Pivot/Interpolation/Model/AnimationTree
-onready var _GroundEffects: Spatial = $Pivot/Interpolation/GroundEffects
-onready var _ShipEffects: ShipEffects = $ShipEffects
+@onready var _ShipModel: Node3D = $Pivot/Interpolation/Model
+@onready var _AnimationTree: AnimationTree = $Pivot/Interpolation/Model/AnimationTree
+@onready var _GroundEffects: Node3D = $Pivot/Interpolation/GroundEffects
+@onready var _ShipEffects: ShipEffects = $ShipEffects
 # Audio nodes
-onready var _ShipAudio: AudioStreamPlayer3D = $Pivot/Interpolation/Audio
+@onready var _ShipAudio: AudioStreamPlayer3D = $Pivot/Interpolation/Audio
 
 
 func _enter_tree() -> void:
 	PlayerManager.player = self
-	connect("gravity_changed", self, "_on_gravity_changed")
+	connect("gravity_changed", Callable(self, "_on_gravity_changed"))
 
 func _exit_tree() -> void:
 #	if PlayerManager.player == self:
@@ -69,7 +69,7 @@ func _exit_tree() -> void:
 
 func _ready() -> void:
 	set_gravity_enabled(gravity_enabled)
-	_GroundRayCast.cast_to = Vector3.DOWN * ground_ray_length
+	_GroundRayCast.target_position = Vector3.DOWN * ground_ray_length
 
 func _process(delta):
 	# Do all gameplay-related calculation that don't depend on physics
@@ -107,7 +107,7 @@ func _process(delta):
 	# TILT - Rotation of the ship on the forward axis when turning
 	var target_tilt: float = turn_input.x * 0.5
 	tilt = lerp(tilt, target_tilt, 1.0 - pow(10, -delta))
-	tilt = clamp(tilt, -deg2rad(90.0), deg2rad(90.0))
+	tilt = clamp(tilt, -deg_to_rad(90.0), deg_to_rad(90.0))
 	
 	# Movement signals
 	if is_zero_approx(prev_speed) and not is_zero_approx(speed):
@@ -124,7 +124,7 @@ func _process(delta):
 	
 	if gravity_enabled:
 		_ShipEffects.dust_effect_emitting = (ground_distance < ground_ray_length and abs(speed_amount) > 0.2)
-		_GroundEffects.translation = Vector3.DOWN * ground_distance # interpolated
+		_GroundEffects.position = Vector3.DOWN * ground_distance # interpolated
 	else:
 		_ShipEffects.dust_effect_emitting = false
 	
@@ -138,7 +138,7 @@ func _process(delta):
 		abs(turn_input.x) * 0.1 + 
 		rotation.x * 0.2, 
 		0.01, 4)
-	_ShipAudio.unit_db = linear2db(abs(power) * 3.0)
+	_ShipAudio.volume_db = linear_to_db(abs(power) * 3.0)
 	
 	# Animation
 	_AnimationTree["parameters/flying/power/blend_position"] = power
@@ -157,7 +157,7 @@ func _physics_process(delta):
 		if _GroundRayCast.is_colliding():
 			ground_position = _GroundRayCast.get_collision_point()
 			ground_normal = _GroundRayCast.get_collision_normal()
-			ground_distance = ground_position.distance_to(global_translation)
+			ground_distance = ground_position.distance_to(global_position)
 			var ground_offset: float = ground_ray_length - ground_distance
 			# Spring force when close to the ground
 			gravity_speed += calculate_spring(ground_offset, spring_strength, spring_damping) * delta
@@ -165,29 +165,35 @@ func _physics_process(delta):
 			collision_correction += calculate_correction(ground_normal) * (
 				ground_correction_amount * pow(abs(speed / max_speed), 2.0))
 			
-			DebugDraw.draw_point(ground_position, Color.red, 1.0)
+			DebugDraw.draw_point(ground_position, Color.RED, 1.0)
 		else:
-			ground_position = global_translation + _GroundRayCast.cast_to
+			ground_position = global_position + _GroundRayCast.target_position
 			ground_normal = Vector3.UP
 			ground_distance = ground_ray_length
 	
 	# Add the gravity to the velocity
 	var final_velocity: Vector3 = velocity + Vector3.UP * gravity_speed
-	velocity = move_and_slide(final_velocity, Vector3.UP, false, 4, PI)
+	set_velocity(final_velocity)
+	set_up_direction(Vector3.UP)
+	set_floor_stop_on_slope_enabled(false)
+	set_max_slides(4)
+	set_floor_max_angle(PI)
+	move_and_slide()
+	velocity = velocity
 	
-	var slide_count: = get_slide_count()
+	var slide_count: = get_slide_collision_count()
 	if slide_count > 0:
 		# Get the collision normal
 		var col_normal: Vector3 = Vector3.ZERO
 		for slide in slide_count:
-			var col: KinematicCollision = get_slide_collision(0)
+			var col: KinematicCollision3D = get_slide_collision(0)
 			col_normal += col.normal
 		col_normal = col_normal.normalized()
 		collision_correction += calculate_correction(col_normal) * (
 			collision_correction_amount * pow(abs(speed / max_speed), 2.0))
-		DebugDraw.draw_line(global_translation, global_translation + col_normal * 10.0, Color.red)
+		DebugDraw.draw_line(global_position, global_position + col_normal * 10.0, Color.RED)
 	
-	DebugDraw.draw_line(global_translation, global_translation + forward * 10.0, Color.blue)
+	DebugDraw.draw_line(global_position, global_position + forward * 10.0, Color.BLUE)
 
 
 func calculate_correction(collison_normal: Vector3)->Vector2:
@@ -199,14 +205,14 @@ func calculate_correction(collison_normal: Vector3)->Vector2:
 	# "flattened" version with its Z component removed (so perpendicular 
 	# to the local forward vector), and add it to the player's turning input.
 	var pivot_basis: Basis = get_pivot_basis()
-	var local_normal: Vector3 = pivot_basis.xform_inv(collison_normal)
+	var local_normal: Vector3 = (collison_normal) * pivot_basis
 	var local_normal_flattened: = Vector3(local_normal.x, local_normal.y, 0.0).normalized()
 	var plane_normal: = local_normal_flattened.cross(Vector3.FORWARD).normalized()
 	
 	var angle: = local_normal.signed_angle_to(local_normal_flattened, plane_normal)
 	var correction = Vector2(
-		rad2deg(angle) * local_normal_flattened.x, 
-		-rad2deg(angle) * local_normal_flattened.y)
+		rad_to_deg(angle) * local_normal_flattened.x, 
+		-rad_to_deg(angle) * local_normal_flattened.y)
 	
 	return correction
 
@@ -216,9 +222,9 @@ func calculate_spring(offset: float, strength: float, damping: float)->float:
 
 
 func rotate_pivot(turn: Vector2)->void:
-	_ShipPivot.rotation.y -= deg2rad(turn.x)
-	_ShipPivot.rotation.x -= deg2rad(turn.y)
-	_ShipPivot.rotation.x = clamp(_ShipPivot.rotation.x, deg2rad(-90), deg2rad(90))
+	_ShipPivot.rotation.y -= deg_to_rad(turn.x)
+	_ShipPivot.rotation.x -= deg_to_rad(turn.y)
+	_ShipPivot.rotation.x = clamp(_ShipPivot.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 	_ShipPivot.orthonormalize()
 
 
@@ -230,7 +236,7 @@ func get_pivot_basis(global: bool = true)->Basis:
 
 # Teleport to a global position & rotation
 func teleport(target_position: Vector3, target_rotation: Vector3)->void:
-	global_translation = target_position
+	global_position = target_position
 	_ShipPivot.global_rotation = target_rotation
 	_ShipInterpolation.reset_interpolation()
 	_Camera.reset_interpolation()

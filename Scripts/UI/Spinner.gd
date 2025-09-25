@@ -1,7 +1,7 @@
 class_name Spinner
 extends Control
 
-export var rotation_speed: float = 180.0
+@export var rotation_speed: float = 180.0
 
 func _process(delta: float) -> void:
-	rect_rotation += rotation_speed * delta
+	rotation += rotation_speed * delta

@@ -1,5 +1,5 @@
-tool
-extends Path
+@tool
+extends Path3D
 
 enum Renderer {
 	STATIC, # Use SurfaceTool for rendering
@@ -21,11 +21,11 @@ enum UVMode {
 	REPEAT
 }
 
-export(Renderer) var renderer = Renderer.STATIC setget set_renderer
-export(RenderMode) var render_mode = RenderMode.TRIANGLES setget set_render_mode
-export(UVMode) var uv_mode = UVMode.STRETCH setget set_uv_mode
-export(float,0.0,100.0) var uv_size = 1.0 setget set_uv_size
-export(Material) var material = null setget set_material
+@export var renderer: Renderer = Renderer.STATIC: set = set_renderer
+@export var render_mode: RenderMode = RenderMode.TRIANGLES: set = set_render_mode
+@export var uv_mode: UVMode = UVMode.STRETCH: set = set_uv_mode
+@export var uv_size = 1.0: set = set_uv_size
+@export var material: Material = null: set = set_material
 
 var _internal_render_mode = Mesh.PRIMITIVE_TRIANGLES
 
@@ -35,7 +35,7 @@ func set_renderer(value):
 	renderer = value
 	
 	if _mesh_instance and _imm_geo:
-		if Engine.editor_hint:
+		if Engine.is_editor_hint():
 			_show_mesh_instance()
 		else:
 			match value:
@@ -76,7 +76,7 @@ func set_material(mat):
 
 var _mesh_instance = null
 var _imm_sf = ImmediateSurface.new()
-var _imm_geo : ImmediateGeometry = null
+var _imm_geo : ImmediateMesh = null
 
 func _update_material():
 	_mesh_instance.material_override = material
@@ -86,7 +86,7 @@ func _enter_tree():
 	for child in get_children():
 		child.queue_free()
 	
-	_mesh_instance = MeshInstance.new()
+	_mesh_instance = MeshInstance3D.new()
 	add_child(_mesh_instance)
 	
 	_imm_geo = _imm_sf.get_immediate_geometry()
@@ -114,6 +114,6 @@ func redraw():
 	call_deferred("_draw")
 
 func _ready():
-	if not is_connected("curve_changed",self,"redraw"):
-		connect("curve_changed",self,"redraw")
+	if not is_connected("curve_changed", Callable(self, "redraw")):
+		connect("curve_changed", Callable(self, "redraw"))
 

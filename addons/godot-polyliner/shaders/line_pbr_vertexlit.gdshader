@@ -4,7 +4,7 @@ render_mode vertex_lighting,specular_blinn;
 //render_mode depth_draw_alpha_prepass;
 
 uniform float line_width = 0.1;
-uniform sampler2D width_curve : hint_albedo;
+uniform sampler2D width_curve : source_color;
 uniform bool tangent_facing = false;
 uniform bool rounded = false;
 float line_process(float width, inout vec3 vertex, vec3 dir_to_cam, vec2 uv,
@@ -54,11 +54,11 @@ void vertex(){
 	}
 }
 
-uniform sampler2D albedo_tex : hint_albedo;
+uniform sampler2D albedo_tex : source_color;
 uniform bool tex_stretch = true;
 uniform vec2 tex_scale = vec2(1.0,1.0);
 
-uniform vec4 color : hint_color = vec4(vec3(1.0),1.0);
+uniform vec4 color : source_color = vec4(vec3(1.0),1.0);
 uniform float metallic  : hint_range(0.0,1.0,0.005) = 0.0;
 uniform float specular  : hint_range(0.0,1.0,0.005) = 0.5;
 uniform float roughness : hint_range(0.0,1.0,0.005) = 0.5;

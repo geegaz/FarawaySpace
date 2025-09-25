@@ -5,19 +5,19 @@
 [ext_resource path="res://default_env.tres" type="Environment" id=3]
 [ext_resource path="res://addons/cubemap_generator/CubemapGenerator.gd" type="Script" id=4]
 
-[node name="LevelBase" type="Spatial"]
+[node name="LevelBase" type="Node3D"]
 script = ExtResource( 2 )
 checkpoints = [ NodePath("ShipSpawner") ]
 
 [node name="LevelUI" type="CanvasLayer" parent="."]
 
-[node name="Lighting" type="Spatial" parent="."]
+[node name="Lighting" type="Node3D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
 environment = ExtResource( 3 )
 
-[node name="DirectionalLight" type="DirectionalLight" parent="Lighting"]
-transform = Transform( -0.939693, 0.196175, -0.280166, 0, 0.819152, 0.573577, 0.34202, 0.538986, -0.769751, 0, 0, 0 )
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D( -0.939693, 0.196175, -0.280166, 0, 0.819152, 0.573577, 0.34202, 0.538986, -0.769751, 0, 0, 0 )
 light_bake_mode = 0
 shadow_enabled = true
 directional_shadow_split_1 = 0.05
@@ -25,10 +25,10 @@ directional_shadow_normal_bias = 1.0
 directional_shadow_bias_split_scale = 0.5
 directional_shadow_max_distance = 500.0
 
-[node name="ShipSpawner" type="Position3D" parent="."]
+[node name="ShipSpawner" type="Marker3D" parent="."]
 script = ExtResource( 1 )
 
-[node name="CubemapGenerator" type="Spatial" parent="."]
+[node name="CubemapGenerator" type="Node3D" parent="."]
 script = ExtResource( 4 )
 shadow_atlas_size = 2048.0
 camera_far = 500.0

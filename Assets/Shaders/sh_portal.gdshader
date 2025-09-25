@@ -1,7 +1,7 @@
 shader_type spatial;
 render_mode unshaded, world_vertex_coords;
 
-uniform samplerCube cubemap : hint_albedo;
+uniform samplerCube cubemap : source_color;
 uniform float min_eta : hint_range(0.0, 1.0, 0.01) = 0.5;
 uniform float max_eta : hint_range(0.0, 1.0, 0.01) = 0.9;
 uniform float distorted_eta_start : hint_range(0.0, 1.0, 0.01) = 0.3;
@@ -25,7 +25,7 @@ float fresnel(vec3 view, vec3 normal, float power)
 
 void vertex()
 {
-	camera_pos = (CAMERA_MATRIX * vec4(0.0, 0.0, 0.0, 1.0)).xyz;
+	camera_pos = (INV_VIEW_MATRIX * vec4(0.0, 0.0, 0.0, 1.0)).xyz;
 	world_pos = VERTEX;
 	world_normal = NORMAL;
 }

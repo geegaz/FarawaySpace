@@ -4,11 +4,11 @@ extends Node
 const MOUSE_MULTIPLIER: float = 0.1
 const CONTROLLER_MULTIPLIER: float = 4.0
 
-export var enabled: bool = true setget set_enabled
-export var mouse_sensitivity: float = 0.5
-export var mouse_invert_vertical: bool = false
-export var controller_sensitivity: float = 0.5
-export var controller_invert_vertical: bool = false
+@export var enabled: bool = true: set = set_enabled
+@export var mouse_sensitivity: float = 0.5
+@export var mouse_invert_vertical: bool = false
+@export var controller_sensitivity: float = 0.5
+@export var controller_invert_vertical: bool = false
 
 var mouse_motion: Vector2
 

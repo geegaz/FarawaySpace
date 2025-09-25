@@ -1,6 +1,6 @@
 shader_type spatial;
 render_mode skip_vertex_transform,cull_disabled;
-render_mode depth_draw_alpha_prepass;
+render_mode depth_prepass_alpha;
 //render_mode unshaded;
 
 // \"tangent-facing\" code and \"rounded end\" code was removed
@@ -80,7 +80,7 @@ void vertex(){
 		NORMAL
 	);
 	// I don't know how this works, but it does, so no complaints
-	vec3 yeds = INV_CAMERA_MATRIX[1].xyz * TBN;
+	vec3 yeds = VIEW_MATRIX[1].xyz * TBN;
 	float a1 = atan(-yeds.y,yeds.z);
 	rot = rotation3dX( a1 + angle );
 	TBN *= rot;
@@ -96,7 +96,7 @@ void vertex(){
 	ray_origin *= rot;
 	
 	// Handle object rotation
-	rot = mat3(WORLD_MATRIX) * rot;
+	rot = mat3(MODEL_MATRIX) * rot;
 }
 
 vec3 opRep( in vec3 p, in vec3 c )
@@ -176,7 +176,7 @@ float fake_ao(vec3 ro, vec3 rd) {
 
 uniform float roughness : hint_range(0.0, 1.0, 0.001) = 0.25;
 uniform float metallic : hint_range(0.0, 1.0, 0.001) = 1.0;
-uniform vec4 color : hint_color = vec4(vec3(0.9),1.0);
+uniform vec4 color : source_color = vec4(vec3(0.9),1.0);
 
 void fragment(){
 	vec3 ro = ray_origin;

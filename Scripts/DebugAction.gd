@@ -1,10 +1,10 @@
 class_name DebugAction
 extends Node
 
-export var target: NodePath
-export var code: String
-export var function: String
-export var args: Array
+@export var target: NodePath
+@export var code: String
+@export var function: String
+@export var args: Array
 
 var debug_active: bool
 var matched: int

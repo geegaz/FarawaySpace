@@ -4,7 +4,7 @@ render_mode blend_add, unshaded;
 
 uniform float line_width = 0.0;
 uniform float glow_width = 0.4;
-uniform sampler2D width_curve : hint_albedo;
+uniform sampler2D width_curve : source_color;
 uniform bool tangent_facing = false;
 uniform bool rounded = true;
 float line_process(float width, inout vec3 vertex, vec3 dir_to_cam, vec2 uv,
@@ -53,7 +53,7 @@ float getDistToLineCenter(vec2 uv) {
 }
 
 
-uniform vec4 color : hint_color = vec4(vec3(1.0),1.0);
+uniform vec4 color : source_color = vec4(vec3(1.0),1.0);
 uniform float curve : hint_range(0.0,1.0) = 0.2;
 void fragment(){
 	float roundededge = smoothstep(lw*0.5,0.5,getDistToLineCenter(UV));

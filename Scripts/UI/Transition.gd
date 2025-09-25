@@ -4,7 +4,7 @@ extends Control
 signal fade_in_finished
 signal fade_out_finished
 
-var tween: SceneTreeTween
+var tween: Tween
 var tween_callable: Callable
 
 func _ready() -> void:
@@ -30,7 +30,7 @@ func transition(color: Color, callable: Callable, duration: float = 1.0)->void:
 		tween.kill()
 	tween = create_tween()
 	_add_fade_in(half_duration)
-	tween.tween_callback(tween_callable, "do")
+	tween.tween_callback(Callable(tween_callable, "do"))
 	_add_fade_out(half_duration)
 	
 	self.color = color
@@ -40,14 +40,14 @@ func transition(color: Color, callable: Callable, duration: float = 1.0)->void:
 func _add_fade_in(duration: float) -> void:
 	if not tween:
 		return
-	tween.tween_callback(self, "show")
+	tween.tween_callback(Callable(self, "show"))
 	tween.tween_property(self, "color:a", 1.0, duration)
-	tween.tween_callback(self, "emit_signal", ["fade_in_finished"])
+	tween.tween_callback(Callable(self, "emit_signal").bind("fade_in_finished"))
 
 func _add_fade_out(duration: float) -> void:
 	if not tween:
 		return
 	tween.tween_property(self, "color:a", 0.0, duration)
-	tween.tween_callback(self, "hide")
-	tween.tween_callback(self, "emit_signal", ["fade_out_finished"])
+	tween.tween_callback(Callable(self, "hide"))
+	tween.tween_callback(Callable(self, "emit_signal").bind("fade_out_finished"))
 

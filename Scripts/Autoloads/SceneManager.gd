@@ -15,7 +15,7 @@ var first_loading: bool = true
 var transition: Transition
 var spinner: Spinner
 
-onready var tree: SceneTree = get_tree()
+@onready var tree: SceneTree = get_tree()
 
 func _ready() -> void:
 	transition = UIManager.controls.LevelTransition
@@ -35,7 +35,7 @@ func change_level(level: LevelData)->void:
 		printerr("Level is already loaded")
 		return # Don't load the current level again
 	
-	var dir: = Directory.new()
+	var dir: = DirAccess.new()
 	if not dir.file_exists(level.level_scene_path):
 		printerr("Level scene path is invalid")
 		return # Can't load an invalid path
@@ -44,17 +44,17 @@ func change_level(level: LevelData)->void:
 	changing_level = true
 	
 	if load_additive and first_loading: # When starting the game
-		transition.color = Color.black
+		transition.color = Color.BLACK
 		transition.show()
 		first_loading = false
 	else:
 		transition.color = level.level_color
 		transition.color.a = 0.0
 		transition.fade_in()
-		yield(transition, "fade_in_finished")
+		await transition.fade_in_finished
 		
 	var bright: bool = transition.color.get_luminance() > 0.5
-	spinner.modulate = Color.black if bright else Color.white
+	spinner.modulate = Color.BLACK if bright else Color.WHITE
 	spinner.show()
 	
 	### LOADING ###
@@ -66,21 +66,21 @@ func change_level(level: LevelData)->void:
 	current_level = null
 	
 	# Start loading in the background
-	loading_thread.start(self, "_load_level_threaded", level.level_scene_path)
-	yield(self, "loading_completed")
+	loading_thread.start(Callable(self, "_load_level_threaded").bind(level.level_scene_path))
+	await self.loading_completed
 	var loaded_scene: PackedScene = loading_thread.wait_to_finish()
 	
 	# Add new level
 	current_level = level
-	current_level_node = loaded_scene.instance()
+	current_level_node = loaded_scene.instantiate()
 	call_deferred("add_current_level_node_to_scene")
 	
 	###############
 	
-	yield(current_level_node, "ready")
+	await current_level_node.ready
 	spinner.hide()
 	transition.fade_out()
-	yield(transition, "fade_out_finished")
+	await transition.fade_out_finished
 	
 	changing_level = false
 	PlayerManager.player_input.enabled = true
@@ -110,7 +110,7 @@ func _load_level_threaded(path: String)->PackedScene:
 	if ResourceLoader.has_cached(path):
 		return ResourceLoader.load(path) as PackedScene
 		
-	var loader: = ResourceLoader.load_interactive(path, "PackedScene")
+	var loader: = ResourceLoader.load_threaded_request(path, "PackedScene")
 	var error: = OK
 	while error == OK:
 		OS.delay_msec(5)

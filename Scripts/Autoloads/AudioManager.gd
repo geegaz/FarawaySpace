@@ -1,10 +1,10 @@
 extends Node
 
-export(NodePath) var default_player: NodePath
+@export var default_player: NodePath
 
-onready var _DefaultPlayer: AudioStreamPlayer = get_node_or_null(default_player)
-onready var _CurrentPlayer: AudioStreamPlayer = _DefaultPlayer
-onready var _Tween: Tween = $Tween
+@onready var _DefaultPlayer: AudioStreamPlayer = get_node_or_null(default_player)
+@onready var _CurrentPlayer: AudioStreamPlayer = _DefaultPlayer
+@onready var _Tween: Tween = $Tween
 
 func fade_to(new_player: AudioStreamPlayer, time = 1.0, volume = 0):
 	if time > 0:
@@ -33,7 +33,7 @@ func fade_to(new_player: AudioStreamPlayer, time = 1.0, volume = 0):
 	_CurrentPlayer = new_player
 	print("fading to",_CurrentPlayer,_CurrentPlayer.name)
 
-func fade_area_reverb(area: Area, amount: float, time = 1.0):
+func fade_area_reverb(area: Area3D, amount: float, time = 1.0):
 	amount = clamp(amount, 0, 1)
 	if time > 0:
 		# Setup tween for audio fading in

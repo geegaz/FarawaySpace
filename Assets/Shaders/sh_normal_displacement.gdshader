@@ -1,13 +1,13 @@
 shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert;
 
-uniform vec4 color : hint_color = vec4(1.0);
+uniform vec4 color : source_color = vec4(1.0);
 
 uniform float grow : hint_range(0,1);
 uniform vec3 grow_origin = vec3(0.0);
 uniform float grow_origin_distance = 2.0;
 uniform float grow_origin_multiplier = 2.0;
-uniform sampler2D grow_noise : hint_black;
+uniform sampler2D grow_noise : hint_default_black;
 uniform float grow_noise_speed;
 
 void vertex() {

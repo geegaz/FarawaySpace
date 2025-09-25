@@ -5,10 +5,10 @@
 [sub_resource type="SphereMesh" id=1]
 flip_faces = true
 
-[node name="PortalEffect" type="Spatial"]
+[node name="PortalEffect" type="Node3D"]
 
-[node name="PortalSphere" type="MeshInstance" parent="."]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+[node name="PortalSphere" type="MeshInstance3D" parent="."]
+transform = Transform3D( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
 layers = 4
 material_override = ExtResource( 1 )
 mesh = SubResource( 1 )

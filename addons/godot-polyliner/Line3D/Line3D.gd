@@ -1,12 +1,12 @@
-tool
-extends Spatial
+@tool
+extends Node3D
 
-export(float,0.0,100.0) var uv_size = 1.0 setget set_uv_size
-export(Material) var material = null setget set_material
+@export var uv_size = 1.0: set = set_uv_size
+@export var material: Material = null: set = set_material
 
 var _linegen = LineGen3D.new()
 
-export var points = PoolVector3Array() setget set_points
+@export var points = PackedVector3Array(): set = set_points
 
 func set_points(val):
 	points = val
@@ -38,7 +38,7 @@ func set_uv_size(value):
 	uv_size = value
 	redraw()
 
-var _mesh_instance = MeshInstance.new()
+var _mesh_instance = MeshInstance3D.new()
 func set_material(mat):
 	if mat == null:
 		material = load("res://addons/godot-polyliner/default_line_material.tres").duplicate(true)
@@ -60,9 +60,9 @@ func _draw():
 	var length = uv_size
 	
 	print()
-	var start = OS.get_ticks_usec()
+	var start = Time.get_ticks_usec()
 	_mesh_instance.mesh = _linegen.draw_from_points_strip(points)
-	var end = OS.get_ticks_usec()
+	var end = Time.get_ticks_usec()
 	print( points.size(), " points, ", (end-start)*0.001, " ms" )
 
 var already_redrawn = false
