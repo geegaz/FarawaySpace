@@ -41,6 +41,7 @@ skeleton = NodePath("")
 layers = 4
 light_color = Color(0.7643624, 0.83405286, 0.8392583, 1)
 light_energy = 10.0
+light_volumetric_fog_energy = 1000.0
 light_bake_mode = 0
 omni_range = 20.0
 omni_shadow_mode = 0

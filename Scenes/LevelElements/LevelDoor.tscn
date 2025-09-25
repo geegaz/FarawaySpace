@@ -132,6 +132,7 @@ material_override = SubResource("ShaderMaterial_kcnyh")
 mesh = SubResource("18")
 
 [node name="PortalLight" parent="LevelTrigger" index="3"]
+light_color = Color(0.78, 0.9853333, 1, 1)
 shadow_enabled = true
 omni_range = 40.0
 

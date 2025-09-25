@@ -5,9 +5,8 @@
 [resource]
 background_mode = 1
 background_color = Color(0.12028601, 0.14511034, 0.15751967, 1)
-background_energy_multiplier = 1.5
 sky = SubResource("1")
-tonemap_mode = 4
+tonemap_mode = 3
 tonemap_exposure = 1.2
 ssao_enabled = true
 glow_enabled = true
@@ -18,6 +17,8 @@ fog_mode = 1
 fog_light_color = Color(0.12156863, 0.14509805, 0.15686275, 1)
 fog_density = 1.0
 fog_depth_end = 250.0
+volumetric_fog_density = 0.001
+volumetric_fog_gi_inject = 16.0
 adjustment_enabled = true
 adjustment_contrast = 1.05
 adjustment_saturation = 1.5
