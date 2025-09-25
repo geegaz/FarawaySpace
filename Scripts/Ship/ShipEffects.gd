@@ -16,7 +16,7 @@ extends Node
 @onready var _LeftWingTrail: Node3D = get_node_or_null(left_wing_trail)
 
 @export var dust_effect: NodePath
-@onready var _DustEffect: Particles = get_node_or_null(dust_effect)
+@onready var _DustEffect: GPUParticles3D = get_node_or_null(dust_effect)
 
 
 func set_core_trail_width(new_value: float):

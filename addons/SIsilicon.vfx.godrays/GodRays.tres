@@ -1,8 +1,11 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cnkb4d4gddhek"]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id="1"]
 code = "shader_type spatial;
 render_mode unshaded, cull_disabled, skip_vertex_transform, blend_add;
+
+uniform sampler2D DEPTH_TEXTURE : hint_depth_texture, repeat_disable, filter_nearest;
+uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, repeat_disable, filter_nearest;
 
 uniform vec4 light_color: source_color;
 uniform vec3 light_pos;
@@ -12,14 +15,10 @@ uniform int light_type = 0; //0 = directional, 1 = omni
 uniform float exposure: hint_range(0,2);
 uniform float attenuate = 1.0;
 
-uniform sampler2D clouds : source_color;
-uniform bool use_clouds = false;
-
 uniform int num_samples = 100;
 uniform float dither = 1.0;
 uniform bool use_pcf5 = true;
 
-const float PI = 3.141592653;
 const float HALF_PI = PI/2.0;
 
 varying mat4 inv_project_mat;
@@ -42,11 +41,11 @@ void vertex() {
 	vec4 _far_plane = (INV_PROJECTION_MATRIX * vec4(0,0,1,1));
 	far_plane = -_far_plane.z / _far_plane.w;
 	
-	POSITION = vec4(VERTEX.xy, -1.0, 1.0);
+	POSITION = vec4(VERTEX.xy, 1.0, 1.0);
 }
 
 vec3 uv_to_ray(vec2 uv, mat4 inv_cam_matrix) {
-	vec4 view_space_ray = inv_project_mat * vec4(uv * 2.0 - 1.0, 0, 1);
+	vec4 view_space_ray = inv_project_mat * vec4(uv * 2.0 - 1.0, 1, 1);
 	view_space_ray.xyz /= view_space_ray.w;
 	view_space_ray.w = 0.0;
 	
@@ -56,14 +55,8 @@ vec3 uv_to_ray(vec2 uv, mat4 inv_cam_matrix) {
 
 float depth_texture(sampler2D tex, vec2 uv) {
 	float depth = clamp(uv, 0.0, 1.0) == uv ? texture(tex, uv).r : 1.0;
-	vec4 upos = inv_project_mat * vec4(uv*2.0-1.0, depth*2.0-1.0, 1.0);
-	return -upos.z/upos.w;
-}
-
-vec4 texture_panorama(sampler2D tex, vec3 ray) {
-	float u = atan(ray.x, ray.z) / (2.0 * PI) + 0.5;
-	float v = asin(ray.y) / PI + 0.5;
-	return texture(tex, vec2(u, 1.0 - v));
+	vec4 upos = inv_project_mat * vec4(uv * 2.0-1.0, depth, 1.0);
+	return upos.z / upos.w;
 }
 
 float sun_light(sampler2D depth, vec3 ray_o, vec3 ray_d, vec2 uv, vec2 tex_Size) {
@@ -77,12 +70,6 @@ float sun_light(sampler2D depth, vec3 ray_o, vec3 ray_d, vec2 uv, vec2 tex_Size)
 		is_obstacle += float(depth_texture(depth, uv + tex_Size*vec2(0,1)) < light_depth);
 		is_obstacle += float(depth_texture(depth, uv + tex_Size*vec2(0,-1)) < light_depth);
 		is_obstacle /= 5.0;
-	}
-	
-	if(use_clouds) {
-		float temp = texture_panorama(clouds, ray_d).a;
-		if(temp < 0.7) temp = 0.0;
-		is_obstacle = min(is_obstacle + temp, 1.0);
 	}
 	
 	float sun = 0.0;
@@ -135,7 +122,7 @@ void fragment() {
 	if(length(light_color) <= 0.001)
 		discard;
 	
-	vec2 pixel_size = 1.0 / vec2(textureSize(SCREEN_TEXTURE, 0));//vec2(dFdx(SCREEN_UV.x), dFdy(SCREEN_UV.y)) * 1.5;
+	vec2 pixel_size = 1.0 / vec2(textureSize(SCREEN_TEXTURE, 0)); //vec2(dFdx(SCREEN_UV.x), dFdy(SCREEN_UV.y)) * 1.5;
 	vec2 screen_uv = SCREEN_UV;
 	vec2 delta_uv = (light_screen_pos.xy - screen_uv) / (float(num_samples));
 	
@@ -161,15 +148,14 @@ void fragment() {
 }"
 
 [resource]
-render_priority = -1
-shader = SubResource( 1 )
-shader_param/light_color = null
-shader_param/light_pos = null
-shader_param/size = 1.0
-shader_param/light_type = 0
-shader_param/exposure = null
-shader_param/attenuate = 1.0
-shader_param/use_clouds = false
-shader_param/num_samples = 10
-shader_param/dither = 1.0
-shader_param/use_pcf5 = true
+render_priority = 10
+shader = SubResource("1")
+shader_parameter/light_color = Color(0, 0, 0, 1)
+shader_parameter/light_pos = Vector3(0, 0, 0)
+shader_parameter/size = 1.0
+shader_parameter/light_type = 0
+shader_parameter/exposure = 0.0
+shader_parameter/attenuate = 1.0
+shader_parameter/num_samples = 100
+shader_parameter/dither = 1.0
+shader_parameter/use_pcf5 = true

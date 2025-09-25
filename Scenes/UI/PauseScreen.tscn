@@ -1,29 +1,31 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://jlvt2pxikbem"]
 
-[ext_resource path="res://default_theme.tres" type="Theme" id=1]
-[ext_resource path="res://Scripts/UI/Pause.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Shaders/sh_ui_blur.gdshader" type="Shader" id=3]
-
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 3 )
-shader_param/blur_amount = 2.0
+[ext_resource type="Theme" uid="uid://c3hsjjmqm58co" path="res://default_theme.tres" id="1"]
+[ext_resource type="Script" uid="uid://djfukiirkfgfg" path="res://Scripts/UI/Pause.gd" id="2"]
+[ext_resource type="Material" uid="uid://b004i5hlnnvfj" path="res://Assets/Materials/mat_ui_blur.tres" id="3_w3jdu"]
 
 [node name="PauseScreen" type="Control"]
 process_mode = 3
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 1 )
-script = ExtResource( 2 )
+theme = ExtResource("1")
+script = ExtResource("2")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource( 1 )
+material = ExtResource("3_w3jdu")
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.498039 )
+color = Color(0, 0, 0, 0.498039)
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -34,12 +36,13 @@ offset_right = 236.0
 offset_bottom = -3.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
-theme_type_variation = "TitleLabel"
+theme_type_variation = &"TitleLabel"
 text = "Pause"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ButtonsContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -51,12 +54,9 @@ offset_bottom = 102.0
 theme_override_constants/separation = 8
 
 [node name="Resume" type="Button" parent="ButtonsContainer"]
-offset_right = 256.0
-offset_bottom = 37.0
+layout_mode = 2
 text = "Resume"
 
 [node name="Quit" type="Button" parent="ButtonsContainer"]
-offset_top = 45.0
-offset_right = 256.0
-offset_bottom = 82.0
+layout_mode = 2
 text = "Quit"

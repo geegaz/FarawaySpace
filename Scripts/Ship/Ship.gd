@@ -31,7 +31,6 @@ var turn_input: Vector2
 var speed: float
 var prev_speed: float
 var gravity_speed: float
-var velocity: Vector3
 
 # Visuals variables
 var dir: float = 0.0
@@ -164,8 +163,6 @@ func _physics_process(delta):
 			# Additional correction when close to the ground (to help stay horizontal)
 			collision_correction += calculate_correction(ground_normal) * (
 				ground_correction_amount * pow(abs(speed / max_speed), 2.0))
-			
-			DebugDraw.draw_point(ground_position, Color.RED, 1.0)
 		else:
 			ground_position = global_position + _GroundRayCast.target_position
 			ground_normal = Vector3.UP
@@ -187,13 +184,10 @@ func _physics_process(delta):
 		var col_normal: Vector3 = Vector3.ZERO
 		for slide in slide_count:
 			var col: KinematicCollision3D = get_slide_collision(0)
-			col_normal += col.normal
+			col_normal += col.get_normal()
 		col_normal = col_normal.normalized()
 		collision_correction += calculate_correction(col_normal) * (
 			collision_correction_amount * pow(abs(speed / max_speed), 2.0))
-		DebugDraw.draw_line(global_position, global_position + col_normal * 10.0, Color.RED)
-	
-	DebugDraw.draw_line(global_position, global_position + forward * 10.0, Color.BLUE)
 
 
 func calculate_correction(collison_normal: Vector3)->Vector2:

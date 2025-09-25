@@ -1,14 +1,13 @@
 class_name LevelDoor
 extends Node3D
 
-@export var level: Resource
+@export var level: LevelData
 @export var locks: Array # (Array, String)
-@export var petal_animations: Array # (Array, NodePath)
+@export var petal_animations: Array[AnimationPlayer]
 @export var petal_animation_name: String = "DoorPetal_ARMAction"
+@export var door_animation: AnimationPlayer
 
 var open: bool
-
-@onready var _DoorAnimation: AnimationPlayer = $AnimationPlayer
 
 func _enter_tree() -> void:
 	var trigger: LevelTrigger = $LevelTrigger
@@ -29,12 +28,10 @@ func _on_door_trigger_body_exited(body: Node)->void:
 
 func open_door()->void:
 	if not open:
-		_DoorAnimation.play("open_door")
+		door_animation.play("open_door")
 		open = true
 
 func open_petal(index: int)->void:
-	if index < 0 or index >= petal_animations.size():
-		return
-	
-	var petal_animation: AnimationPlayer = get_node_or_null(petal_animations[index])
-	petal_animation.play(petal_animation_name)
+	var petal_animation: AnimationPlayer = petal_animations.get(index)
+	if petal_animation:
+		petal_animation.play(petal_animation_name)

@@ -1,47 +1,46 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://50umnyrpnf8a"]
 
-[ext_resource path="res://Scripts/Triggers/LevelTrigger.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Materials/mat_portal.tres" type="Material" id=2]
-[ext_resource path="res://Assets/Materials/mat_shadow.tres" type="Material" id=3]
-[ext_resource path="res://addons/SIsilicon.vfx.godrays/GodRays.gd" type="Script" id=4]
+[ext_resource type="Script" uid="uid://ev28icfvc5wf" path="res://Scripts/Triggers/LevelTrigger.gd" id="1"]
+[ext_resource type="Material" uid="uid://dk60mshmjwlay" path="res://Assets/Materials/mat_portal.tres" id="2"]
+[ext_resource type="Material" uid="uid://cwe1rex5kuqjm" path="res://Assets/Materials/mat_shadow.tres" id="3"]
 
-[sub_resource type="SphereShape3D" id=1]
+[sub_resource type="SphereShape3D" id="1"]
 radius = 2.0
 
-[sub_resource type="QuadMesh" id=4]
-size = Vector2( 20, 20 )
+[sub_resource type="QuadMesh" id="4"]
+size = Vector2(20, 20)
 
-[sub_resource type="SphereMesh" id=5]
+[sub_resource type="SphereMesh" id="5"]
 flip_faces = true
 radius = 4.0
 height = 8.0
 
-[node name="LevelTrigger" type="Area3D"]
+[node name="LevelTrigger" type="Area3D" node_paths=PackedStringArray("portal_sphere", "portal_light")]
 collision_layer = 0
 collision_mask = 2
 monitorable = false
-script = ExtResource( 1 )
+script = ExtResource("1")
+portal_sphere = NodePath("PortalSphere")
+portal_light = NodePath("PortalLight")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="PortalShadow" type="MeshInstance3D" parent="."]
-material_override = ExtResource( 3 )
+material_override = ExtResource("3")
 cast_shadow = 0
-mesh = SubResource( 4 )
+mesh = SubResource("4")
 
 [node name="PortalSphere" type="MeshInstance3D" parent="."]
 layers = 4
-material_override = ExtResource( 2 )
-mesh = SubResource( 5 )
+material_override = ExtResource("2")
+mesh = SubResource("5")
 skeleton = NodePath("")
 
 [node name="PortalLight" type="OmniLight3D" parent="."]
 layers = 4
-light_color = Color( 0.654902, 0.737255, 0.752941, 1 )
+light_color = Color(0.7643624, 0.83405286, 0.8392583, 1)
+light_energy = 10.0
 light_bake_mode = 0
-omni_range = 40.0
-omni_attenuation = 2.0
-
-[node name="GodRays" type="Node3D" parent="PortalLight"]
-script = ExtResource( 4 )
+omni_range = 20.0
+omni_shadow_mode = 0

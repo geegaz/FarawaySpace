@@ -1,10 +1,5 @@
 extends Node
 
-signal loading_completed
-
-var loading_thread: = Thread.new()
-var loading_mutex: = Mutex.new()
-
 var changing_level: bool
 var current_level: LevelData
 var current_level_node: Node
@@ -35,8 +30,7 @@ func change_level(level: LevelData)->void:
 		printerr("Level is already loaded")
 		return # Don't load the current level again
 	
-	var dir: = DirAccess.new()
-	if not dir.file_exists(level.level_scene_path):
+	if not FileAccess.file_exists(level.level_scene_path):
 		printerr("Level scene path is invalid")
 		return # Can't load an invalid path
 	
@@ -66,9 +60,7 @@ func change_level(level: LevelData)->void:
 	current_level = null
 	
 	# Start loading in the background
-	loading_thread.start(Callable(self, "_load_level_threaded").bind(level.level_scene_path))
-	await self.loading_completed
-	var loaded_scene: PackedScene = loading_thread.wait_to_finish()
+	var loaded_scene: = await _load_level_threaded(level.level_scene_path)
 	
 	# Add new level
 	current_level = level
@@ -110,16 +102,17 @@ func _load_level_threaded(path: String)->PackedScene:
 	if ResourceLoader.has_cached(path):
 		return ResourceLoader.load(path) as PackedScene
 		
-	var loader: = ResourceLoader.load_threaded_request(path, "PackedScene")
-	var error: = OK
-	while error == OK:
-		OS.delay_msec(5)
-		error = loader.poll()
-	
-	call_deferred("emit_signal", "loading_completed")
-	
-	if error != ERR_FILE_EOF:
+	var error: = ResourceLoader.load_threaded_request(path, "PackedScene")
+	if error != OK:
 		printerr("Failed to load scene %s"%path, error)
-	return loader.get_resource() as PackedScene
+		return null
 	
-
+	var status: = ResourceLoader.THREAD_LOAD_IN_PROGRESS
+	while status == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+		status = ResourceLoader.load_threaded_get_status(path)
+		await tree.process_frame
+	
+	if status == ResourceLoader.THREAD_LOAD_LOADED:
+		return ResourceLoader.load_threaded_get(path)
+	printerr("Failed to load scene %s"%path, error)
+	return null

@@ -1,15 +1,16 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dk60mshmjwlay"]
 
-[ext_resource path="res://Assets/Textures/default_cubemap/default_cubemap.tres" type="Cubemap" id=1]
-[ext_resource path="res://Assets/Shaders/sh_portal.gdshader" type="Shader" id=2]
+[ext_resource type="Shader" uid="uid://dq2g06ereimvl" path="res://Assets/Shaders/sh_portal.gdshader" id="2"]
+[ext_resource type="CompressedCubemap" uid="uid://ceg50dbo0pgb2" path="res://Assets/Textures/default_cubemap/cubemap.jpg" id="2_ms7lk"]
 
 [resource]
 resource_local_to_scene = true
-shader = ExtResource( 2 )
-shader_param/min_eta = 0.5
-shader_param/max_eta = 0.9
-shader_param/distorted_eta_start = 0.3
-shader_param/fade_start = 0.5
-shader_param/chromatic_dispersion_start = 0.5
-shader_param/chromatic_dispersion_multiplier = 4.0
-shader_param/cubemap = ExtResource( 1 )
+render_priority = 0
+shader = ExtResource("2")
+shader_parameter/cubemap = ExtResource("2_ms7lk")
+shader_parameter/min_eta = 0.5
+shader_parameter/max_eta = 0.9
+shader_parameter/distorted_eta_start = 0.3
+shader_parameter/fade_start = 0.5
+shader_parameter/chromatic_dispersion_start = 0.5
+shader_parameter/chromatic_dispersion_multiplier = 4.0

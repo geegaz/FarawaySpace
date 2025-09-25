@@ -6,8 +6,6 @@ var light : Light3D
 @export var attenuation := 2.0: set = set_attenuation
 @export var light_size := 0.5: set = set_light_size
 
-var clouds : Texture2D: set = set_clouds
-
 var canvas : MeshInstance3D
 var material := preload("GodRays.tres").duplicate() as ShaderMaterial
 
@@ -17,7 +15,6 @@ func _notification(what : int) -> void:
 			light = get_parent()
 	elif what == NOTIFICATION_UNPARENTED:
 		light = null
-		set_clouds(null)
 
 func _ready() -> void:
 	if get_child_count() > 0 and get_child(0).owner == null:
@@ -38,8 +35,6 @@ func _ready() -> void:
 	set_exposure(exposure)
 	set_attenuation(attenuation)
 	set_light_size(light_size)
-	
-	set_clouds(null)
 
 func _process(delta : float) -> void:
 	if not light:
@@ -81,8 +76,3 @@ func set_light_size(value : float) -> void:
 	light_size = value
 	if canvas:
 		canvas.visible = light_size != 0
-
-func set_clouds(value : Texture2D) -> void:
-	clouds = value
-	material.set_shader_parameter("clouds", value)
-	material.set_shader_parameter("use_clouds", value != null)

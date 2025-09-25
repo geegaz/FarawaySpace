@@ -1,41 +1,41 @@
-[gd_resource type="Theme" load_steps=10 format=2]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://c3hsjjmqm58co"]
 
-[ext_resource path="res://Assets/Fonts/millennia.tres" type="FontFile" id=1]
-[ext_resource path="res://Assets/Styles/Button/style_focused.tres" type="StyleBox" id=2]
-[ext_resource path="res://Assets/Styles/Button/style_normal.tres" type="StyleBox" id=3]
-[ext_resource path="res://Assets/Styles/Button/style_pressed.tres" type="StyleBox" id=4]
-[ext_resource path="res://Assets/Styles/Button/style_hover.tres" type="StyleBox" id=5]
-[ext_resource path="res://Assets/Styles/Button/style_disabled.tres" type="StyleBox" id=6]
-[ext_resource path="res://Assets/Fonts/galiver-sans.tres" type="FontFile" id=7]
+[ext_resource type="FontFile" path="res://Assets/Fonts/millennia.tres" id="1"]
+[ext_resource type="StyleBox" path="res://Assets/Styles/Button/style_focused.tres" id="2"]
+[ext_resource type="StyleBox" path="res://Assets/Styles/Button/style_normal.tres" id="3"]
+[ext_resource type="StyleBox" path="res://Assets/Styles/Button/style_pressed.tres" id="4"]
+[ext_resource type="StyleBox" path="res://Assets/Styles/Button/style_hover.tres" id="5"]
+[ext_resource type="StyleBox" path="res://Assets/Styles/Button/style_disabled.tres" id="6"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/galiver-sans.tres" id="7"]
 
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 1, 1, 1, 1 )
+[sub_resource type="StyleBoxFlat" id="3"]
+bg_color = Color(1, 1, 1, 1)
 draw_center = false
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
+border_color = Color(1, 1, 1, 1)
 
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 1, 1, 1, 1 )
+[sub_resource type="StyleBoxFlat" id="2"]
+bg_color = Color(1, 1, 1, 1)
 
 [resource]
-Button/colors/font_color = Color( 1, 1, 1, 1 )
-Button/colors/font_color_disabled = Color( 0.25098, 0.25098, 0.25098, 1 )
-Button/colors/font_color_focus = Color( 1, 1, 1, 1 )
-Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
-Button/colors/font_color_pressed = Color( 0, 0, 0, 1 )
-Button/fonts/font = ExtResource( 1 )
-Button/styles/disabled = ExtResource( 6 )
-Button/styles/focus = ExtResource( 2 )
-Button/styles/hover = ExtResource( 5 )
-Button/styles/normal = ExtResource( 3 )
-Button/styles/pressed = ExtResource( 4 )
-Label/fonts/font = ExtResource( 1 )
-ProgressBar/colors/font_color = Color( 0.498039, 0.498039, 0.498039, 1 )
-ProgressBar/fonts/font = ExtResource( 1 )
-ProgressBar/styles/bg = SubResource( 3 )
-ProgressBar/styles/fg = SubResource( 2 )
-TitleLabel/base_type = "Label"
-TitleLabel/fonts/font = ExtResource( 7 )
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_color_disabled = Color(0.25098, 0.25098, 0.25098, 1)
+Button/colors/font_color_focus = Color(1, 1, 1, 1)
+Button/colors/font_color_hover = Color(0, 0, 0, 1)
+Button/colors/font_color_pressed = Color(0, 0, 0, 1)
+Button/fonts/font = ExtResource("1")
+Button/styles/disabled = ExtResource("6")
+Button/styles/focus = ExtResource("2")
+Button/styles/hover = ExtResource("5")
+Button/styles/normal = ExtResource("3")
+Button/styles/pressed = ExtResource("4")
+Label/fonts/font = ExtResource("1")
+ProgressBar/colors/font_color = Color(0.498039, 0.498039, 0.498039, 1)
+ProgressBar/fonts/font = ExtResource("1")
+ProgressBar/styles/bg = SubResource("3")
+ProgressBar/styles/fg = SubResource("2")
+TitleLabel/base_type = &"Label"
+TitleLabel/fonts/font = ExtResource("7")

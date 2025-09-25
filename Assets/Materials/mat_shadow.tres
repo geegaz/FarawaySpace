@@ -1,12 +1,12 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cwe1rex5kuqjm"]
 
-[ext_resource path="res://Assets/Shaders/sh_shadow.gdshader" type="Shader" id=1]
+[ext_resource type="Shader" uid="uid://bkaftu0eord8p" path="res://Assets/Shaders/sh_shadow.gdshader" id="1"]
 
 [resource]
 render_priority = -2
-shader = ExtResource( 1 )
-shader_param/color = null
-shader_param/proximity_fade_distance = 5.0
-shader_param/distance_fade_min = 0.0
-shader_param/distance_fade_max = 10.0
-shader_param/shadow_power = 2.0
+shader = ExtResource("1")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/proximity_fade_distance = 5.0
+shader_parameter/distance_fade_min = 0.0
+shader_parameter/distance_fade_max = 10.0
+shader_parameter/shadow_power = 2.0

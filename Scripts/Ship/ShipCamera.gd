@@ -12,27 +12,26 @@ func _ready():
 	# Setup target
 	if translation_as_offset and _Target:
 		offset = position
-	set_as_top_level(true)
+	top_level = true
 	reset_interpolation()
 
 func _process(delta):
 	# Follow target
 	if _Target:
 		global_transform = global_transform.interpolate_with(get_target_transform(), 1- exp(-smoothing * delta))
-		global_rotation = Quaternion(global_rotation).slerp(get_target_rotation(),1- exp(-smoothing * delta)).get_euler()
+		global_rotation = quaternion.slerp(get_target_rotation(),1- exp(-smoothing * delta)).get_euler()
 
 func get_target_transform()->Transform3D:
 	if not _Target:
 		return global_transform
-	return _Target.global_transform.translated(offset)
+	return _Target.global_transform.translated_local(offset)
 
 func get_target_rotation()->Quaternion:
 	if not _Target:
-		return Quaternion(global_rotation)
-	return Quaternion(_Target.global_rotation)
+		return quaternion
+	return _Target.quaternion
 
 func reset_interpolation()->void:
 	if _Target:
 		global_transform = get_target_transform()
 		global_rotation = get_target_rotation().get_euler()
-

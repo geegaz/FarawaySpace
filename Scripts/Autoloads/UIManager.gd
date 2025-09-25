@@ -125,5 +125,3 @@ func remove_control_from_layer(control_name: String, layer_name: String)->void:
 	else:
 		printerr("Can't remove control %s from layer %s: control is already child of %s"%[
 			control, layer, control_parent])
-
-

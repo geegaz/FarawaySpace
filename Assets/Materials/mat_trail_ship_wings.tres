@@ -1,27 +1,29 @@
-[gd_resource type="ShaderMaterial" load_steps=6 format=2]
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://bo043ux18pc12"]
 
-[ext_resource path="res://Assets/Shaders/sh_trails.gdshader" type="Shader" id=1]
+[ext_resource type="Shader" uid="uid://csih6saaq6aaj" path="res://Assets/Shaders/sh_trails.gdshader" id="1"]
 
-[sub_resource type="Gradient" id=45]
-offsets = PackedFloat32Array( 0, 0.2, 0.9 )
-colors = PackedColorArray( 1, 1, 1, 0, 1, 1, 1, 0.498039, 1, 1, 1, 0 )
+[sub_resource type="Gradient" id="45"]
+offsets = PackedFloat32Array(0, 0.2, 0.9)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.498039, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture2D" id=46]
-gradient = SubResource( 45 )
+[sub_resource type="GradientTexture2D" id="46"]
+gradient = SubResource("45")
 
-[sub_resource type="Curve" id=47]
-_data = [ Vector2( 0, 0 ), 0.0, 5.0, 0, 0, Vector2( 0.4, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -3.0, 0.0, 0, 0 ]
+[sub_resource type="Curve" id="47"]
+_data = [Vector2(0, 0), 0.0, 5.0, 0, 0, Vector2(0.4, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.0, 0.0, 0, 0]
+point_count = 3
 
-[sub_resource type="CurveTexture" id=48]
-curve = SubResource( 47 )
+[sub_resource type="CurveTexture" id="48"]
+curve = SubResource("47")
 
 [resource]
-shader = ExtResource( 1 )
-shader_param/line_width = 0.1
-shader_param/tangent_facing = false
-shader_param/tex_stretch = true
-shader_param/tex_scale = Vector2( 1, 1 )
-shader_param/amount = 1.0
-shader_param/color = Color( 1, 1, 1, 1 )
-shader_param/width_curve = SubResource( 48 )
-shader_param/albedo_tex = SubResource( 46 )
+render_priority = 0
+shader = ExtResource("1")
+shader_parameter/line_width = 0.1
+shader_parameter/width_curve = SubResource("48")
+shader_parameter/tangent_facing = false
+shader_parameter/albedo_tex = SubResource("46")
+shader_parameter/tex_stretch = true
+shader_parameter/tex_scale = Vector2(1, 1)
+shader_parameter/amount = 1.0
+shader_parameter/color = Color(1, 1, 1, 1)

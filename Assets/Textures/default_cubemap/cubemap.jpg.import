@@ -1,0 +1,28 @@
+[remap]
+
+importer="cubemap_texture"
+type="CompressedCubemap"
+uid="uid://ceg50dbo0pgb2"
+path.s3tc="res://.godot/imported/cubemap.jpg-fc42d5a75dbe027c51e5101ce61424e8.s3tc.ccube"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://Assets/Textures/default_cubemap/cubemap.jpg"
+dest_files=["res://.godot/imported/cubemap.jpg-fc42d5a75dbe027c51e5101ce61424e8.s3tc.ccube"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
+compress/hdr_compression=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+slices/arrangement=1

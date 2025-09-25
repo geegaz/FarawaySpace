@@ -1,17 +1,18 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bt5pnocxwcmij"]
 
-[ext_resource path="res://Assets/Shaders/sh_particles.gdshader" type="Shader" id=1]
-[ext_resource path="res://addons/kenney_particle_pack/smoke_05.png" type="Texture2D" id=2]
+[ext_resource type="Shader" uid="uid://b0a0xxjgru36n" path="res://Assets/Shaders/sh_particles.gdshader" id="1"]
+[ext_resource type="Texture2D" uid="uid://qghlgttb3gcs" path="res://addons/kenney_particle_pack/smoke_05.png" id="2"]
 
 [resource]
-shader = ExtResource( 1 )
-shader_param/color = Color( 0.768627, 0.768627, 0.768627, 1 )
-shader_param/proximity_fade_distance = 1.0
-shader_param/distance_fade_min = 0.0
-shader_param/distance_fade_max = 1.0
-shader_param/transmission = Color( 0.247059, 0.247059, 0.247059, 1 )
-shader_param/billboard = true
-shader_param/particles_anim_h_frames = 1
-shader_param/particles_anim_v_frames = 1
-shader_param/particles_anim_loop = false
-shader_param/texture_albedo = ExtResource( 2 )
+render_priority = 0
+shader = ExtResource("1")
+shader_parameter/color = Color(0.768627, 0.768627, 0.768627, 1)
+shader_parameter/texture_albedo = ExtResource("2")
+shader_parameter/proximity_fade_distance = 1.0
+shader_parameter/distance_fade_min = 0.0
+shader_parameter/distance_fade_max = 1.0
+shader_parameter/transmission = Color(0.247059, 0.247059, 0.247059, 1)
+shader_parameter/billboard = true
+shader_parameter/particles_anim_h_frames = 1
+shader_parameter/particles_anim_v_frames = 1
+shader_parameter/particles_anim_loop = false

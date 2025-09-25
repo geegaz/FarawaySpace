@@ -1,11 +1,12 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bx0h8kcxcrhip"]
 
-[ext_resource path="res://Assets/Shaders/sh_surfaces.gdshader" type="Shader" id=1]
-[ext_resource path="res://Assets/Materials/mat_surface_ship_core_displacement.tres" type="Material" id=2]
+[ext_resource type="Shader" uid="uid://daqlevmxhm1j1" path="res://Assets/Shaders/sh_surfaces.gdshader" id="1"]
+[ext_resource type="Material" uid="uid://ou11w1wncibu" path="res://Assets/Materials/mat_surface_ship_core_displacement.tres" id="2"]
 
 [resource]
-next_pass = ExtResource( 2 )
-shader = ExtResource( 1 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/emission = Color( 1, 1, 1, 1 )
-shader_param/emission_amount = 1.5
+render_priority = 0
+next_pass = ExtResource("2")
+shader = ExtResource("1")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/emission = Color(1, 1, 1, 1)
+shader_parameter/emission_amount = 1.5
