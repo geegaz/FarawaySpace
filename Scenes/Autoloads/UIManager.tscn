@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cntsaatd4ac44" path="res://Scripts/Autoloads/UIManager.gd" id="1"]
 [ext_resource type="PackedScene" path="res://Scenes/UI/Transition.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://Scenes/UI/PauseScreen.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://jlvt2pxikbem" path="res://Scenes/UI/PauseScreen.tscn" id="3"]
 [ext_resource type="Script" uid="uid://caj6kwvkdyxrk" path="res://Scripts/UI/Spinner.gd" id="4"]
 [ext_resource type="Texture2D" uid="uid://dabshaatpykly" path="res://Assets/Textures/visor_1.png" id="5"]
 
@@ -21,11 +21,13 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -96.0
-offset_top = -96.0
+offset_left = -80.0
+offset_top = -80.0
 offset_right = -32.0
 offset_bottom = -32.0
-pivot_offset = Vector2(32, 32)
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(24, 24)
 texture = ExtResource("5")
 expand_mode = 1
 script = ExtResource("4")
@@ -34,5 +36,3 @@ script = ExtResource("4")
 layer = 9
 
 [node name="PauseScreen" parent="MenuLayer" instance=ExtResource("3")]
-layout_mode = 3
-anchors_preset = 15

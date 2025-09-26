@@ -14,8 +14,8 @@ func _enter_tree() -> void:
 	trigger.level = level
 	
 	var door_trigger: Area3D = $DoorTrigger
-	door_trigger.connect("body_entered", Callable(self, "_on_door_trigger_body_entered"))
-	door_trigger.connect("body_exited", Callable(self, "_on_door_trigger_body_exited"))
+	door_trigger.body_entered.connect(_on_door_trigger_body_entered)
+	door_trigger.body_exited.connect(_on_door_trigger_body_exited)
 
 func _on_door_trigger_body_entered(body: Node)->void:
 	if body is Ship:
@@ -30,8 +30,3 @@ func open_door()->void:
 	if not open:
 		door_animation.play("open_door")
 		open = true
-
-func open_petal(index: int)->void:
-	var petal_animation: AnimationPlayer = petal_animations.get(index)
-	if petal_animation:
-		petal_animation.play(petal_animation_name)

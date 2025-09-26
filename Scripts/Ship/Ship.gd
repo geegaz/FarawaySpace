@@ -22,6 +22,19 @@ signal gravity_changed(value)
 @export var spring_damping: float = 4.0 # (float, 0.0, 10.0)
 @export var ground_correction_amount: float = 0.025 # (float, 0, 1)
 
+@export_group("References")
+# Gameplay nodes
+@export var _Camera: Camera3D
+@export var _ShipPivot: Node3D
+@export var _GroundRayCast: RayCast3D
+# Visuals nodes
+@export var _ShipModel: Node3D
+@export var _AnimationTree: AnimationTree
+@export var _GroundEffects: Node3D
+@export var _ShipEffects: ShipEffects
+# Audio nodes
+@export var _ShipAudio: AudioStreamPlayer3D
+
 # Input variables
 var forward_input: float
 var backward_input: float
@@ -43,19 +56,6 @@ var collision_correction: Vector2
 var ground_position: Vector3
 var ground_normal: Vector3
 var ground_distance: float
-
-# Gameplay nodes
-@onready var _Camera: Camera3D = $Camera3D
-@onready var _ShipPivot: Node3D = $Pivot
-@onready var _ShipInterpolation: PhysInterp = $Pivot/Interpolation
-@onready var _GroundRayCast: RayCast3D = $GroundRayCast
-# Visuals nodes
-@onready var _ShipModel: Node3D = $Pivot/Interpolation/Model
-@onready var _AnimationTree: AnimationTree = $Pivot/Interpolation/Model/AnimationTree
-@onready var _GroundEffects: Node3D = $Pivot/Interpolation/GroundEffects
-@onready var _ShipEffects: ShipEffects = $ShipEffects
-# Audio nodes
-@onready var _ShipAudio: AudioStreamPlayer3D = $Pivot/Interpolation/Audio
 
 
 func _enter_tree() -> void:
@@ -118,7 +118,7 @@ func _process(delta):
 	_ShipModel.rotation.z = tilt
 	
 	# Trails
-	_ShipEffects.core_trail_width = max(power, 0.0) * 0.3
+	_ShipEffects.core_trail_width = max(power, 0.0) * 0.5
 	_ShipEffects.wing_trails_emitting = speed_amount > 0.9;
 	
 	if gravity_enabled:
@@ -232,8 +232,6 @@ func get_pivot_basis(global: bool = true)->Basis:
 func teleport(target_position: Vector3, target_rotation: Vector3)->void:
 	global_position = target_position
 	_ShipPivot.global_rotation = target_rotation
-	_ShipInterpolation.reset_interpolation()
-	_Camera.reset_interpolation()
 
 
 func set_enabled(value: bool)->void:

@@ -5,6 +5,7 @@ var controls: Dictionary
 var control_layers: Dictionary
 
 @onready var tree: SceneTree = get_tree()
+@onready var window: Window = tree.root
 
 func _enter_tree() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -27,7 +28,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		pause(not tree.paused)
 	
 	if event.is_action_pressed("ui_fullscreen"):
-		get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (not ((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN))) else Window.MODE_WINDOWED
+		var target_mode: = Window.MODE_FULLSCREEN
+		if window.mode == Window.MODE_FULLSCREEN:
+			target_mode = Window.MODE_WINDOWED
+		window.mode = target_mode
 
 func pause(value: bool)->void:
 	tree.paused = value

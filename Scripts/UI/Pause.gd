@@ -2,12 +2,12 @@ extends Control
 
 var tween: Tween
 
-@onready var _Resume: Button = $ButtonsContainer/Resume
-@onready var _Quit: Button = $ButtonsContainer/Quit
+@export var resume_button: Button
+@export var quit_button: Button
 
 func _ready() -> void:
-	_Resume.connect("pressed", Callable(self, "_on_resume_pressed"))
-	_Quit.connect("pressed", Callable(self, "_on_quit_pressed"))
+	resume_button.pressed.connect(_on_resume_pressed)
+	quit_button.pressed.connect(_on_quit_pressed)
 
 func _on_resume_pressed()->void:
 	UIManager.pause(false)
@@ -18,7 +18,7 @@ func _on_quit_pressed()->void:
 
 func enter_state()->void:
 	visible = true
-	_Resume.grab_focus()
+	resume_button.grab_focus()
 
 func exit_state()->void:
 	visible = false

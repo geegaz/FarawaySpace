@@ -3,7 +3,7 @@ render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert;
 
 uniform vec4 color : source_color = vec4(1.0);
 
-uniform float grow_amount : hint_range(0,1);
+uniform float grow : hint_range(0,1);
 uniform vec3 grow_origin = vec3(0.0);
 uniform float grow_origin_distance = 2.0;
 uniform float grow_origin_multiplier = 2.0;
@@ -12,7 +12,7 @@ uniform float grow_noise_speed;
 
 void vertex() {
 	float origin_affect = clamp((grow_origin_distance - distance(VERTEX, grow_origin))/grow_origin_distance, 0.0, 1.0)  * grow_origin_multiplier;
-	VERTEX = VERTEX + NORMAL * grow_amount * origin_affect * texture(grow_noise, VERTEX.xy + TIME*grow_noise_speed).r;
+	VERTEX = VERTEX + NORMAL * grow * origin_affect * texture(grow_noise, VERTEX.xy + TIME*grow_noise_speed).r;
 }
 
 void fragment() {

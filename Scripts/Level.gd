@@ -3,29 +3,15 @@ extends Node3D
 
 @export var has_gravity: bool
 @export var start_checkpoint: int
-@export var checkpoints: Array # (Array, NodePath)
+@export var checkpoints: Array[ShipSpawner]
 @export var override_player_scene: PackedScene
 
 var current_checkpoint: ShipSpawner
 
 func _ready() -> void:
-	current_checkpoint = try_get_spawner(start_checkpoint)
+	current_checkpoint = checkpoints.get(start_checkpoint)
 	if current_checkpoint:
 		spawn_player(current_checkpoint)
-
-func try_get_spawner(index: int)->ShipSpawner:
-	var valid_index: bool = start_checkpoint >= 0 and start_checkpoint < checkpoints.size()
-	if not valid_index:
-		printerr("Invalid index %s in %s"%[start_checkpoint, checkpoints])
-		return null # Skip for now too
-	
-	var checkpoint_path: NodePath = checkpoints[start_checkpoint]
-	var checkpoint_node: ShipSpawner = get_node_or_null(checkpoint_path)
-	if not checkpoint_node:
-		printerr("Couldn't find spawner %s"%checkpoint_path)
-		return null
-	
-	return checkpoint_node
 
 func spawn_player(at: ShipSpawner)->void:
 	var player_scene: PackedScene = override_player_scene

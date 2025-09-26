@@ -6,35 +6,25 @@ extends Node
 @export var wing_trails_emitting: bool = true: set = set_wing_trails_emitting
 @export var dust_effect_emitting: bool = true: set = set_dust_effect_emitting
 
-@export var core_trail: NodePath
-@onready var _CoreTrail: Node3D = get_node_or_null(core_trail)
-
-@export var right_wing_trail: NodePath
-@onready var _RightWingTrail: Node3D = get_node_or_null(right_wing_trail)
-
-@export var left_wing_trail: NodePath
-@onready var _LeftWingTrail: Node3D = get_node_or_null(left_wing_trail)
-
-@export var dust_effect: NodePath
-@onready var _DustEffect: GPUParticles3D = get_node_or_null(dust_effect)
-
+@export var core_trail: Trail3D
+@export var wing_trails: Array[Trail3D]
+@export var dust_effect: GPUParticles3D
 
 func set_core_trail_width(new_value: float):
 	core_trail_width = new_value
 	
-	if _CoreTrail:
-		_CoreTrail.material.set_shader_parameter("line_width", core_trail_width)
+	if core_trail:
+		core_trail.width = core_trail_width
 
 func set_wing_trails_emitting(new_value: bool):
 	wing_trails_emitting = new_value
 	
-	if _RightWingTrail:
-		_RightWingTrail.sampling_mode = _RightWingTrail.SamplingMode.Idle if new_value else _RightWingTrail.SamplingMode.None
-	if _LeftWingTrail:
-		_LeftWingTrail.sampling_mode = _LeftWingTrail.SamplingMode.Idle if new_value else _LeftWingTrail.SamplingMode.None
+	#var time_limit: = 0.25 if wing_trails_emitting else 0.0
+	#for trail in wing_trails:
+		#trail.time_limit = time_limit
 
 func set_dust_effect_emitting(new_value: bool):
 	dust_effect_emitting = new_value
 	
-	if _DustEffect:
-		_DustEffect.emitting = new_value
+	if dust_effect:
+		dust_effect.emitting = dust_effect_emitting

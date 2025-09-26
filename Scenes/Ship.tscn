@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://d2k3uncoj5ise"]
+[gd_scene load_steps=40 format=3 uid="uid://d2k3uncoj5ise"]
 
 [ext_resource type="ArrayMesh" uid="uid://c7jo5vrb5ovow" path="res://Assets/Meshes/ship_wing.obj" id="1"]
 [ext_resource type="ArrayMesh" uid="uid://bl067x0m5ancu" path="res://Assets/Meshes/ship_prism.obj" id="2"]
@@ -6,12 +6,24 @@
 [ext_resource type="Script" uid="uid://chdjsh46c7s2g" path="res://Scripts/DebugAction.gd" id="4"]
 [ext_resource type="Script" uid="uid://87g1aydclotd" path="res://Scripts/Ship/Ship.gd" id="5"]
 [ext_resource type="PackedScene" path="res://Scenes/Effects/DustEffect.tscn" id="6"]
-[ext_resource type="Material" path="res://Assets/Materials/mat_surface_level_diffuse.tres" id="8_csonu"]
+[ext_resource type="Material" uid="uid://c0yy0f4y871dd" path="res://Assets/Materials/mat_surface_ship_diffuse.tres" id="8_11qs7"]
 [ext_resource type="Script" uid="uid://dm17ec53umwiu" path="res://Scripts/Ship/ShipCamera.gd" id="9"]
 [ext_resource type="Script" uid="uid://ttu4p5movomr" path="res://Scripts/Ship/ShipEffects.gd" id="11"]
 [ext_resource type="AudioStream" uid="uid://c47iw855uwvkc" path="res://Assets/Sounds/flying_sound.ogg" id="12"]
-[ext_resource type="Script" uid="uid://b535tiu4j1mpv" path="res://addons/godot-recipes/phys_interp.gd" id="13"]
+[ext_resource type="Script" uid="uid://bqflf4vw8mem1" path="res://addons/lines_and_trails_3d/trail_3d.gd" id="13_11qs7"]
 [ext_resource type="Material" uid="uid://cwe1rex5kuqjm" path="res://Assets/Materials/mat_shadow.tres" id="14"]
+
+[sub_resource type="Curve" id="Curve_csonu"]
+_data = [Vector2(0, 0), 0.0, 7.7031245, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.8388216, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_11qs7"]
+_data = [Vector2(0, 0), 0.0, 3.838817, 0, 0, Vector2(1, 0), -3.8388216, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_csonu"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="QuadMesh" id="65"]
 size = Vector2(8, 8)
@@ -830,7 +842,7 @@ blend_point_2/node = SubResource("63")
 blend_point_2/pos = -1.0
 
 [sub_resource type="AnimationNodeBlendTree" id="58"]
-graph_offset = Vector2(-335, -13)
+graph_offset = Vector2(-76.8631, 77.477005)
 nodes/power/node = SubResource("64")
 nodes/power/position = Vector2(62, 113)
 node_connections = [&"output", 0, &"power"]
@@ -853,7 +865,7 @@ blend_point_2/node = SubResource("52")
 blend_point_2/pos = -1.0
 
 [sub_resource type="AnimationNodeBlendTree" id="57"]
-graph_offset = Vector2(-413, 32)
+graph_offset = Vector2(-249.92612, 1.7235107)
 nodes/power/node = SubResource("53")
 nodes/power/position = Vector2(20, 120)
 node_connections = [&"output", 0, &"power"]
@@ -864,45 +876,56 @@ xfade_time = 0.2
 [sub_resource type="AnimationNodeStateMachineTransition" id="60"]
 xfade_time = 0.2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wj15d"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_csonu"]
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="33"]
 states/Start/position = Vector2(157, 169)
 states/flying/node = SubResource("58")
-states/flying/position = Vector2(569, 169)
+states/flying/position = Vector2(291, 169)
 states/grounded/node = SubResource("57")
-states/grounded/position = Vector2(300, 169)
-transitions = ["flying", "grounded", SubResource("59"), "grounded", "flying", SubResource("60"), "Start", "grounded", SubResource("AnimationNodeStateMachineTransition_wj15d")]
+states/grounded/position = Vector2(566, 169)
+transitions = ["flying", "grounded", SubResource("59"), "grounded", "flying", SubResource("60"), "Start", "flying", SubResource("AnimationNodeStateMachineTransition_csonu")]
 graph_offset = Vector2(-18, 40)
 
 [sub_resource type="SphereShape3D" id="16"]
+radius = 1.0
 
-[node name="Ship" type="CharacterBody3D" groups=["Player"]]
+[node name="Ship" type="CharacterBody3D" node_paths=PackedStringArray("_Camera", "_ShipPivot", "_GroundRayCast", "_ShipModel", "_AnimationTree", "_GroundEffects", "_ShipEffects", "_ShipAudio") groups=["Player"]]
 collision_layer = 2
 collision_mask = 15
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("5")
 max_speed = 20.0
+_Camera = NodePath("Camera3D")
+_ShipPivot = NodePath("Pivot")
+_GroundRayCast = NodePath("GroundRayCast")
+_ShipModel = NodePath("Pivot/Model")
+_AnimationTree = NodePath("Pivot/Model/AnimationTree")
+_GroundEffects = NodePath("Pivot/GroundEffects")
+_ShipEffects = NodePath("ShipEffects")
+_ShipAudio = NodePath("Pivot/Audio")
 
 [node name="DebugActionGravityOn" type="Node" parent="."]
 script = ExtResource("4")
-target = NodePath("..")
 code = "gon"
 function = "set_gravity_enabled"
 args = [true]
 
 [node name="DebugActionGravityOff" type="Node" parent="."]
 script = ExtResource("4")
-target = NodePath("..")
 code = "goff"
 function = "set_gravity_enabled"
 args = [false]
 
-[node name="ShipEffects" type="Node" parent="."]
+[node name="ShipEffects" type="Node" parent="." node_paths=PackedStringArray("core_trail", "wing_trails")]
 script = ExtResource("11")
-dust_effect = NodePath("../Pivot/Interpolation/GroundEffects/DustEffect")
+core_trail = NodePath("../Pivot/Model/Core/Trail3D")
+wing_trails = [NodePath("../Pivot/Model/RightWing/Trail3DRight"), NodePath("../Pivot/Model/LeftWing/Trail3DLeft")]
+dust_effect = NodePath("../Pivot/GroundEffects/DustEffect")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2, 6)
 current = true
 far = 1000.0
@@ -911,68 +934,110 @@ target = NodePath("../Pivot")
 
 [node name="Pivot" type="Node3D" parent="."]
 
-[node name="Interpolation" type="Node3D" parent="Pivot"]
-script = ExtResource("13")
-
-[node name="Model" type="Node3D" parent="Pivot/Interpolation"]
+[node name="Model" type="Node3D" parent="Pivot"]
 transform = Transform3D(1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Pivot/Interpolation/Model"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Pivot/Model"]
 transform = Transform3D(1, 0, 0, 0, -1, -1.50996e-07, 0, 1.50996e-07, -1, 0, 1.50996e-07, 1)
 layers = 2
 light_energy = 2.0
 light_bake_mode = 0
 spot_range = 50.0
 
-[node name="Core" type="MeshInstance3D" parent="Pivot/Interpolation/Model"]
+[node name="Core" type="MeshInstance3D" parent="Pivot/Model"]
 layers = 2
 material_override = ExtResource("3")
 gi_mode = 2
 mesh = ExtResource("2")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Pivot/Interpolation/Model/Core"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Pivot/Model/Core"]
 layers = 2
 light_energy = 0.1
 light_bake_mode = 0
 
-[node name="RightWing" type="MeshInstance3D" parent="Pivot/Interpolation/Model"]
+[node name="Trail3D" type="MeshInstance3D" parent="Pivot/Model/Core"]
+process_priority = 9999
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.1)
 layers = 2
-material_override = ExtResource("8_csonu")
+gi_mode = 2
+skeleton = NodePath("../../../..")
+script = ExtResource("13_11qs7")
+max_section_length = 0.02
+width = 0.5
+width_curve = SubResource("Curve_csonu")
+metadata/_custom_type_script = "uid://bqflf4vw8mem1"
+
+[node name="RightWing" type="MeshInstance3D" parent="Pivot/Model"]
+layers = 2
+material_override = ExtResource("8_11qs7")
 gi_mode = 2
 mesh = ExtResource("1")
 
-[node name="LeftWing" type="MeshInstance3D" parent="Pivot/Interpolation/Model"]
+[node name="Trail3DRight" type="MeshInstance3D" parent="Pivot/Model/RightWing"]
+process_priority = 9999
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999999, -2.5, 0, -1.1)
+layers = 2
+gi_mode = 2
+skeleton = NodePath("../../../..")
+script = ExtResource("13_11qs7")
+max_section_length = 0.025
+time_limit = 0.5
+width = 0.1
+width_curve = SubResource("Curve_11qs7")
+color = Color(1, 1, 1, 0.49803922)
+gradient = SubResource("Gradient_csonu")
+material_type = 3
+metadata/_custom_type_script = "uid://bqflf4vw8mem1"
+
+[node name="LeftWing" type="MeshInstance3D" parent="Pivot/Model"]
 transform = Transform3D(-0.999999, -8.742278e-08, 0, 8.742269e-08, -1, 0, 0, 0, 1, 0, 0, 0)
 layers = 2
-material_override = ExtResource("8_csonu")
+material_override = ExtResource("8_11qs7")
 gi_mode = 2
 mesh = ExtResource("1")
 
-[node name="Shadow" type="MeshInstance3D" parent="Pivot/Interpolation/Model"]
+[node name="Trail3DLeft" type="MeshInstance3D" parent="Pivot/Model/LeftWing"]
+process_priority = 9999
+transform = Transform3D(1.0000012, -1.9932236e-21, 1.6940659e-21, -7.105429e-15, 1.0000001, 0, 0, 0, 1.0000001, -2.5, 0, -1.1)
+layers = 2
+gi_mode = 2
+skeleton = NodePath("../../../..")
+script = ExtResource("13_11qs7")
+max_section_length = 0.025
+time_limit = 0.5
+width = 0.1
+width_curve = SubResource("Curve_11qs7")
+color = Color(1, 1, 1, 0.49803922)
+gradient = SubResource("Gradient_csonu")
+material_type = 3
+metadata/_custom_type_script = "uid://bqflf4vw8mem1"
+
+[node name="Shadow" type="MeshInstance3D" parent="Pivot/Model"]
 layers = 2
 material_override = ExtResource("14")
 cast_shadow = 0
 gi_mode = 0
 mesh = SubResource("65")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/Interpolation/Model"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/Model"]
 libraries = {
 &"": SubResource("AnimationLibrary_xt253")
 }
 autoplay = "grounded_idle"
 
-[node name="AnimationTree" type="AnimationTree" parent="Pivot/Interpolation/Model"]
+[node name="AnimationTree" type="AnimationTree" parent="Pivot/Model"]
 tree_root = SubResource("33")
 anim_player = NodePath("../AnimationPlayer")
-parameters/flying/power/blend_position = 0.0102708
+parameters/flying/power/blend_position = 0.0
 parameters/grounded/power/blend_position = 0.0
 
-[node name="GroundEffects" type="Node3D" parent="Pivot/Interpolation"]
+[node name="GroundEffects" type="Node3D" parent="Pivot"]
 
-[node name="DustEffect" parent="Pivot/Interpolation/GroundEffects" instance=ExtResource("6")]
+[node name="DustEffect" parent="Pivot/GroundEffects" instance=ExtResource("6")]
+gi_mode = 2
 emitting = false
 
-[node name="Audio" type="AudioStreamPlayer3D" parent="Pivot/Interpolation"]
+[node name="Audio" type="AudioStreamPlayer3D" parent="Pivot"]
 stream = ExtResource("12")
 volume_db = -80.0
 autoplay = true

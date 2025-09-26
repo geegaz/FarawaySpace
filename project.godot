@@ -24,12 +24,15 @@ SceneManager="*res://Scripts/Autoloads/SceneManager.gd"
 
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
+window/stretch/scale=2.0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/SIsilicon.vfx.godrays/plugin.cfg", "res://addons/godot-polyliner/plugin.cfg")
+enabled=PackedStringArray("res://addons/lines_and_trails_3d/plugin.cfg")
 
 [filesystem]
 
@@ -43,6 +46,7 @@ version_hint="4.5"
 [gui]
 
 theme/custom="res://default_theme.tres"
+theme/custom_font="uid://x24an8786xvy"
 
 [importer_defaults]
 
@@ -176,10 +180,11 @@ debug={
 3d_physics/layer_3="Enemies"
 3d_physics/layer_4="Items"
 
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
 [rendering]
 
 anti_aliasing/quality/screen_space_aa=1
 environment/defaults/default_environment="uid://wnfj7sk53jhn"
-quality/godrays/sample_number=50
-quality/godrays/dither_amount=1.0
-quality/godrays/use_pcf5=false

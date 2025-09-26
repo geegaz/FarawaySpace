@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://btbk4yikymaxs"]
 
-[ext_resource type="PackedScene" path="res://Scenes/Levels/LevelBase.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dnignpn388y65" path="res://Scenes/Levels/LevelBase.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://bdi8x8xa4yp4b" path="res://Assets/Meshes/shell_sphere.glb" id="2"]
 [ext_resource type="PackedScene" uid="uid://b38d47b7ao6aj" path="res://Scenes/LevelElements/LevelDoor.tscn" id="5"]
 [ext_resource type="Environment" uid="uid://dddiovijhkup7" path="res://Scenes/Levels/LevelTutorialData/env_level_tutorial.tres" id="7"]
@@ -15,14 +15,18 @@ environment = ExtResource("7")
 [node name="DirectionalLight3D" parent="Lighting" index="1"]
 visible = false
 
-[node name="ShellSphere" parent="." index="2" instance=ExtResource("2")]
-
-[node name="LightmapGI" type="LightmapGI" parent="." index="3"]
-quality = 2
-light_data = ExtResource("12")
-
-[node name="CubemapGenerator" parent="." index="5"]
+[node name="CubemapGenerator" parent="." index="3"]
 path = "res://Scenes/Levels/LevelTutorialData"
+
+[node name="ShellSphere" parent="." index="4" instance=ExtResource("2")]
+
+[node name="LightmapGI" type="LightmapGI" parent="." index="5"]
+quality = 2
+supersampling = true
+bounces = 10
+interior = true
+denoiser_strength = 0.2
+light_data = ExtResource("12")
 
 [node name="LevelDoor" parent="." index="6" instance=ExtResource("5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -78)

@@ -1,7 +1,7 @@
 class_name DebugAction
 extends Node
 
-@export var target: NodePath
+@export var target: Node
 @export var code: String
 @export var function: String
 @export var args: Array
@@ -27,6 +27,5 @@ func _unhandled_input(event: InputEvent) -> void:
 			matched = 0
 
 func do_action()->void:
-	var target_node: = get_node_or_null(target)
-	if target_node and target_node.has_method(function):
-		target_node.callv(function, args)
+	if target and target.has_method(function):
+		target.callv(function, args)

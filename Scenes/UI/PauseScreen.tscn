@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://djfukiirkfgfg" path="res://Scripts/UI/Pause.gd" id="2"]
 [ext_resource type="Material" uid="uid://b004i5hlnnvfj" path="res://Assets/Materials/mat_ui_blur.tres" id="3_w3jdu"]
 
-[node name="PauseScreen" type="Control"]
+[node name="PauseScreen" type="Control" node_paths=PackedStringArray("resume_button", "quit_button")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -16,6 +16,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1")
 script = ExtResource("2")
+resume_button = NodePath("ButtonsContainer/Resume")
+quit_button = NodePath("ButtonsContainer/Quit")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = ExtResource("3_w3jdu")

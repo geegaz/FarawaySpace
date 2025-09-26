@@ -9,4 +9,4 @@ script = ExtResource("1")
 level_name = "Tutorial"
 level_scene_path = "res://Scenes/Levels/LevelTutorial.tscn"
 level_cubemap = ExtResource("2")
-level_color = Color(0.2523, 0.2774333, 0.29, 1)
+level_color = Color(0.1764706, 0.20784314, 0.21960784, 1)

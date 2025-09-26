@@ -37,10 +37,12 @@ func change_level(level: LevelData)->void:
 	PlayerManager.player_input.enabled = false
 	changing_level = true
 	
-	if load_additive and first_loading: # When starting the game
+	if first_loading and not load_additive:
+		current_level_node = tree.current_scene
+	
+	if first_loading and load_additive: # When starting the game
 		transition.color = Color.BLACK
 		transition.show()
-		first_loading = false
 	else:
 		transition.color = level.level_color
 		transition.color.a = 0.0
@@ -74,6 +76,7 @@ func change_level(level: LevelData)->void:
 	transition.fade_out()
 	await transition.fade_out_finished
 	
+	first_loading = false
 	changing_level = false
 	PlayerManager.player_input.enabled = true
 

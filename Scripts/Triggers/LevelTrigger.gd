@@ -13,8 +13,10 @@ func _ready() -> void:
 		portal_sphere.material_override.set_shader_parameter("cubemap", level.level_cubemap)
 	portal_light.light_color = level.level_color
 
+@warning_ignore("unused_parameter")
 func trigger_entered(ship: Ship)->void:
 	SceneManager.change_level(level)
 
-#func trigger_exited(ship: Ship)->void:
-#	pass
+@warning_ignore("unused_parameter")
+func trigger_exited(ship: Ship)->void:
+	pass

@@ -79,6 +79,7 @@ func generate_cubemap():
 	
 	_cubemap.take_over_path(_temp_path)
 	ResourceSaver.save(_cubemap, _temp_path, ResourceSaver.FLAG_COMPRESS)
+	_cubemap.emit_changed()
 	
 	for _cleanup in get_children():
 		_cleanup.queue_free()

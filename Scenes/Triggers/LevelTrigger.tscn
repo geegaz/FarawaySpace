@@ -5,7 +5,7 @@
 [ext_resource type="Material" uid="uid://cwe1rex5kuqjm" path="res://Assets/Materials/mat_shadow.tres" id="3"]
 
 [sub_resource type="SphereShape3D" id="1"]
-radius = 2.0
+radius = 3.5
 
 [sub_resource type="QuadMesh" id="4"]
 size = Vector2(20, 20)
