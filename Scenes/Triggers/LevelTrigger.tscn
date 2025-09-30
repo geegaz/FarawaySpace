@@ -27,6 +27,7 @@ portal_light = NodePath("PortalLight")
 shape = SubResource("1")
 
 [node name="PortalShadow" type="MeshInstance3D" parent="."]
+layers = 4
 material_override = ExtResource("3")
 cast_shadow = 0
 mesh = SubResource("4")

@@ -3,7 +3,7 @@
 importer="cubemap_texture"
 type="CompressedCubemap"
 uid="uid://ceg50dbo0pgb2"
-path.s3tc="res://.godot/imported/cubemap.jpg-fc42d5a75dbe027c51e5101ce61424e8.s3tc.ccube"
+path.s3tc="res://.godot/imported/default_cubemap.jpg-1ba8ceae7f1878f4d61b6ba2b05aaa30.s3tc.ccube"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Textures/default_cubemap/cubemap.jpg"
-dest_files=["res://.godot/imported/cubemap.jpg-fc42d5a75dbe027c51e5101ce61424e8.s3tc.ccube"]
+source_file="res://Assets/Textures/default_cubemap.jpg"
+dest_files=["res://.godot/imported/default_cubemap.jpg-1ba8ceae7f1878f4d61b6ba2b05aaa30.s3tc.ccube"]
 
 [params]
 

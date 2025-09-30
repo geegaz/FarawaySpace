@@ -30,10 +30,11 @@ func get_saved(value_name: StringName, default: Variant = null)->Variant:
 	return save_data.get(value_name, default)
 
 func set_saved(value_name: StringName, value: Variant) -> bool:
-	var success: = save_data.set(value_name, value)
-	if success:
-		request_save()
-	return success
+	var identical: bool = save_data.has(value_name) and save_data[value_name] == value
+	var success: bool = save_data.set(value_name, value)
+	if success and not identical:
+		request_save() # Only save to disk if the values were different...
+	return success # ...but return true even if the values were identical
 
 
 func save_file()->void:
@@ -44,7 +45,7 @@ func save_file()->void:
 		SAVE_TYPE_JSON:
 			var json_string: = JSON.stringify(save_data, "\t")
 			file.store_string(json_string)
-	print("Saved save file with data:\n",save_data)
+	print("Saved save file with data: ",save_data)
 
 func load_file()->void:
 	var file: = FileAccess.open(save_path, FileAccess.READ)
@@ -54,7 +55,7 @@ func load_file()->void:
 		SAVE_TYPE_JSON:
 			var json_string: = file.get_as_text()
 			save_data = JSON.parse_string(json_string)
-	print("Loaded save file with data:\n",save_data)
+	print("Loaded save file with data: ",save_data)
 
 func request_save()->void:
 	if save_requested:

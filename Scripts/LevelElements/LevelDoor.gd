@@ -1,9 +1,14 @@
 class_name LevelDoor
 extends Node3D
 
-@export var level: LevelData
 @export var required_keys: PackedStringArray
+@export var portal_data: LevelPortalData
+@export_group("References")
 @export var door_animation: AnimationPlayer
+@export var door_trigger: Area3D
+@export var level_trigger: Area3D
+@export var portal_sphere: MeshInstance3D
+@export var portal_light: OmniLight3D
 
 var available_keys: PackedStringArray:
 	set(value): PlayerSave.set_saved("available_keys", value)
@@ -15,12 +20,12 @@ var used_keys: PackedStringArray:
 var open: bool
 
 func _enter_tree() -> void:
-	var trigger: LevelTrigger = $LevelTrigger
-	trigger.level = level
-	
-	var door_trigger: Area3D = $DoorTrigger
+	level_trigger.body_entered.connect(_on_level_trigger_body_entered)
 	door_trigger.body_entered.connect(_on_door_trigger_body_entered)
-	door_trigger.body_exited.connect(_on_door_trigger_body_exited)
+	
+	if portal_data:
+		portal_sphere.material_override.set_shader_parameter("cubemap", portal_data.cubemap)
+		portal_light.light_color = portal_data.color
 
 func _ready() -> void:
 	var unlocked: = true
@@ -34,13 +39,15 @@ func _ready() -> void:
 		door_animation.play("open_door")
 		door_animation.seek(3.0) # Go to the end of the animation
 
+
 func _on_door_trigger_body_entered(body: Node)->void:
 	if body is Ship:
 		open_door()
 
-func _on_door_trigger_body_exited(body: Node)->void:
+func _on_level_trigger_body_entered(body: Node)->void:
 	if body is Ship:
-		pass
+		if portal_data:
+			LevelManager.change_level(portal_data.level, portal_data.color)
 
 
 func open_door()->void:

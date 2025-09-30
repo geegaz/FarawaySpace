@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelPortalData" load_steps=3 format=3 uid="uid://c1s44l8xfoo64"]
+
+[ext_resource type="Script" uid="uid://jbum72jhxlbb" path="res://Scripts/ResourceTypes/LevelPortalData.gd" id="1"]
+[ext_resource type="Cubemap" uid="uid://dgk83fl4usfk6" path="res://Scenes/Levels/Level00Data/cubemap_00.tres" id="1_obyit"]
+
+[resource]
+resource_name = "Level 0"
+script = ExtResource("1")
+level = "Level 0"
+cubemap = ExtResource("1_obyit")
+level = "Level 0"

@@ -1,9 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bijurnx4vtylr"]
+[gd_scene load_steps=2 format=3 uid="uid://bijurnx4vtylr"]
 
-[ext_resource type="Resource" uid="uid://dsrqq5ie5hwvt" path="res://Scenes/Levels/LevelTutorialData/level_tutorial.tres" id="1"]
 [ext_resource type="Script" uid="uid://sporkmi6863n" path="res://Scripts/Main.gd" id="4"]
 
 [node name="Main" type="Node"]
 script = ExtResource("4")
-start_level = ExtResource("1")
+default_level = "Tutorial"
 start_input_active = true

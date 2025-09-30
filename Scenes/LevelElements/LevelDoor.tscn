@@ -1,10 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://b38d47b7ao6aj"]
+[gd_scene load_steps=15 format=3 uid="uid://b38d47b7ao6aj"]
 
 [ext_resource type="PackedScene" uid="uid://dasb5uqrl4p8r" path="res://Assets/Meshes/door_frame.glb" id="1"]
-[ext_resource type="PackedScene" uid="uid://50umnyrpnf8a" path="res://Scenes/Triggers/LevelTrigger.tscn" id="2"]
 [ext_resource type="Script" uid="uid://bhouxvv6r71ee" path="res://Scripts/LevelElements/LevelDoor.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://bofbuyj7ib62v" path="res://Assets/Meshes/door_petal.glb" id="5"]
-[ext_resource type="CompressedCubemap" uid="uid://ceg50dbo0pgb2" path="res://Assets/Textures/default_cubemap/cubemap.jpg" id="5_jqp7b"]
+[ext_resource type="CompressedCubemap" uid="uid://ceg50dbo0pgb2" path="res://Assets/Textures/default_cubemap.jpg" id="5_jqp7b"]
 [ext_resource type="Script" uid="uid://chdjsh46c7s2g" path="res://Scripts/DebugAction.gd" id="6"]
 [ext_resource type="Shader" uid="uid://dq2g06ereimvl" path="res://Assets/Shaders/sh_portal.gdshader" id="8"]
 
@@ -151,9 +150,15 @@ _data = {
 &"open_door": SubResource("12")
 }
 
-[node name="LevelDoor" type="Node3D" node_paths=PackedStringArray("door_animation")]
+[node name="LevelDoor" type="Node3D" node_paths=PackedStringArray("door_animation", "door_trigger", "level_trigger", "portal_sphere", "portal_light")]
 script = ExtResource("3")
+level_cubemap = ExtResource("5_jqp7b")
+level_color = Color(0.7647059, 0.8352941, 0.8392157, 1)
 door_animation = NodePath("AnimationPlayer")
+door_trigger = NodePath("DoorTrigger")
+level_trigger = NodePath("LevelTrigger")
+portal_sphere = NodePath("LevelTrigger/PortalSphere")
+portal_light = NodePath("LevelTrigger/PortalLight")
 
 [node name="DoorFrame" parent="." instance=ExtResource("1")]
 
@@ -163,23 +168,29 @@ door_animation = NodePath("AnimationPlayer")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 shape = SubResource("4")
 
-[node name="LevelTrigger" parent="." instance=ExtResource("2")]
+[node name="LevelTrigger" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
 
-[node name="CollisionShape3D" parent="LevelTrigger" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelTrigger"]
 shape = SubResource("17")
 
-[node name="PortalShadow" parent="LevelTrigger" index="1"]
-visible = false
-
-[node name="PortalSphere" parent="LevelTrigger" index="2"]
+[node name="PortalSphere" type="MeshInstance3D" parent="LevelTrigger"]
+layers = 4
 material_override = SubResource("ShaderMaterial_kcnyh")
 mesh = SubResource("18")
+skeleton = NodePath("")
 
-[node name="PortalLight" parent="LevelTrigger" index="3"]
+[node name="PortalLight" type="OmniLight3D" parent="LevelTrigger"]
+layers = 4
 light_color = Color(0.78, 0.9853333, 1, 1)
 light_energy = 20.0
+light_volumetric_fog_energy = 1000.0
+light_bake_mode = 0
 shadow_enabled = true
 omni_range = 40.0
+omni_shadow_mode = 0
 
 [node name="DoorTrigger" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
@@ -273,7 +284,6 @@ function = "debug_add_keys"
 metadata/_custom_type_script = "uid://chdjsh46c7s2g"
 
 [editable path="DoorFrame"]
-[editable path="LevelTrigger"]
 [editable path="DoorPetal"]
 [editable path="DoorPetal2"]
 [editable path="DoorPetal3"]

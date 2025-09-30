@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelPortalData" load_steps=3 format=3 uid="uid://dsrqq5ie5hwvt"]
+
+[ext_resource type="Script" uid="uid://jbum72jhxlbb" path="res://Scripts/ResourceTypes/LevelPortalData.gd" id="1"]
+[ext_resource type="Cubemap" uid="uid://bgpsrbp56emxr" path="res://Scenes/Levels/LevelTutorialData/cubemap_tutorial.tres" id="2"]
+
+[resource]
+resource_name = "Tutorial"
+script = ExtResource("1")
+level = "Tutorial"
+cubemap = ExtResource("2")
+color = Color(0.18259999, 0.22, 0.21750666, 1)

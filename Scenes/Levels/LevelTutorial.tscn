@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://dnignpn388y65" path="res://Scenes/Levels/LevelBase.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://bdi8x8xa4yp4b" path="res://Assets/Meshes/shell_sphere.glb" id="2"]
 [ext_resource type="PackedScene" uid="uid://b38d47b7ao6aj" path="res://Scenes/LevelElements/LevelDoor.tscn" id="5"]
-[ext_resource type="Environment" uid="uid://dddiovijhkup7" path="res://Scenes/Levels/LevelTutorialData/env_level_tutorial.tres" id="7"]
-[ext_resource type="Resource" uid="uid://c1s44l8xfoo64" path="res://Scenes/Levels/Level00Data/level_00.tres" id="9"]
+[ext_resource type="Resource" uid="uid://c1s44l8xfoo64" path="res://Scenes/Levels/Level00Data/portal_00.tres" id="6_gw3r5"]
+[ext_resource type="Environment" uid="uid://dddiovijhkup7" path="res://Scenes/Levels/LevelTutorialData/env_tutorial.tres" id="7"]
 [ext_resource type="LightmapGIData" uid="uid://iv1b3700gnjv" path="res://Scenes/Levels/LevelTutorialData/Lightmap/LevelTutorial.lmbake" id="12"]
 
 [node name="LevelTutorial" instance=ExtResource("1")]
@@ -30,5 +30,5 @@ light_data = ExtResource("12")
 
 [node name="LevelDoor" parent="." index="6" instance=ExtResource("5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -78)
-level = ExtResource("9")
 required_keys = PackedStringArray("test", "test2")
+portal_data = ExtResource("6_gw3r5")

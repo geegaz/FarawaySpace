@@ -1,14 +1,24 @@
 extends Node
 
-var changing_level: bool
-var current_level: LevelData
-var current_level_node: Node
+const LEVELS: = {
+	"Tutorial": "res://Scenes/Levels/LevelTutorial.tscn",
+	"Level 0": "res://Scenes/Levels/Level00.tscn"
+}
 
+var changing_level: bool
 var load_additive: bool = false
 var first_loading: bool = true
 
 var transition: Transition
 var spinner: Spinner
+
+var current_level_node: Node
+var current_level: String:
+	set(value): PlayerSave.set_saved("current_level", value)
+	get: return PlayerSave.get_saved("current_level", "")
+var current_checkpoint: int:
+	set(value): PlayerSave.set_saved("current_checkpoint", value)
+	get: return PlayerSave.get_saved("current_checkpoint", 0)
 
 @onready var tree: SceneTree = get_tree()
 
@@ -19,20 +29,17 @@ func _ready() -> void:
 	spinner = UIManager.controls.LevelSpinner
 	spinner.hide()
 
-func change_level(level: LevelData)->void:
+
+func change_level(level: String, fade_color: Color = Color.BLACK)->void:
 	if changing_level:
 		printerr("Already changing level")
 		return # Can't change level if already changing
-	if not level:
-		printerr("No LevelData provided")
+	if level not in LEVELS:
+		printerr("Unknown level %s"%level)
 		return # No level provided
-	if level == current_level:
+	if level == current_level and not first_loading:
 		printerr("Level is already loaded")
 		return # Don't load the current level again
-	
-	if not FileAccess.file_exists(level.level_scene_path):
-		printerr("Level scene path is invalid")
-		return # Can't load an invalid path
 	
 	PlayerManager.player_input.enabled = false
 	changing_level = true
@@ -40,11 +47,10 @@ func change_level(level: LevelData)->void:
 	if first_loading and not load_additive:
 		current_level_node = tree.current_scene
 	
+	transition.color = fade_color
 	if first_loading and load_additive: # When starting the game
-		transition.color = Color.BLACK
 		transition.show()
 	else:
-		transition.color = level.level_color
 		transition.color.a = 0.0
 		transition.fade_in()
 		await transition.fade_in_finished
@@ -59,19 +65,19 @@ func change_level(level: LevelData)->void:
 	if current_level_node:
 		remove_current_level_node_from_scene()
 		current_level_node = null
-	current_level = null
 	
 	# Start loading in the background
-	var loaded_scene: = await _load_level_threaded(level.level_scene_path)
+	var scene_path: String = LEVELS[level] # already checked
+	var loaded_scene: = await load_level_threaded(scene_path)
 	
 	# Add new level
-	current_level = level
+	current_level = level # SAVED
+	current_checkpoint = 0 # SAVED
 	current_level_node = loaded_scene.instantiate()
-	call_deferred("add_current_level_node_to_scene")
+	add_current_level_node_to_scene.call_deferred()
 	
 	###############
 	
-	await current_level_node.ready
 	spinner.hide()
 	transition.fade_out()
 	await transition.fade_out_finished
@@ -100,8 +106,7 @@ func add_current_level_node_to_scene()->void:
 		tree.root.add_child(current_level_node)
 		tree.current_scene = current_level_node
 
-
-func _load_level_threaded(path: String)->PackedScene:
+func load_level_threaded(path: String)->PackedScene:
 	if ResourceLoader.has_cached(path):
 		return ResourceLoader.load(path) as PackedScene
 		
