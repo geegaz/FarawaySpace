@@ -10,14 +10,16 @@ config_version=5
 
 [application]
 
-config/name="Faraway Spaces V1"
-config/description="No Description"
+config/name="De Passage"
 run/main_scene="res://Scenes/Main.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="Geegaz"
 config/features=PackedStringArray("4.5")
 config/icon="res://icon.png"
 
 [autoload]
 
+PlayerSave="*res://Scripts/Autoloads/PlayerSave.gd"
 UIManager="*res://Scenes/Autoloads/UIManager.tscn"
 PlayerManager="*res://Scripts/Autoloads/PlayerManager.gd"
 SceneManager="*res://Scripts/Autoloads/SceneManager.gd"

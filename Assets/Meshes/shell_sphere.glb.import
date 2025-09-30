@@ -42,7 +42,7 @@ _subresources={
 "Diffuse": {
 "use_external/enabled": true,
 "use_external/fallback_path": "res://Assets/Materials/mat_surface_level_diffuse.tres",
-"use_external/path": "res://Assets/Materials/mat_surface_level_diffuse.tres"
+"use_external/path": "uid://cfbur7idqoq1n"
 },
 "Emissive": {
 "use_external/enabled": true,

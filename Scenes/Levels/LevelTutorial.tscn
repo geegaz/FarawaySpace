@@ -31,3 +31,4 @@ light_data = ExtResource("12")
 [node name="LevelDoor" parent="." index="6" instance=ExtResource("5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -78)
 level = ExtResource("9")
+required_keys = PackedStringArray("test", "test2")

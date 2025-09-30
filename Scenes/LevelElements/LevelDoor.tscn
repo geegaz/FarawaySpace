@@ -72,7 +72,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "clips": PackedStringArray("DoorPetal_ARMAction"),
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0.033333335)
 }
 tracks/2/type = "animation"
 tracks/2/imported = false
@@ -82,7 +82,7 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "clips": PackedStringArray("DoorPetal_ARMAction"),
-"times": PackedFloat32Array(0.033333335)
+"times": PackedFloat32Array(0.06666667)
 }
 tracks/3/type = "animation"
 tracks/3/imported = false
@@ -92,7 +92,7 @@ tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "clips": PackedStringArray("DoorPetal_ARMAction"),
-"times": PackedFloat32Array(0.06666667)
+"times": PackedFloat32Array(0.1)
 }
 tracks/4/type = "animation"
 tracks/4/imported = false
@@ -102,7 +102,7 @@ tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "clips": PackedStringArray("DoorPetal_ARMAction"),
-"times": PackedFloat32Array(0.1)
+"times": PackedFloat32Array(0.13333334)
 }
 tracks/5/type = "animation"
 tracks/5/imported = false
@@ -112,7 +112,7 @@ tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "clips": PackedStringArray("DoorPetal_ARMAction"),
-"times": PackedFloat32Array(0.13333334)
+"times": PackedFloat32Array(0.16666667)
 }
 tracks/6/type = "animation"
 tracks/6/imported = false
@@ -122,7 +122,7 @@ tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "clips": PackedStringArray("DoorPetal_ARMAction"),
-"times": PackedFloat32Array(0.16666667)
+"times": PackedFloat32Array(0.2)
 }
 tracks/7/type = "animation"
 tracks/7/imported = false
@@ -132,7 +132,7 @@ tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "clips": PackedStringArray("DoorPetal_ARMAction"),
-"times": PackedFloat32Array(0.2)
+"times": PackedFloat32Array(0.23333333)
 }
 tracks/8/type = "animation"
 tracks/8/imported = false
@@ -142,7 +142,7 @@ tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "clips": PackedStringArray("DoorPetal_ARMAction"),
-"times": PackedFloat32Array(0.23333333)
+"times": PackedFloat32Array(0.26666668)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jqp7b"]
@@ -151,9 +151,8 @@ _data = {
 &"open_door": SubResource("12")
 }
 
-[node name="LevelDoor" type="Node3D" node_paths=PackedStringArray("petal_animations", "door_animation")]
+[node name="LevelDoor" type="Node3D" node_paths=PackedStringArray("door_animation")]
 script = ExtResource("3")
-petal_animations = [NodePath("DoorPetal/AnimationPlayer"), NodePath("DoorPetal2/AnimationPlayer"), NodePath("DoorPetal3/AnimationPlayer"), NodePath("DoorPetal4/AnimationPlayer"), NodePath("DoorPetal5/AnimationPlayer"), NodePath("DoorPetal6/AnimationPlayer"), NodePath("DoorPetal7/AnimationPlayer"), NodePath("DoorPetal8/AnimationPlayer")]
 door_animation = NodePath("AnimationPlayer")
 
 [node name="DoorFrame" parent="." instance=ExtResource("1")]
@@ -194,76 +193,84 @@ shape = SubResource("15")
 [node name="DoorPetal" parent="." instance=ExtResource("5")]
 
 [node name="Skeleton3D" parent="DoorPetal" index="0"]
-bones/2/rotation = Quaternion(0.6587246, -1.1596606e-17, -1.5220586e-17, 0.7523842)
-bones/3/rotation = Quaternion(0.23246722, 5.529121e-19, -2.28989e-18, 0.97260433)
-bones/4/rotation = Quaternion(3.0908623e-08, 0.7071068, 0.7071068, 3.0908623e-08)
+bones/2/rotation = Quaternion(0.65828395, 1.3109524e-11, -8.200223e-12, 0.75276977)
+bones/3/rotation = Quaternion(0.23305055, 2.1718384e-12, -8.99764e-12, 0.9724646)
+bones/4/rotation = Quaternion(3.092175e-08, 0.7074072, 0.70680636, 3.089549e-08)
 
 [node name="DoorPetal2" parent="." instance=ExtResource("5")]
 transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="DoorPetal2" index="0"]
-bones/2/rotation = Quaternion(0.6576051, 3.3317887e-11, -2.0827437e-11, 0.75336283)
-bones/3/rotation = Quaternion(0.23394771, 5.525955e-12, -2.2880151e-11, 0.97224927)
-bones/4/rotation = Quaternion(3.094197e-08, 0.70786977, 0.70634305, 3.0875242e-08)
+bones/2/rotation = Quaternion(0.65863115, 2.7799841e-12, -1.7389434e-12, 0.75246596)
+bones/3/rotation = Quaternion(0.2325909, 4.605585e-13, -1.9080328e-12, 0.9725747)
+bones/4/rotation = Quaternion(3.0911405e-08, 0.7071705, 0.70704305, 3.0905834e-08)
 
 [node name="DoorPetal3" parent="." instance=ExtResource("5")]
 transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="DoorPetal3" index="0"]
-bones/2/rotation = Quaternion(0.65820414, 1.5481946e-11, -9.684208e-12, 0.7528395)
-bones/3/rotation = Quaternion(0.23315611, 2.5648743e-12, -1.0625935e-11, 0.97243935)
-bones/4/rotation = Quaternion(3.0924117e-08, 0.7074615, 0.70675194, 3.089311e-08)
+bones/2/rotation = Quaternion(0.65800923, 2.128092e-11, -1.3310892e-11, 0.7530099)
+bones/3/rotation = Quaternion(0.23341408, 3.5258883e-12, -1.460664e-11, 0.97237754)
+bones/4/rotation = Quaternion(3.092993e-08, 0.7075943, 0.706619, 3.0887303e-08)
 
 [node name="DoorPetal4" parent="." instance=ExtResource("5")]
 transform = Transform3D(-0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="DoorPetal4" index="0"]
-bones/2/rotation = Quaternion(0.65855145, 5.152408e-12, -3.2229297e-12, 0.75253576)
-bones/3/rotation = Quaternion(0.23269649, 8.535947e-13, -3.5363296e-12, 0.97254944)
-bones/4/rotation = Quaternion(3.0913778e-08, 0.70722485, 0.7069887, 3.090347e-08)
+bones/2/rotation = Quaternion(0.65836895, 1.0582636e-11, -6.619618e-12, 0.7526955)
+bones/3/rotation = Quaternion(0.23293816, 1.753213e-12, -7.2633297e-12, 0.9724916)
+bones/4/rotation = Quaternion(3.091922e-08, 0.70734924, 0.7068643, 3.089802e-08)
 
 [node name="DoorPetal5" parent="." instance=ExtResource("5")]
 transform = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="DoorPetal5" index="0"]
-bones/2/rotation = Quaternion(0.6580725, 1.9398776e-11, -1.2134245e-11, 0.7529546)
-bones/3/rotation = Quaternion(0.23333041, 3.2137702e-12, -1.3314225e-11, 0.97239757)
-bones/4/rotation = Quaternion(3.092804e-08, 0.7075512, 0.7066621, 3.088918e-08)
+bones/2/rotation = Quaternion(0.6587161, 2.530964e-13, -1.5833802e-13, 0.7523916)
+bones/3/rotation = Quaternion(0.23247847, 4.19326e-14, -1.7372123e-13, 0.9726016)
+bones/4/rotation = Quaternion(3.0908872e-08, 0.70711255, 0.707101, 3.0908367e-08)
 
 [node name="DoorPetal6" parent="." instance=ExtResource("5")]
 transform = Transform3D(-0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="DoorPetal6" index="0"]
-bones/2/rotation = Quaternion(0.65841985, 9.0692375e-12, -5.6729647e-12, 0.752651)
-bones/3/rotation = Quaternion(0.23287079, 1.5024903e-12, -6.224619e-12, 0.9725077)
-bones/4/rotation = Quaternion(3.0917704e-08, 0.7073146, 0.7068989, 3.0899535e-08)
+bones/2/rotation = Quaternion(0.6578034, 2.7412702e-11, -1.7139914e-11, 0.75318974)
+bones/3/rotation = Quaternion(0.23368593, 4.544748e-12, -1.8821273e-11, 0.9723122)
+bones/4/rotation = Quaternion(3.093606e-08, 0.7077346, 0.7064785, 3.0881157e-08)
 
 [node name="DoorPetal7" parent="." instance=ExtResource("5")]
 transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="DoorPetal7" index="0"]
-bones/2/rotation = Quaternion(0.6572147, 4.4944576e-11, -2.8087782e-11, 0.7537035)
-bones/3/rotation = Quaternion(0.23446311, 7.4578494e-12, -3.0871652e-11, 0.97212505)
-bones/4/rotation = Quaternion(3.0953593e-08, 0.7081357, 0.7060764, 3.0863575e-08)
+bones/2/rotation = Quaternion(0.65828496, 1.3078411e-11, -8.180761e-12, 0.7527689)
+bones/3/rotation = Quaternion(0.23304918, 2.1666844e-12, -8.976287e-12, 0.97246504)
+bones/4/rotation = Quaternion(3.0921715e-08, 0.70740646, 0.7068071, 3.0895524e-08)
 
 [node name="DoorPetal8" parent="." instance=ExtResource("5")]
 transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="DoorPetal8" index="0"]
-bones/2/rotation = Quaternion(0.65804505, 2.0214271e-11, -1.2644347e-11, 0.7529786)
-bones/3/rotation = Quaternion(0.2333667, 3.3488715e-12, -1.38739315e-11, 0.9723888)
-bones/4/rotation = Quaternion(3.0928863e-08, 0.70756984, 0.70664346, 3.088837e-08)
+bones/2/rotation = Quaternion(0.6586322, 2.7488658e-12, -1.7194785e-12, 0.752465)
+bones/3/rotation = Quaternion(0.23258954, 4.5540313e-13, -1.8866748e-12, 0.972575)
+bones/4/rotation = Quaternion(3.0911373e-08, 0.7071697, 0.7070438, 3.0905866e-08)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_jqp7b")
 }
 
-[node name="DebugAction" type="Node" parent="."]
+[node name="DebugActionOpen" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("6")
 target = NodePath("..")
-code = "door"
-function = "open_door"
+code = "open"
+function = "debug_force_open"
+metadata/_custom_type_script = "uid://chdjsh46c7s2g"
+
+[node name="DebugActionKeys" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("6")
+target = NodePath("..")
+code = "key"
+function = "debug_add_keys"
+metadata/_custom_type_script = "uid://chdjsh46c7s2g"
 
 [editable path="DoorFrame"]
 [editable path="LevelTrigger"]
