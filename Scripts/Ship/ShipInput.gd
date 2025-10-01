@@ -52,5 +52,3 @@ func set_enabled(value: bool)->void:
 		PlayerManager.player.forward_input = 0.0
 		PlayerManager.player.backward_input = 0.0
 		PlayerManager.player.turn_input = Vector2.ZERO
-	print("ShipInput: Set enabled ",enabled)
-	print_stack()

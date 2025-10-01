@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dmira8t8vt7js"]
 
-[ext_resource type="Script" uid="uid://besxm50pcs4r2" path="res://Scripts/UI/MenuScreen.gd" id="1_pk0te"]
+[ext_resource type="Script" uid="uid://besxm50pcs4r2" path="res://Scripts/UI/MenuFlowState.gd" id="1_pk0te"]
 [ext_resource type="Material" uid="uid://b004i5hlnnvfj" path="res://Assets/Materials/mat_ui_blur.tres" id="1_tsdtt"]
 
 [sub_resource type="Gradient" id="Gradient_jqlr8"]
@@ -11,7 +11,7 @@ gradient = SubResource("Gradient_jqlr8")
 fill_from = Vector2(0.8, 0)
 metadata/_snap_enabled = true
 
-[node name="MenuScreen" type="Control" node_paths=PackedStringArray("start_button")]
+[node name="MenuState" type="Control" node_paths=PackedStringArray("start_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,6 +20,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pk0te")
 start_button = NodePath("Container/VBoxContainer/StartButton")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+position = Vector2(639.99994, 360)
+scale = Vector2(6.3999996, 3.6)
+copy_mode = 2
 
 [node name="Background" type="TextureRect" parent="."]
 material = ExtResource("1_tsdtt")

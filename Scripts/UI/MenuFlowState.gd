@@ -1,4 +1,4 @@
-extends Control
+extends UIFlowState
 
 @export var start_button: Button
 
@@ -8,9 +8,9 @@ func _ready() -> void:
 func _on_start_pressed()->void:
 	UIManager.menu(false)
 
-func enter_state()->void:
+func _enter_state()->void:
 	visible = true
 	start_button.grab_focus()
 
-func exit_state()->void:
+func _exit_state()->void:
 	visible = false

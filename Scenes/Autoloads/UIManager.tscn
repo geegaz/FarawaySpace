@@ -1,17 +1,27 @@
-[gd_scene load_steps=7 format=3 uid="uid://b30w02b05mpwv"]
+[gd_scene load_steps=10 format=3 uid="uid://b30w02b05mpwv"]
 
 [ext_resource type="Script" uid="uid://cntsaatd4ac44" path="res://Scripts/Autoloads/UIManager.gd" id="1"]
 [ext_resource type="PackedScene" path="res://Scenes/UI/Transition.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://jlvt2pxikbem" path="res://Scenes/UI/PauseScreen.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://jlvt2pxikbem" path="res://Scenes/UI/PauseState.tscn" id="3"]
 [ext_resource type="Script" uid="uid://caj6kwvkdyxrk" path="res://Scripts/UI/Spinner.gd" id="4"]
 [ext_resource type="Texture2D" uid="uid://dabshaatpykly" path="res://Assets/Textures/visor_1.png" id="5"]
-[ext_resource type="PackedScene" uid="uid://dmira8t8vt7js" path="res://Scenes/UI/MenuScreen.tscn" id="6_ubtt6"]
+[ext_resource type="Script" uid="uid://lenbwui3yjax" path="res://Scripts/UI/UIFlow.gd" id="5_joxa6"]
+[ext_resource type="Material" uid="uid://b004i5hlnnvfj" path="res://Assets/Materials/mat_ui_blur.tres" id="6_5ba8c"]
+[ext_resource type="PackedScene" uid="uid://dmira8t8vt7js" path="res://Scenes/UI/MenuState.tscn" id="6_ubtt6"]
+[ext_resource type="Script" uid="uid://bgc0me1sv8mlk" path="res://Scripts/UI/GameFlowState.gd" id="9_g53n0"]
 
-[node name="UIManager" type="Node"]
+[node name="UIManager" type="Node" node_paths=PackedStringArray("flow")]
 script = ExtResource("1")
+flow = NodePath("UIFlow")
+
+[node name="UIFlow" type="Node" parent="." node_paths=PackedStringArray("host")]
+script = ExtResource("5_joxa6")
+host = NodePath("../MenuLayer")
+metadata/_custom_type_script = "uid://lenbwui3yjax"
 
 [node name="LoadingLayer" type="CanvasLayer" parent="."]
 layer = 10
+visible = false
 
 [node name="LevelTransition" parent="LoadingLayer" instance=ExtResource("2")]
 anchors_preset = 15
@@ -36,6 +46,26 @@ script = ExtResource("4")
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 layer = 9
 
-[node name="PauseScreen" parent="MenuLayer" instance=ExtResource("3")]
+[node name="Background" type="ColorRect" parent="MenuLayer"]
+visible = false
+material = ExtResource("6_5ba8c")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.49803922)
 
-[node name="MenuScreen" parent="MenuLayer" instance=ExtResource("6_ubtt6")]
+[node name="PauseFlowState" parent="MenuLayer" instance=ExtResource("3")]
+
+[node name="MenuFlowState" parent="MenuLayer" instance=ExtResource("6_ubtt6")]
+
+[node name="GameFlowState" type="Control" parent="MenuLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("9_g53n0")

@@ -10,8 +10,8 @@ var player_scene: PackedScene = preload("res://Scenes/Ship.tscn")
 
 var player: Ship
 var player_input: ShipInput # From spawn_player
-
 var playing: bool = false: set = set_playing
+
 
 func _ready() -> void:
 	# Create the controller, creating the player is handled by the levels
@@ -29,5 +29,3 @@ func set_playing(value: bool)->void:
 			player_input.enabled = false
 			stopped_playing.emit()
 	playing = value
-	print("PlayerManager: Set playing ", playing)
-	print_stack()

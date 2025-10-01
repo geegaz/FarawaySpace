@@ -1,4 +1,4 @@
-extends Control
+extends UIFlowState
 
 var tween: Tween
 
@@ -16,9 +16,9 @@ func _on_quit_pressed()->void:
 	UIManager.quit()
 
 
-func enter_state()->void:
+func _enter_state()->void:
 	visible = true
 	resume_button.grab_focus()
 
-func exit_state()->void:
+func _exit_state()->void:
 	visible = false

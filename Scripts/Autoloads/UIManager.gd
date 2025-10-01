@@ -1,5 +1,7 @@
 extends Node
 
+@export var flow: UIFlow
+
 var layers: Dictionary
 var controls: Dictionary
 var control_layers: Dictionary
@@ -37,21 +39,20 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func pause(value: bool)->void:
 	tree.paused = value
-	var pause_screen: Control = controls.PauseScreen
 	if value:
-		pause_screen.enter_state()
+		flow.go_to("PauseFlowState")
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	else:
-		pause_screen.exit_state()
+		flow.go_to("GameFlowState")
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func menu(value: bool)->void:
-	var menu_screen: Control = controls.MenuScreen
 	if value:
-		menu_screen.enter_state()
+		flow.go_to("MenuFlowState")
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		PlayerManager.playing = false
 	else:
-		menu_screen.exit_state()
+		flow.go_to("GameFlowState")
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		PlayerManager.playing = true
 
