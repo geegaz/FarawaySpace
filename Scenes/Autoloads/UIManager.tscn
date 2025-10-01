@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b30w02b05mpwv"]
+[gd_scene load_steps=7 format=3 uid="uid://b30w02b05mpwv"]
 
 [ext_resource type="Script" uid="uid://cntsaatd4ac44" path="res://Scripts/Autoloads/UIManager.gd" id="1"]
 [ext_resource type="PackedScene" path="res://Scenes/UI/Transition.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://jlvt2pxikbem" path="res://Scenes/UI/PauseScreen.tscn" id="3"]
 [ext_resource type="Script" uid="uid://caj6kwvkdyxrk" path="res://Scripts/UI/Spinner.gd" id="4"]
 [ext_resource type="Texture2D" uid="uid://dabshaatpykly" path="res://Assets/Textures/visor_1.png" id="5"]
+[ext_resource type="PackedScene" uid="uid://dmira8t8vt7js" path="res://Scenes/UI/MenuScreen.tscn" id="6_ubtt6"]
 
 [node name="UIManager" type="Node"]
 script = ExtResource("1")
@@ -36,3 +37,5 @@ script = ExtResource("4")
 layer = 9
 
 [node name="PauseScreen" parent="MenuLayer" instance=ExtResource("3")]
+
+[node name="MenuScreen" parent="MenuLayer" instance=ExtResource("6_ubtt6")]

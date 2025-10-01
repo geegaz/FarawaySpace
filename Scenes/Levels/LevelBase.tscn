@@ -1,9 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnignpn388y65"]
+[gd_scene load_steps=9 format=3 uid="uid://dnignpn388y65"]
 
 [ext_resource type="Script" uid="uid://qqx3kxttkf83" path="res://Scripts/Ship/ShipSpawner.gd" id="1"]
 [ext_resource type="Script" uid="uid://27avulp44p1v" path="res://Scripts/Level.gd" id="2"]
 [ext_resource type="Environment" uid="uid://wnfj7sk53jhn" path="res://default_env.tres" id="3"]
 [ext_resource type="Script" uid="uid://dincinelague4" path="res://addons/cubemap_generator/CubemapGenerator.gd" id="4"]
+[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="4_bybyf"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_j6j3i"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="7_b072a"]
+
+[sub_resource type="Resource" id="Resource_y3oa2"]
+script = ExtResource("5_j6j3i")
+transition = 7
+ease = 1
 
 [node name="LevelBase" type="Node3D" node_paths=PackedStringArray("checkpoints")]
 script = ExtResource("2")
@@ -23,9 +31,25 @@ shadow_enabled = true
 directional_shadow_split_1 = 0.05
 directional_shadow_max_distance = 500.0
 
-[node name="ShipSpawner" type="Marker3D" parent="."]
+[node name="ShipSpawner" type="Marker3D" parent="." node_paths=PackedStringArray("spawner_camera")]
 script = ExtResource("1")
+spawner_camera = NodePath("PhantomCamera3D")
+
+[node name="PhantomCamera3D" type="Node3D" parent="ShipSpawner"]
+transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, -8, 3, 7)
+script = ExtResource("4_bybyf")
+tween_resource = SubResource("Resource_y3oa2")
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
 [node name="CubemapGenerator" type="Node3D" parent="."]
 script = ExtResource("4")
 cull_mask = 1
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, -8, 3, 7)
+fov = 70.0
+
+[node name="PhantomCameraHost" type="Node" parent="Camera3D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("7_b072a")

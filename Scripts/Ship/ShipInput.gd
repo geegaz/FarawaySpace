@@ -17,7 +17,6 @@ func _ready() -> void:
 	Input.use_accumulated_input = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-
 func _process(delta: float) -> void:
 	# Turning (with a controller)
 	var controller_motion: Vector2 = Input.get_vector("turn_left","turn_right","turn_up","turn_down")
@@ -26,7 +25,7 @@ func _process(delta: float) -> void:
 	if controller_invert_vertical:
 		controller_motion.y = -controller_motion.y
 	
-	if PlayerManager.player and PlayerManager.player.enabled:
+	if PlayerManager.player:
 		PlayerManager.player.forward_input = Input.get_action_strength("move_front")
 		PlayerManager.player.backward_input = Input.get_action_strength("move_back")
 		PlayerManager.player.turn_input = mouse_motion + controller_motion
@@ -48,9 +47,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func set_enabled(value: bool)->void:
 	enabled = value
-	set_process(enabled)
-	set_process_unhandled_input(enabled)
+	process_mode = Node.PROCESS_MODE_INHERIT if value else Node.PROCESS_MODE_DISABLED
 	if PlayerManager.player and not enabled:
 		PlayerManager.player.forward_input = 0.0
 		PlayerManager.player.backward_input = 0.0
 		PlayerManager.player.turn_input = Vector2.ZERO
+	print("ShipInput: Set enabled ",enabled)
+	print_stack()

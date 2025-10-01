@@ -1,5 +1,73 @@
-[gd_scene format=2]
+[gd_scene load_steps=5 format=3 uid="uid://dmira8t8vt7js"]
 
-[node name="MenuScreen" type="Control"]
+[ext_resource type="Script" uid="uid://besxm50pcs4r2" path="res://Scripts/UI/MenuScreen.gd" id="1_pk0te"]
+[ext_resource type="Material" uid="uid://b004i5hlnnvfj" path="res://Assets/Materials/mat_ui_blur.tres" id="1_tsdtt"]
+
+[sub_resource type="Gradient" id="Gradient_jqlr8"]
+colors = PackedColorArray(0, 0, 0, 0.49803922, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tsdtt"]
+gradient = SubResource("Gradient_jqlr8")
+fill_from = Vector2(0.8, 0)
+metadata/_snap_enabled = true
+
+[node name="MenuScreen" type="Control" node_paths=PackedStringArray("start_button")]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pk0te")
+start_button = NodePath("Container/VBoxContainer/StartButton")
+
+[node name="Background" type="TextureRect" parent="."]
+material = ExtResource("1_tsdtt")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -832.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_tsdtt")
+
+[node name="Container" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -896.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="Container"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -144.0
+offset_top = 32.0
+offset_right = 144.0
+offset_bottom = 96.0
+grow_horizontal = 2
+theme_type_variation = &"HeaderLarge"
+text = "De Passage"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = -14.5
+offset_right = -32.0
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="StartButton" type="Button" parent="Container/VBoxContainer"]
+layout_mode = 2
+text = "Start"

@@ -1,17 +1,30 @@
-[gd_scene load_steps=40 format=3 uid="uid://d2k3uncoj5ise"]
+[gd_scene load_steps=45 format=3 uid="uid://d2k3uncoj5ise"]
 
 [ext_resource type="ArrayMesh" uid="uid://c7jo5vrb5ovow" path="res://Assets/Meshes/ship_wing.obj" id="1"]
 [ext_resource type="ArrayMesh" uid="uid://bl067x0m5ancu" path="res://Assets/Meshes/ship_prism.obj" id="2"]
 [ext_resource type="Material" uid="uid://bx0h8kcxcrhip" path="res://Assets/Materials/mat_surface_ship_core.tres" id="3"]
 [ext_resource type="Script" uid="uid://chdjsh46c7s2g" path="res://Scripts/DebugAction.gd" id="4"]
 [ext_resource type="Script" uid="uid://87g1aydclotd" path="res://Scripts/Ship/Ship.gd" id="5"]
+[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="5_xt253"]
 [ext_resource type="PackedScene" path="res://Scenes/Effects/DustEffect.tscn" id="6"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_mxetg"]
+[ext_resource type="Script" uid="uid://b8hhnqsugykly" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="7_mxetg"]
 [ext_resource type="Material" uid="uid://c0yy0f4y871dd" path="res://Assets/Materials/mat_surface_ship_diffuse.tres" id="8_11qs7"]
 [ext_resource type="Script" uid="uid://dm17ec53umwiu" path="res://Scripts/Ship/ShipCamera.gd" id="9"]
 [ext_resource type="Script" uid="uid://ttu4p5movomr" path="res://Scripts/Ship/ShipEffects.gd" id="11"]
 [ext_resource type="AudioStream" uid="uid://c47iw855uwvkc" path="res://Assets/Sounds/flying_sound.ogg" id="12"]
 [ext_resource type="Script" uid="uid://bqflf4vw8mem1" path="res://addons/lines_and_trails_3d/trail_3d.gd" id="13_11qs7"]
 [ext_resource type="Material" uid="uid://cwe1rex5kuqjm" path="res://Assets/Materials/mat_shadow.tres" id="14"]
+
+[sub_resource type="Resource" id="Resource_q0ew7"]
+script = ExtResource("7_mxetg")
+fov = 70.0
+metadata/_custom_type_script = "uid://b8hhnqsugykly"
+
+[sub_resource type="Resource" id="Resource_w30pm"]
+script = ExtResource("6_mxetg")
+transition = 7
+ease = 1
 
 [sub_resource type="Curve" id="Curve_csonu"]
 _data = [Vector2(0, 0), 0.0, 7.7031245, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.8388216, 0.0, 0, 0]
@@ -891,14 +904,14 @@ graph_offset = Vector2(-18, 40)
 [sub_resource type="SphereShape3D" id="16"]
 radius = 1.0
 
-[node name="Ship" type="CharacterBody3D" node_paths=PackedStringArray("_Camera", "_ShipPivot", "_GroundRayCast", "_ShipModel", "_AnimationTree", "_GroundEffects", "_ShipEffects", "_ShipAudio") groups=["Player"]]
+[node name="Ship" type="CharacterBody3D" node_paths=PackedStringArray("_ShipPivot", "_GroundRayCast", "_ShipModel", "_AnimationTree", "_GroundEffects", "_ShipEffects", "_ShipAudio") groups=["Player"]]
 collision_layer = 2
 collision_mask = 15
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("5")
 max_speed = 20.0
-_Camera = NodePath("Camera3D")
+_CameraOverride = SubResource("Resource_q0ew7")
 _ShipPivot = NodePath("Pivot")
 _GroundRayCast = NodePath("GroundRayCast")
 _ShipModel = NodePath("Pivot/Model")
@@ -923,14 +936,19 @@ args = [false]
 script = ExtResource("11")
 core_trail = NodePath("../Pivot/Model/Core/Trail3D")
 wing_trails = [NodePath("../Pivot/Model/RightWing/Trail3DRight"), NodePath("../Pivot/Model/LeftWing/Trail3DLeft")]
-dust_effect = NodePath("../Pivot/GroundEffects/DustEffect")
 
-[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2, 6)
-current = true
-far = 1000.0
+[node name="CameraAnchor" type="Node3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 2, 6)
 script = ExtResource("9")
 target = NodePath("../Pivot")
+
+[node name="PhantomCamera3D" type="Node3D" parent="CameraAnchor"]
+script = ExtResource("5_xt253")
+priority = 1
+tween_resource = SubResource("Resource_w30pm")
+tween_on_load = false
+camera_3d_resource = SubResource("Resource_q0ew7")
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
 [node name="Pivot" type="Node3D" parent="."]
 

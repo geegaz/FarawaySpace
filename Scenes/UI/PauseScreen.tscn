@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://jlvt2pxikbem"]
 
 [ext_resource type="Theme" uid="uid://c3hsjjmqm58co" path="res://default_theme.tres" id="1"]
-[ext_resource type="Script" uid="uid://djfukiirkfgfg" path="res://Scripts/UI/Pause.gd" id="2"]
+[ext_resource type="Script" uid="uid://djfukiirkfgfg" path="res://Scripts/UI/PauseScreen.gd" id="2"]
 [ext_resource type="Material" uid="uid://b004i5hlnnvfj" path="res://Assets/Materials/mat_ui_blur.tres" id="3_w3jdu"]
+
 
 [node name="PauseScreen" type="Control" node_paths=PackedStringArray("resume_button", "quit_button")]
 process_mode = 3

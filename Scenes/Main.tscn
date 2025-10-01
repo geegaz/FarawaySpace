@@ -5,4 +5,3 @@
 [node name="Main" type="Node"]
 script = ExtResource("4")
 default_level = "Tutorial"
-start_input_active = true

@@ -12,10 +12,10 @@ var first_loading: bool = true
 var transition: Transition
 var spinner: Spinner
 
-var current_level_node: Node
-var current_level: String:
-	set(value): PlayerSave.set_saved("current_level", value)
-	get: return PlayerSave.get_saved("current_level", "")
+var curren_level: Level
+var curren_level_name: String:
+	set(value): PlayerSave.set_saved("current_level_name", value)
+	get: return PlayerSave.get_saved("current_level_name", "")
 var current_checkpoint: int:
 	set(value): PlayerSave.set_saved("current_checkpoint", value)
 	get: return PlayerSave.get_saved("current_checkpoint", 0)
@@ -30,22 +30,23 @@ func _ready() -> void:
 	spinner.hide()
 
 
-func change_level(level: String, fade_color: Color = Color.BLACK)->void:
+func change_level(level_name: String, fade_color: Color = Color.BLACK)->void:
 	if changing_level:
 		printerr("Already changing level")
 		return # Can't change level if already changing
-	if level not in LEVELS:
-		printerr("Unknown level %s"%level)
+	if level_name not in LEVELS:
+		printerr("Unknown level %s"%level_name)
 		return # No level provided
-	if level == current_level and not first_loading:
+	if level_name == curren_level_name and not first_loading:
 		printerr("Level is already loaded")
 		return # Don't load the current level again
 	
-	PlayerManager.player_input.enabled = false
+	if PlayerManager.playing:
+		PlayerManager.player_input.enabled = false
 	changing_level = true
 	
 	if first_loading and not load_additive:
-		current_level_node = tree.current_scene
+		curren_level = tree.current_scene
 	
 	transition.color = fade_color
 	if first_loading and load_additive: # When starting the game
@@ -62,49 +63,51 @@ func change_level(level: String, fade_color: Color = Color.BLACK)->void:
 	### LOADING ###
 	
 	# Remove previous level
-	if current_level_node:
+	if curren_level:
 		remove_current_level_node_from_scene()
-		current_level_node = null
+		curren_level = null
 	
 	# Start loading in the background
-	var scene_path: String = LEVELS[level] # already checked
+	var scene_path: String = LEVELS[level_name] # already checked
 	var loaded_scene: = await load_level_threaded(scene_path)
 	
 	# Add new level
-	current_level = level # SAVED
 	current_checkpoint = 0 # SAVED
-	current_level_node = loaded_scene.instantiate()
+	curren_level_name = level_name # SAVED
+	curren_level = loaded_scene.instantiate()
 	add_current_level_node_to_scene.call_deferred()
 	
 	###############
 	
+	await curren_level.ready
 	spinner.hide()
 	transition.fade_out()
 	await transition.fade_out_finished
 	
 	first_loading = false
 	changing_level = false
-	PlayerManager.player_input.enabled = true
+	if PlayerManager.playing:
+		PlayerManager.player_input.enabled = true
 
 
 func remove_current_level_node_from_scene(delete: bool = true)->void:
 	if load_additive:
-		tree.current_scene.remove_child(current_level_node)
+		tree.current_scene.remove_child(curren_level)
 	else:
-		tree.root.remove_child(current_level_node)
+		tree.root.remove_child(curren_level)
 		tree.current_scene = null
 	
 	if delete:
-		current_level_node.queue_free()
+		curren_level.queue_free()
 
 func add_current_level_node_to_scene()->void:
 	if load_additive:
 		# Add the level to the main scene
-		tree.current_scene.add_child(current_level_node)
+		tree.current_scene.add_child(curren_level)
 	else:
 		# Change the scene directly
-		tree.root.add_child(current_level_node)
-		tree.current_scene = current_level_node
+		tree.root.add_child(curren_level)
+		tree.current_scene = curren_level
 
 func load_level_threaded(path: String)->PackedScene:
 	if ResourceLoader.has_cached(path):

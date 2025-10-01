@@ -24,18 +24,18 @@ PlayerSettings="*res://Scripts/Autoloads/PlayerSettings.gd"
 PlayerManager="*res://Scripts/Autoloads/PlayerManager.gd"
 LevelManager="*res://Scripts/Autoloads/LevelManager.gd"
 UIManager="*res://Scenes/Autoloads/UIManager.tscn"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/stretch/mode="2d"
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/stretch/scale=2.0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/lines_and_trails_3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/lines_and_trails_3d/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [filesystem]
 
@@ -49,7 +49,6 @@ version_hint="4.5"
 [gui]
 
 theme/custom="res://default_theme.tres"
-theme/custom_font="uid://x24an8786xvy"
 
 [importer_defaults]
 

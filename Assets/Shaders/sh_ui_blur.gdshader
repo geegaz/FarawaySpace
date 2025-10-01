@@ -7,8 +7,9 @@ uniform float blur_amount : hint_range(0.0, 10.0, 0.1) = 0.0;
 
 void fragment()
 {
-	vec3 screen_col = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur_amount).rgb;
-	vec3 col = mix(screen_col, COLOR.rgb, COLOR.a);
-	
-	COLOR = vec4(col, 1.0);
+	vec4 col = COLOR;
+	vec3 col_screen = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur_amount * col.a).rgb;
+
+	vec3 albedo = mix(col_screen, col.rgb, col.a);
+	COLOR = vec4(albedo, 1.0);
 }

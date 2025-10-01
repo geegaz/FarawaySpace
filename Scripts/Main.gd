@@ -1,13 +1,13 @@
 extends Node
 
 @export var default_level: String
-@export var start_input_active: bool
+@export var start_playing: bool
 
 func _ready() -> void:
-	PlayerManager.player_input.enabled = start_input_active
+	PlayerManager.playing = start_playing
 	
 	LevelManager.load_additive = true
-	var start_level: = LevelManager.current_level
+	var start_level: = LevelManager.curren_level_name
 	if start_level.is_empty():
 		start_level = default_level
 	LevelManager.change_level(start_level)

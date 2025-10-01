@@ -5,7 +5,6 @@ signal started_moving
 signal stopped_moving
 signal gravity_changed(value)
 
-@export var enabled: bool = true: set = set_enabled
 # Movement exports
 @export var max_speed: float = 25.0 # m/s
 @export var acceleration: float = 10.0 # m/s/s
@@ -24,7 +23,7 @@ signal gravity_changed(value)
 
 @export_group("References")
 # Gameplay nodes
-@export var _Camera: Camera3D
+@export var _CameraOverride: Camera3DResource
 @export var _ShipPivot: Node3D
 @export var _GroundRayCast: RayCast3D
 # Visuals nodes
@@ -128,8 +127,8 @@ func _process(delta):
 		_ShipEffects.dust_effect_emitting = false
 	
 	# Camera
-	if _Camera:
-		_Camera.fov = lerp(70, 100, speed_amount) # need signed speed amount
+	if _CameraOverride:
+		_CameraOverride.fov = lerp(70, 100, speed_amount) # need signed speed amount
 	
 	# Audio
 	_ShipAudio.pitch_scale = clamp(
@@ -234,19 +233,9 @@ func teleport(target_position: Vector3, target_rotation: Vector3)->void:
 	_ShipPivot.global_rotation = target_rotation
 
 
-func set_enabled(value: bool)->void:
-	enabled = value
-	forward_input = 0.0
-	backward_input = 0.0
-	turn_input = Vector2.ZERO
-	speed = 0.0
-	gravity_speed = 0.0
-	set_physics_process(value)
-
 func set_gravity_enabled(new_value: bool)->void:
 	gravity_enabled = new_value
 	emit_signal("gravity_changed", new_value)
-
 
 func _on_gravity_changed(value: bool)->void:
 	if value:

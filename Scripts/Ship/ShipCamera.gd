@@ -1,4 +1,4 @@
-extends Camera3D
+extends Node3D
 
 # Camera following
 @export var target: Node3D

@@ -22,6 +22,8 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	pause(false)
+	if not PlayerManager.playing:
+		menu(true)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_pause"):
@@ -42,6 +44,16 @@ func pause(value: bool)->void:
 	else:
 		pause_screen.exit_state()
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func menu(value: bool)->void:
+	var menu_screen: Control = controls.MenuScreen
+	if value:
+		menu_screen.enter_state()
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	else:
+		menu_screen.exit_state()
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		PlayerManager.playing = true
 
 func quit()->void:
 	tree.quit()
