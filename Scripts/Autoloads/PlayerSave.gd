@@ -37,16 +37,6 @@ func set_saved(value_name: StringName, value: Variant) -> bool:
 	return success # ...but return true even if the values were identical
 
 
-func save_file()->void:
-	var file: = FileAccess.open(save_path, FileAccess.WRITE)
-	match save_type:
-		SAVE_TYPE_BINARY:
-			file.store_var(save_data)
-		SAVE_TYPE_JSON:
-			var json_string: = JSON.stringify(save_data, "\t")
-			file.store_string(json_string)
-	print("Saved save file with data: ",save_data)
-
 func load_file()->void:
 	var file: = FileAccess.open(save_path, FileAccess.READ)
 	match save_type:
@@ -55,7 +45,17 @@ func load_file()->void:
 		SAVE_TYPE_JSON:
 			var json_string: = file.get_as_text()
 			save_data = JSON.parse_string(json_string)
-	print("Loaded save file with data: ",save_data)
+	print("Loaded save with data: ",save_data)
+
+func save_file()->void:
+	var file: = FileAccess.open(save_path, FileAccess.WRITE)
+	match save_type:
+		SAVE_TYPE_BINARY:
+			file.store_var(save_data)
+		SAVE_TYPE_JSON:
+			var json_string: = JSON.stringify(save_data, "\t")
+			file.store_string(json_string)
+	print("Saved save with data: ",save_data)
 
 func request_save()->void:
 	if save_requested:

@@ -20,6 +20,7 @@ config/icon="res://icon.png"
 [autoload]
 
 PlayerSave="*res://Scripts/Autoloads/PlayerSave.gd"
+PlayerSettings="*res://Scripts/Autoloads/PlayerSettings.gd"
 PlayerManager="*res://Scripts/Autoloads/PlayerManager.gd"
 LevelManager="*res://Scripts/Autoloads/LevelManager.gd"
 UIManager="*res://Scenes/Autoloads/UIManager.tscn"
