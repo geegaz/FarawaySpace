@@ -15,20 +15,23 @@ environment = ExtResource("7")
 [node name="DirectionalLight3D" parent="Lighting" index="1"]
 visible = false
 
-[node name="CubemapGenerator" parent="." index="3"]
+[node name="CubemapGenerator" parent="." index="4"]
+file_name = "cubemap_tutorial"
 path = "res://Scenes/Levels/LevelTutorialData"
 
-[node name="ShellSphere" parent="." index="4" instance=ExtResource("2")]
+[node name="ShellSphere" parent="." index="5" instance=ExtResource("2")]
 
-[node name="LightmapGI" type="LightmapGI" parent="." index="5"]
+[node name="LevelDoor" parent="." index="6" instance=ExtResource("5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -78)
+required_keys = 1
+portal_data = ExtResource("6_gw3r5")
+
+[node name="LightmapGI" type="LightmapGI" parent="." index="7"]
 quality = 2
 supersampling = true
 bounces = 10
 interior = true
 denoiser_strength = 0.2
+max_texture_size = 8192
+generate_probes_subdiv = 1
 light_data = ExtResource("12")
-
-[node name="LevelDoor" parent="." index="6" instance=ExtResource("5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -78)
-required_keys = PackedStringArray("test", "test2")
-portal_data = ExtResource("6_gw3r5")

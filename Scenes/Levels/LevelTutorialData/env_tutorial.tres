@@ -4,18 +4,19 @@
 
 [resource]
 background_mode = 1
-background_color = Color(0.1764706, 0.20784314, 0.21960784, 1)
+background_color = Color(0.6420518, 0.6622501, 0.6743981, 1)
 sky = SubResource("1")
 ambient_light_source = 2
-ambient_light_color = Color(0.12156863, 0.14509805, 0.15686275, 1)
+ambient_light_color = Color(0.0801, 0.08934, 0.09, 1)
 tonemap_mode = 4
 ssao_enabled = true
+ssao_radius = 2.0
 glow_enabled = true
 glow_bloom = 0.03
 glow_blend_mode = 1
 fog_enabled = true
 fog_mode = 1
-fog_light_color = Color(0.1782, 0.20606665, 0.22, 1)
+fog_light_color = Color(0.6431373, 0.6627451, 0.6745098, 1)
 fog_density = 1.0
 fog_depth_begin = 100.0
 fog_depth_end = 250.0

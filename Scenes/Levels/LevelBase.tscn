@@ -19,6 +19,15 @@ checkpoints = [NodePath("ShipSpawner")]
 
 [node name="LevelUI" type="CanvasLayer" parent="."]
 
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, -8, 3, 7)
+fov = 70.0
+
+[node name="PhantomCameraHost" type="Node" parent="Camera3D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("7_b072a")
+
 [node name="Lighting" type="Node3D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
@@ -44,12 +53,3 @@ metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 [node name="CubemapGenerator" type="Node3D" parent="."]
 script = ExtResource("4")
 cull_mask = 1
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, -8, 3, 7)
-fov = 70.0
-
-[node name="PhantomCameraHost" type="Node" parent="Camera3D"]
-process_priority = 300
-process_physics_priority = 300
-script = ExtResource("7_b072a")
