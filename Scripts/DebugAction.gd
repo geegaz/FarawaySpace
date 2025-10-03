@@ -10,7 +10,7 @@ var debug_active: bool
 var matched: int
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action("debug"):
+	if event.is_action("ui_debug"):
 		debug_active = event.is_pressed()
 		matched = 0
 		return

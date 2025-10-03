@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://cngn5g1nbqp28"]
+
+[ext_resource type="Script" uid="uid://dsa566om6gg84" path="res://Scripts/UI/QuitFlowState.gd" id="1_h4u5t"]
+
+[node name="QuitFlowState" type="Control" node_paths=PackedStringArray("confirm_button", "cancel_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h4u5t")
+confirm_button = NodePath("VBoxContainer/HBoxContainer/ConfirmButton")
+cancel_button = NodePath("VBoxContainer/HBoxContainer/CancelButton")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -118.5
+offset_top = -29.0
+offset_right = 118.5
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Do you want to quit ?"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ConfirmButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Confirm"
+
+[node name="CancelButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cancel"

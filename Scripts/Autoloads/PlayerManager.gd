@@ -18,6 +18,11 @@ func _ready() -> void:
 	player_input = ShipInput.new()
 	player_input.enabled = playing
 	add_child(player_input)
+	
+	if playing:
+		started_playing.emit()
+	else:
+		stopped_playing.emit()
 
 
 func set_playing(value: bool)->void:

@@ -4,7 +4,7 @@
 [ext_resource type="Environment" uid="uid://wnfj7sk53jhn" path="res://default_env.tres" id="3"]
 [ext_resource type="Material" uid="uid://cfbur7idqoq1n" path="res://Assets/Materials/mat_surface_level_diffuse.tres" id="3_efk68"]
 [ext_resource type="PackedScene" uid="uid://d2k3uncoj5ise" path="res://Scenes/Ship.tscn" id="4"]
-[ext_resource type="PackedScene" uid="uid://jlvt2pxikbem" path="res://Scenes/UI/PauseState.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://jlvt2pxikbem" path="res://Scenes/UI/PauseFlowState.tscn" id="8"]
 
 
 [sub_resource type="ConcavePolygonShape3D" id="1"]

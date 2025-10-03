@@ -1,7 +1,7 @@
 class_name LevelDoor
 extends Node3D
 
-@export var required_keys: PackedStringArray
+@export_flags_avoidance var required_keys: int # Hack to have the flags displayed as a grid
 @export var portal_data: LevelPortalData
 @export_group("References")
 @export var door_animation: AnimationPlayer
@@ -10,12 +10,12 @@ extends Node3D
 @export var portal_sphere: MeshInstance3D
 @export var portal_light: OmniLight3D
 
-var available_keys: PackedStringArray:
+var available_keys: int:
 	set(value): PlayerSave.set_saved("available_keys", value)
-	get: return PlayerSave.get_saved("available_keys", [])
-var used_keys: PackedStringArray:
+	get: return PlayerSave.get_saved("available_keys", 0)
+var used_keys: int:
 	set(value): PlayerSave.set_saved("used_keys", value)
-	get: return PlayerSave.get_saved("used_keys", [])
+	get: return PlayerSave.get_saved("used_keys", 0)
 
 var open: bool
 
@@ -28,12 +28,7 @@ func _enter_tree() -> void:
 		portal_light.light_color = portal_data.color
 
 func _ready() -> void:
-	var unlocked: = true
-	for key in required_keys:
-		if key not in used_keys:
-			unlocked = false
-			break
-	
+	var unlocked: = required_keys & used_keys == required_keys
 	if unlocked:
 		open = true
 		door_animation.play("open_door")
@@ -59,25 +54,18 @@ func open_door()->void:
 	var a_keys: = available_keys
 	var u_keys: = used_keys
 	
-	if a_keys.is_empty():
-		# TODO: Feedback for the missing keys
-		return # No key available, so no need to check them
-	
-	var required_keys_amount: = required_keys.size()
-	for key in required_keys:
-		if key in u_keys:
-			required_keys_amount -= 1
-		elif key in a_keys:
-			a_keys.erase(key)
-			u_keys.append(key)
-			required_keys_amount -= 1
-			# TODO: Feedback for the used keys that were removed
+	var used: = required_keys & a_keys
+	if used > 0:
+		# TODO: Feedback for the used keys that were removed
+		pass
+	u_keys |= used
+	a_keys ^= used
 	
 	# Apply the changed keys to the save file
 	available_keys = a_keys
 	used_keys = u_keys
 	
-	if required_keys_amount > 0:
+	if required_keys & u_keys != required_keys:
 		# TODO: Feedback for the missing keys
 		return # Not enough keys
 	
@@ -93,10 +81,7 @@ func debug_add_keys()->void:
 	var a_keys: = available_keys
 	var u_keys: = used_keys
 	
-	for key in required_keys:
-		if key in a_keys or key in u_keys:
-			continue
-		a_keys.append(key)
+	a_keys |= required_keys & ~u_keys
 	
 	available_keys = a_keys
 	

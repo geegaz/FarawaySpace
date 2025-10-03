@@ -30,7 +30,7 @@ func setup()->void:
 		states[child.name] = child
 		child.flow = self
 		if child.name != current_state:
-			host.remove_child(child)
+			child.status = UIFlowState.STATUS_INACTIVE
 
 func go_back()->void:
 	if stack.is_empty():
@@ -41,7 +41,8 @@ func go_back()->void:
 	go_to(state, false)
 
 func go_to(state: StringName, use_stack: bool = true)->void:
-	if not state in states:
+	var state_none: = state.is_empty()
+	if not (state in states or state_none):
 		printerr("No state %s in states"%state)
 		return
 	if state == current_state:
@@ -49,20 +50,18 @@ func go_to(state: StringName, use_stack: bool = true)->void:
 		return
 	
 	if not current_state.is_empty():
-		@warning_ignore("redundant_await")
-		await states[current_state]._exit_state()
-		host.remove_child(states[current_state])
+		if states[current_state].wait_for_exit:
+			await states[current_state]._exit_state()
+		else:
+			states[current_state]._exit_state()
 	
+	if use_stack:
+		stack.push_back(current_state)
 	current_state = state
 	state_changed.emit(state)
-	if use_stack:
-		stack.push_back(state)
 	
-	host.add_child(states[current_state])
-	states[current_state]._enter_state()
-
-func is_current_state(state: StringName)->bool:
-	return current_state == state
+	if not state_none:
+		states[current_state]._enter_state()
 
 func get_child_states()->Array[UIFlowState]:
 	var child_states: Array[UIFlowState]

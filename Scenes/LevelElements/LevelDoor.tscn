@@ -152,8 +152,6 @@ _data = {
 
 [node name="LevelDoor" type="Node3D" node_paths=PackedStringArray("door_animation", "door_trigger", "level_trigger", "portal_sphere", "portal_light")]
 script = ExtResource("3")
-level_cubemap = ExtResource("5_jqp7b")
-level_color = Color(0.7647059, 0.8352941, 0.8392157, 1)
 door_animation = NodePath("AnimationPlayer")
 door_trigger = NodePath("DoorTrigger")
 level_trigger = NodePath("LevelTrigger")
@@ -185,7 +183,7 @@ skeleton = NodePath("")
 [node name="PortalLight" type="OmniLight3D" parent="LevelTrigger"]
 layers = 4
 light_color = Color(0.78, 0.9853333, 1, 1)
-light_energy = 20.0
+light_energy = 10.0
 light_volumetric_fog_energy = 1000.0
 light_bake_mode = 0
 shadow_enabled = true

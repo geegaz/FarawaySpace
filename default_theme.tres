@@ -1,12 +1,13 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://c3hsjjmqm58co"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://c3hsjjmqm58co"]
 
-[ext_resource type="StyleBox" path="res://Assets/Styles/Button/style_focused.tres" id="2"]
-[ext_resource type="StyleBox" path="res://Assets/Styles/Button/style_normal.tres" id="3"]
-[ext_resource type="StyleBox" path="res://Assets/Styles/Button/style_pressed.tres" id="4"]
-[ext_resource type="StyleBox" path="res://Assets/Styles/Button/style_hover.tres" id="5"]
-[ext_resource type="StyleBox" path="res://Assets/Styles/Button/style_disabled.tres" id="6"]
+[ext_resource type="StyleBox" uid="uid://de82vky7es5gd" path="res://Assets/Styles/Button/style_focused.tres" id="2"]
+[ext_resource type="StyleBox" uid="uid://d2rmmgw24aemq" path="res://Assets/Styles/Button/style_normal.tres" id="3"]
+[ext_resource type="StyleBox" uid="uid://bs545ffjapk8i" path="res://Assets/Styles/Button/style_pressed.tres" id="4"]
+[ext_resource type="StyleBox" uid="uid://b7ne5ell05gb6" path="res://Assets/Styles/Button/style_hover.tres" id="5"]
+[ext_resource type="StyleBox" uid="uid://cmm86ck7ddyeg" path="res://Assets/Styles/Button/style_disabled.tres" id="6"]
 [ext_resource type="FontFile" uid="uid://x24an8786xvy" path="res://Assets/Fonts/millennia.regular.ttf" id="6_ed8xq"]
 [ext_resource type="FontFile" uid="uid://bna7nytcg2xpv" path="res://Assets/Fonts/galiver-sans.bold.ttf" id="6_u7cj8"]
+[ext_resource type="StyleBox" uid="uid://bqicqn6pnqexc" path="res://Assets/Styles/Separator/style_horizontal.tres" id="6_uwdo0"]
 
 [sub_resource type="StyleBoxFlat" id="3"]
 bg_color = Color(1, 1, 1, 1)
@@ -23,6 +24,7 @@ bg_color = Color(1, 1, 1, 1)
 [resource]
 default_font = ExtResource("6_ed8xq")
 default_font_size = 24
+BoxContainer/constants/separation = 8
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_color_disabled = Color(0.25098, 0.25098, 0.25098, 1)
 Button/colors/font_color_focus = Color(1, 1, 1, 1)
@@ -33,6 +35,7 @@ Button/styles/focus = ExtResource("2")
 Button/styles/hover = ExtResource("5")
 Button/styles/normal = ExtResource("3")
 Button/styles/pressed = ExtResource("4")
+HSeparator/styles/separator = ExtResource("6_uwdo0")
 HeaderLarge/font_sizes/font_size = 48
 HeaderLarge/fonts/font = ExtResource("6_u7cj8")
 ProgressBar/colors/font_color = Color(0.498039, 0.498039, 0.498039, 1)

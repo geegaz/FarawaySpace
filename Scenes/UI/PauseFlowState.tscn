@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://jlvt2pxikbem"]
+
+[ext_resource type="Theme" uid="uid://c3hsjjmqm58co" path="res://default_theme.tres" id="1"]
+[ext_resource type="Script" uid="uid://djfukiirkfgfg" path="res://Scripts/UI/PauseFlowState.gd" id="2"]
+
+[node name="PauseState" type="Control" node_paths=PackedStringArray("resume_button", "respawn_button", "menu_button", "quit_button")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1")
+script = ExtResource("2")
+resume_button = NodePath("PauseContainer/Resume")
+respawn_button = NodePath("PauseContainer/Respawn")
+menu_button = NodePath("PauseContainer/MainMenu")
+quit_button = NodePath("PauseContainer/Quit")
+
+[node name="PauseContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -69.0
+offset_right = 128.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PauseContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_type_variation = &"HeaderLarge"
+text = "Pause"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Resume" type="Button" parent="PauseContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Respawn" type="Button" parent="PauseContainer"]
+layout_mode = 2
+text = "Respawn"
+
+[node name="HSeparator" type="HSeparator" parent="PauseContainer"]
+layout_mode = 2
+
+[node name="MainMenu" type="Button" parent="PauseContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Main Menu"
+
+[node name="Quit" type="Button" parent="PauseContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Quit"
