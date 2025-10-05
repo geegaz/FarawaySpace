@@ -3,18 +3,18 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bofbuyj7ib62v"
-path="res://.godot/imported/door_petal.glb-a83f97bfe75cc4b9f719526f3fd2c1f4.scn"
+uid="uid://wx4n8v3cyyrv"
+path="res://.godot/imported/door_petals.glb-2dc411c0cf04a12cc9f6ba547ef79314.scn"
 
 [deps]
 
-source_file="res://Assets/Meshes/door_petal.glb"
-dest_files=["res://.godot/imported/door_petal.glb-a83f97bfe75cc4b9f719526f3fd2c1f4.scn"]
+source_file="res://Assets/Meshes/door_petals.glb"
+dest_files=["res://.godot/imported/door_petals.glb-2dc411c0cf04a12cc9f6ba547ef79314.scn"]
 
 [params]
 
 nodes/root_type="Node3D"
-nodes/root_name="DoorPetal"
+nodes/root_name="DoorPetals"
 nodes/root_script=null
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -29,7 +29,7 @@ meshes/lightmap_texel_size=0.2
 meshes/force_disable_compression=false
 skins/use_named_skins=true
 animation/import=true
-animation/fps=15
+animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
@@ -37,6 +37,14 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={}
+_subresources={
+"materials": {
+"SurfaceDiffuse": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Assets/Materials/mat_surface_level_diffuse.tres",
+"use_external/path": "uid://cfbur7idqoq1n"
+}
+}
+}
 gltf/naming_version=2
 gltf/embedded_image_handling=1

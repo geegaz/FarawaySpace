@@ -25,8 +25,7 @@ float fresnel(vec3 view, vec3 normal, float power)
 
 void vertex()
 {
-	// Do matrix multiplications in vertex function
-	camera_pos = (INV_VIEW_MATRIX * vec4(0.0, 0.0, 0.0, 1.0)).xyz;
+	camera_pos = CAMERA_POSITION_WORLD;
 	world_pos = VERTEX;
 	world_normal = NORMAL;
 }
@@ -37,8 +36,6 @@ void fragment()
 	
 	// Load-bearing fresnel
 	float f = fresnel(VIEW, NORMAL, 2.0);
-	
-	
 	
 	float fade = smoothstep(0.0, fade_start, f);
 	float chromatic_distorsion_amount = 1.0 - smoothstep(0.0, chromatic_dispersion_start, f);
@@ -55,9 +52,11 @@ void fragment()
 	refracted_g.x = -refracted_g.x;
 	refracted_b.x = -refracted_b.x;
 	
-	float col_r = texture(cubemap, refracted_r).r;
-	float col_g = texture(cubemap, refracted_g).g;
-	float col_b = texture(cubemap, refracted_b).b;
+	// Also need to flip the direction of the view vector since 
+	// Godot 4.2+ uses -Z view direction
+	float col_r = texture(cubemap, -refracted_r).r;
+	float col_g = texture(cubemap, -refracted_g).g;
+	float col_b = texture(cubemap, -refracted_b).b;
 	ALBEDO = vec3(col_r, col_g, col_b);
 	ALPHA = fade;
 }

@@ -43,16 +43,17 @@ text = "Pause"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="HSeparator" type="HSeparator" parent="PauseContainer"]
+layout_mode = 2
+
 [node name="Resume" type="Button" parent="PauseContainer"]
 layout_mode = 2
+theme_type_variation = &"ButtonBig"
 text = "Resume"
 
 [node name="Respawn" type="Button" parent="PauseContainer"]
 layout_mode = 2
 text = "Respawn"
-
-[node name="HSeparator" type="HSeparator" parent="PauseContainer"]
-layout_mode = 2
 
 [node name="MainMenu" type="Button" parent="PauseContainer"]
 layout_mode = 2

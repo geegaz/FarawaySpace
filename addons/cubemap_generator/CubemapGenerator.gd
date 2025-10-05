@@ -78,12 +78,13 @@ func generate_cubemap():
 	_cubemap.create_from_images(_view_textures)
 	
 	_cubemap.take_over_path(_temp_path)
-	ResourceSaver.save(_cubemap, _temp_path, ResourceSaver.FLAG_COMPRESS)
-	_cubemap.emit_changed()
+	var error: = ResourceSaver.save(_cubemap, _temp_path, ResourceSaver.FLAG_COMPRESS)
+	if error == OK:
+		print("Baked Cubemap. Saved to %s" % _temp_path)
 	
 	for _cleanup in get_children():
 		_cleanup.queue_free()
 	_view_textures.clear()
 	_views.clear()
 	
-	print("Baked Cubemap. Saved to %s" % _temp_path)
+	

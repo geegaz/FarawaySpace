@@ -3,18 +3,18 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dasb5uqrl4p8r"
-path="res://.godot/imported/door_frame.glb-953da8e42dace858b917e1e5970df172.scn"
+uid="uid://c4yi0810oetgr"
+path="res://.godot/imported/gym_box.glb-12feb68f2c7b8ba8b52a7d40afb17d4c.scn"
 
 [deps]
 
-source_file="res://Assets/Meshes/door_frame.glb"
-dest_files=["res://.godot/imported/door_frame.glb-953da8e42dace858b917e1e5970df172.scn"]
+source_file="res://Assets/Meshes/gym_box.glb"
+dest_files=["res://.godot/imported/gym_box.glb-12feb68f2c7b8ba8b52a7d40afb17d4c.scn"]
 
 [params]
 
-nodes/root_type="Node3D"
-nodes/root_name="DoorFrame"
+nodes/root_type=""
+nodes/root_name=""
 nodes/root_script=null
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -24,12 +24,12 @@ nodes/use_node_type_suffixes=true
 meshes/ensure_tangents=true
 meshes/generate_lods=true
 meshes/create_shadow_meshes=true
-meshes/light_baking=2
+meshes/light_baking=1
 meshes/lightmap_texel_size=0.2
 meshes/force_disable_compression=false
 skins/use_named_skins=true
-animation/import=false
-animation/fps=15
+animation/import=true
+animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
@@ -39,15 +39,18 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
-"SurfaceDiffuse": {
+"PrototypeLight": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://Assets/Materials/mat_surface_level_diffuse.tres",
-"use_external/path": "uid://cfbur7idqoq1n"
+"use_external/fallback_path": "res://Assets/Materials/prototype/mat_prototype_light.tres",
+"use_external/path": "uid://llvlbtjxom6w"
 }
 },
 "nodes": {
-"PATH:DoorFrame": {
-"generate/physics": true
+"PATH:GymBox": {
+"generate/physics": true,
+"physics/shape_type": 3,
+"primitive/position": Vector3(0, -5, -10),
+"primitive/size": Vector3(10, 10, 20)
 }
 }
 }

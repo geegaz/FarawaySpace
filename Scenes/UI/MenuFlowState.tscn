@@ -11,7 +11,7 @@ gradient = SubResource("Gradient_jqlr8")
 fill_from = Vector2(0.8, 0)
 metadata/_snap_enabled = true
 
-[node name="MenuState" type="Control" node_paths=PackedStringArray("start_button")]
+[node name="MenuState" type="Control" node_paths=PackedStringArray("start_button", "quit_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,6 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pk0te")
 start_button = NodePath("Container/VBoxContainer/StartButton")
+quit_button = NodePath("Container/VBoxContainer/QuitButton")
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="."]
 position = Vector2(639.99994, 360)
@@ -71,4 +72,9 @@ layout_mode = 2
 
 [node name="StartButton" type="Button" parent="Container/VBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"ButtonBig"
 text = "Start"
+
+[node name="QuitButton" type="Button" parent="Container/VBoxContainer"]
+layout_mode = 2
+text = "Quit"

@@ -2,7 +2,7 @@ extends Node
 
 const LEVELS: = {
 	"Tutorial": "res://Scenes/Levels/LevelTutorial.tscn",
-	"Level 0": "res://Scenes/Levels/Level00.tscn"
+	"Gym": "res://Scenes/Levels/LevelGym.tscn"
 }
 
 var changing_level: bool

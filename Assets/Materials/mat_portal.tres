@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dk60mshmjwlay"]
 
 [ext_resource type="Shader" uid="uid://dq2g06ereimvl" path="res://Assets/Shaders/sh_portal.gdshader" id="2"]
-[ext_resource type="CompressedCubemap" uid="uid://ceg50dbo0pgb2" path="res://Assets/Textures/default_cubemap.jpg" id="2_ms7lk"]
+[ext_resource type="Cubemap" uid="uid://dgk83fl4usfk6" path="res://Scenes/Levels/LevelGymData/cubemap_gym.tres" id="2_ms7lk"]
 
 [resource]
 resource_local_to_scene = true

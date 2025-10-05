@@ -1,11 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://btbk4yikymaxs"]
+[gd_scene load_steps=7 format=3 uid="uid://btbk4yikymaxs"]
 
-[ext_resource type="PackedScene" uid="uid://dnignpn388y65" path="res://Scenes/Levels/LevelBase.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dnignpn388y65" path="res://Scenes/Levels/BaseLevel.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://bdi8x8xa4yp4b" path="res://Assets/Meshes/shell_sphere.glb" id="2"]
-[ext_resource type="Script" uid="uid://d185vdk6ng1wh" path="res://Scripts/LightProbesMesh.gd" id="3_351fv"]
-[ext_resource type="ArrayMesh" uid="uid://bf6vuic4v06jm" path="res://Assets/Meshes/icosphere_low.obj" id="4_2rro3"]
 [ext_resource type="PackedScene" uid="uid://b38d47b7ao6aj" path="res://Scenes/LevelElements/LevelDoor.tscn" id="5"]
-[ext_resource type="Resource" uid="uid://c1s44l8xfoo64" path="res://Scenes/Levels/Level00Data/portal_00.tres" id="6_gw3r5"]
+[ext_resource type="Resource" uid="uid://c1s44l8xfoo64" path="res://Scenes/Levels/LevelGymData/portal_gym.tres" id="6_gw3r5"]
 [ext_resource type="Environment" uid="uid://dddiovijhkup7" path="res://Scenes/Levels/LevelTutorialData/env_tutorial.tres" id="7"]
 [ext_resource type="LightmapGIData" uid="uid://iv1b3700gnjv" path="res://Scenes/Levels/LevelTutorialData/Lightmap/LevelTutorial.lmbake" id="12"]
 
@@ -21,149 +19,14 @@ visible = false
 file_name = "cubemap_tutorial"
 path = "res://Scenes/Levels/LevelTutorialData"
 
-[node name="LightProbesMesh" type="Node3D" parent="." index="5"]
-transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, 0, 0, 0)
-visible = false
-script = ExtResource("3_351fv")
-source = ExtResource("4_2rro3")
-source_scale = 85.0
+[node name="ShellSphere" parent="." index="5" instance=ExtResource("2")]
 
-[node name="CenterProbe" type="LightmapProbe" parent="LightProbesMesh" index="0"]
-
-[node name="Surface0Probe0" type="LightmapProbe" parent="LightProbesMesh" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80.83993, -0.0012969971, 26.265892)
-
-[node name="Surface0Probe1" type="LightmapProbe" parent="LightProbesMesh" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.153767, 72.3048, -26.268482)
-
-[node name="Surface0Probe2" type="LightmapProbe" parent="LightProbesMesh" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.495617, 44.68612, 42.49935)
-
-[node name="Surface0Probe3" type="LightmapProbe" parent="LightProbesMesh" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.809463, -72.307396, -42.501945)
-
-[node name="Surface0Probe4" type="LightmapProbe" parent="LightProbesMesh" index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.495617, 44.68612, -42.501945)
-
-[node name="Surface0Probe5" type="LightmapProbe" parent="LightProbesMesh" index="6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012311339, -0.0012969971, 85)
-
-[node name="Surface0Probe6" type="LightmapProbe" parent="LightProbesMesh" index="7"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.30384, -44.688713, -0.0012969971)
-
-[node name="Surface0Probe7" type="LightmapProbe" parent="LightProbesMesh" index="8"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.809463, -72.307396, 42.49935)
-
-[node name="Surface0Probe8" type="LightmapProbe" parent="LightProbesMesh" index="9"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.153767, 72.3048, 26.265892)
-
-[node name="Surface0Probe9" type="LightmapProbe" parent="LightProbesMesh" index="10"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.806994, 72.3048, -42.501945)
-
-[node name="Surface0Probe10" type="LightmapProbe" parent="LightProbesMesh" index="11"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80.83993, -0.0012969971, -26.268482)
-
-[node name="Surface0Probe11" type="LightmapProbe" parent="LightProbesMesh" index="12"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.961998, -0.0012969971, -68.76653)
-
-[node name="Surface0Probe12" type="LightmapProbe" parent="LightProbesMesh" index="13"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.961998, -0.0012969971, 68.76395)
-
-[node name="Surface0Probe13" type="LightmapProbe" parent="LightProbesMesh" index="14"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.95953, -0.0012969971, -68.76653)
-
-[node name="Surface0Probe14" type="LightmapProbe" parent="LightProbesMesh" index="15"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.68493, 72.3048, -0.0012969971)
-
-[node name="Surface0Probe15" type="LightmapProbe" parent="LightProbesMesh" index="16"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.806994, 72.3048, 42.49935)
-
-[node name="Surface0Probe16" type="LightmapProbe" parent="LightProbesMesh" index="17"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.83993, -0.0012969971, -26.268482)
-
-[node name="Surface0Probe17" type="LightmapProbe" parent="LightProbesMesh" index="18"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012311339, -0.0012969971, -85)
-
-[node name="Surface0Probe18" type="LightmapProbe" parent="LightProbesMesh" index="19"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.34307, -44.688713, -68.76653)
-
-[node name="Surface0Probe19" type="LightmapProbe" parent="LightProbesMesh" index="20"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.151306, -72.307396, 26.265892)
-
-[node name="Surface0Probe20" type="LightmapProbe" parent="LightProbesMesh" index="21"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.95953, -0.0012969971, 68.76395)
-
-[node name="Surface0Probe21" type="LightmapProbe" parent="LightProbesMesh" index="22"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.34307, -44.688713, 68.76395)
-
-[node name="Surface0Probe22" type="LightmapProbe" parent="LightProbesMesh" index="23"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.345547, 44.68612, 68.76395)
-
-[node name="Surface0Probe23" type="LightmapProbe" parent="LightProbesMesh" index="24"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.498085, -44.688713, -42.501945)
-
-[node name="Surface0Probe24" type="LightmapProbe" parent="LightProbesMesh" index="25"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.498085, -44.688713, 42.49935)
-
-[node name="Surface0Probe25" type="LightmapProbe" parent="LightProbesMesh" index="26"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -72.30631, 44.68612, -0.0012969971)
-
-[node name="Surface0Probe26" type="LightmapProbe" parent="LightProbesMesh" index="27"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012311339, -85, -0.0012969971)
-
-[node name="Surface0Probe27" type="LightmapProbe" parent="LightProbesMesh" index="28"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.687386, -72.307396, -0.0012969971)
-
-[node name="Surface0Probe28" type="LightmapProbe" parent="LightProbesMesh" index="29"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.151306, -72.307396, -26.268482)
-
-[node name="Surface0Probe29" type="LightmapProbe" parent="LightProbesMesh" index="30"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.495197, -38.014263, 72.3048)
-
-[node name="Surface0Probe30" type="LightmapProbe" parent="LightProbesMesh" index="31"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -76.02666, -38.014263, -0.0012969971)
-
-[node name="Surface0Probe31" type="LightmapProbe" parent="LightProbesMesh" index="32"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.50792, 38.01167, 44.68612)
-
-[node name="Surface0Probe32" type="LightmapProbe" parent="LightProbesMesh" index="33"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.492737, 38.01167, 72.3048)
-
-[node name="Surface0Probe33" type="LightmapProbe" parent="LightProbesMesh" index="34"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.50545, -38.014263, 44.68612)
-
-[node name="Surface0Probe34" type="LightmapProbe" parent="LightProbesMesh" index="35"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.83993, -0.0012969971, 26.265892)
-
-[node name="Surface0Probe35" type="LightmapProbe" parent="LightProbesMesh" index="36"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.024185, 38.01167, -0.0012969971)
-
-[node name="Surface0Probe36" type="LightmapProbe" parent="LightProbesMesh" index="37"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012311339, 85, -0.0012969971)
-
-[node name="Surface0Probe37" type="LightmapProbe" parent="LightProbesMesh" index="38"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.50545, -38.014263, -44.688713)
-
-[node name="Surface0Probe38" type="LightmapProbe" parent="LightProbesMesh" index="39"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.492737, 38.01167, -72.307396)
-
-[node name="Surface0Probe39" type="LightmapProbe" parent="LightProbesMesh" index="40"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.495197, -38.014263, -72.307396)
-
-[node name="Surface0Probe40" type="LightmapProbe" parent="LightProbesMesh" index="41"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.345547, 44.68612, -68.76653)
-
-[node name="Surface0Probe41" type="LightmapProbe" parent="LightProbesMesh" index="42"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.50792, 38.01167, -44.688713)
-
-[node name="ShellSphere" parent="." index="6" instance=ExtResource("2")]
-
-[node name="LevelDoor" parent="." index="7" instance=ExtResource("5")]
+[node name="LevelDoor" parent="." index="6" instance=ExtResource("5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -78)
 required_keys = 1
 portal_data = ExtResource("6_gw3r5")
 
-[node name="LightmapGI" type="LightmapGI" parent="." index="8"]
+[node name="LightmapGI" type="LightmapGI" parent="." index="7"]
 quality = 2
 supersampling = true
 bounces = 10
