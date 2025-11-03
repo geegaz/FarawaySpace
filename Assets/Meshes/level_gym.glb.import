@@ -41,12 +41,12 @@ _subresources={
 "materials": {
 "PrototypeDark": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://Assets/Materials/P/mat_prototype_dark.tres",
+"use_external/fallback_path": "res://Assets/Materials/Proto/mat_prototype_dark.tres",
 "use_external/path": "uid://doxr2535acvnp"
 },
 "PrototypeLight": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://Assets/Materials/P/mat_prototype_light.tres",
+"use_external/fallback_path": "res://Assets/Materials/Proto/mat_prototype_light.tres",
 "use_external/path": "uid://llvlbtjxom6w"
 }
 },

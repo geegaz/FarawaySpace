@@ -41,7 +41,7 @@ _subresources={
 "materials": {
 "PrototypeLight": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://Assets/Materials/prototype/mat_prototype_light.tres",
+"use_external/fallback_path": "res://Assets/Materials/Proto/mat_prototype_light.tres",
 "use_external/path": "uid://llvlbtjxom6w"
 }
 },

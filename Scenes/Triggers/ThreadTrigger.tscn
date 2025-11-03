@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bd3028s82vn0t"]
+
+[ext_resource type="Script" uid="uid://c4kdmbo6jdvkr" path="res://Scripts/Triggers/ThreadTrigger.gd" id="1_n880l"]
+[ext_resource type="Material" uid="uid://cab88yl38qnwm" path="res://Assets/Materials/mat_surface_level_emissive.tres" id="2_34gr1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_n880l"]
+radius = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_n880l"]
+
+[node name="ThreadTrigger" type="Area3D" node_paths=PackedStringArray("visual")]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_n880l")
+visual = NodePath("Visual")
+metadata/_custom_type_script = "uid://c4kdmbo6jdvkr"
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_n880l")
+
+[node name="Visual" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_34gr1")
+mesh = SubResource("SphereMesh_n880l")
